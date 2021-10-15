@@ -1,0 +1,23 @@
+{
+  "scripts": {
+    "build": "snowpack build"
+  },
+  "dependencies": {
+    "htm": "^3.0.1",
+    "preact": "^10.2.1",
+    "storeon": "^3.1.4"
+  },
+  "devDependencies": {
+    "snowpack": "^1.1.2"
+  },
+  "snowpack": {
+    "webDependencies": [
+      "htm",
+      "htm/preact",
+      "preact",
+      "preact/hooks",
+      "storeon",
+      "storeon/preact"
+    ]
+  }
+}

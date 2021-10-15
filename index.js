@@ -2,14 +2,21 @@ import { render } from './web_modules/preact.js';
 import { StoreContext } from './web_modules/storeon/preact.js'
 import {api, html} from './helper/index.js';
 import store from './store/index.js';
-import {EyeExaminationProcessList} from './component/index.js'
+import {Carousel,BackButton} from './component/index.js'
 
 const BookerComponent = () => {
   return html`
-    <div class="container">
-      <h1>Időponty</h1>
+    <div class="bg-primary bg-gradient text-light p-2">
+      <div class="container">
+        <h3>
+          <${BackButton}/>
+          Időponty
+        </h3>
+      </div>
+    </div>
+    <div class="bg-body container p-1">
       <${StoreContext.Provider} value=${store}>
-        <${EyeExaminationProcessList}/>
+        <${Carousel}/>
       <//>
     </div>
   `;
@@ -26,6 +33,8 @@ export default class ClearvisioAppointmentBooker {
 
     render(html`<${BookerComponent}/>`, options.element);
   }
+
+  getStore() { return store; }
 }
 
 window.ClearvisioAppointmentBooker = ClearvisioAppointmentBooker

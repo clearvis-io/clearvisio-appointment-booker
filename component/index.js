@@ -1,3 +1,4 @@
-import EyeExaminationProcessList from './EyeExaminationProcessList.js';
+import BackButton from './BackButton.js';
+import Carousel from './Carousel.js';
 
-export {EyeExaminationProcessList}
+export {Carousel, BackButton}

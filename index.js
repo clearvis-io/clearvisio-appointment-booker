@@ -34,6 +34,10 @@ export default class ClearvisioAppointmentBooker {
     api.setPath(options.apiPath);
     store.dispatch('apiInit');
 
+    if (options.language) {
+      store.dispatch('language/set', options.language);
+    }
+
     var element = document.createElement('div');
     (options.element || document.body).appendChild(element);
     render(html`<${BookerComponent}/>`, element);

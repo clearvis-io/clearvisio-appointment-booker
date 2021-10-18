@@ -2,6 +2,7 @@ import {html} from '../helper/index.js'
 import { useState } from '../web_modules/preact/hooks.js';
 import store from '../store/index.js'
 import {useStoreon} from '../web_modules/storeon/preact.js'
+import {translator as __} from '../helper/index.js'
 
 export default (props) => {
   const storeValue = useStoreon(props.modalStateStore)
@@ -33,14 +34,14 @@ export default (props) => {
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title">${props.title}</h5>
+            <h5 class="modal-title">${__(props.title)}</h5>
           </div>
           <div class="modal-body">
-            <p>${props.content}</p>
+            <p>${__(props.content)}</p>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" onClick=${onHideConfirm}>${props.cancelButtonLabel}</button>
-            <button type="button" class="btn btn-primary" onClick=${props.onApprove}>${props.approveButtonLabel}</button>
+            <button type="button" class="btn btn-secondary" onClick=${onHideConfirm}>${__(props.cancelButtonLabel)}</button>
+            <button type="button" class="btn btn-primary" onClick=${props.onApprove}>${__(props.approveButtonLabel)}</button>
           </div>
         </div>
       </div>

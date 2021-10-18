@@ -1,6 +1,6 @@
 import { render } from './web_modules/preact.js';
 import { StoreContext } from './web_modules/storeon/preact.js'
-import {api, html} from './helper/index.js';
+import {html} from './helper/index.js';
 import createStore from './store/createStore.js';
 import {Carousel, BackButton, CloseButton} from './component/index.js'
 
@@ -28,11 +28,11 @@ const BookerComponent = (props) => {
 export default class ClearvisioAppointmentBooker {
   constructor(options) {
     var store = createStore();
-    api.addHeader('X-AUTH-API-STORE-CODE', options.storeCode)
-    for (const key in options.apiHeaders || {}) {
-      api.addHeader(key, options.apiHeaders[key]);
-    }
-    api.setPath(options.apiPath);
+    store.dispatch(
+      'api/addHeaders',
+      Object.assign({'X-AUTH-API-STORE-CODE': options.storeCode}, options.apiHeaders || {})
+    );
+    store.dispatch('api/setPath', options.apiPath);
     store.dispatch('apiInit');
 
     if (options.language) {

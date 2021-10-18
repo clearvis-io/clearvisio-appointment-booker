@@ -9,6 +9,6 @@ export function eyeExaminationProcesses (store) {
   })
 
   store.on('apiInit', async () => {
-    store.dispatch('eyeExaminationProcesses/add', await api.get('eye_examination_processes'));
+    store.dispatch('eyeExaminationProcesses/add', await api.get(store, 'eye_examination_processes'));
   });
 }

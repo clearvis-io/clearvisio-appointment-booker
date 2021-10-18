@@ -1,10 +1,12 @@
 import {html} from '../helper/index.js'
-import store from '../store/index.js'
 import SimpleModal from './SimpleModal.js'
+import {useStoreon} from '../web_modules/storeon/preact.js'
 
 export default (props) => {
-  const onShowConfirm = () =>store.dispatch('closeConfirmModalState/set', true);
-  const onClose = () => store.dispatch('close');
+  const { dispatch } = useStoreon();
+
+  const onShowConfirm = () => dispatch('closeConfirmModalState/set', true);
+  const onClose = () => dispatch('close');
 
   return html`
     <${SimpleModal} modalStateStore="closeConfirmModalState"

@@ -1,12 +1,11 @@
 import {html} from '../helper/index.js'
 import { useState } from '../web_modules/preact/hooks.js';
-import store from '../store/index.js'
 import {useStoreon} from '../web_modules/storeon/preact.js'
 import {translator as __} from '../helper/index.js'
 
 export default (props) => {
-  const storeValue = useStoreon(props.modalStateStore)
-  const visible = storeValue[props.modalStateStore]
+  const store = useStoreon(props.modalStateStore)
+  const visible = store[props.modalStateStore]
 
   const [previousVisible, setPreviousVisible] = useState(false);
   const [display, setDisplay] = useState(false);

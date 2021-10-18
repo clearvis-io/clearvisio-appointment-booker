@@ -1,13 +1,12 @@
 import {useStoreon} from '../web_modules/storeon/preact.js'
-import store from '../store/index.js'
 import {html} from '../helper/index.js'
 
 export default (props) => {
-  const { appointment } = useStoreon('appointment')
+  const { appointment, dispatch } = useStoreon('appointment')
 
   const onClick = () => {
-    store.dispatch('appointment/set', {eye_examination_process: props.item});
-    store.dispatch('currentStep/next');
+    dispatch('appointment/set', {eye_examination_process: props.item});
+    dispatch('currentStep/next');
   }
 
   return html`

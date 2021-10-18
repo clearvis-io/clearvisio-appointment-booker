@@ -7,6 +7,8 @@ import { modalStateStore } from './modalStateStore.js'
 
 var closeConfirmModalState = modalStateStore('closeConfirmModalState');
 
-export default createStoreon([
-  eyeExaminationProcesses, currentStep, appointment, closeConfirmModalState, language
-])
+export default () => {
+  return createStoreon([
+    eyeExaminationProcesses, currentStep, appointment, closeConfirmModalState, language
+  ]);
+}

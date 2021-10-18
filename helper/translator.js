@@ -4,12 +4,12 @@ const messages = {
   hu: {
     "Are you sure you want to cancel this appointment?":
       "Biztosan megszakítja ezt az időpontot?",
-    "All inputed data will be lost.":
-      "Mindent megadott adat el fog veszni.",
-    "No, continue editing appointment":
-      "Nem, időpont foglalás folytatása",
-    "Cancel appointment":
-      "Időpont megszakítása"
+    "All inputed data will be lost.": "Mindent megadott adat el fog veszni.",
+    "No, continue editing appointment": "Nem, időpont foglalás folytatása",
+    "Cancel appointment": "Időpont megszakítása",
+    "Appointment booking failed": "Időpontfoglalás nem sikerült",
+    "Due to an unexpected error appointment could not be booked, please restart the process":
+      "Az időpontfoglalás közben nem várt hiba történt, kérjük kezdje újra a folyamatot"
   }
 };
 

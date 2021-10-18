@@ -2,12 +2,13 @@ import { render } from './web_modules/preact.js';
 import { StoreContext } from './web_modules/storeon/preact.js'
 import {html} from './helper/index.js';
 import createStore from './store/createStore.js';
-import {Carousel, BackButton, CloseButton} from './component/index.js'
+import {Carousel, BackButton, CloseButton, GlobalModal} from './component/index.js'
 
 const BookerComponent = (props) => {
   return html`
     <div class="clearvisio-appointment-booker fixed-top">
       <${StoreContext.Provider} value=${props.store}>
+        <${GlobalModal}/>
         <div class="bg-primary bg-gradient text-light p-2">
           <div class="container">
             <${CloseButton}/>
@@ -18,7 +19,7 @@ const BookerComponent = (props) => {
           </div>
         </div>
         <div class="bg-body content container p-1">
-            <${Carousel}/>
+          <${Carousel}/>
         </div>
       <//>
     </div>
@@ -28,6 +29,7 @@ const BookerComponent = (props) => {
 export default class ClearvisioAppointmentBooker {
   constructor(options) {
     var store = createStore();
+    this.store = store;
     store.dispatch(
       'api/addHeaders',
       Object.assign({'X-AUTH-API-STORE-CODE': options.storeCode}, options.apiHeaders || {})
@@ -46,7 +48,7 @@ export default class ClearvisioAppointmentBooker {
     store.on('close', () => element.remove());
   }
 
-  getStore() { return store; }
+  getStore() { return this.store; }
 }
 
 window.ClearvisioAppointmentBooker = ClearvisioAppointmentBooker

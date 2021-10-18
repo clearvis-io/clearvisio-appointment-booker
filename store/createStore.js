@@ -5,11 +5,14 @@ import { appointment } from './appointment.js'
 import { api } from './api.js'
 import { language } from './language.js'
 import { modalStateStore } from './modalStateStore.js'
+import { moduleState } from './moduleState.js'
 
 var closeConfirmModalState = modalStateStore('closeConfirmModalState');
+var globalModalState = modalStateStore('globalModalState');
 
 export default () => {
   return createStoreon([
-    eyeExaminationProcesses, currentStep, appointment, closeConfirmModalState, language, api
+    eyeExaminationProcesses, currentStep, appointment, moduleState, language, api,
+    closeConfirmModalState, globalModalState
   ]);
 }

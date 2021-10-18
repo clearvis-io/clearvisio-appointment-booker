@@ -1,7 +1,8 @@
 import {html} from '../helper/index.js'
-import { useState } from '../web_modules/preact/hooks.js';
+import {useState} from '../web_modules/preact/hooks.js';
 import {useStoreon} from '../web_modules/storeon/preact.js'
 import {translator as __} from '../helper/index.js'
+import Spinner from './Spinner.js'
 
 export default (props) => {
   const store = useStoreon(props.modalStateStore)
@@ -30,18 +31,31 @@ export default (props) => {
 
   return html`
     <div class="modal text-dark fade ${showClassAdded ? 'show' : ''}" tabindex="-1" style="${display ? 'display: block;' : ''}">
-      <div class="modal-dialog">
+      <div class="modal-dialog ${props.modalClasses || ''}">
         <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title">${__(props.title)}</h5>
+          ${ props.title ? html`
+            <div class="${props.headerClasses || ''} modal-header">
+              <h5 class="modal-title">${__(props.title)}</h5>
+            </div>
+          ` : '' }
+          <div class="${props.contentClasses || ''} modal-body">
+            ${ props.content ? html`<p>${__(props.content)}</p>` : html`<${Spinner}/>`}
           </div>
-          <div class="modal-body">
-            <p>${__(props.content)}</p>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" onClick=${onHideConfirm}>${__(props.cancelButtonLabel)}</button>
-            <button type="button" class="btn btn-primary" onClick=${props.onApprove}>${__(props.approveButtonLabel)}</button>
-          </div>
+          ${ props.approveButtonLabel || props.cancelButtonLabel ? html`
+            <div class="modal-footer">
+              ${ props.cancelButtonLabel ? html`
+                <button type="button" class="btn btn-secondary" onClick=${onHideConfirm}>
+                  ${__(props.cancelButtonLabel)}
+                </button>
+              ` : '' }
+              ${ props.approveButtonLabel ? html`
+                <button type="button" class="btn btn-primary  ${props.approveButtonClasses || ''}"
+                  onClick=${props.onApprove}>
+                  ${__(props.approveButtonLabel)}
+                </button>
+              ` : '' }
+            </div>
+          ` : '' }
         </div>
       </div>
     </div>

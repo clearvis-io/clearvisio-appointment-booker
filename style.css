@@ -1,0 +1,4 @@
+.clearvisio-appointment-booker > .content {
+  height: calc(100vh - 61.5333px);
+  overflow: scroll;
+}

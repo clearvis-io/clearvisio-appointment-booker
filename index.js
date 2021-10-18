@@ -6,20 +6,22 @@ import {Carousel, BackButton, CloseButton} from './component/index.js'
 
 const BookerComponent = () => {
   return html`
-    <${StoreContext.Provider} value=${store}>
-      <div class="bg-primary bg-gradient text-light p-2">
-        <div class="container">
-          <${CloseButton}/>
-          <h3>
-            <${BackButton}/>
-            Időponty
-          </h3>
+    <div class="clearvisio-appointment-booker fixed-top">
+      <${StoreContext.Provider} value=${store}>
+        <div class="bg-primary bg-gradient text-light p-2">
+          <div class="container">
+            <${CloseButton}/>
+            <h3>
+              <${BackButton}/>
+              Időponty
+            </h3>
+          </div>
         </div>
-      </div>
-      <div class="bg-body container p-1">
-          <${Carousel}/>
-      </div>
-    <//>
+        <div class="bg-body content container p-1">
+            <${Carousel}/>
+        </div>
+      <//>
+    </div>
   `;
 }
 

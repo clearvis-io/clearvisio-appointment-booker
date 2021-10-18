@@ -1,9 +1,19 @@
 const api = {
   get: async (store, model) => {
     const {path, headers} = store.get().api;
-    const result = await (await fetch(`${path}/${model}`, {headers})).json()
 
-    return result['hydra:member']
+    try {
+      const result = await (await fetch(`${path}/${model}/alma`, {headers})).json()
+
+      if (!result['hydra:member']) {
+        throw new Error('Invalid response');
+      }
+
+      return result['hydra:member'];
+    } catch (error) {
+      store.dispatch('moduleState/set', 'error');
+      throw error;
+    }
   }
 };
 

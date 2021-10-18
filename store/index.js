@@ -4,6 +4,6 @@ import { currentStep } from './currentStep.js'
 import { appointment } from './appointment.js'
 import { modalStateStore } from './modalStateStore.js'
 
-console.log('HMM', closeConfirmModalState);
+var closeConfirmModalState = modalStateStore('closeConfirmModalState');
 
 export default createStoreon([eyeExaminationProcesses, currentStep, appointment, closeConfirmModalState])

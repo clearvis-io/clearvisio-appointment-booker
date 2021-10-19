@@ -10,7 +10,10 @@ export function calendars (store) {
   store.on('apiInit', async () => {
     store.dispatch(
       'calendars/set',
-      await api.get(store, `appointment_calendars?store=${store.get().store['@id']}`)
+      await api.get(
+        store,
+        `appointment_calendars?groups[]=userProfilePictureRead&tore=${store.get().store['@id']}`
+      )
     );
   });
 }

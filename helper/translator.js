@@ -9,7 +9,11 @@ const messages = {
     "Cancel appointment": "Időpont megszakítása",
     "Appointment booking failed": "Időpontfoglalás nem sikerült",
     "Due to an unexpected error appointment could not be booked, please restart the process":
-      "Az időpontfoglalás közben nem várt hiba történt, kérjük kezdje újra a folyamatot"
+      "Az időpontfoglalás közben nem várt hiba történt, kérjük kezdje újra a folyamatot",
+    "None of our colleagues was available for the selected process":
+      "Egy munkatársunk sem volt elérhető a választott protokolhoz",
+    "First free": "Első szabad",
+    "For finding the nearest free time slot.": "A lehető legkorábbi időpont választásához."
   }
 };
 

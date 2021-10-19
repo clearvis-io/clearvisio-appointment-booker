@@ -5,7 +5,7 @@ const roleHierarchy = [
 ];
 
 export default function ({appointment, calendars}) {
-  var process = appointment.eye_examination_process;
+  var process = appointment ? appointment.eye_examination_process : null;
 
   return calendars.filter(function(calendar) {
     if (!process) {

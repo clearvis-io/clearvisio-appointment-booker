@@ -2,3 +2,23 @@
   height: calc(100vh - 61.5333px);
   overflow: auto;
 }
+
+.clearvisio-appointment-booker .avatar {
+  width: 50px;
+  height: 50px;
+  position: relative;
+}
+
+.clearvisio-appointment-booker .avatar > .image {
+  width: 50px;
+  height: 50px;
+  border-radius: 10em;
+  border: solid 1px lightgrey;
+  object-fit: cover;
+}
+
+.clearvisio-appointment-booker .avatar > .form-check-input {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+}

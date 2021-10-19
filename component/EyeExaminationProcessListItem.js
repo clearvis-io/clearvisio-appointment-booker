@@ -10,8 +10,8 @@ export default (props) => {
   }
 
   return html`
-    <li class="list-group-item">
-      <div class="form-check" onClick=${onClick}>
+    <li class="list-group-item" onClick=${onClick}>
+      <div class="form-check">
         <input class="form-check-input" type="radio"
           checked=${appointment.eye_examination_process == props.item} />
         <label class="form-check-label">

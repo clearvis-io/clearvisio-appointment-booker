@@ -30,12 +30,7 @@ export default class ClearvisioAppointmentBooker {
   constructor(options) {
     var store = createStore();
     this.store = store;
-    store.dispatch(
-      'api/addHeaders',
-      Object.assign({'X-AUTH-API-STORE-CODE': options.storeCode}, options.apiHeaders || {})
-    );
-    store.dispatch('api/setPath', options.apiPath);
-    store.dispatch('apiInit');
+    this.setupApi(options);
     this.loadStore(options.storeCode)
       .then(() => store.dispatch('moduleState/set', 'idle'));
 
@@ -43,16 +38,29 @@ export default class ClearvisioAppointmentBooker {
       store.dispatch('language/set', options.language);
     }
 
-    var element = document.createElement('div');
-    (options.element || document.body).appendChild(element);
-    render(html`<${BookerComponent} store=${store}/>`, element);
+    this.createElementAndRender(options);
+  }
 
-    store.on('close', () => element.remove());
+  setupApi(options) {
+    this.store.dispatch(
+      'api/addHeaders',
+      Object.assign({'X-AUTH-API-STORE-CODE': options.storeCode}, options.apiHeaders || {})
+    );
+    this.store.dispatch('api/setPath', options.apiPath);
+    this.store.dispatch('apiInit');
   }
 
   async loadStore(storeCode) {
     var stores = await api.get(this.store, `stores?code=${storeCode}`);
     this.store.dispatch('store/set', stores[0]);
+  }
+
+  createElementAndRender({parentElement}) {
+    var element = document.createElement('div');
+    (parentElement || document.body).appendChild(element);
+    render(html`<${BookerComponent} store=${this.store}/>`, element);
+
+    this.store.on('close', () => element.remove());
   }
 
   getStore() { return this.store; }

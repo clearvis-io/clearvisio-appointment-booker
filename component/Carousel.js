@@ -12,7 +12,7 @@ export default (props) => {
     <div class="carousel slide">
       <div class="carousel-inner">
         <${CarouselItem} step="process" wrappedComponent=${EyeExaminationProcessList}/>
-        <${CarouselItem} step="user" wrappedComponent=${CalendarList}/>
+        <${CarouselItem} step="calendar" wrappedComponent=${CalendarList}/>
         <${CarouselItem} step="appointment" wrappedComponent=${TimeSlotSelection}/>
         <${CarouselItem} step="customer" wrappedComponent=${CustomerForm}/>
         <${CarouselItem} step="summary" wrappedComponent=${Summary}/>

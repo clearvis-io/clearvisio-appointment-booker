@@ -62,9 +62,6 @@ export default class ClearvisioAppointmentBooker {
     var storeEntity = this.store.get().store;
     var processes = await api.get(this.store, `eye_examination_processes?chain=${storeEntity.chain['@id']}`);
     this.store.dispatch('eyeExaminationProcesses/set', processes);
-    if (processes.length == 1) {
-      this.store.dispatch('availableSteps/removeStep', 'process');
-    }
   }
 
   createElementAndRender({parentElement}) {

@@ -1,6 +1,20 @@
-const defaultAvailableSteps = ['process', 'user', 'appointment', 'customer', 'summary'];
+import availableCalendarFilter from '../helper/availableCalendarFilter.js'
+
+const defaultAvailableSteps = ['process', 'calendar', 'appointment', 'customer', 'summary'];
 
 export function currentStep (store) {
+  var removeStep = (availableSteps, removedStep) => {
+    return defaultAvailableSteps.filter(
+      (step) => availableSteps.indexOf(step) != -1 && step != removedStep
+    )
+  }
+
+  var addStep = (availableSteps, addedStep) => {
+    return defaultAvailableSteps.filter(
+      (step) => availableSteps.indexOf(step) != -1 || step == addedStep
+    )
+  }
+
   store.on('@init', () => {
     return {
       currentStep: 'process',
@@ -18,20 +32,29 @@ export function currentStep (store) {
     return { currentStep: index > 0 ? availableSteps[index - 1] : currentStep };
   });
 
-  store.on('availableSteps/removeStep', ({ availableSteps, currentStep }, removedStep) => {
-    return {
-      availableSteps: availableSteps = defaultAvailableSteps.filter(
-        (step) => availableSteps.indexOf(step) != -1 && step != removedStep
-      ),
-      currentStep: availableSteps.indexOf(currentStep) == -1 ? availableSteps[0] : currentStep
-    };
+  store.on('eyeExaminationProcesses/set', ({ eyeExaminationProcesses, availableSteps, currentStep }) => {
+    if (eyeExaminationProcesses.length == 1) {
+      return {
+        availableSteps: availableSteps = removeStep(availableSteps, 'process'),
+        currentStep: currentStep == 'process' ? availableSteps[0] : currentStep
+      };
+    }
   });
 
-  store.on('availableSteps/addStep', ({ availableSteps }, addedStep) => {
-    return {
-      availableSteps: defaultAvailableSteps.filter(
-        (step) => availableSteps.indexOf(step) != -1 || step == addedStep
-      )
-    };
+  store.on('appointment/set', ({ availableSteps, appointment, calendars, currentStep }) => {
+    var availableCalendars = availableCalendarFilter({appointment, calendars});
+
+    if (availableCalendars.length == 1 &&
+      (!appointment.calendar || appointment.calendar['@id'] != availableCalendars[0]['@id'])) {
+      return {
+        appointment: Object.assign(appointment, {calendar: availableCalendars[0]}),
+        availableSteps: removeStep(availableSteps, 'calendar'),
+        currentStep: currentStep == 'calendar' ? 'appointment' : currentStep
+      };
+    }
+
+    if (availableCalendars.length > 1) {
+      return { availableSteps: addStep(availableSteps, 'calendar') };
+    }
   });
 }

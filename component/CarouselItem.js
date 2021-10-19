@@ -6,6 +6,10 @@ export default (props) => {
   const index = availableSteps.indexOf(props.step);
   const currentIndex = availableSteps.indexOf(currentStep);
 
+  if (availableSteps.indexOf(props.step) == -1) {
+    return html``;
+  }
+
   return html`
     <div class="carousel-item
       ${currentIndex - 1 == index ? 'carousel-item-prev' : ''}

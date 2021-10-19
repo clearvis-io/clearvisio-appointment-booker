@@ -32,6 +32,7 @@ export default class ClearvisioAppointmentBooker {
     this.store = store;
     this.setupApi(options);
     this.loadStore(options.storeCode)
+      .then(() => this.loadEyeExaminationProcesses())
       .then(() => {
         store.dispatch('moduleState/set', 'idle');
         this.store.dispatch('apiInit');
@@ -55,6 +56,15 @@ export default class ClearvisioAppointmentBooker {
   async loadStore(storeCode) {
     var stores = await api.get(this.store, `stores?code=${storeCode}`);
     this.store.dispatch('store/set', stores[0]);
+  }
+
+  async loadEyeExaminationProcesses() {
+    var storeEntity = this.store.get().store;
+    var processes = await api.get(this.store, `eye_examination_processes?chain=${storeEntity.chain['@id']}`);
+    this.store.dispatch('eyeExaminationProcesses/set', processes);
+    if (processes.length == 1) {
+      this.store.dispatch('availableSteps/removeStep', 'process');
+    }
   }
 
   createElementAndRender({parentElement}) {

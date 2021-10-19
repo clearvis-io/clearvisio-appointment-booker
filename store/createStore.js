@@ -1,6 +1,6 @@
 import { createStoreon } from '../web_modules/storeon.js'
 import { eyeExaminationProcesses } from './eyeExaminationProcesses.js'
-import { currentStep } from './currentStep.js'
+import { steps } from './steps.js'
 import { appointment } from './appointment.js'
 import { api } from './api.js'
 import { language } from './language.js'
@@ -14,7 +14,7 @@ var globalModalState = modalStateStore('globalModalState', {visible: true});
 
 export default () => {
   return createStoreon([
-    eyeExaminationProcesses, currentStep, appointment, moduleState, language, api,
+    eyeExaminationProcesses, steps, appointment, moduleState, language, api,
     storeStore, calendars,
     closeConfirmModalState, globalModalState
   ]);

@@ -2,7 +2,7 @@ import availableCalendarFilter from '../helper/availableCalendarFilter.js'
 
 const defaultAvailableSteps = ['process', 'calendar', 'appointment', 'customer', 'summary'];
 
-export function currentStep (store) {
+export function steps (store) {
   var removeStep = (availableSteps, removedStep) => {
     return defaultAvailableSteps.filter(
       (step) => availableSteps.indexOf(step) != -1 && step != removedStep

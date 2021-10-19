@@ -8,7 +8,7 @@ import { modalStateStore } from './modalStateStore.js'
 import { moduleState } from './moduleState.js'
 
 var closeConfirmModalState = modalStateStore('closeConfirmModalState');
-var globalModalState = modalStateStore('globalModalState');
+var globalModalState = modalStateStore('globalModalState', {visible: true});
 
 export default () => {
   return createStoreon([

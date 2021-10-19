@@ -1,6 +1,6 @@
 import { render } from './web_modules/preact.js';
 import { StoreContext } from './web_modules/storeon/preact.js'
-import {html} from './helper/index.js';
+import {html, api} from './helper/index.js';
 import createStore from './store/createStore.js';
 import {Carousel, BackButton, CloseButton, GlobalModal} from './component/index.js'
 
@@ -36,6 +36,8 @@ export default class ClearvisioAppointmentBooker {
     );
     store.dispatch('api/setPath', options.apiPath);
     store.dispatch('apiInit');
+    this.loadStore(options.storeCode)
+      .then(() => store.dispatch('moduleState/set', 'idle'));
 
     if (options.language) {
       store.dispatch('language/set', options.language);
@@ -46,6 +48,11 @@ export default class ClearvisioAppointmentBooker {
     render(html`<${BookerComponent} store=${store}/>`, element);
 
     store.on('close', () => element.remove());
+  }
+
+  async loadStore(storeCode) {
+    var stores = await api.get(this.store, `stores?code=${storeCode}`);
+    this.store.dispatch('store/set', stores[0]);
   }
 
   getStore() { return this.store; }

@@ -3,7 +3,7 @@ const api = {
     const {path, headers} = store.get().api;
 
     try {
-      const result = await (await fetch(`${path}/${model}/alma`, {headers})).json()
+      const result = await (await fetch(`${path}/${model}`, {headers})).json()
 
       if (!result['hydra:member']) {
         throw new Error('Invalid response');

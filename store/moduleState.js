@@ -1,7 +1,7 @@
 const availableStates = ['idle', 'loading', 'error']
 
 export function moduleState (store) {
-  store.on('@init', () => ({ moduleState: 'idle' }))
+  store.on('@init', () => ({ moduleState: 'loading' }))
 
   store.on('moduleState/set', ({moduleState}, newValue) => {
     newValue = (availableStates.indexOf(newValue) != -1) ? newValue : moduleState

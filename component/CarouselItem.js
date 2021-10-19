@@ -12,7 +12,9 @@ export default (props) => {
       ${currentStep == props.step ? 'active' : ''}
       ${currentIndex + 1 == index ? 'carousel-item-next' : ''}
     ">
-      <${props.wrappedComponent}/>
+      <div class="container-sm p-1 col-sm-6">
+        <${props.wrappedComponent}/>
+      </div>
     </div>
   `;
 }

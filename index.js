@@ -18,7 +18,7 @@ const BookerComponent = (props) => {
             </h3>
           </div>
         </div>
-        <div class="bg-body content container p-1">
+        <div class="bg-body content">
           <${Carousel}/>
         </div>
       <//>

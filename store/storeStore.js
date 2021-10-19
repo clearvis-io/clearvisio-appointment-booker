@@ -4,6 +4,6 @@ export function storeStore (store) {
   store.on('@init', () => ({ store: null }))
 
   store.on('store/set', ({ store }, newStore) => {
-    return { store: newStore ) };
+    return { store: newStore };
   })
 }

@@ -32,7 +32,10 @@ export default class ClearvisioAppointmentBooker {
     this.store = store;
     this.setupApi(options);
     this.loadStore(options.storeCode)
-      .then(() => store.dispatch('moduleState/set', 'idle'));
+      .then(() => {
+        store.dispatch('moduleState/set', 'idle');
+        this.store.dispatch('apiInit');
+      });
 
     if (options.language) {
       store.dispatch('language/set', options.language);
@@ -47,7 +50,6 @@ export default class ClearvisioAppointmentBooker {
       Object.assign({'X-AUTH-API-STORE-CODE': options.storeCode}, options.apiHeaders || {})
     );
     this.store.dispatch('api/setPath', options.apiPath);
-    this.store.dispatch('apiInit');
   }
 
   async loadStore(storeCode) {

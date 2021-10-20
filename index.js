@@ -60,7 +60,7 @@ export default class ClearvisioAppointmentBooker {
 
   async loadEyeExaminationProcesses() {
     var storeEntity = this.store.get().store;
-    var processes = await api.get(this.store, `eye_examination_processes?chain=${storeEntity.chain['@id']}`);
+    var processes = await api.get(this.store, `eye_examination_processes?hasLength&chain=${storeEntity.chain['@id']}`);
     this.store.dispatch('eyeExaminationProcesses/set', processes);
   }
 

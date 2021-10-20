@@ -4,7 +4,7 @@ export function calendars (store) {
   store.on('@init', () => ({ calendars: [] }));
 
   store.on('calendars/set', (storedValue, calendars) => {
-    return { calendars };
+    return { calendars: calendars.filter(({user}) => user) };
   });
 
   store.on('apiInit', async () => {

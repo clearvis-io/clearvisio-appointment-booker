@@ -12,7 +12,7 @@ export default () => {
 
   return html`
     <${DateSelectionCarousel}/>
-    <ul class="list-group mt-1">
+    <ul class="list-group mt-3">
       ${
         nextFreeSlots[key] ?
         (

@@ -1,6 +1,21 @@
 import {useStoreon} from '../web_modules/storeon/preact.js'
 import DateSelectionCarouselItem from './DateSelectionCarouselItem.js'
-import {html, createDateGroups} from '../helper/index.js'
+import {html, createDateGroups, translator as __} from '../helper/index.js'
+
+const months = [
+  'January',
+  'February',
+  'March',
+  'April',
+  'May',
+  'June',
+  'July',
+  'August',
+  'September',
+  'October',
+  'November',
+  'December'
+];
 
 export default (props) => {
   const { selectedDate, dispatch } = useStoreon('selectedDate')
@@ -25,19 +40,22 @@ export default (props) => {
 
   return html`
     <div class="dateSelection hstack gap-1">
-        <button class="btn btn-outline-secondary" onClick=${onPrevious}
-          disabled=${!previousDateGroup}>
-          ${'<'}
-        </button>
-      <div class="carousel slide">
-        <div class="carousel-inner">
-          ${dateGroups.map((group) => html`<${DateSelectionCarouselItem} dateGroup=${group} visibleDateGroups=${visibleDateGroups}/>`)}
+      <button class="btn btn-outline-secondary" onClick=${onPrevious}
+        disabled=${!previousDateGroup}>
+        ${'<'}
+      </button>
+      <div>
+        <div>${__(months[currentDateGroup[0].getMonth()])}</div>
+        <div class="carousel slide">
+          <div class="carousel-inner">
+            ${dateGroups.map((group) => html`<${DateSelectionCarouselItem} dateGroup=${group} visibleDateGroups=${visibleDateGroups}/>`)}
+          </div>
         </div>
       </div>
-        <button class="btn btn-outline-secondary" onClick=${onNext}
-          disabled=${!nextDateGroup}>
-          ${'>'}
-        </button>
+      <button class="btn btn-outline-secondary" onClick=${onNext}
+        disabled=${!nextDateGroup}>
+        ${'>'}
+      </button>
     </div>
   `;
 }

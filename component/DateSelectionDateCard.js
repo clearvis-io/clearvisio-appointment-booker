@@ -1,7 +1,15 @@
 import {useStoreon} from '../web_modules/storeon/preact.js'
-import {html, datesMatch} from '../helper/index.js'
+import {html, datesMatch, translator as __} from '../helper/index.js'
 
-const abbrivedDayOfTheWeek = ['V', 'H', 'K', 'Sze', 'Cs', 'P', 'Szo'];
+const abbrivedDayOfTheWeek = [
+  '@abbrSunday',
+  '@abbrMonday',
+  '@abbrTuesday',
+  '@abbrWednesday',
+  '@abbrThursday',
+  '@abbrFriday',
+  '@abbrSaturday'
+];
 
 export default ({date}) => {
   const { selectedDate, dispatch } = useStoreon('selectedDate')
@@ -13,7 +21,7 @@ export default ({date}) => {
       <div class="card ${datesMatch(date, selectedDate) ? 'bg-primary text-light' : ''}" onClick="${onClick}">
         <div class="card-body user-select-none p-1">
           <h6 class="card-subtitle text-center ${!datesMatch(date, selectedDate) ? 'text-muted' : ''}">
-            ${abbrivedDayOfTheWeek[date.getDay()]}
+            ${__(abbrivedDayOfTheWeek[date.getDay()])}
           </h6>
           <h5 class="card-title text-center">${date.getDate()}</h5>
         </div>

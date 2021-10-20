@@ -13,16 +13,54 @@ const messages = {
     "None of our colleagues was available for the selected process":
       "Egy munkatársunk sem volt elérhető a választott protokolhoz",
     "First free": "Első szabad",
-    "For finding the nearest free time slot.": "A lehető legkorábbi időpont választásához."
+    "For finding the nearest free time slot.": "A lehető legkorábbi időpont választásához.",
+    '@abbrSunday': 'V',
+    '@abbrMonday': 'H',
+    '@abbrTuesday': 'K',
+    '@abbrWednesday': 'Sze',
+    '@abbrThursday': 'Cs',
+    '@abbrFriday': 'P',
+    '@abbrSaturday': 'Szo',
+    'January': 'Január',
+    'February': 'Február',
+    'March': 'Március',
+    'April': 'Április',
+    'May': 'Május',
+    'June': 'Június',
+    'July': 'Július',
+    'August': 'Augusztus',
+    'September': 'Szeptember',
+    'October': 'Október',
+    'November': 'November',
+    'December': 'December'
+  },
+  en: {
+    '@abbrSunday': 'Sun',
+    '@abbrMonday': 'Mon',
+    '@abbrTuesday': 'Tue',
+    '@abbrWednesday': 'Wed',
+    '@abbrThursday': 'Thu',
+    '@abbrFriday': 'Fri',
+    '@abbrSaturday': 'Sat',
+    'January': 'January',
+    'February': 'February',
+    'March': 'March',
+    'April': 'April',
+    'May': 'May',
+    'June': 'June',
+    'July': 'July',
+    'August': 'August',
+    'September': 'September',
+    'October': 'October',
+    'November': 'November',
+    'December': 'December'
   }
 };
 
 export default (message, params = {}) => {
   const {language} = useStoreon('language');
-  const languageSpecificMessages = messages[language] ?? messages[language.substring(0, 2)];
-  if (languageSpecificMessages) {
-    message = languageSpecificMessages[message] ?? message;
-  }
+  const languageSpecificMessages = messages[language] || messages[language.substring(0, 2)] || messages['en'];
+  message = languageSpecificMessages[message] || message;
 
   for (const key in params) {
     message = message.replace(`/%${key}%/g`, params[key]);

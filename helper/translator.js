@@ -32,7 +32,12 @@ const messages = {
     'September': 'Szeptember',
     'October': 'Október',
     'November': 'November',
-    'December': 'December'
+    'December': 'December',
+    'There are no free appointment times for this day': 'Nincsenek szabad időpontok erre a napra',
+    "The next free slot is available on %date%": "A következő szabad időpont dátuma: %date%",
+    'Go to date': 'Ugrás dátumra',
+    'Click here to search for the next free appointment':
+      'Kattintson ide a következő szabad időpont kereséséhez'
   },
   en: {
     '@abbrSunday': 'Sun',
@@ -59,11 +64,11 @@ const messages = {
 
 export default (message, params = {}) => {
   const {language} = useStoreon('language');
-  const languageSpecificMessages = messages[language] || messages[language.substring(0, 2)] || messages['en'];
+  const languageSpecificMessages = messages[language] || messages[language.substring(0, 2)] || messages.en;
   message = languageSpecificMessages[message] || message;
 
   for (const key in params) {
-    message = message.replace(`/%${key}%/g`, params[key]);
+    message = message.replace(new RegExp('%' + key + '%', 'g'), params[key]);
   }
 
   return message;

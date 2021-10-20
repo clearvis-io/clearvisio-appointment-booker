@@ -44,7 +44,7 @@ export default (props) => {
         disabled=${!previousDateGroup}>
         ${'<'}
       </button>
-      <div>
+      <div class="carousel-container">
         <div>${__(months[currentDateGroup[0].getMonth()])}</div>
         <div class="carousel slide">
           <div class="carousel-inner">

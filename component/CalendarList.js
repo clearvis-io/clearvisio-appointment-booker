@@ -1,8 +1,10 @@
 import {useStoreon} from '../web_modules/storeon/preact.js'
 import {html, availableCalendarFilter, translator as __} from '../helper/index.js'
 import CalendarListItem from './CalendarListItem.js'
+import Spinner from './Spinner.js'
 
 export default (props) => {
+  const {appointment, calendarsLoaded, dispatch} = useStoreon('appointment', 'calendarsLoaded');
   const calendars = availableCalendarFilter(useStoreon('calendars'));
 
   const firstAvailableUser = {
@@ -12,19 +14,28 @@ export default (props) => {
     }
   };
 
+  const onBack = () => dispatch('currentStep/previous');
+
   return html`
     <ul class="list-group">
       ${
-        calendars.length ?
-          html`
-            ${calendars.map(item => html`<${CalendarListItem} item=${item} />`)}
-            <${CalendarListItem} item=${firstAvailableUser} />
-          ` :
-          html`
-            <li class="list-group-item">
-              ${__('None of our colleagues was available for the selected process')}
-            </li>
+        appointment.eye_examination_process && calendarsLoaded ?
+        (
+          calendars.length ?
+            html`
+              ${calendars.map(item => html`<${CalendarListItem} item=${item} />`)}
+              <${CalendarListItem} item=${firstAvailableUser} />
+            ` :
+            html`
+              <li class="list-group-item text-center">
+                ${__('None of our colleagues was available for the selected process')}
+                <button class="btn m-2 btn-primary" onClick="${onBack}">
+                  ${__('Select another process')}
+                </button>
+              </li>
           `
+        ) :
+        html`<li class="list-group-item"><${Spinner}/></li>`
       }
     </ul>
   `;

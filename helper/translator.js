@@ -11,7 +11,7 @@ const messages = {
     "Due to an unexpected error appointment could not be booked, please restart the process":
       "Az időpontfoglalás közben nem várt hiba történt, kérjük kezdje újra a folyamatot",
     "None of our colleagues was available for the selected process":
-      "Egy munkatársunk sem volt elérhető a választott protokolhoz",
+      "Egy munkatársunk sem volt elérhető a választott protokollhoz",
     "First free": "Első szabad",
     "For finding the nearest free time slot.": "A lehető legkorábbi időpont választásához.",
     '@abbrSunday': 'V',
@@ -48,7 +48,8 @@ const messages = {
     'Postal code': 'Irányítószám',
     'City': 'Város',
     'Street address': 'Utca',
-    'Mobile': 'Mobil'
+    'Mobile': 'Mobil',
+    'Select another process': 'Másik protokoll választása'
   },
   en: {
     '@abbrSunday': 'Sun',

@@ -1,10 +1,10 @@
 import {api} from '../helper/index.js'
 
 export function calendars (store) {
-  store.on('@init', () => ({ calendars: [] }));
+  store.on('@init', () => ({ calendars: [], calendarsLoaded: false }));
 
   store.on('calendars/set', (storedValue, calendars) => {
-    return { calendars: calendars.filter(({user}) => user) };
+    return { calendars: calendars.filter(({user}) => user), calendarsLoaded: true };
   });
 
   store.on('apiInit', async () => {

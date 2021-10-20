@@ -1,4 +1,3 @@
-import {useStoreon} from '../web_modules/storeon/preact.js'
 import {html} from '../helper/index.js'
 import DateSelectionDateCard from './DateSelectionDateCard.js'
 

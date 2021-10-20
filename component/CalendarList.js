@@ -1,7 +1,6 @@
 import {useStoreon} from '../web_modules/storeon/preact.js'
 import {html, availableCalendarFilter, translator as __} from '../helper/index.js'
 import CalendarListItem from './CalendarListItem.js'
-import Spinner from './Spinner.js'
 
 export default (props) => {
   const calendars = availableCalendarFilter(useStoreon('calendars'));

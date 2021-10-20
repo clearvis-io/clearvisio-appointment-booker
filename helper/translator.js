@@ -37,7 +37,18 @@ const messages = {
     "The next free slot is available on %date%": "A következő szabad időpont dátuma: %date%",
     'Go to date': 'Ugrás dátumra',
     'Click here to search for the next free appointment':
-      'Kattintson ide a következő szabad időpont kereséséhez'
+      'Kattintson ide a következő szabad időpont kereséséhez',
+    'Last name': 'Vezetéknév',
+    'First name': 'Keresztnév',
+    'Birth': 'Születési dátum',
+    'Gender': 'Nem',
+    'SSN': 'TAJ szám',
+    'Country': 'Ország',
+    'State': 'Állam',
+    'Postal code': 'Irányítószám',
+    'City': 'Város',
+    'Street address': 'Utca',
+    'Mobile': 'Mobil'
   },
   en: {
     '@abbrSunday': 'Sun',

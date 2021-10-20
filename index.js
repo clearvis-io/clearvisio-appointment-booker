@@ -4,6 +4,20 @@ import {html, api} from './helper/index.js';
 import createStore from './store/createStore.js';
 import {Carousel, BackButton, CloseButton, GlobalModal} from './component/index.js'
 
+const knownCustomerFields = [
+  'first_name',
+  'last_name',
+  'birth',
+  'gender',
+  'ssn',
+  'country',
+  'postal_code',
+  'city',
+  'street_address',
+  'mobile',
+  'email'
+];
+
 const BookerComponent = (props) => {
   return html`
     <div class="clearvisio-appointment-booker fixed-top">
@@ -30,6 +44,7 @@ export default class ClearvisioAppointmentBooker {
   constructor(options) {
     var store = createStore();
     this.store = store;
+    this.setupCustomerFields(options);
     this.setupApi(options);
     this.loadStore(options.storeCode)
       .then(() => this.loadEyeExaminationProcesses())
@@ -43,6 +58,16 @@ export default class ClearvisioAppointmentBooker {
     }
 
     this.createElementAndRender(options);
+  }
+
+  setupCustomerFields({customerFields, requiredCustomerFields}) {
+    var config = {};
+    requiredCustomerFields = ['first_name', 'last_name'].concat(requiredCustomerFields || ['email']);
+    ['first_name', 'last_name'].concat(customerFields || ['mobile', 'email']).forEach((key) => {
+      config[key] = {requried: requiredCustomerFields.indexOf(key) != -1}
+    });
+
+    this.store.dispatch('customerForm/set', config);
   }
 
   setupApi(options) {

@@ -34,6 +34,11 @@ const requestNextFreeSlots = async (store, date) => {
     let nextFreeSlot = nextFreeSlots[i];
     let key = createNextFreeSlotsForDateKey(appointment, new Date(nextFreeSlot.start));
 
+    if (nextFreeSlotsForDates[key].length &&
+      nextFreeSlotsForDates[key][nextFreeSlotsForDates[key].length - 1].start == nextFreeSlot.start) {
+      continue;
+    }
+
     nextFreeSlotsForDates[key].status = 'incomplete';
     if (!nextFreeSlotsForDates[key].slots) {
       nextFreeSlotsForDates[key].slots = [];
@@ -73,11 +78,14 @@ const createNextFreeSlotRequest = (store, date) => {
 const createEmptyNextFreeSlotsForDates = (store, start, end) => {
   const {appointment} = store.get();
   var date = new Date(start);
+  date.setHours(0);
+  date.setMinutes(0);
+
   var result = {};
 
   while (date <= end) {
     result[createNextFreeSlotsForDateKey(appointment, date)] = {status: 'empty'};
-    date.setDate(date.getDate()  + 1);
+    date.setDate(date.getDate() + 1);
   }
 
   return result;

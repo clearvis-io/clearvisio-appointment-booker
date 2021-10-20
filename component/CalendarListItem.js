@@ -10,7 +10,7 @@ export default (props) => {
   }
 
   return html`
-    <li class="list-group-item" onClick=${onClick}>
+    <li class="user-select-none list-group-item" onClick=${onClick}>
       <div class="avatar me-2 float-start">
         ${
           props.item.user.profile_picture ?

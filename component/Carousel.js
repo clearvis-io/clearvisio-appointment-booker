@@ -1,4 +1,3 @@
-import {useStoreon} from '../web_modules/storeon/preact.js'
 import CarouselItem from './CarouselItem.js'
 import EyeExaminationProcessList from './EyeExaminationProcessList.js'
 import CalendarList from './CalendarList.js'

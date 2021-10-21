@@ -49,7 +49,8 @@ const messages = {
     'City': 'Város',
     'Street address': 'Utca',
     'Mobile': 'Mobil',
-    'Select another process': 'Másik protokoll választása'
+    'Select another process': 'Másik protokoll választása',
+    '@abbrMinute': 'p.'
   },
   en: {
     '@abbrSunday': 'Sun',
@@ -70,7 +71,8 @@ const messages = {
     'September': 'September',
     'October': 'October',
     'November': 'November',
-    'December': 'December'
+    'December': 'December',
+    '@abbrMinute': 'm.'
   }
 };
 

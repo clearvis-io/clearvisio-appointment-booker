@@ -56,7 +56,13 @@ const messages = {
     'Female': 'Nő',
     'Next': 'Tovább',
     'This field is required.': 'Ez a mező kötelező.',
-    'Invalid email address.': 'Hibás email cím.'
+    'Invalid email address.': 'Hibás email cím.',
+    'Your information': 'A te adataid',
+    'Name': 'Név',
+    'Date of birth': 'Születési dátum',
+    'Address': 'Cím',
+    'Phone number': 'Telefonszám',
+
   },
   en: {
     '@abbrSunday': 'Sun',

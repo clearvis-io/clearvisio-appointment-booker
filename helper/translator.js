@@ -53,7 +53,10 @@ const messages = {
     '@abbrMinute': 'p.',
     'Not specified': 'Nincs megadva',
     'Male': 'Férfi',
-    'Female': 'Nő'
+    'Female': 'Nő',
+    'Next': 'Tovább',
+    'This field is required.': 'Ez a mező kötelező.',
+    'Invalid email address.': 'Hibás email cím.'
   },
   en: {
     '@abbrSunday': 'Sun',

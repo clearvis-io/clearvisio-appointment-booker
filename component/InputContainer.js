@@ -8,13 +8,22 @@ export default (props) => {
   if (!customerForm[props.property]) {
     return;
   }
+
+  var fieldConfig = customerForm[props.property];
+
   return html`
-    <div class="${props.class || 'col'} p-1 mb-2">
+    <div class="${props.class || 'col'} needs-validation p-1 mb-2">
       <label class="form-label text-truncate">
-        ${customerForm[props.property].required ? html`<span class="text-danger">*</span> ` : ''}
+        ${fieldConfig.required ? html`<span class="text-danger">*</span> ` : ''}
         ${__(props.label)}
       </label>
-      <${props.inputClass || TextInput} property=${props.property}/>
+      <${props.inputClass || TextInput} property=${props.property}
+        invalid=${fieldConfig.errors && fieldConfig.errors.length ? 'was-validated' : ''}/>
+      ${
+        fieldConfig.errors && fieldConfig.errors.length ?
+        fieldConfig.errors.map(error => html`<div class="invalid-feedback">${__(error)}</div>`) :
+        ''
+      }
     </div>
   `;
 }

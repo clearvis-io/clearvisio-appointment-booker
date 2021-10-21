@@ -39,12 +39,12 @@ export default (props) => {
   }
 
   return html`
-    <div class="input-group">
-      <${Dropdown} onInput=${(value) => setDate('FullYear', value)}
+    <div class="${props.invalid ? 'is-invalid' : ''} input-group">
+      <${Dropdown} invalid=${props.invalid} onInput=${(value) => setDate('FullYear', value)}
         value=${date ? date.getFullYear() : ''} emptySelection="----" options=${yearOptions}/>
-      <${Dropdown} onInput=${(value) => setDate('Month', value)}
+      <${Dropdown} invalid=${props.invalid} onInput=${(value) => setDate('Month', value)}
         value=${date ? date.getMonth() : ''} emptySelection="--" options=${monthOptions}/>
-      <${Dropdown} onInput=${(value) => setDate('Date', value)}
+      <${Dropdown} invalid=${props.invalid} onInput=${(value) => setDate('Date', value)}
         value=${date ? date.getDate() : ''} emptySelection="--" options=${dayOptions}/>
     </div>
   `;

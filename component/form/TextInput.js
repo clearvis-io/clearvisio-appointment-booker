@@ -13,7 +13,7 @@ export default (props) => {
   }
 
   return html`
-    <input type="text" class="form-control" onInput=${onInput}
+    <input type="text" class="${props.invalid ? 'is-invalid' : ''} form-control" onInput=${onInput}
       value=${appointment.customer[props.property] || ''}/>
   `;
 }

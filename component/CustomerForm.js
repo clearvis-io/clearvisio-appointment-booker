@@ -1,5 +1,5 @@
 import {useStoreon} from '../web_modules/storeon/preact.js'
-import {html} from '../helper/index.js'
+import {html, translator as __} from '../helper/index.js'
 import InputContainer from './InputContainer.js'
 import DateInput from './form/DateInput.js'
 import GenderDropdown from './form/GenderDropdown.js'
@@ -7,13 +7,17 @@ import GenderDropdown from './form/GenderDropdown.js'
 const switchedNameOrderLanguages = ['hu'];
 
 export default (props) => {
-  const { customerForm, language } = useStoreon('customerForm', 'language');
+  const { customerForm, language, dispatch } = useStoreon('customerForm', 'language');
 
   const switchNameOrder = (switchedNameOrderLanguages.indexOf(language) != -1 ||
     switchedNameOrderLanguages.indexOf(language.substring(0, 2)) != -1);
 
+  const onNext = () => {
+    dispatch('customerForm/validateAndNext');
+  }
+
   return html`
-    <form class="card p-2">
+    <div class="card p-2">
       <div class="row mx-2">
         ${
           switchNameOrder ?
@@ -44,6 +48,7 @@ export default (props) => {
       <div class="row mx-2">
         <${InputContainer} property="mobile" label="Mobile"/><${InputContainer} property="email" label="Email"/>
       </div>
-    </form>
+      <button class="mx-2 btn btn-primary" onClick=${onNext}>${__('Next')}</button>
+    </div>
   `;
 }

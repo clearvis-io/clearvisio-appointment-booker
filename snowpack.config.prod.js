@@ -4,5 +4,6 @@ module.exports = {
     minify: true,
     target: 'es2018',
     entrypoints: ['index.js']
-  }
+  },
+  plugins: ['@snowpack/plugin-postcss']
 }

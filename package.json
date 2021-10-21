@@ -1,7 +1,7 @@
 {
   "scripts": {
     "dev": "snowpack build --watch",
-    "build": "snowpack build --config snowpack.config.prod.js"
+    "build": "snowpack build --config snowpack.config.prod.js && mkdir -p dist && cp build/style.css dist && cp build/index.js dist"
   },
   "dependencies": {
     "@snowpack/plugin-postcss": "^1.4.3",

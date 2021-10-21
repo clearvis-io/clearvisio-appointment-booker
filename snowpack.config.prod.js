@@ -5,5 +5,6 @@ module.exports = {
     target: 'es2018',
     entrypoints: ['index.js']
   },
-  plugins: ['@snowpack/plugin-postcss']
+  plugins: ['@snowpack/plugin-postcss'],
+  exclude: ['**/dist/**/*'],
 }

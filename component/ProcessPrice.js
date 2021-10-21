@@ -5,9 +5,8 @@ const fractionDigitOverrides = {
     HUF: 0
 };
 
-const createPriceFormatter = (store) => {
+const createPriceFormatter = (store, language) => {
     var currency = store.price_list.currency;
-    var language = store.chain.language.replace('_', '-');
     var options = {style: 'currency', currency};
     if (fractionDigitOverrides[currency] != undefined) {
         options.maximumFractionDigits = fractionDigitOverrides[currency];
@@ -18,7 +17,7 @@ const createPriceFormatter = (store) => {
 }
 
 export default (processServices) => {
-    const { store } = useStoreon('store')
+    const { store, language } = useStoreon('store', 'language')
 
     var minPrice = null;
     var maxPrice = null;
@@ -40,7 +39,7 @@ export default (processServices) => {
             });
         });
     });
-    var priceFormatter = createPriceFormatter(store);
+    var priceFormatter = createPriceFormatter(store, language);
 
     if (minPrice == null || maxPrice  == null) {
         return html``;

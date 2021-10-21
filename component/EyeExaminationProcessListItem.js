@@ -5,7 +5,6 @@ import ProcessPrice from './ProcessPrice.js'
 export default (props) => {
   const { appointment, dispatch } = useStoreon('appointment')
 
-
   const onClick = () => {
     dispatch('appointment/set', {eye_examination_process: props.item});
     dispatch('currentStep/next');

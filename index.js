@@ -1,8 +1,9 @@
 import { render } from 'preact';
-import { StoreContext } from 'storeon/preact'
+import { StoreContext, useStoreon } from 'storeon/preact'
 import {html, api} from './helper/index.js';
 import createStore from './store/createStore.js';
 import {Carousel, BackButton, CloseButton, GlobalModal} from './component/index.js'
+import Header from './component/Header.js';
 
 const knownCustomerFields = [
   'first_name',
@@ -23,15 +24,7 @@ const BookerComponent = (props) => {
     <div class="clearvisio-appointment-booker fixed-top">
       <${StoreContext.Provider} value=${props.store}>
         <${GlobalModal}/>
-        <div class="bg-primary bg-gradient text-light p-2">
-          <div class="container">
-            <${CloseButton}/>
-            <h3>
-              <${BackButton}/>
-              Időponty
-            </h3>
-          </div>
-        </div>
+        <${Header}/>
         <div class="bg-body content">
           <${Carousel}/>
         </div>
@@ -56,6 +49,7 @@ export default class ClearvisioAppointmentBooker {
     if (options.language) {
       store.dispatch('language/set', options.language);
     }
+    store.dispatch('header/set', options.header || {});
 
     this.createElementAndRender(options);
   }

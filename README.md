@@ -46,3 +46,11 @@ WIP
 * **country**: The country of the address of the customer, it is required to be set if any of the address parts are available in the customerFields. Two character ISO country codes are accepted. Eg. "HU".
 * **language**: The language of the booker UI. If not set, then navigator.language is used. (The available languages are currently en and hu.)
 
+
+## Building manually
+1. Clone the git repository from github
+2. 
+```bash
+$ npm install
+$ npm run build
+```

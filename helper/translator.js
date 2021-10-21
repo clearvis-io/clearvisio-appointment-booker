@@ -50,7 +50,10 @@ const messages = {
     'Street address': 'Utca',
     'Mobile': 'Mobil',
     'Select another process': 'Másik protokoll választása',
-    '@abbrMinute': 'p.'
+    '@abbrMinute': 'p.',
+    'Not specified': 'Nincs megadva',
+    'Male': 'Férfi',
+    'Female': 'Nő'
   },
   en: {
     '@abbrSunday': 'Sun',

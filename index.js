@@ -10,7 +10,7 @@ const knownCustomerFields = [
   'birth',
   'gender',
   'ssn',
-  'country',
+  'state',
   'postal_code',
   'city',
   'street_address',

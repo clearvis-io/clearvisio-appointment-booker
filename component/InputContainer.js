@@ -9,7 +9,7 @@ export default (props) => {
     return;
   }
   return html`
-    <div class="col p-1 mb-2">
+    <div class="${props.class || 'col'} p-1 mb-2">
       <label class="form-label text-truncate">
         ${customerForm[props.property].required ? html`<span class="text-danger">*</span> ` : ''}
         ${__(props.label)}

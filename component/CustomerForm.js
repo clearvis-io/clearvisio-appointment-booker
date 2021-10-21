@@ -1,6 +1,8 @@
 import {useStoreon} from '../web_modules/storeon/preact.js'
 import {html} from '../helper/index.js'
 import InputContainer from './InputContainer.js'
+import DateInput from './form/DateInput.js'
+import GenderDropdown from './form/GenderDropdown.js'
 
 const switchedNameOrderLanguages = ['hu'];
 
@@ -26,12 +28,12 @@ export default (props) => {
         }
       </div>
       <div class="row mx-2">
-        <${InputContainer} property="birth" label="Birth" />
-        <${InputContainer} property="gender" label="Gender"/>
+        <${InputContainer} class="col-lg-5" property="birth" label="Birth" inputClass=${DateInput}/>
+        <${InputContainer} property="gender" label="Gender" inputClass=${GenderDropdown}/>
         <${InputContainer} property="ssn" label="SSN"/>
       </div>
       <div class="row mx-2">
-        <${InputContainer} property="country" label="Country"/><${InputContainer} property="state" label="State"/>
+        <${InputContainer} property="state" label="State"/>
       </div>
       <div class="row mx-2">
         <${InputContainer} property="postal_code" label="Postal code"/><${InputContainer} property="city" label="City"/>

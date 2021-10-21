@@ -64,7 +64,7 @@ export default class ClearvisioAppointmentBooker {
     var config = {};
     requiredCustomerFields = ['first_name', 'last_name'].concat(requiredCustomerFields || ['email']);
     ['first_name', 'last_name'].concat(customerFields || ['mobile', 'email']).forEach((key) => {
-      config[key] = {requried: requiredCustomerFields.indexOf(key) != -1}
+      config[key] = {required: requiredCustomerFields.indexOf(key) != -1}
     });
 
     this.store.dispatch('customerForm/set', config);

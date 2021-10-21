@@ -1,6 +1,6 @@
 import {useStoreon} from '../web_modules/storeon/preact.js'
 import {html} from '../helper/index.js'
-import Input from './Input.js'
+import InputContainer from './InputContainer.js'
 
 const switchedNameOrderLanguages = ['hu'];
 
@@ -16,29 +16,31 @@ export default (props) => {
         ${
           switchNameOrder ?
           html`
-            <${Input} property="last_name" label="Last name"/>
-            <${Input} property="first_name" label="First name"/>
+            <${InputContainer} property="last_name" label="Last name"/>
+            <${InputContainer} property="first_name" label="First name"/>
           ` :
           html`
-            <${Input} property="first_name" label="First name"/>
-            <${Input} property="last_name" label="Last name"/>
+            <${InputContainer} property="first_name" label="First name"/>
+            <${InputContainer} property="last_name" label="Last name"/>
           `
         }
       </div>
       <div class="row mx-2">
-        <${Input} property="birth" label="Birth"/>
-        <${Input} property="gender" label="Gender"/>
-        <${Input} property="ssn" label="SSN"/>
+        <${InputContainer} property="birth" label="Birth" />
+        <${InputContainer} property="gender" label="Gender"/>
+        <${InputContainer} property="ssn" label="SSN"/>
       </div>
       <div class="row mx-2">
-        <${Input} property="country" label="Country"/><${Input} property="state" label="State"/>
+        <${InputContainer} property="country" label="Country"/><${InputContainer} property="state" label="State"/>
       </div>
       <div class="row mx-2">
-        <${Input} property="postal_code" label="Postal code"/><${Input} property="city" label="City"/>
+        <${InputContainer} property="postal_code" label="Postal code"/><${InputContainer} property="city" label="City"/>
       </div>
-      <${Input} property="street_address" label="Street address"/>
       <div class="row mx-2">
-        <${Input} property="mobile" label="Mobile"/><${Input} property="email" label="Email"/>
+        <${InputContainer} property="street_address" label="Street address"/>
+      </div>
+      <div class="row mx-2">
+        <${InputContainer} property="mobile" label="Mobile"/><${InputContainer} property="email" label="Email"/>
       </div>
     </form>
   `;

@@ -1,6 +1,6 @@
 import {html} from '../helper/index.js'
 import SimpleModal from './SimpleModal.js'
-import {useStoreon} from '../web_modules/storeon/preact.js'
+import {useStoreon} from 'storeon/preact'
 
 export default (props) => {
   const { dispatch } = useStoreon();

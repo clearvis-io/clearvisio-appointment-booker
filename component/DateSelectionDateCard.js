@@ -1,4 +1,4 @@
-import {useStoreon} from '../web_modules/storeon/preact.js'
+import {useStoreon} from 'storeon/preact'
 import {html, datesMatch, translator as __} from '../helper/index.js'
 
 const abbrivedDayOfTheWeek = [

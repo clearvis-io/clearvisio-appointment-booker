@@ -1,4 +1,4 @@
-import {useStoreon} from '../web_modules/storeon/preact.js'
+import {useStoreon} from 'storeon/preact'
 import {html} from '../helper/index.js'
 import EyeExaminationProcessListItem from './EyeExaminationProcessListItem.js'
 import Spinner from './Spinner.js'

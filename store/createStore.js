@@ -1,4 +1,4 @@
-import { createStoreon } from '../web_modules/storeon.js'
+import { createStoreon } from 'storeon'
 import { eyeExaminationProcesses } from './eyeExaminationProcesses.js'
 import { steps } from './steps.js'
 import { appointment } from './appointment.js'

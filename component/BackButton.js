@@ -1,5 +1,5 @@
 import {html} from '../helper/index.js'
-import {useStoreon} from '../web_modules/storeon/preact.js'
+import {useStoreon} from 'storeon/preact'
 
 export default (props) => {
   const { currentStep, availableSteps, dispatch } = useStoreon('currentStep', 'availableSteps')

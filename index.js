@@ -1,5 +1,5 @@
-import { render } from './web_modules/preact.js';
-import { StoreContext } from './web_modules/storeon/preact.js'
+import { render } from 'preact';
+import { StoreContext } from 'storeon/preact'
 import {html, api} from './helper/index.js';
 import createStore from './store/createStore.js';
 import {Carousel, BackButton, CloseButton, GlobalModal} from './component/index.js'

@@ -1,5 +1,5 @@
 import {html, translator as __, dateTimeFormatter} from '../helper/index.js'
-import {useStoreon} from '../web_modules/storeon/preact.js'
+import {useStoreon} from 'storeon/preact'
 import ProcessPrice from './ProcessPrice.js'
 import SummaryEn from './Summary/SummaryEn.js'
 import SummaryHu from './Summary/SummaryHu.js'

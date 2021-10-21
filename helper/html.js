@@ -1,4 +1,4 @@
-import { h } from '../web_modules/preact.js';
-import htm from '../web_modules/htm.js';
+import { h } from 'preact';
+import htm from 'htm';
 
 export default htm.bind(h);

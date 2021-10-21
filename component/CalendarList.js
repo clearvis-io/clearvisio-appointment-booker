@@ -1,4 +1,4 @@
-import {useStoreon} from '../web_modules/storeon/preact.js'
+import {useStoreon} from 'storeon/preact'
 import {html, availableCalendarFilter, translator as __} from '../helper/index.js'
 import CalendarListItem from './CalendarListItem.js'
 import Spinner from './Spinner.js'

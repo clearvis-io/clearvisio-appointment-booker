@@ -1,6 +1,6 @@
 import {html, createNextFreeSlotsForDateKey} from '../helper/index.js'
 import DateSelectionCarousel from './DateSelectionCarousel.js'
-import {useStoreon} from '../web_modules/storeon/preact.js'
+import {useStoreon} from 'storeon/preact'
 import Spinner from './Spinner.js'
 import TimeSlotEmptyDay from './TimeSlotEmptyDay.js'
 import TimeSlot from './TimeSlot.js'

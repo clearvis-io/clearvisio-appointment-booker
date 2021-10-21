@@ -1,6 +1,6 @@
 import {html} from '../helper/index.js'
-import {useState} from '../web_modules/preact/hooks.js';
-import {useStoreon} from '../web_modules/storeon/preact.js'
+import {useState} from 'preact/hooks';
+import {useStoreon} from 'storeon/preact'
 import {translator as __} from '../helper/index.js'
 import Spinner from './Spinner.js'
 

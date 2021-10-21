@@ -1,4 +1,4 @@
-import {useStoreon} from '../web_modules/storeon/preact.js'
+import {useStoreon} from 'storeon/preact'
 import DateSelectionCarouselItem from './DateSelectionCarouselItem.js'
 import {html, createDateGroups, translator as __} from '../helper/index.js'
 

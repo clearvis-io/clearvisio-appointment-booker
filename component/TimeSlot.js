@@ -1,4 +1,4 @@
-import {useStoreon} from '../web_modules/storeon/preact.js'
+import {useStoreon} from 'storeon/preact'
 import {html, dateTimeFormatter, dateTimesMatch} from '../helper/index.js'
 
 export default (props) => {

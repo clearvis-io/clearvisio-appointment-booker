@@ -13,7 +13,7 @@ export default (props) => {
     }
 
   return html`
-    <${Dropdown} onInput=${onInput} invalid=${props.invalid}
+    <${Dropdown} onInput=${onInput} invalid=${props.invalid} disabled=${!!appointment.customer['@id']}
       value=${appointment.customer[props.property] || ''} emptySelection="${__('Not specified')}"
         options=${[{value: 'm', label: __('Male')}, {value: 'f', label: __('Female')}]}/>
   `;

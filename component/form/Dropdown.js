@@ -8,7 +8,7 @@ export default (props) => {
 
   return html`
     <select type="text" class="form-select ${props.class || ''} ${props.invalid ? 'is-invalid' : ''}"
-      onInput=${onInput} value=${props.value}>
+      onInput=${onInput} value=${props.value} disabled=${props.disabled}>
       ${props.emptySelection ? html`<option value="">${props.emptySelection}</option>` : ''}
       ${props.options.map(({value, label}) => html`<option value="${value}">${label}</option>`)}
     </select>

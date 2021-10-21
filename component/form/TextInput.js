@@ -14,6 +14,7 @@ export default (props) => {
 
   return html`
     <input type="text" class="${props.invalid ? 'is-invalid' : ''} form-control" onInput=${onInput}
-      value=${appointment.customer[props.property] || ''}/>
+      value=${appointment.customer[props.property] || ''}
+      disabled=${!!appointment.customer['@id']} />
   `;
 }

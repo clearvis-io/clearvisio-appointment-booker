@@ -41,11 +41,14 @@ export default (props) => {
   return html`
     <div class="${props.invalid ? 'is-invalid' : ''} input-group">
       <${Dropdown} invalid=${props.invalid} onInput=${(value) => setDate('FullYear', value)}
-        value=${date ? date.getFullYear() : ''} emptySelection="----" options=${yearOptions}/>
+        value=${date ? date.getFullYear() : ''} emptySelection="----" options=${yearOptions}
+         disabled=${!!appointment.customer['@id']}/>
       <${Dropdown} invalid=${props.invalid} onInput=${(value) => setDate('Month', value)}
-        value=${date ? date.getMonth() : ''} emptySelection="--" options=${monthOptions}/>
+        value=${date ? date.getMonth() : ''} emptySelection="--" options=${monthOptions}
+         disabled=${!!appointment.customer['@id']}/>
       <${Dropdown} invalid=${props.invalid} onInput=${(value) => setDate('Date', value)}
-        value=${date ? date.getDate() : ''} emptySelection="--" options=${dayOptions}/>
+        value=${date ? date.getDate() : ''} emptySelection="--" options=${dayOptions}
+         disabled=${!!appointment.customer['@id']}/>
     </div>
   `;
 }

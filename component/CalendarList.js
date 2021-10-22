@@ -23,8 +23,8 @@ export default (props) => {
         (
           calendars.length ?
             html`
-              ${calendars.map(item => html`<${CalendarListItem} item=${item} />`)}
               <${CalendarListItem} item=${firstAvailableUser} />
+              ${calendars.map(item => html`<${CalendarListItem} item=${item} />`)}
             ` :
             html`
               <li class="list-group-item text-center">

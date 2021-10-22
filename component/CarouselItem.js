@@ -19,13 +19,13 @@ export default (props) => {
       ${currentStep == props.step ? 'active' : ''}
       ${currentIndex + 1 == index ? 'carousel-item-next' : ''}
     ">
-      <div class="${needsSummaryCard ? 'container p-1' : 'container-sm p-1 col-sm-6'}">
+      <div class="${needsSummaryCard ? 'content container with summary' : 'content container-sm p-1 col-sm-6'}">
         <div class="row">
-          <div class="${needsSummaryCard ? 'col-8' : 'col'}">
+          <div class="${needsSummaryCard ? 'col-8 content' : 'col'}">
             <${props.wrappedComponent}/>
           </div>
           ${needsSummaryCard ? html`
-            <div class="col-4">
+            <div class="col-4 summarycard">
               <${Summary} props=${props}/>
             </div>
           ` : ''}

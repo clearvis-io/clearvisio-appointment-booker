@@ -16,7 +16,12 @@ const createPriceFormatter = (store, language) => {
     return new Intl.NumberFormat(language, options);
 }
 
-export default (processServices) => {
+export default ({process}) => {
+    if (!process) {
+        return html``;
+    }
+
+    const processServices = process.process_services;
     const { store, language } = useStoreon('store', 'language')
 
     var minPrice = null;

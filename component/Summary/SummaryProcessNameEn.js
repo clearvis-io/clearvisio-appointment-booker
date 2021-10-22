@@ -6,6 +6,6 @@ export default ({summary}) => {
   }
 
   return html`
-    <span class="fw-bold">${summary.processName}</span>, vele: ${summary.examinerName}
+    <span class="fw-bold">${summary.processName}</span> with: ${summary.examinerName}
     `;
 }

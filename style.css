@@ -1,17 +1,17 @@
 @import 'https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css';
 
-.clearvisio-appointment-booker > .content {
+.content {
   height: calc(100vh - 61.5333px);
   overflow: auto;
 }
 
-.clearvisio-appointment-booker .avatar {
+.avatar {
   width: 50px;
   height: 50px;
   position: relative;
 }
 
-.clearvisio-appointment-booker .avatar > .image {
+.avatar > .image {
   width: 50px;
   height: 50px;
   border-radius: 10em;
@@ -19,12 +19,12 @@
   object-fit: cover;
 }
 
-.clearvisio-appointment-booker .avatar > .form-check-input {
+.avatar > .form-check-input {
   position: absolute;
   right: 0;
   bottom: 0;
 }
 
-.clearvisio-appointment-booker .dateSelection > .carousel-container {
+.dateSelection > .carousel-container {
   width: 100%;
 }

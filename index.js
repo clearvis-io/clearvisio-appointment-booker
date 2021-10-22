@@ -21,7 +21,7 @@ const knownCustomerFields = [
 
 const BookerComponent = (props) => {
   return html`
-    <div class="clearvisio-appointment-booker fixed-top">
+    <div class="fixed-top">
       <${StoreContext.Provider} value=${props.store}>
         <${GlobalModal}/>
         <${Header}/>

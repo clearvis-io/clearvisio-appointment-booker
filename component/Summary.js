@@ -8,9 +8,6 @@ import SummaryPrice from './Summary/SummaryPrice.js'
 
 export default (props) => {
   const { appointment, language } = useStoreon('appointment', 'language')
-  if (!appointment['eye_examination_process'] || !appointment['calendar'] || !appointment.start || !appointment.end) {
-    return;
-  }
 
   var addressPartKeys = ['state', 'postal_code', 'city', 'street_address'];
   var addressParts = [];
@@ -23,11 +20,12 @@ export default (props) => {
   })
 
   var options = {
-    dateTimeStart: dateTimeFormatter.formatDateTime(appointment.start),
-    dateTimeEnd: dateTimeFormatter.formatDateTime(appointment.end),
-    processLength: appointment['eye_examination_process'].length,
-    processName: appointment['eye_examination_process'].name,
-    examinerName: appointment.calendar.user.name,
+    dateTimeStart: appointment.start ? dateTimeFormatter.formatDateTime(appointment.start) : null,
+    dateTimeEnd: appointment.end ? dateTimeFormatter.formatDateTime(appointment.end) : null,
+    processLength: appointment['eye_examination_process'] ? appointment['eye_examination_process'].length : null,
+    processName: appointment['eye_examination_process'] ? appointment['eye_examination_process'].name : null,
+    process: appointment['eye_examination_process'],
+    examinerName: appointment.calendar ? appointment.calendar.user.name : null,
     customer: appointment.customer,
     customerAddress: addressParts.join(', ')
   };
@@ -37,18 +35,26 @@ export default (props) => {
       <li class="list-group-item fw-bold">
         ${__('Your appointment details')}
       </li>
-      <li class="list-group-item">
-        <${language == 'hu-HU' ?  SummaryProcessDateHu : SummaryProcessDateEn} summary=${options}/>
-      </li>
-      <li class="list-group-item">
-        <${language == 'hu-HU' ? SummaryProcessNameHu : SummaryProcessDateEn} summary=${options}/>
-      </li>
+      ${options.dateTimeStart && options.dateTimeEnd && options.processLength ? html`
+        <li class="list-group-item">
+          <${language == 'hu-HU' ?  SummaryProcessDateHu : SummaryProcessDateEn} summary=${options}/>
+        </li>
+      ` : ''}
+      ${options.processName && options.examinerName ? html`
+        <li class="list-group-item">
+          <${language == 'hu-HU' ? SummaryProcessNameHu : SummaryProcessDateEn} summary=${options}/>
+        </li>
+      ` : ''}
+      ${Object.keys(options.customer).length !== 0 ? html`
       <li class="list-group-item">
         <${SummaryCustomer} customer=${options.customer} customerAddress=${options.customerAddress}/>
       </li>
+      ` : ''}
+      ${options.process ? html`
       <li class="list-group-item">
         <${SummaryPrice} summary=${options}/>
       </li>
+      ` : ''}
     </ul>
     `;
 }

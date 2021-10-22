@@ -62,7 +62,8 @@ const messages = {
     'Date of birth': 'Születési dátum',
     'Address': 'Cím',
     'Phone number': 'Telefonszám',
-    'Your appointment details': 'Foglalási adatai'
+    'Your appointment details': 'Foglalási adatai',
+    'Price': 'Ár'
 
   },
   en: {

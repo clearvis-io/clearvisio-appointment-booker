@@ -1,17 +1,15 @@
 import {html, dateTimeFormatter, translator as __} from '../../helper/index.js'
 
 export default ({customer, customerAddress}) => {
-  if (!customer) {
-    return html``;
-  }
-
   return html`
       <div class="container">
         <div class="row fw-bold">
           <span>${__('Your information')}:</span>
         </div>
         <div class="row mt-2">
-          <span><span class="fw-bold">${__('Name')}:</span> ${customer['last_name']} ${customer['first_name']}</span>
+          ${customer.first_name && customer.last_name ? html`
+            <span><span class="fw-bold">${__('Name')}:</span> ${customer['last_name']} ${customer['first_name']}</span>
+          ` : ''}
         </div>
         <div class="row">
           ${customer.birth ? html`

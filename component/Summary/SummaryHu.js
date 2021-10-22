@@ -1,5 +1,8 @@
 import {html, dateTimeFormatter} from '../../helper/index.js'
 import SummaryCustomer from './SummaryCustomer.js';
+import SummaryPriceHu from './SummaryPriceHu.js';
+import SummaryProcessDateHu from './SummaryProcessDateHu.js';
+import SummaryProcessName from './SummaryProcessNameHu.js';
 
 export default (params) => {
   return html`
@@ -7,21 +10,10 @@ export default (params) => {
       <li class="list-group-item fw-bold">
         Foglalási adatai
       </li>
-      <li class="list-group-item">
-        <div>
-          Az időpontja <span class="fw-bold">${params.dateTimeStart}</span> időpontban kezdődik
-        </div>
-        <div class="text-muted">
-          ${params.processLength} percet vesz igénybe, ${params.dateTimeEnd}-ig tart
-        </div>
-      </li>
-      <li class="list-group-item">
-        <span class="fw-bold">${params.processName}</span>, vele: ${params.examinerName}
-      </li>
+      ${SummaryProcessDateHu(params)}
+      ${SummaryProcessName(params)}
       ${SummaryCustomer({customer: params.customer, customerAddress: params.customerAddress})}
-      <li class="list-group-item">
-        <span class="fw-bold">Ár:</span> ${params.processPrice}
-      </li>
+      ${SummaryPriceHu(params)}
     </ul>
   `;
 }

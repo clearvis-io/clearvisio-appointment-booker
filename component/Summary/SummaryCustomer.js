@@ -1,6 +1,10 @@
 import {html, dateTimeFormatter, translator as __} from '../../helper/index.js'
 
 export default ({customer, customerAddress}) => {
+  if (!customer) {
+    return html``;
+  }
+
   return html`
       <li class="list-group-item text-start">
         <div class="container">

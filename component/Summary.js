@@ -3,13 +3,16 @@ import {useStoreon} from 'storeon/preact'
 import SummaryCustomer from './Summary/SummaryCustomer.js'
 import SummaryProcessDateHu from './Summary/SummaryProcessDateHu.js'
 import SummaryProcessDateEn from './Summary/SummaryProcessDateEn.js'
-import SummaryProcessNameHu from './Summary/SummaryProcessNameHu.js'
-import SummaryProcessNameEn from './Summary/SummaryProcessNameEn.js'
-import SummaryPrice from './Summary/SummaryPrice.js'
 import BookAppointmentButton from './Summary/BookAppointmentButton.js'
+import ProcessPrice from './ProcessPrice.js';
 
 export default (props) => {
-  const { appointment, language, currentStep } = useStoreon('appointment', 'language', 'currentStep')
+  const { appointment, language, currentStep, store, selectedCalendar } =
+    useStoreon('appointment', 'language', 'currentStep', 'store', 'selectedCalendar');
+
+  if (!store) {
+    return;
+  }
 
   var addressPartKeys = ['state', 'postal_code', 'city', 'street_address'];
   var addressParts = [];
@@ -21,41 +24,56 @@ export default (props) => {
     addressParts.push(appointment.customer[key]);
   })
 
+  var calendar = appointment.calendar || selectedCalendar;
+
   var options = {
     dateTimeStart: appointment.start ? dateTimeFormatter.formatDateTime(appointment.start) : null,
     dateTimeEnd: appointment.end ? dateTimeFormatter.formatDateTime(appointment.end) : null,
     processLength: appointment['eye_examination_process'] ? appointment['eye_examination_process'].length : null,
     processName: appointment['eye_examination_process'] ? appointment['eye_examination_process'].name : null,
     process: appointment['eye_examination_process'],
-    examinerName: appointment.calendar ? appointment.calendar.user.name : null,
+    examinerName: calendar ? calendar.user.name : null,
     customer: appointment.customer,
     customerAddress: addressParts.join(', ')
   };
 
   return html`
     <ul class="list-group text-center">
-      <li class="list-group-item fw-bold">
-        ${__('Your appointment details')}
+      ${
+        currentStep != 'summary' ?
+        html`<li class="list-group-item fw-bold">${__('Your appointment details')}</li>` :
+        null
+      }
+      <li class="list-group-item">
+        <div class="fw-bold">${store.name}</div>
+        <div>${store.email}</div>
+        <div>${store.phone}</div>
       </li>
+      ${options.processName ? html`
+        <li class="list-group-item">
+          <div>
+            <span class="fw-bold">${options.processName}</span>
+            ${options.examinerName ? html`, ${__('with: %examiner%', {examiner: options.examinerName})}` : null}
+          </div>
+          <div>
+            <span class="fw-bold">${__('Price')}:</span> <${ProcessPrice} process=${options.process}/>
+          </div>
+        </li>
+      ` : ''}
       ${options.dateTimeStart && options.dateTimeEnd && options.processLength ? html`
         <li class="list-group-item">
-          <${language == 'hu-HU' ?  SummaryProcessDateHu : SummaryProcessDateEn} summary=${options}/>
+          <div>
+            <${language == 'hu-HU' ?  SummaryProcessDateHu : SummaryProcessDateEn} summary=${options}/>
+          </div>
+          <div class="text-muted">
+            ${__('It takes up to %length% minutes', {length: options.processLength})}
+          </div>
         </li>
       ` : ''}
-      ${options.processName && options.examinerName ? html`
+      ${currentStep == 'summary' ? html`
         <li class="list-group-item">
-          <${language == 'hu-HU' ? SummaryProcessNameHu : SummaryProcessNameEn} summary=${options}/>
+          <${SummaryCustomer} customer=${options.customer} customerAddress=${options.customerAddress}/>
         </li>
-      ` : ''}
-      ${Object.keys(options.customer).length !== 0 ? html`
-      <li class="list-group-item">
-        <${SummaryCustomer} customer=${options.customer} customerAddress=${options.customerAddress}/>
-      </li>
-      ` : ''}
-      ${options.process ? html`
-      <li class="list-group-item">
-        <${SummaryPrice} summary=${options}/>
-      </li>
       ` : ''}
       ${
         currentStep == 'summary' ?
@@ -66,5 +84,5 @@ export default (props) => {
         ` : ''
       }
     </ul>
-    `;
+  `;
 }

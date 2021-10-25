@@ -71,7 +71,9 @@ const messages = {
       'A vizsgálat kezdete: %start%, kérjük érkezzen 5 perccel korábban.',
     'If you have any further questions, please contuct us through our customer service.':
       'Ha további kérdése van, keresse fel ügyfélszolgálatunkat.',
-    'Appointment booked!': 'Időpont lefoglalva!'
+    'Appointment booked!': 'Időpont lefoglalva!',
+    'with: %examiner%': 'vele: %examiner%',
+    'It takes up to %length% minutes': '%length% percet vesz igénybe'
   },
   en: {
     '@abbrSunday': 'Sun',

@@ -4,7 +4,7 @@ import CalendarListItem from './CalendarListItem.js'
 import Spinner from './Spinner.js'
 
 export default (props) => {
-  const {appointment, calendarsLoaded, dispatch} = useStoreon('appointment', 'calendarsLoaded');
+  const {appointment, dispatch} = useStoreon('appointment');
   const calendars = availableCalendarFilter(useStoreon('calendars'));
 
   const firstAvailableUser = {
@@ -19,7 +19,7 @@ export default (props) => {
   return html`
     <ul class="list-group">
       ${
-        appointment.eye_examination_process && calendarsLoaded ?
+        appointment.eye_examination_process ?
         (
           calendars.length ?
             html`
@@ -35,7 +35,7 @@ export default (props) => {
               </li>
           `
         ) :
-        html`<li class="list-group-item"><${Spinner}/></li>`
+        ''
       }
     </ul>
   `;

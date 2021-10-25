@@ -14,6 +14,25 @@ const api = {
       store.dispatch('moduleState/set', 'error');
       throw error;
     }
+  },
+
+  post: async (store, model, body) => {
+    const {path, headers} = store.get().api
+
+    options = {
+      method: 'POST',
+      headers: headers,
+      body: JSON.stringify(body)
+    }
+
+    try {
+      const result = await (await fetch(`${path}/${model}`, options)).json();
+
+      console.log('VÁLASZ', result);
+    } catch (error) {
+      store.dispatch('moduleState/set', 'error');
+      throw error;
+    }
   }
 };
 

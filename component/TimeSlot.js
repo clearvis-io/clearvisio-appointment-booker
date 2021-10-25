@@ -2,9 +2,22 @@ import {useStoreon} from 'storeon/preact'
 import {html, dateTimeFormatter, dateTimesMatch} from '../helper/index.js'
 
 export default (props) => {
-  const { appointment, dispatch } = useStoreon('appointment');
+  const { appointment, calendars, dispatch } = useStoreon('appointment', 'calendars');
   const onClick = () => {
-    dispatch('appointment/set', {start: props.slot.start, end: props.slot.end});
+    var calendar = null;
+    for (let i = 0; i < calendars.length; i++) {
+      if (props.slot.calendar['@id'] == calendars[i]['@id']) {
+        var calendar = calendars[i];
+      }
+    }
+    if (!calendar) {
+      throw new Error('Could not find calendar');
+    }
+
+    dispatch(
+      'appointment/set',
+      {start: props.slot.start, end: props.slot.end, calendar: calendar}
+    );
     dispatch('currentStep/next');
   }
 

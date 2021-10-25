@@ -2,11 +2,12 @@ import {useStoreon} from 'storeon/preact'
 import {html, createNextFreeSlotsForDateKey, dateTimeFormatter, translator as __} from '../helper/index.js'
 
 export default (props) => {
-  const { selectedDate, nextFreeSlots, appointment, dispatch } = useStoreon('appointment', 'nextFreeSlots', 'selectedDate')
+  const { selectedCalendar, selectedDate, nextFreeSlots, appointment, dispatch } =
+    useStoreon('selectedCalendar', 'appointment', 'nextFreeSlots', 'selectedDate')
   var date = new Date(selectedDate), key, found = false;
   date.setDate(date.getDate() + 1);
 
-  while (nextFreeSlots[key = createNextFreeSlotsForDateKey(appointment, date)]) {
+  while (nextFreeSlots[key = createNextFreeSlotsForDateKey(appointment, selectedCalendar, date)]) {
     if (nextFreeSlots[key].status !== 'empty') {
       found = true;
       break;

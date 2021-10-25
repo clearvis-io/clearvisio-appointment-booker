@@ -1,4 +1,4 @@
-export default function (appointment, date) {
+export default function (appointment, selectedCalendar, date) {
   if (!appointment) {
     return;
   }
@@ -6,6 +6,6 @@ export default function (appointment, date) {
   return !appointment.eye_examination_process ?
     null :
     appointment.eye_examination_process['@id'] + '-' +
-      (appointment.calendar ? appointment.calendar['@id'] : 'NO_CALENDAR') + '-' +
+      (selectedCalendar ? selectedCalendar['@id'] : 'NO_CALENDAR') + '-' +
       date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
 }

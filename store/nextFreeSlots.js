@@ -1,14 +1,14 @@
 import {api, createNextFreeSlotsForDateKey} from '../helper/index.js'
 
 const nextFreeSlotsAreLoadedFor = (storeValue, date) => {
-  const {appointment, nextFreeSlots} = storeValue;
-  const nextFreeSlotsForDate = nextFreeSlots[createNextFreeSlotsForDateKey(appointment, date)];
+  const {appointment, selectedCalendar, nextFreeSlots} = storeValue;
+  const nextFreeSlotsForDate = nextFreeSlots[createNextFreeSlotsForDateKey(appointment, selectedCalendar, date)];
 
   return nextFreeSlotsForDate && nextFreeSlotsForDate.status != 'incomplete'
 }
 
 const requestNextFreeSlots = async (store, date) => {
-  const {appointment} = store.get();
+  const {appointment, selectedCalendar} = store.get();
   if (!appointment.eye_examination_process || dateIsTooFarFromSelectedDate(store, date) ||
     nextFreeSlotsAreLoadedFor(store.get(), date)) {
     return;
@@ -32,7 +32,7 @@ const requestNextFreeSlots = async (store, date) => {
   var previousKey = null;
   for (let i = 0; i < nextFreeSlots.length; i++) {
     let nextFreeSlot = nextFreeSlots[i];
-    let key = createNextFreeSlotsForDateKey(appointment, new Date(nextFreeSlot.start));
+    let key = createNextFreeSlotsForDateKey(appointment, selectedCalendar, new Date(nextFreeSlot.start));
 
     if (nextFreeSlotsForDates[key].length &&
       nextFreeSlotsForDates[key][nextFreeSlotsForDates[key].length - 1].start == nextFreeSlot.start) {
@@ -57,17 +57,17 @@ const requestNextFreeSlots = async (store, date) => {
 }
 
 const dateIsTooFarFromSelectedDate = (store, date) => {
-  return (date - store.get().selectedDate) / 1000 / 60 / 60 / 24 > 60;
+  return (date - store.get().selectedDate) / 1000 / 60 / 60 / 24 > 21;
 }
 
 const createNextFreeSlotRequest = (store, date) => {
-  const {appointment} = store.get();
+  const {appointment, selectedCalendar} = store.get();
   var request = {
     process: appointment.eye_examination_process['@id'],
     start: date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate(),
   };
-  if (appointment.calendar) {
-    request.calendar = appointment.calendar['@id'];
+  if (selectedCalendar) {
+    request.calendar = selectedCalendar['@id'];
   } else {
     request.store = store.get().store['@id'];
   }
@@ -76,7 +76,7 @@ const createNextFreeSlotRequest = (store, date) => {
 }
 
 const createEmptyNextFreeSlotsForDates = (store, start, end) => {
-  const {appointment} = store.get();
+  const {appointment, selectedCalendar} = store.get();
   var date = new Date(start);
   date.setHours(0);
   date.setMinutes(0);
@@ -84,7 +84,7 @@ const createEmptyNextFreeSlotsForDates = (store, start, end) => {
   var result = {};
 
   while (date <= end) {
-    result[createNextFreeSlotsForDateKey(appointment, date)] = {status: 'empty'};
+    result[createNextFreeSlotsForDateKey(appointment, selectedCalendar, date)] = {status: 'empty'};
     date.setDate(date.getDate() + 1);
   }
 

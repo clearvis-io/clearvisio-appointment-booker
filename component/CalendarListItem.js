@@ -2,10 +2,10 @@ import {useStoreon} from 'storeon/preact'
 import {html} from '../helper/index.js'
 
 export default (props) => {
-  const { appointment, dispatch } = useStoreon('appointment')
+  const { selectedCalendar, dispatch } = useStoreon('selectedCalendar')
 
   const onClick = () => {
-    dispatch('appointment/set', {calendar: props.item['@id'] ? props.item : null});
+    dispatch('selectedCalendar/set', props.item['@id'] ? props.item : null);
     dispatch('currentStep/next');
   }
 
@@ -17,7 +17,8 @@ export default (props) => {
           html`<img class="image" src="data:image/*;base64,${props.item.user.profile_picture}"/>` :
           html`<h2 class="p-1 text-muted text-center image">?</h2>`
         }
-        <input class="form-check-input" type="radio" checked=${appointment.calendar == props.item} />
+        <input class="form-check-input" type="radio"
+          checked=${selectedCalendar == props.item || (!props.item['@id'] && !selectedCalendar)} />
       </div>
       <div class="fw-bold">${props.item.user.name}</div>
       ${props.item.user.description || ''}

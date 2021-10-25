@@ -6,9 +6,10 @@ import TimeSlotEmptyDay from './TimeSlotEmptyDay.js'
 import TimeSlot from './TimeSlot.js'
 
 export default () => {
-  const { selectedDate, appointment, nextFreeSlots } = useStoreon('selectedDate', 'nextFreeSlots', 'appointment')
+  const { selectedDate, selectedCalendar, appointment, nextFreeSlots } =
+    useStoreon('selectedCalendar', 'selectedDate', 'nextFreeSlots', 'appointment')
 
-  var key = createNextFreeSlotsForDateKey(appointment, selectedDate);
+  var key = createNextFreeSlotsForDateKey(appointment, selectedCalendar, selectedDate);
 
   return html`
     <${DateSelectionCarousel}/>

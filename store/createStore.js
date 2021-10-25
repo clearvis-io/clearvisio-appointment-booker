@@ -14,6 +14,7 @@ import { customerForm } from './customerForm.js'
 import { header } from './header.js'
 import { booking } from './booking.js'
 import { country } from './country.js'
+import { selectedCalendar } from './selectedCalendar.js'
 
 var closeConfirmModalState = modalStateStore('closeConfirmModalState');
 var globalModalState = modalStateStore('globalModalState', {visible: true});
@@ -22,6 +23,6 @@ export default () => {
   return createStoreon([
     eyeExaminationProcesses, steps, appointment, moduleState, language, api,
     storeStore, calendars, selectedDate, nextFreeSlots, customerForm,
-    closeConfirmModalState, globalModalState, header, booking, country
+    closeConfirmModalState, globalModalState, header, booking, country, selectedCalendar
   ]);
 }

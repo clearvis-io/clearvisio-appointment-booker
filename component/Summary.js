@@ -4,10 +4,12 @@ import SummaryCustomer from './Summary/SummaryCustomer.js'
 import SummaryProcessDateHu from './Summary/SummaryProcessDateHu.js'
 import SummaryProcessDateEn from './Summary/SummaryProcessDateEn.js'
 import SummaryProcessNameHu from './Summary/SummaryProcessNameHu.js'
+import SummaryProcessNameEn from './Summary/SummaryProcessNameEn.js'
 import SummaryPrice from './Summary/SummaryPrice.js'
+import BookAppointmentButton from './Summary/BookAppointmentButton.js'
 
 export default (props) => {
-  const { appointment, language } = useStoreon('appointment', 'language')
+  const { appointment, language, currentStep } = useStoreon('appointment', 'language', 'currentStep')
 
   var addressPartKeys = ['state', 'postal_code', 'city', 'street_address'];
   var addressParts = [];
@@ -42,7 +44,7 @@ export default (props) => {
       ` : ''}
       ${options.processName && options.examinerName ? html`
         <li class="list-group-item">
-          <${language == 'hu-HU' ? SummaryProcessNameHu : SummaryProcessDateEn} summary=${options}/>
+          <${language == 'hu-HU' ? SummaryProcessNameHu : SummaryProcessNameEn} summary=${options}/>
         </li>
       ` : ''}
       ${Object.keys(options.customer).length !== 0 ? html`
@@ -55,6 +57,14 @@ export default (props) => {
         <${SummaryPrice} summary=${options}/>
       </li>
       ` : ''}
+      ${
+        currentStep == 'summary' ?
+        html`
+          <li class="list-group-item">
+            <${BookAppointmentButton}/>
+          </li>
+        ` : ''
+      }
     </ul>
     `;
 }

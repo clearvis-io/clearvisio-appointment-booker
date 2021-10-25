@@ -6,9 +6,11 @@ import createDateGroups from './createDateGroups.js';
 import datesMatch from './datesMatch.js';
 import dateTimesMatch from './dateTimesMatch.js';
 import dateTimeFormatter from './dateTimeFormatter.js';
+import nameFormatter from './nameFormatter.js';
 import createNextFreeSlotsForDateKey from './createNextFreeSlotsForDateKey.js';
+import ValidationError from './ValidationError.js';
 
 export {
   api, html, translator, availableCalendarFilter, createDateGroups, datesMatch, dateTimesMatch,
-  createNextFreeSlotsForDateKey, dateTimeFormatter
+  createNextFreeSlotsForDateKey, dateTimeFormatter, nameFormatter, ValidationError
 }

@@ -50,6 +50,9 @@ export default class ClearvisioAppointmentBooker {
       store.dispatch('language/set', options.language);
     }
     store.dispatch('header/set', options.header || {});
+    if (options.country) {
+      store.dispatch('country/set', options.country);
+    }
 
     this.createElementAndRender(options);
   }
@@ -61,7 +64,7 @@ export default class ClearvisioAppointmentBooker {
       config[key] = {required: requiredCustomerFields.indexOf(key) != -1}
     });
 
-    this.store.dispatch('customerForm/set', config);
+    this.store.dispatch('customerForm/set', {customerForm: config});
   }
 
   setupApi(options) {

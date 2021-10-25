@@ -17,10 +17,13 @@ const validateEmail = (value, fieldConfig) => {
 }
 
 export function customerForm (store) {
-  store.on('@init', () => ({ customerForm: {} }))
+  store.on('@init', () => ({ customerForm: {}, customerFormGlobalErrors: [] }))
 
-  store.on('customerForm/set', ({customerForm}, newValue) => {
-    return { customerForm: Object.assign(customerForm, newValue) };
+  store.on('customerForm/set', ({customerForm, customerFormGlobalErrors}, newValue) => {
+    return {
+      customerForm: Object.assign(customerForm, newValue.customerForm || {}),
+      customerFormGlobalErrors: newValue.customerFormGlobalErrors || customerFormGlobalErrors
+    };
   });
 
   store.on('customerForm/validateAndNext', ({customerForm, appointment}) => {
@@ -44,7 +47,7 @@ export function customerForm (store) {
     })
 
     if (foundInvalidField) {
-      return {customerForm};
+      return {customerForm, customerFormGlobalErrors: []};
     }
 
     store.dispatch('currentStep/next');

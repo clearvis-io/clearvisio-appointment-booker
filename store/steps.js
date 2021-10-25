@@ -22,6 +22,10 @@ export function steps (store) {
     };
   });
 
+  store.on('currentStep/set', ({ availableSteps, currentStep }, newStep) => {
+    return { currentStep: availableSteps.indexOf(newStep) != -1 ? newStep : currentStep };
+  });
+
   store.on('currentStep/next', ({ currentStep, availableSteps }) => {
     var index = availableSteps.indexOf(currentStep);
     return { currentStep: index < availableSteps.length - 1 ? availableSteps[index + 1] : currentStep };

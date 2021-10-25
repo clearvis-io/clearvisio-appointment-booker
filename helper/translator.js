@@ -63,8 +63,15 @@ const messages = {
     'Address': 'Cím',
     'Phone number': 'Telefonszám',
     'Your appointment details': 'Foglalás adatai',
-    'Price': 'Ár'
-
+    'Price': 'Ár',
+    'Book appointment': 'Időpont foglalása',
+    "%customer%'s examination": '%customer% vizsgálata',
+    'We have recorded you appointment.': 'Időpontját rögzítettük.',
+    'The examination will start at %start%, please arrive 5 minutes early.':
+      'A vizsgálat kezdete: %start%, kérjük érkezzen 5 perccel korábban.',
+    'If you have any further questions, please contuct us through our customer service.':
+      'Ha további kérdése van, keresse fel ügyfélszolgálatunkat.',
+    'Appointment booked!': 'Időpont lefoglalva!'
   },
   en: {
     '@abbrSunday': 'Sun',
@@ -90,8 +97,8 @@ const messages = {
   }
 };
 
-export default (message, params = {}) => {
-  const {language} = useStoreon('language');
+export default (message, params = {}, language) => {
+  language = language || useStoreon('language').language;
   const languageSpecificMessages = messages[language] || messages[language.substring(0, 2)] || messages.en;
   message = languageSpecificMessages[message] || message;
 

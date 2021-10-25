@@ -1,4 +1,4 @@
-import {html, dateTimeFormatter, translator as __} from '../../helper/index.js'
+import {html, dateTimeFormatter, nameFormatter, translator as __} from '../../helper/index.js'
 
 export default ({customer, customerAddress}) => {
   return html`
@@ -8,7 +8,7 @@ export default ({customer, customerAddress}) => {
         </div>
         <div class="row mt-2">
           ${customer.first_name && customer.last_name ? html`
-            <span><span class="fw-bold">${__('Name')}:</span> ${customer['last_name']} ${customer['first_name']}</span>
+            <span><span class="fw-bold">${__('Name')}:</span> ${nameFormatter.format(customer)}</span>
           ` : ''}
         </div>
         <div class="row">

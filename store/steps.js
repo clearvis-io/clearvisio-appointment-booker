@@ -18,12 +18,17 @@ export function steps (store) {
   store.on('@init', () => {
     return {
       currentStep: 'process',
-      availableSteps: defaultAvailableSteps
+      availableSteps: defaultAvailableSteps,
+      calendarStepShouldBeHidden: false
     };
   });
 
   store.on('currentStep/set', ({ availableSteps, currentStep }, newStep) => {
     return { currentStep: availableSteps.indexOf(newStep) != -1 ? newStep : currentStep };
+  });
+
+  store.on('calendarStepShouldBeHidden/set', ({availableSteps}, calendarStepShouldBeHidden) => {
+    return { calendarStepShouldBeHidden, availableSteps: removeStep(availableSteps, 'calendar') };
   });
 
   store.on('currentStep/next', ({ currentStep, availableSteps }) => {
@@ -45,11 +50,16 @@ export function steps (store) {
     }
   });
 
-  store.on('appointment/set', ({ availableSteps, appointment, calendars, currentStep }) => {
+  store.on(
+      'currentStep/eyeExaminationProcessSelected',
+      ({ availableSteps, appointment, calendars, currentStep, calendarStepShouldBeHidden }) => {
+    if (calendarStepShouldBeHidden) {
+      return;
+    }
+
     var availableCalendars = availableCalendarFilter({appointment, calendars});
 
-    if (availableCalendars.length == 1 &&
-      (!appointment.calendar || appointment.calendar['@id'] != availableCalendars[0]['@id'])) {
+    if (availableCalendars.length == 1 ) {
       return {
         appointment: Object.assign(appointment, {calendar: availableCalendars[0]}),
         availableSteps: removeStep(availableSteps, 'calendar'),
@@ -57,8 +67,6 @@ export function steps (store) {
       };
     }
 
-    if (availableCalendars.length > 1) {
-      return { availableSteps: addStep(availableSteps, 'calendar') };
-    }
+    return { availableSteps: addStep(availableSteps, 'calendar') };
   });
 }

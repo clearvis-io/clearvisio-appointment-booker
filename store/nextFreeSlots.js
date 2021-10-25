@@ -98,6 +98,11 @@ export function nextFreeSlots (store) {
     requestNextFreeSlots(store, storedValue.selectedDate);
   });
 
+  store.on('bookerInit', async (storedValue) => {
+    if (storedValue.currentStep == 'appointment') {
+      requestNextFreeSlots(store, storedValue.selectedDate);
+    }
+  });
   store.on('currentStep/next', async (storedValue) => {
     if (storedValue.currentStep == 'appointment') {
       requestNextFreeSlots(store, storedValue.selectedDate);

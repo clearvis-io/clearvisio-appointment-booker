@@ -7,8 +7,10 @@ export default (props) => {
 
   const onClick = () => {
     dispatch('appointment/set', {eye_examination_process: props.item});
+    dispatch('currentStep/eyeExaminationProcessSelected');
     dispatch('currentStep/next');
   }
+
   return html`
     <li class="user-select-none list-group-item" onClick=${onClick}>
       <div class="form-check">

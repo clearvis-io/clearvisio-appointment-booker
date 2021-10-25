@@ -48,9 +48,12 @@ export default class ClearvisioAppointmentBooker {
       })
       .then(() => {
         store.dispatch('moduleState/set', 'idle');
-        this.store.dispatch('apiInit');
+        this.store.dispatch('bookerInit');
       });
 
+    if (options.calendarStepShouldBeHidden) {
+      store.dispatch('calendarStepShouldBeHidden/set', true);
+    }
     if (options.language) {
       store.dispatch('language/set', options.language);
     }
@@ -96,7 +99,7 @@ export default class ClearvisioAppointmentBooker {
       'calendars/set',
       await api.get(
         this.store,
-        `appointment_calendars?groups[]=userProfilePictureRead&tore=${this.store.get().store['@id']}`
+        `appointment_calendars?groups[]=userProfilePictureRead&store=${this.store.get().store['@id']}`
       )
     );
   }

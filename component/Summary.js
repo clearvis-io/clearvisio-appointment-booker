@@ -1,9 +1,7 @@
 import {translator as __, dateTimeFormatter, html} from '../helper/index.js'
 import {useStoreon} from 'storeon/preact'
-import SummaryCustomer from './Summary/SummaryCustomer.js'
-import SummaryProcessDateHu from './Summary/SummaryProcessDateHu.js'
-import SummaryProcessDateEn from './Summary/SummaryProcessDateEn.js'
-import BookAppointmentButton from './Summary/BookAppointmentButton.js'
+import SummaryCustomer from './summary/SummaryCustomer.js'
+import BookAppointmentButton from './summary/BookAppointmentButton.js'
 import ProcessPrice from './ProcessPrice.js';
 
 export default (props) => {
@@ -63,7 +61,7 @@ export default (props) => {
       ${options.dateTimeStart && options.dateTimeEnd && options.processLength ? html`
         <li class="list-group-item">
           <div>
-            <${language == 'hu-HU' ?  SummaryProcessDateHu : SummaryProcessDateEn} summary=${options}/>
+            ${__('Your appointment starts at startTime')}
           </div>
           <div class="text-muted">
             ${__('It takes up to %length% minutes', {length: options.processLength})}

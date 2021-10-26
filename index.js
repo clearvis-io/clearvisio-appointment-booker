@@ -67,10 +67,13 @@ export default class ClearvisioAppointmentBooker {
 
   setupCustomerFields({customerFields, requiredCustomerFields}) {
     var config = {};
-    requiredCustomerFields = ['first_name', 'last_name'].concat(requiredCustomerFields || ['email']);
-    ['first_name', 'last_name'].concat(customerFields || ['mobile', 'email']).forEach((key) => {
-      config[key] = {required: requiredCustomerFields.indexOf(key) != -1}
-    });
+    requiredCustomerFields =
+      ['first_name', 'last_name', 'acceptPrivacyPolicy'].concat(requiredCustomerFields || ['email']);
+    ['first_name', 'last_name', 'acceptPrivacyPolicy']
+      .concat(customerFields || ['mobile', 'email'])
+      .forEach((key) => {
+        config[key] = {required: requiredCustomerFields.indexOf(key) != -1}
+      });
 
     this.store.dispatch('customerForm/set', {customerForm: config});
   }

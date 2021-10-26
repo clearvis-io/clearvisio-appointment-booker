@@ -1,4 +1,6 @@
 import {useStoreon} from 'storeon/preact'
+import html from './html.js'
+import PrivacyPolicyLink from '../component/PrivacyPolicyLink.js'
 
 const messages = {
   hu: {
@@ -73,7 +75,10 @@ const messages = {
       'Ha további kérdése van, keresse fel ügyfélszolgálatunkat.',
     'Appointment booked!': 'Időpont lefoglalva!',
     'with: %examiner%': 'vele: %examiner%',
-    'It takes up to %length% minutes': '%length% percet vesz igénybe'
+    'It takes up to %length% minutes': '%length% percet vesz igénybe',
+    'I have accepeted the privacy policy': html`Elfogadom az <${PrivacyPolicyLink}>adatkezelési szabályzatban<//> foglaltakat`,
+    'Privacy policy': 'Adatkezelési tájékoztató',
+    'Close': 'Bezárás'
   },
   en: {
     '@abbrSunday': 'Sun',
@@ -95,7 +100,9 @@ const messages = {
     'October': 'October',
     'November': 'November',
     'December': 'December',
-    '@abbrMinute': 'm.'
+    '@abbrMinute': 'm.',
+    'I have accepeted the privacy policy': html`I have accepeted the <${PrivacyPolicyLink}>privacy policy<//>`
+
   }
 };
 

@@ -15,14 +15,16 @@ import { header } from './header.js'
 import { booking } from './booking.js'
 import { country } from './country.js'
 import { selectedCalendar } from './selectedCalendar.js'
+import { privacyPolicy } from './privacyPolicy.js'
 
 var closeConfirmModalState = modalStateStore('closeConfirmModalState');
 var globalModalState = modalStateStore('globalModalState', {visible: true});
+var privacyPolicyModalState = modalStateStore('privacyPolicyModalState');
 
 export default () => {
   return createStoreon([
-    eyeExaminationProcesses, steps, appointment, moduleState, language, api,
-    storeStore, calendars, selectedDate, nextFreeSlots, customerForm,
+    eyeExaminationProcesses, steps, appointment, moduleState, language, api, privacyPolicyModalState,
+    storeStore, calendars, selectedDate, nextFreeSlots, customerForm, privacyPolicy,
     closeConfirmModalState, globalModalState, header, booking, country, selectedCalendar
   ]);
 }

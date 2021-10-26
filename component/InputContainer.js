@@ -13,10 +13,16 @@ export default (props) => {
 
   return html`
     <div class="${props.class || 'col'} needs-validation p-1 mb-2">
-      <label class="form-label text-truncate">
-        ${fieldConfig.required ? html`<span class="text-danger">*</span> ` : ''}
-        ${__(props.label)}
-      </label>
+      ${
+        props.label ?
+        html `
+          <label class="form-label text-truncate">
+            ${fieldConfig.required ? html`<span class="text-danger">*</span> ` : ''}
+            ${__(props.label)}
+          </label>
+        ` :
+        null
+      }
       <${props.inputClass || TextInput} property=${props.property}
         invalid=${fieldConfig.errors && fieldConfig.errors.length ? 'was-validated' : ''}/>
       ${

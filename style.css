@@ -29,18 +29,17 @@
   width: 100%;
 }
 
-@media only screen and (max-width: 768px) {
+@media only screen and (min-width: 1081px) {
   .content.container.with.summary {
     width: 50%;
   }
 }
+
 @media only screen and (max-width: 768px) {
   .content.container.with.summary .content {
     width: 100%;
   }
-}
 
-@media only screen and (max-width: 768px) {
   .content.container.with.summary .summarycard {
     display: none;
   }

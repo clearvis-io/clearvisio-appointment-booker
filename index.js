@@ -54,6 +54,9 @@ export default class ClearvisioAppointmentBooker {
     if (options.calendarStepShouldBeHidden) {
       store.dispatch('calendarStepShouldBeHidden/set', true);
     }
+    if (options.firstEligibleTime) {
+      store.dispatch('firstEligibleTime/set', options.firstEligibleTime);
+    }
     if (options.language) {
       store.dispatch('language/set', options.language);
     }

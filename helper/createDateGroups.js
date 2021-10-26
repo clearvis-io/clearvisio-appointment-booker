@@ -24,12 +24,12 @@ const createDateGroup = (date) => {
 
 var dateGroups = [];
 
-export default function () {
+export default function (firstEligibleDate) {
   if (dateGroups.length) {
     return dateGroups;
   }
 
-  var date = new Date();
+  var date = firstEligibleDate || new Date();
 
   for (var i = 0; i <= 100; i++) {
     dateGroups.push(createDateGroup(date));

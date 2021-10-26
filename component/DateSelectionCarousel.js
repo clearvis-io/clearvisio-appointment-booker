@@ -18,9 +18,9 @@ const months = [
 ];
 
 export default (props) => {
-  const { selectedDate, dispatch } = useStoreon('selectedDate')
+  const { selectedDate, firstEligibleDate, dispatch } = useStoreon('selectedDate', 'firstEligibleDate')
 
-  const dateGroups = createDateGroups();
+  const dateGroups = createDateGroups(firstEligibleDate);
 
   const onPrevious = () => dispatch('selectedDate/set', previousDateGroup[4]);
   const onNext = () => dispatch('selectedDate/set', nextDateGroup[0]);

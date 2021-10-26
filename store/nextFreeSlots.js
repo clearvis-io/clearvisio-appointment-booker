@@ -8,7 +8,7 @@ const nextFreeSlotsAreLoadedFor = (storeValue, date) => {
 }
 
 const requestNextFreeSlots = async (store, date) => {
-  const {appointment, selectedCalendar} = store.get();
+  const {appointment, selectedCalendar, firstEligibleTime} = store.get();
   if (!appointment.eye_examination_process || dateIsTooFarFromSelectedDate(store, date) ||
     nextFreeSlotsAreLoadedFor(store.get(), date)) {
     return;
@@ -32,10 +32,13 @@ const requestNextFreeSlots = async (store, date) => {
   var previousKey = null;
   for (let i = 0; i < nextFreeSlots.length; i++) {
     let nextFreeSlot = nextFreeSlots[i];
-    let key = createNextFreeSlotsForDateKey(appointment, selectedCalendar, new Date(nextFreeSlot.start));
+    let start = new Date(nextFreeSlot.start);
+    let key = createNextFreeSlotsForDateKey(appointment, selectedCalendar, start);
 
-    if (nextFreeSlotsForDates[key].length &&
-      nextFreeSlotsForDates[key][nextFreeSlotsForDates[key].length - 1].start == nextFreeSlot.start) {
+    if ((
+          nextFreeSlotsForDates[key].length &&
+          nextFreeSlotsForDates[key][nextFreeSlotsForDates[key].length - 1].start == nextFreeSlot.start
+        ) || start < firstEligibleTime) {
       continue;
     }
 
@@ -53,6 +56,7 @@ const requestNextFreeSlots = async (store, date) => {
   }
 
   store.dispatch('nextFreeSlots/add', nextFreeSlotsForDates);
+
   return requestNextFreeSlots(store, lastDate);
 }
 
@@ -92,7 +96,45 @@ const createEmptyNextFreeSlotsForDates = (store, start, end) => {
 }
 
 export function nextFreeSlots (store) {
-  store.on('@init', () => ({ nextFreeSlots: {} }));
+  store.on('@init', () => {
+    var date = new Date;
+    date.setDate(date.getDate() + 1);
+    date.setHours(0);
+    date.setMinutes(0);
+    date.setSeconds(0);
+
+    return { nextFreeSlots: {}, firstEligibleDate: date, firstEligibleTime: date };
+  });
+
+  store.on('firstEligibleTime/set', (storedValue, firstEligibleTimeConstant) => {
+    var firstEligibleDate = new Date;
+    firstEligibleDate.setDate(firstEligibleDate.getDate() + 1);
+    firstEligibleDate.setHours(0);
+    firstEligibleDate.setMinutes(0);
+    firstEligibleDate.setSeconds(0);
+
+    if (firstEligibleTimeConstant == 'tomorrow') {
+      return {firstEligibleDate, firstEligibleTime: firstEligibleDate};
+    }
+    if (firstEligibleTimeConstant == 'tomorrowNoon') {
+      var firstEligibleTime = new Date(firstEligibleDate);
+      firstEligibleTime.setHours(12);
+
+      return {firstEligibleDate, firstEligibleTime};
+    }
+    if (firstEligibleTimeConstant == 'plus24Hours') {
+      var firstEligibleTime = new Date();
+      firstEligibleTime.setDate(firstEligibleTime.getDate() + 1);
+
+      return {firstEligibleDate, firstEligibleTime};
+    }
+    if (firstEligibleTimeConstant == 'dayAfterTomorrow') {
+      firstEligibleDate.setDate(firstEligibleDate.getDate() + 1);
+      store.dispatch('selectedDate/set', firstEligibleDate);
+
+      return {firstEligibleDate, firstEligibleTime: firstEligibleDate};
+    }
+  });
 
   store.on('selectedDate/set', async (storedValue) => {
     requestNextFreeSlots(store, storedValue.selectedDate);

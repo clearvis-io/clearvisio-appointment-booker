@@ -80,7 +80,12 @@ const messages = {
     'I have accepeted the privacy policy': html`Elfogadom az <${PrivacyPolicyLink}>adatkezelési szabályzatban<//> foglaltakat`,
     'Privacy policy': 'Adatkezelési tájékoztató',
     'Close': 'Bezárás',
-    'Your appointment starts at startTime': html`Az időpontja <${StartTime}//> időpontban kezdődik`
+    'Your appointment starts at startTime': html`Az időpontja <${StartTime}//> időpontban kezdődik`,
+    'Appointment booker': 'Időpont foglaló',
+    'Select eye examination type': 'Válaszd ki a látásvizsgálat típusát',
+    'Select a vision expert': 'Válassz látásszakértőt',
+    'Select your desired appointment time': 'Válassz egy megfelelő időpontot',
+    'Add you contact details': 'Add meg elérhetőségeidet'
   },
   en: {
     '@abbrSunday': 'Sun',

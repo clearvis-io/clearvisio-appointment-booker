@@ -1,4 +1,4 @@
-import {html, translator as __, api, nameFormatter, ValidationError} from '../../helper/index.js'
+import {html, translator as __, api, nameFormatter, ValidationError, phoneNumberParser} from '../../helper/index.js'
 import {useStoreon} from 'storeon/preact'
 import {useState} from 'preact/hooks';
 import Spinner from '../Spinner.js'
@@ -21,7 +21,12 @@ const createCustomerAndAppointmet = async (storeContent) => {
 
 const createCustomer = async (storeContent) => {
   return await api.post(storeContent, 'customers', Object.assign(
-    {}, storeContent.appointment.customer, {country: storeContent.country}
+    {}, storeContent.appointment.customer, {
+      country: storeContent.country,
+      mobile: storeContent.appointment.customer.mobile ?
+        phoneNumberParser(storeContent.store.chain.language, storeContent.appointment.customer.mobile) :
+        null
+    }
   ));
 }
 
@@ -76,7 +81,7 @@ const createAppointmet = async (storeContent, customer) => {
 export default (props) => {
   var storeContent = useStoreon(
     'appointment', 'api', 'booking', 'language', 'customerForm', 'customerFormGlobalErrors',
-    'country', 'moduleState'
+    'country', 'moduleState', 'store'
   );
   const { booking, moduleState, dispatch } = storeContent;
 

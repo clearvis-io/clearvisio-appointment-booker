@@ -7,10 +7,11 @@ import datesMatch from './datesMatch.js';
 import dateTimesMatch from './dateTimesMatch.js';
 import dateTimeFormatter from './dateTimeFormatter.js';
 import nameFormatter from './nameFormatter.js';
+import phoneNumberParser from './phoneNumberParser.js';
 import createNextFreeSlotsForDateKey from './createNextFreeSlotsForDateKey.js';
 import ValidationError from './ValidationError.js';
 
 export {
   api, html, translator, availableCalendarFilter, createDateGroups, datesMatch, dateTimesMatch,
-  createNextFreeSlotsForDateKey, dateTimeFormatter, nameFormatter, ValidationError
+  createNextFreeSlotsForDateKey, dateTimeFormatter, nameFormatter, ValidationError, phoneNumberParser
 }

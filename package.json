@@ -5,6 +5,7 @@
   },
   "dependencies": {
     "@snowpack/plugin-postcss": "^1.4.3",
+    "country-telephone-data": "^0.6.3",
     "cssnano": "^5.0.8",
     "htm": "^3.0.1",
     "postcss": "^8.3.11",

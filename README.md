@@ -1,5 +1,9 @@
+<img src="https://raw.githubusercontent.com/clearvis-io/clearvisio-appointment-booker/main/logoDark.png">
+
 # Clearvis.io Appointment Booker
-WIP
+Clearvis.io is a cloud based Practice Management Software (PMS) for optical retailers. It provides complete solution for the daily front- and backoffice tasks in an optical retail store. Clearvis.io includes EHR, POS and CRM features and it is suitable for private practices and retail chains as well.
+
+This module is a frontend for the Appointment Booking API of clearvis.io. The API itself is only available for subscribers, this is a simple, configurable, open source frontend for it, that is easy to add to any website or webstore. It allows the registration of a customer, accepting the store's privacy policy and booking of an available appointment matching the customer's desired expectations. (Including selecting the type of examination, the optometrist or opthalmologist and of course the date and time of the examination.)
 
 ## Simple usage example
 ```html
@@ -20,7 +24,7 @@ WIP
           storeCode: 'DEMO',
           apiPath: '/myProxiedApi.php',
           country: 'HU',
-          header: {title: 'Appointment'}
+          headerTitle: 'Appointment'
         });
       });
     </script>
@@ -29,9 +33,9 @@ WIP
 ```
 
 ## Detailed constructor arguments of ClearvisioAppointmentBooker
-* **header**: The title and subtitle of the appointment booker UI (eg. `{title: 'TITLE', subtitle: 'subtitle'}`) Subtitle is not required
+* **headerTitle**: The title of the appointment booker UI
 * **storeCode**: The code of a store in the clearvis.io subscription. (It can be configured on the clearvis.io UI.)
-* **apiPath**: The booker sends all API requests from to this endpoint. It is recomended, to create a proxy controller on you webserver for this, so API key is hidden from the browser. (See below for an example proxy php file. For deatails of the clearvis.io API see the documentation on the clearvis.io UI.)
+* **apiPath**: The booker sends all API requests to this endpoint. It is recomended, to create a proxy controller on you webserver for this, so API key and CRM URL is hidden from the browser. (See below for an example proxy php file. For deatails of the clearvis.io API see the documentation on the clearvis.io UI.)
 * **apiHeaders**: Additional headers sent in the API requests
   ```js
       new ClearvisioAppointmentBooker({
@@ -41,10 +45,16 @@ WIP
         //...
       });
   ```
-* **customerFields**: List of fields in an array that can be set on the customer registration page. The available values are: [birth, gender, ssn, state, postal_code, city, street_address, mobile, email]. The default value is: `['mobile', 'email']`.
+* **customerFields**: List of fields in an array that can be set on the customer registration page. The available values are: `[birth, gender, ssn, state, postal_code, city, street_address, mobile, email]`. The default value is: `['mobile', 'email']`.
 * **requiredCustomerFields**: List of fields that are required to be set on the customer registration page. (The available values are the same.)
 * **country**: The country of the address of the customer, it is required to be set if any of the address parts are available in the customerFields. Two character ISO country codes are accepted. Eg. "HU".
 * **language**: The language of the booker UI. If not set, then navigator.language is used. (The available languages are currently en and hu.)
+* **calendarStepShouldBeHidden**: When set to `true` it will hide the calendar/optometrist selection step, if customers should not be allowed to check free slots by user
+* **firstEligibleTime**: Determines the first free time slot that can be selected. Default value is `tomorrow`. The available values are:
+  * *tomorrow*: The first free slot tomorrow will be available for selection
+  * *tomorrowNoon*: The first free slot after tomorrow 12:00 will be available for selection
+  * *plus24Hours*: The first free slot tomorrow later than the current time will be available for selection
+  * *dayAfterTomorrow*: The first free slot the day after tomorrow will be available for selection
 
 ## Example backend proxy in PHP
 ```php

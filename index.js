@@ -61,7 +61,9 @@ export default class ClearvisioAppointmentBooker {
     if (options.language) {
       store.dispatch('language/set', options.language);
     }
-    store.dispatch('header/set', options.header || {});
+    if (options.headerTitle) {
+      store.dispatch('headerTitle/set', options.headerTitle);
+    }
     if (options.country) {
       store.dispatch('country/set', options.country);
     }

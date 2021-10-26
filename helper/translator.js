@@ -81,7 +81,7 @@ const messages = {
     'Privacy policy': 'Adatkezelési tájékoztató',
     'Close': 'Bezárás',
     'Your appointment starts at startTime': html`Az időpontja <${StartTime}//> időpontban kezdődik`,
-    'Appointment booker': 'Időpont foglaló',
+    'Appointment booker': 'Időpontfoglaló',
     'Select eye examination type': 'Válaszd ki a látásvizsgálat típusát',
     'Select a vision expert': 'Válassz látásszakértőt',
     'Select your desired appointment time': 'Válassz egy megfelelő időpontot',

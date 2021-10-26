@@ -2,7 +2,7 @@ import { render } from 'preact';
 import { StoreContext, useStoreon } from 'storeon/preact'
 import {html, api} from './helper/index.js';
 import createStore from './store/createStore.js';
-import {Carousel, BackButton, CloseButton, GlobalModal} from './component/index.js'
+import {Carousel, BackButton, CloseButton, GlobalModal, Style} from './component/index.js'
 import Header from './component/Header.js';
 
 const knownCustomerFields = [
@@ -21,6 +21,7 @@ const knownCustomerFields = [
 
 const BookerComponent = (props) => {
   return html`
+    <${Style} colors=${props.colors}/>
     <div class="fixed-top">
       <${StoreContext.Provider} value=${props.store}>
         <${GlobalModal}/>
@@ -110,10 +111,10 @@ export default class ClearvisioAppointmentBooker {
     );
   }
 
-  createElementAndRender({parentElement}) {
+  createElementAndRender({parentElement, colors}) {
     var element = document.createElement('div');
     (parentElement || document.body).appendChild(element);
-    render(html`<${BookerComponent} store=${this.store}/>`, element);
+    render(html`<${BookerComponent} store=${this.store} colors=${colors}/>`, element);
 
     this.store.on('close', () => element.remove());
   }

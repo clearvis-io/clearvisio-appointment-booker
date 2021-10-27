@@ -24,7 +24,10 @@ This module is a frontend for the Appointment Booking API of clearvis.io. The AP
           storeCode: 'DEMO',
           apiPath: '/myProxiedApi.php',
           country: 'HU',
-          headerTitle: 'Appointment'
+          headerTitle: 'Appointment',
+          colors: {
+            primary: '#282',
+          }
         });
       });
     </script>
@@ -55,6 +58,13 @@ This module is a frontend for the Appointment Booking API of clearvis.io. The AP
   * *tomorrowNoon*: The first free slot after tomorrow 12:00 will be available for selection
   * *plus24Hours*: The first free slot tomorrow later than the current time will be available for selection
   * *dayAfterTomorrow*: The first free slot the day after tomorrow will be available for selection
+* **colors**: Allow overriding some colors of the module. (Complex overriding can be done with css manually or forking the project.) Not all keys are need to be set. The allowed keys are:
+  * *background*: Sets the color of the background
+  * *contentBackground*: Sets the background color of the segments/card/lists
+  * *text*: Sets the color of the normal foreground text
+  * *primary*: Sets the color of the header and the primary buttons 
+  * *danger*: Sets the color of errors dialogs and validation messages
+  * *success*: Sets the header color of the success dialog
 
 ## Example backend proxy in PHP
 ```php

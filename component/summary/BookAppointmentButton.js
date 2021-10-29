@@ -73,7 +73,8 @@ const createAppointmet = async (storeContent, customer) => {
         "%customer%'s examination",
         {customer: nameFormatter.format(customer, language)},
         language
-      )
+      ),
+      status: 'booked'
     })
   );
 }

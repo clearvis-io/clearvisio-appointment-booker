@@ -18,25 +18,33 @@ export default (props) => {
       var subtitle = __('Select your desired appointment time');
       break;
     case 'customer':
-      var subtitle = __('Add you contact details');
+      var subtitle = __('Enter customer details');
       break;
     default:
-      var subtitle = __('Your appointment details');
+      var subtitle = __('Appointment details verification');
       break;
   }
 
   return html`
     <div class="bg-primary bg-gradient text-light p-2">
-      <div class="container">
-        <${CloseButton}/>
-          <h3>
-            <${BackButton}/>
-            ${headerTitle || __('Appointment booker')}
-          </h3>
-          <h5 class="ms-5">
-            ${subtitle}
-          </h5>
-       </div>
+      <div class="container col-sm-6">
+        <div class="row">
+          <div class="col-8">
+            <h3>
+              ${headerTitle || __('Appointment booking')}
+            </h3>
+            <h5>
+              ${subtitle}
+            </h5>
+          </div>
+          <div class="col-4">
+            <div class="btn-group btn-group-lg text-end" role="group" aria-label="Navigation buttons">
+              <${BackButton}/>
+              <${CloseButton}/>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
     `;
 }

@@ -9,13 +9,12 @@ export default (props) => {
   const onClose = () => dispatch('close');
 
   return html`
+    <button type="button" class="btn btn-outline-light" onClick=${onShowConfirm}>X</button>
     <${SimpleModal} modalStateStore="closeConfirmModalState"
       title="Are you sure you want to cancel this appointment?"
       content="All inputed data will be lost."
       cancelButtonLabel="No, continue editing appointment"
       approveButtonLabel="Cancel appointment"
       onApprove=${onClose}/>
-
-    <button type="button" class="float-end btn-close btn-close-white" onClick=${onShowConfirm}></button>
   `;
 }

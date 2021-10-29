@@ -8,7 +8,7 @@ export default (props) => {
 
   return html`
     <button type="button" onClick=${onClick}
-      class="${(currentStep == availableSteps[0] || booking) ? 'invisible' : ''} btn btn-outline-light mx-1">
+      class="${(currentStep == availableSteps[0] || booking) ? 'invisible' : ''} btn btn-outline-light">
       ←
     </button>
   `;

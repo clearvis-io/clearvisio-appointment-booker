@@ -16,12 +16,12 @@ export default (props) => {
           approveButtonClasses="btn-success"
           title="Appointment booked!"
           content="
-            ${__('We have recorded you appointment.')}
+            ${__('Your appointment have been recorded.')}
             ${__(
               'The examination will start at %start%, please arrive 5 minutes early.',
               {start: dateTimeFormatter.formatTime(appointment.start)}
             )}
-            ${__('If you have any further questions, please contuct us through our customer service.')}
+            ${__('If you have any further questions, please contact us through our customer service.')}
           "
           approveButtonLabel="OK"
           onApprove=${onClose}/>

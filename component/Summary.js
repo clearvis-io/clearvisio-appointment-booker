@@ -39,7 +39,7 @@ export default (props) => {
     <ul class="list-group text-center">
       ${
         currentStep != 'summary' ?
-        html`<li class="list-group-item fw-bold">${__('Your appointment details')}</li>` :
+        html`<li class="list-group-item fw-bold">${__('Appointment summary')}</li>` :
         null
       }
       <li class="list-group-item">

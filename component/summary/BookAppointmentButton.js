@@ -99,7 +99,7 @@ export default (props) => {
     <div class="d-grid">
       <button type="button" onClick=${onClick} disabled=${moduleState != 'idle'}
         class="btn btn-primary btn-lg">
-        ${booking && moduleState == 'idle' ? html`<${Spinner}/>` : __('Book appointment')}
+        ${booking && moduleState == 'idle' ? html`<${Spinner}/>` : __('Confirm appointment')}
       </button>
     </div>
   `;

@@ -25,7 +25,7 @@ export default (props) => {
       <input class="form-check-input" type="checkbox"
         checked=${appointment.customer[props.property] || false}/>
       <label class="form-check-label">
-        ${__('I have accepeted the privacy policy')}
+        ${__('I have accepted the privacy policy')}
       </label>
     </div>
   `;

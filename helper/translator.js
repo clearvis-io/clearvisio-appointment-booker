@@ -6,15 +6,15 @@ import StartTime from '../component/summary/StartTime.js'
 const messages = {
   hu: {
     "Are you sure you want to cancel this appointment?":
-      "Biztosan megszakítja ezt az időpontot?",
+      "Biztosan megszakítja a foglalást?",
     "All inputed data will be lost.": "Mindent megadott adat el fog veszni.",
-    "No, continue editing appointment": "Nem, időpont foglalás folytatása",
-    "Cancel appointment": "Időpont megszakítása",
+    "No, continue editing appointment": "Nem, időpontfoglalás folytatása",
+    "Cancel appointment": "Foglalás megszakítása",
     "Appointment booking failed": "Időpontfoglalás nem sikerült",
     "Due to an unexpected error appointment could not be booked, please restart the process":
       "Az időpontfoglalás közben nem várt hiba történt, kérjük kezdje újra a folyamatot",
-    "None of our colleagues was available for the selected process":
-      "Egy munkatársunk sem volt elérhető a választott protokollhoz",
+    "None of our colleagues is available for the selected process":
+      "Egy munkatársunk sem elérhető a választott protokollhoz",
     "First free": "Első szabad",
     "For finding the nearest free time slot.": "A lehető legkorábbi időpont választásához.",
     '@abbrSunday': 'V',
@@ -60,32 +60,33 @@ const messages = {
     'Next': 'Tovább',
     'This field is required.': 'Ez a mező kötelező.',
     'Invalid email address.': 'Hibás email cím.',
-    'Your information': 'A te adataid',
+    'Your information': 'Az Ön adatai',
     'Name': 'Név',
     'Date of birth': 'Születési dátum',
     'Address': 'Cím',
     'Phone number': 'Telefonszám',
-    'Your appointment details': 'Foglalás adatai',
+    'Appointment details verification': 'Foglalási adatok ellenőrzése',
+    'Appointment summary': 'Foglalási összesítő',
     'Price': 'Ár',
-    'Book appointment': 'Időpont foglalása',
+    'Confirm appointment': 'Időpontfoglalás jóváhagyása',
     "%customer%'s examination": '%customer% vizsgálata',
-    'We have recorded you appointment.': 'Időpontját rögzítettük.',
+    'Your appointment have been recorded.': 'Foglalását rögzítettük.',
     'The examination will start at %start%, please arrive 5 minutes early.':
       'A vizsgálat kezdete: %start%, kérjük érkezzen 5 perccel korábban.',
-    'If you have any further questions, please contuct us through our customer service.':
+    'If you have any further questions, please contact us through our customer service.':
       'Ha további kérdése van, keresse fel ügyfélszolgálatunkat.',
     'Appointment booked!': 'Időpont lefoglalva!',
     'with: %examiner%': 'vele: %examiner%',
     'It takes up to %length% minutes': '%length% percet vesz igénybe',
-    'I have accepeted the privacy policy': html`Elfogadom az <${PrivacyPolicyLink}>adatkezelési szabályzatban<//> foglaltakat`,
+    'I have accepted the privacy policy': html`Elfogadom az <${PrivacyPolicyLink}>adatkezelési tájékoztatóban<//> foglaltakat`,
     'Privacy policy': 'Adatkezelési tájékoztató',
     'Close': 'Bezárás',
     'Your appointment starts at startTime': html`Az időpontja <${StartTime}//> időpontban kezdődik`,
-    'Appointment booker': 'Időpontfoglaló',
-    'Select eye examination type': 'Válaszd ki a látásvizsgálat típusát',
-    'Select a vision expert': 'Válassz látásszakértőt',
-    'Select your desired appointment time': 'Válassz egy megfelelő időpontot',
-    'Add you contact details': 'Add meg elérhetőségeidet'
+    'Appointment booking': 'Időpontfoglalás',
+    'Select eye examination type': 'Látásvizsgálat típusának választása',
+    'Select a vision expert': 'Látásszakértő választása',
+    'Select your desired appointment time': 'Időpont választása',
+    'Enter customer details': 'Ügyféladatok megadása'
   },
   en: {
     '@abbrSunday': 'Sun',
@@ -108,7 +109,7 @@ const messages = {
     'November': 'November',
     'December': 'December',
     '@abbrMinute': 'm.',
-    'I have accepeted the privacy policy': html`I have accepeted the <${PrivacyPolicyLink}>privacy policy<//>`,
+    'I have accepted the privacy policy': html`I have accepted the <${PrivacyPolicyLink}>privacy policy<//>`,
     'Your appointment starts at startTime': html`Your appointment starts at <${StartTime}//>`
   }
 };

@@ -28,7 +28,7 @@ export default (props) => {
             ` :
             html`
               <li class="list-group-item text-center">
-                ${__('None of our colleagues was available for the selected process')}
+                ${__('None of our colleagues is available for the selected process')}
                 <button class="btn m-2 btn-primary" onClick="${onBack}">
                   ${__('Select another process')}
                 </button>

@@ -83,7 +83,7 @@ const messages = {
     'Close': 'Bezárás',
     'Your appointment starts at startTime': html`Az időpontja <${StartTime}//> időpontban kezdődik`,
     'Appointment booking': 'Időpontfoglalás',
-    'Select eye examination type': 'Látásvizsgálat típusának választása',
+    'Select eye examination type': 'Vizsgálattípus választása',
     'Select a vision expert': 'Látásszakértő választása',
     'Select your desired appointment time': 'Időpont választása',
     'Enter customer details': 'Ügyféladatok megadása'

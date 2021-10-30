@@ -10,18 +10,25 @@ export default (props) => {
   }
 
   return html`
-    <li class="user-select-none list-group-item" onClick=${onClick}>
-      <div class="avatar me-2 float-start">
-        ${
-          props.item.user.profile_picture ?
-          html`<img class="image" src="data:image/*;base64,${props.item.user.profile_picture}"/>` :
-          html`<h2 class="p-1 text-muted text-center image">?</h2>`
-        }
-        <input class="form-check-input" type="radio"
-          checked=${selectedCalendar == props.item || (!props.item['@id'] && !selectedCalendar)} />
+    <li class="list-group-item${selectedCalendar == props.item || (!props.item['@id'] && !selectedCalendar) ? ' selected' : ''}" onClick=${onClick}>
+      <div class="row">
+        <div class="col-auto">
+          <div class="avatar me-2">
+            ${
+              props.item.user.profile_picture ?
+              html`<img class="image" src="data:image/*;base64,${props.item.user.profile_picture}"/>` :
+              html`<h2 class="p-1 text-muted text-center image">?</h2>`
+            }
+          </div>
+        </div>
+        <div class="col-8">
+          <div class="fw-bold">${props.item.user.name}</div>
+          ${props.item.user.description || ''}
+        </div>
+        <div class="col text-end p-2">
+          \u00BB
+        </div>
       </div>
-      <div class="fw-bold">${props.item.user.name}</div>
-      ${props.item.user.description || ''}
     </li>
   `;
 }

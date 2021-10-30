@@ -12,25 +12,16 @@ export default (props) => {
   }
 
   return html`
-    <li class="user-select-none list-group-item" onClick=${onClick}>
-      <div class="form-check">
-        <div class="container">
-          <div class="row">
-            <span class="col-6">
-              <input class="form-check-input" type="radio"
-                checked=${appointment.eye_examination_process == props.item} />
-              <span class="ms-1 fw-bold">
-                ${props.item.name}
-              </span>
-            </span>
-            <span class="text-muted col-2">
-              ${props.item.length} ${__('@abbrMinute')}
-            </span>
-            <span class="col-4 text-end"><${ProcessPrice} process=${props.item}/></span>
-          </div>
-          <div class="row">
-            <div class="col ms-1">${props.item.description || ''}</div>
-          </div>
+    <li class="row list-group-item ${appointment.eye_examination_process == props.item ? 'selected' : ''}" onClick=${onClick}>
+      <div class="row">
+        <div class="col-11">
+          <h4>${props.item.name}</h4>
+          <p class="${props.item.description && props.item.description.length > 0 ? '' : 'd-none'}">${props.item.description}</p>
+          <span class="badge bg-primary me-1">${props.item.length} ${__('@abbrMinute')}</span>
+          <span class="badge bg-primary"><${ProcessPrice} process=${props.item}/></span>
+        </div>
+        <div class="col text-end p-2">
+          \u00BB
         </div>
       </div>
     </li>

@@ -22,13 +22,12 @@ export default (props) => {
   }
 
   return html`
-    <li class="list-group-item" onClick=${onClick}>
-      <div class="row">
-        <div class="col col-1">
-          <input class="form-check-input" type="radio"
-            checked=${dateTimesMatch(new Date(appointment.start), new Date(props.slot.start))} />
+    <li class="list-group-item${dateTimesMatch(new Date(appointment.start), new Date(props.slot.start)) ? ' selected' : ''}" onClick=${onClick}>
+      <div class="row align-items-center ms-2">
+        <div class="col-11">${dateTimeFormatter.formatTime(props.slot.start)}</div>
+        <div class="col text-end p-2">
+          \u00BB
         </div>
-        <div class="col text-center">${dateTimeFormatter.formatTime(props.slot.start)}</div>
       </div>
     </li>
   `;

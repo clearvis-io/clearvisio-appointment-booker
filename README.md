@@ -62,7 +62,7 @@ This module is a frontend for the Appointment Booking API of clearvis.io. The AP
   * *background*: Sets the color of the background
   * *contentBackground*: Sets the background color of the segments/card/lists
   * *text*: Sets the color of the normal foreground text
-  * *primary*: Sets the color of the header and the primary buttons 
+  * *primary*: Sets the color of the header and the primary buttons
   * *danger*: Sets the color of errors dialogs and validation messages
   * *success*: Sets the header color of the success dialog
 
@@ -95,13 +95,22 @@ foreach ($http_response_header ?? [] as $header) {
 
 echo $result;
 ```
+## Starting development environment
 
+In order to create an environment where you can play with the source code, install docker first and then run:
+```bash
+$ API_URL=https://<your instance url>/apiV2 API_KEY=<your api key> API_STORE_CODE=<your store code> docker-compose up -d
+$ npm run dev
+```
+
+This will:
+ * Create a docker container with an apache service listening on http://localhost:8080
+ * Watch any source code changes and build booker automatically.
 
 ## Building manually
 1. Clone the git repository from github
-2. 
+2.
 ```bash
 $ npm install
 $ npm run build
 ```
-

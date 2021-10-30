@@ -1,0 +1,15 @@
+version: "3.3"
+services:
+  clearvisio_booker_app:
+    image: php:7.4-apache
+    volumes:
+      - ./devel/:/var/www/html/
+      - ./build/:/var/www/html/dist/
+      - ./devel/conf.d/environment.conf:/etc/apache2/conf-enabled/environment.conf
+    restart: always
+    ports:
+      - "8080:80"
+    environment:
+      API_URL: ${API_URL}
+      API_KEY: ${API_KEY}
+      API_STORE_CODE: ${API_STORE_CODE}

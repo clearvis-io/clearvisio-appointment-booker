@@ -38,7 +38,7 @@ export default (props) => {
             </h5>
           </div>
           <div class="col-4">
-            <div class="btn-group btn-group-lg text-end" role="group" aria-label="Navigation buttons">
+            <div class="btn-group btn-group-lg float-end" role="group" aria-label="Navigation buttons">
               <${BackButton}/>
               <${CloseButton}/>
             </div>

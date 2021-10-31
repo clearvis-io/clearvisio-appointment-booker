@@ -14,7 +14,7 @@ export default (props) => {
   return html`
     <li class="row list-group-item ${appointment.eye_examination_process == props.item ? 'selected' : ''}" onClick=${onClick}>
       <div class="row">
-        <div class="col-11">
+        <div class="col-11 p-0">
           <h4>${props.item.name}</h4>
           <p class="${props.item.description && props.item.description.length > 0 ? '' : 'd-none'}">${props.item.description}</p>
           <span class="badge bg-primary me-1">${props.item.length} ${__('@abbrMinute')}</span>

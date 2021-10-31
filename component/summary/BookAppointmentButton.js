@@ -74,7 +74,9 @@ const createAppointmet = async (storeContent, customer) => {
         {customer: nameFormatter.format(customer, language)},
         language
       ),
-      status: 'booked'
+      status: 'booked',
+      should_send_confirmation_email: true,
+      should_send_reminder_email: true
     })
   );
 }

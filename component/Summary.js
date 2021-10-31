@@ -1,6 +1,7 @@
 import {translator as __, dateTimeFormatter, html} from '../helper/index.js'
 import {useStoreon} from 'storeon/preact'
 import SummaryCustomer from './summary/SummaryCustomer.js'
+import StartTime from './summary/StartTime.js'
 import BookAppointmentButton from './summary/BookAppointmentButton.js'
 import ProcessPrice from './ProcessPrice.js';
 
@@ -32,36 +33,31 @@ export default (props) => {
     process: appointment['eye_examination_process'],
     examinerName: calendar ? calendar.user.name : null,
     customer: appointment.customer,
-    customerAddress: addressParts.join(', ')
+    customerAddress: addressParts.join(', '),
+    storeAddress: store.postal_code + ' ' + store.city + ', ' + store.street_address
   };
 
   return html`
-    <ul class="list-group text-end">
+    <ul class="list-group${currentStep == 'summary' ? '' : ' text-end'}">
       ${
         currentStep != 'summary' ?
         html`<li class="list-group-item fw-bold">${__('Appointment summary')}</li>` :
         null
       }
-      <li class="list-group-item">
-        <div class="fw-bold">${store.name}</div>
-        <div>${store.email}</div>
-        <div>${store.phone}</div>
-      </li>
       ${options.processName ? html`
         <li class="list-group-item">
+          <div>${__('Subject')}:</div>
+          <div class="fw-bold">${options.processName}</div>
           <div>
-            <span class="fw-bold">${options.processName}</span>
-            ${options.examinerName ? html`, ${__('with: %examiner%', {examiner: options.examinerName})}` : null}
-          </div>
-          <div>
-            <span class="fw-bold">${__('Price')}:</span> <${ProcessPrice} process=${options.process}/>
+            ${options.examinerName ? html`${__('examiner: %examiner%', {examiner: options.examinerName})}` : null}
           </div>
         </li>
       ` : ''}
       ${options.dateTimeStart && options.dateTimeEnd && options.processLength ? html`
         <li class="list-group-item">
+          <div>${__('Start Time')}:</div>
           <div>
-            ${__('Your appointment starts at startTime')}
+            <${StartTime}//>
           </div>
           <div class="text-muted">
             ${__('It takes up to %length% minutes', {length: options.processLength})}
@@ -73,6 +69,14 @@ export default (props) => {
           <${SummaryCustomer} customer=${options.customer} customerAddress=${options.customerAddress}/>
         </li>
       ` : ''}
+      <li class="list-group-item">
+        <div>${__('Location')}:</div>
+        <div class="fw-bold">${store.name}</div>
+        <div>${options.storeAddress}</div>
+        <div>
+          <span class="fw-bold">${__('Price')}:</span> <${ProcessPrice} process=${options.process}/>
+        </div>
+      </li>
       ${
         currentStep == 'summary' ?
         html`

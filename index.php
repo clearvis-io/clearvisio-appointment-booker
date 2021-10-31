@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <link href="./dist/style.css" rel="stylesheet">
+    <link href="./build/style.css" rel="stylesheet">
     <title>Clearvisio Appointment Booker Development Environment</title>
   </head>
   <body>
@@ -18,7 +18,7 @@
     </p>
     <button id="bookAppointments">Book my appointment!</button>
     <script type="module">
-      import ClearvisioAppointmentBooker from './dist/index.js';
+      import ClearvisioAppointmentBooker from './build/index.js';
 
       document.getElementById('bookAppointments').addEventListener('click', () => {
         new ClearvisioAppointmentBooker({

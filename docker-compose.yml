@@ -3,9 +3,8 @@ services:
   clearvisio_booker_app:
     image: php:7.4-apache
     volumes:
-      - ./devel/:/var/www/html/
-      - ./build/:/var/www/html/dist/
-      - ./devel/conf.d/environment.conf:/etc/apache2/conf-enabled/environment.conf
+      - ./:/var/www/html/
+      - ./environment.conf:/etc/apache2/conf-enabled/environment.conf
     restart: always
     ports:
       - "8080:80"

@@ -12,6 +12,7 @@ import { selectedDate } from './selectedDate.js'
 import { nextFreeSlots } from './nextFreeSlots.js'
 import { customerForm } from './customerForm.js'
 import { headerTitle } from './headerTitle.js'
+import { priceComment } from './priceComment.js'
 import { booking } from './booking.js'
 import { country } from './country.js'
 import { selectedCalendar } from './selectedCalendar.js'
@@ -25,6 +26,7 @@ export default () => {
   return createStoreon([
     eyeExaminationProcesses, steps, appointment, moduleState, language, api, privacyPolicyModalState,
     storeStore, calendars, selectedDate, nextFreeSlots, customerForm, privacyPolicy,
-    closeConfirmModalState, globalModalState, headerTitle, booking, country, selectedCalendar
+    closeConfirmModalState, globalModalState, headerTitle, booking, country, selectedCalendar,
+    priceComment
   ]);
 }

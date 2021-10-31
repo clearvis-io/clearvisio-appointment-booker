@@ -67,6 +67,9 @@ export default class ClearvisioAppointmentBooker {
     if (options.country) {
       store.dispatch('country/set', options.country);
     }
+    if (options.priceComment) {
+      store.dispatch('priceComment/set', options.priceComment);
+    }
 
     this.createElementAndRender(options);
   }

@@ -4,6 +4,7 @@ import InputContainer from './InputContainer.js'
 import DateInput from './form/DateInput.js'
 import GenderDropdown from './form/GenderDropdown.js'
 import AcceptPrivacyPolicyCheckbox from './form/AcceptPrivacyPolicyCheckbox.js'
+import AcceptMedicalRecordsUseCheckbox from './form/AcceptMedicalRecordsUseCheckbox.js'
 
 export default (props) => {
   const { customerForm, customerFormGlobalErrors, dispatch } =
@@ -55,6 +56,9 @@ export default (props) => {
       </div>
       <div class="row mx-2">
         <${InputContainer} property="acceptPrivacyPolicy" inputClass=${AcceptPrivacyPolicyCheckbox}/>
+      </div>
+      <div class="row mx-2">
+        <${InputContainer} property="acceptMedicalRecordsUse" inputClass=${AcceptMedicalRecordsUseCheckbox}/>
       </div>
       <button class="mx-2 btn btn-primary" onClick=${onNext}>${__('Next')}</button>
     </div>

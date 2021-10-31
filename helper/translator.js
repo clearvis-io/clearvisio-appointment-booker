@@ -79,6 +79,7 @@ const messages = {
     'examiner: %examiner%': 'végzi: %examiner%',
     'It takes up to %length% minutes': 'Időtartam: %length% perc',
     'I have accepted the privacy policy': html`Elfogadom az <${PrivacyPolicyLink}>adatkezelési tájékoztatóban<//> foglaltakat`,
+    'I agree to the use of my medical records according to privacy policy': 'Hozzájárulok egészségügyi adataim adatkezelési tájékoztatóban foglaltak szerinti kezeléséhez',
     'Privacy policy': 'Adatkezelési tájékoztató',
     'Close': 'Bezárás',
     'Start Time': 'Időpont',
@@ -111,7 +112,7 @@ const messages = {
     'November': 'November',
     'December': 'December',
     '@abbrMinute': 'm.',
-    'I have accepted the privacy policy': html`I have accepted the <${PrivacyPolicyLink}>privacy policy<//>`,
+    'I have accepted the privacy policy': html`I accept the terms of <${PrivacyPolicyLink}>privacy policy<//>`,
     'Your appointment starts at startTime': html`Your appointment starts at <${StartTime}//>`
   }
 };

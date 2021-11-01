@@ -2,7 +2,6 @@
 
 .content {
   height: calc(100vh - 61.5333px);
-  overflow: auto;
 }
 
 .avatar {
@@ -25,20 +24,4 @@
 
 .dateSelection > .btn-outline-secondary {
   margin-top: 30px;
-}
-
-@media only screen and (min-width: 1081px) {
-  .content.container.with.summary {
-    width: 50%;
-  }
-}
-
-@media only screen and (max-width: 768px) {
-  .content.container.with.summary .content {
-    width: 100%;
-  }
-
-  .content.container.with.summary .summarycard {
-    display: none;
-  }
 }

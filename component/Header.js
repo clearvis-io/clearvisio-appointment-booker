@@ -27,7 +27,7 @@ export default (props) => {
 
   return html`
     <div class="bg-primary bg-gradient text-light p-2">
-      <div class="container col-sm-6">
+      <div class="container col-sm-10 col-md-8">
         <div class="row">
           <div class="col-8">
             <h3>

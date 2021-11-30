@@ -53,6 +53,7 @@ This module is a frontend for the Appointment Booking API of clearvis.io. The AP
 * **country**: The country of the address of the customer, it is required to be set if any of the address parts are available in the customerFields. Two character ISO country codes are accepted. Eg. "HU".
 * **language**: The language of the booker UI. If not set, then navigator.language is used. (The available languages are currently en and hu.)
 * **calendarStepShouldBeHidden**: When set to `true` it will hide the calendar/optometrist selection step, if customers should not be allowed to check free slots by user
+* **showFirstAvailableUserItem**: When set to `false` it will hide "First available user" option on the calendar list. (The default value is `true`.)
 * **priceComment**: Text that will be showed on summary card below the price of examination
 * **firstEligibleTime**: Determines the first free time slot that can be selected. Default value is `tomorrow`. The available values are:
   * *tomorrow*: The first free slot tomorrow will be available for selection

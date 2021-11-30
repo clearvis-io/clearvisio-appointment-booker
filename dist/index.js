@@ -140,13 +140,13 @@ var X,h,Le,K,He,Ge,Re,ee={},Ue=[],Sr=/acit|ex(?:s|g|n|p|$)|rph|grid|ows|mnc|ntw|
     ">
       <div class="content container-sm p-1 col-sm-10 col-md-8">
         <div class="row">
-          <div class="${o?"col-8":"col"}">
+          <div class="${o?"col col-sm-8":"col"}">
             <div class="p-1">
               <${e.wrappedComponent}/>
             </div>
           </div>
           ${o?l`
-            <div class="col-4 summarycard">
+            <div class="d-none d-sm-block col-4 summarycard">
               <div class="p-1">
                 <${de} props=${e}/>
               </div>
@@ -277,7 +277,7 @@ var X,h,Le,K,He,Ge,Re,ee={},Ue=[],Sr=/acit|ex(?:s|g|n|p|$)|rph|grid|ows|mnc|ntw|
       value=${t.customer[e.property]||""}
       disabled=${!!t.customer["@id"]} />
   `};var S=e=>{let{customerForm:t}=f("customerForm");if(!!t[e.property]){var r=t[e.property];return l`
-    <div class="${e.class||"col"} needs-validation p-1 mb-2">
+    <div class="${e.class||"col-sm"} needs-validation p-1 mb-2 w-100">
       ${e.label?l`
           <label class="form-label text-truncate">
             ${r.required?l`<span class="text-danger">*</span> `:""}
@@ -457,14 +457,14 @@ var X,h,Le,K,He,Ge,Re,ee={},Ue=[],Sr=/acit|ex(?:s|g|n|p|$)|rph|grid|ows|mnc|ntw|
         `:""}
     </style>
   `};var yr=e=>{let{headerTitle:t,currentStep:r}=f("headerTitle","currentStep");switch(r){case"process":var a=u("Select eye examination type");break;case"calendar":var a=u("Select a vision expert");break;case"appointment":var a=u("Select your desired appointment time");break;case"customer":var a=u("Enter customer details");break;default:var a=u("Appointment details verification");break}return l`
-    <div class="bg-primary bg-gradient text-light p-2">
+    <div class="booker-header bg-primary bg-gradient text-light p-2">
       <div class="container col-sm-10 col-md-8">
         <div class="row">
           <div class="col-8">
-            <h3>
+            <h3 class="text-truncate">
               ${t||u("Appointment booking")}
             </h3>
-            <h5>
+            <h5 class="text-truncate">
               ${a}
             </h5>
           </div>
@@ -479,7 +479,7 @@ var X,h,Le,K,He,Ge,Re,ee={},Ue=[],Sr=/acit|ex(?:s|g|n|p|$)|rph|grid|ows|mnc|ntw|
     </div>
     `};var pa=e=>l`
     <${Be} colors=${e.colors}/>
-    <div class="fixed-top">
+    <div class="booker-widget fixed-top">
       <${ke.Provider} value=${e.store}>
         <${Ne}/>
         <${yr}/>

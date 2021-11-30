@@ -64,14 +64,6 @@ export function steps (store) {
 
     var availableCalendars = availableCalendarFilter({appointment, calendars});
 
-    if (availableCalendars.length == 1 ) {
-      return {
-        appointment: Object.assign(appointment, {calendar: availableCalendars[0]}),
-        availableSteps: removeStep(availableSteps, 'calendar'),
-        currentStep: currentStep == 'calendar' ? 'appointment' : currentStep
-      };
-    }
-
     return { availableSteps: addStep(availableSteps, 'calendar') };
   });
 }

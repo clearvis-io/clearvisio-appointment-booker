@@ -19,7 +19,8 @@ export function steps (store) {
     return {
       currentStep: 'process',
       availableSteps: defaultAvailableSteps,
-      calendarStepShouldBeHidden: false
+      calendarStepShouldBeHidden: false,
+      showFirstAvailableUserItem: true
     };
   });
 
@@ -29,6 +30,10 @@ export function steps (store) {
 
   store.on('calendarStepShouldBeHidden/set', ({availableSteps}, calendarStepShouldBeHidden) => {
     return { calendarStepShouldBeHidden, availableSteps: removeStep(availableSteps, 'calendar') };
+  });
+
+  store.on('showFirstAvailableUserItem/set', (previousStoreValue, showFirstAvailableUserItem) => {
+    return {showFirstAvailableUserItem};
   });
 
   store.on('currentStep/next', ({ currentStep, availableSteps }) => {

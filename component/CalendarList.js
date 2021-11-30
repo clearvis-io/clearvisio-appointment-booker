@@ -4,7 +4,7 @@ import CalendarListItem from './CalendarListItem.js'
 import Spinner from './Spinner.js'
 
 export default (props) => {
-  const {appointment, dispatch} = useStoreon('appointment');
+  const {appointment, showFirstAvailableUserItem, dispatch} = useStoreon('appointment', 'showFirstAvailableUserItem');
   const calendars = availableCalendarFilter(useStoreon('calendars'));
 
   const firstAvailableUser = {
@@ -23,7 +23,7 @@ export default (props) => {
         (
           calendars.length ?
             html`
-              <${CalendarListItem} item=${firstAvailableUser} />
+              ${showFirstAvailableUserItem ? html`<${CalendarListItem} item=${firstAvailableUser} />` : ''}
               ${calendars.map(item => html`<${CalendarListItem} item=${item} />`)}
             ` :
             html`

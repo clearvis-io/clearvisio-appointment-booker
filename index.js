@@ -53,7 +53,10 @@ export default class ClearvisioAppointmentBooker {
       });
 
     if (options.calendarStepShouldBeHidden) {
-      store.dispatch('calendarStepShouldBeHidden/set', true);
+      store.dispatch('calendarStepShouldBeHidden/set', options.calendarStepShouldBeHidden);
+    }
+    if (options.showFirstAvailableUserItem !== undefined) {
+      store.dispatch('showFirstAvailableUserItem/set', options.showFirstAvailableUserItem);
     }
     if (options.firstEligibleTime) {
       store.dispatch('firstEligibleTime/set', options.firstEligibleTime);

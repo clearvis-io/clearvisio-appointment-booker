@@ -12,7 +12,7 @@ export default (props) => {
   var fieldConfig = customerForm[props.property];
 
   return html`
-    <div class="${props.class || 'col'} needs-validation p-1 mb-2">
+    <div class="${props.class || 'col-sm'} needs-validation p-1 mb-2 w-100">
       ${
         props.label ?
         html `

@@ -21,13 +21,13 @@ export default (props) => {
     ">
       <div class="content container-sm p-1 col-sm-10 col-md-8">
         <div class="row">
-          <div class="${needsSummaryCard ? 'col-8' : 'col'}">
+          <div class="${needsSummaryCard ? 'col col-sm-8' : 'col'}">
             <div class="p-1">
               <${props.wrappedComponent}/>
             </div>
           </div>
           ${needsSummaryCard ? html`
-            <div class="col-4 summarycard">
+            <div class="d-none d-sm-block col-4 summarycard">
               <div class="p-1">
                 <${Summary} props=${props}/>
               </div>

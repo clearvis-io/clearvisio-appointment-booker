@@ -22,7 +22,7 @@ const knownCustomerFields = [
 const BookerComponent = (props) => {
   return html`
     <${Style} colors=${props.colors}/>
-    <div class="fixed-top">
+    <div class="booker-widget fixed-top">
       <${StoreContext.Provider} value=${props.store}>
         <${GlobalModal}/>
         <${Header}/>

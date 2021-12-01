@@ -19,7 +19,7 @@ export default (props) => {
       ${currentStep == props.step ? 'active' : ''}
       ${currentIndex + 1 == index ? 'carousel-item-next' : ''}
     ">
-      <div class="content container-sm p-1 col-sm-10 col-md-8">
+      <div class="container-sm p-1 col-sm-10 col-md-8">
         <div class="row">
           <div class="${needsSummaryCard ? 'col col-sm-8' : 'col'}">
             <div class="p-1">

@@ -28,6 +28,7 @@ const BookerComponent = (props) => {
         <${Header}/>
         <div class="bg-body content">
           <${Carousel}/>
+          <div class="content-spacer"></div>
         </div>
       <//>
     </div>

@@ -117,13 +117,12 @@ const messages = {
   }
 };
 
-export default (message, params = {}, language, overrides) => {
-  let storeContent = useStoreon('language', 'translationOverrides');
-  language = language || storeContent.language;
-  overrides = overrides || storeContent.translationOverrides;
+export default (message, params = {}, storeContent) => {
+  storeContent = storeContent || useStoreon('language', 'translationOverrides');
+  let language = storeContent.language;
 
   const languageSpecificMessages = messages[language] || messages[language.substring(0, 2)] || messages.en;
-  message = overrides[message] || languageSpecificMessages[message] || message;
+  message = storeContent.translationOverrides[message] || languageSpecificMessages[message] || message;
 
   for (const key in params) {
     message = message.replace(new RegExp('%' + key + '%', 'g'), params[key]);

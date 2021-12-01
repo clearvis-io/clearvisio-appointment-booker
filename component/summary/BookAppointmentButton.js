@@ -68,7 +68,7 @@ const createConsent = async (storeContent, customer) => {
 }
 
 const createAppointmet = async (storeContent, customer) => {
-  const {appointment, language} = storeContent;
+  const {appointment, language, translationOverrides} = storeContent;
 
   await api.post(
     storeContent,
@@ -80,7 +80,7 @@ const createAppointmet = async (storeContent, customer) => {
       title: __(
         "%customer%'s examination",
         {customer: nameFormatter.format(customer, language)},
-        language
+        {language, translationOverrides}
       ),
       status: 'booked',
       should_send_confirmation_email: true,
@@ -92,7 +92,7 @@ const createAppointmet = async (storeContent, customer) => {
 export default (props) => {
   var storeContent = useStoreon(
     'appointment', 'api', 'booking', 'language', 'customerForm', 'customerFormGlobalErrors',
-    'country', 'moduleState', 'store'
+    'country', 'moduleState', 'store', 'translationOverrides'
   );
   const { booking, moduleState, dispatch } = storeContent;
 

@@ -138,7 +138,7 @@ var X,h,Le,K,He,Ge,Re,ee={},Ue=[],Sr=/acit|ex(?:s|g|n|p|$)|rph|grid|ows|mnc|ntw|
       ${t==e.step?"active":""}
       ${n+1==a?"carousel-item-next":""}
     ">
-      <div class="content container-sm p-1 col-sm-10 col-md-8">
+      <div class="container-sm p-1 col-sm-10 col-md-8">
         <div class="row">
           <div class="${o?"col col-sm-8":"col"}">
             <div class="p-1">
@@ -485,6 +485,7 @@ var X,h,Le,K,He,Ge,Re,ee={},Ue=[],Sr=/acit|ex(?:s|g|n|p|$)|rph|grid|ows|mnc|ntw|
         <${yr}/>
         <div class="bg-body content">
           <${Oe}/>
+          <div class="content-spacer"></div>
         </div>
       <//>
     </div>

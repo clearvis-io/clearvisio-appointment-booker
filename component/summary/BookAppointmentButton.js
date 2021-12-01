@@ -20,14 +20,22 @@ const createCustomerAndAppointmet = async (storeContent) => {
 }
 
 const createCustomer = async (storeContent) => {
-  return await api.post(storeContent, 'customers', Object.assign(
+  let customer = Object.assign(
     {}, storeContent.appointment.customer, {
       country: storeContent.country,
       mobile: storeContent.appointment.customer.mobile ?
         phoneNumberParser(storeContent.store.chain.language, storeContent.appointment.customer.mobile) :
         null
     }
-  ));
+  );
+
+  Object.keys(customer).forEach((key) => {
+    if (typeof customer[key] === 'string') {
+      customer[key] = customer[key].trim();
+    }
+  });
+
+  return await api.post(storeContent, 'customers', customer);
 }
 
 const handleCustomerValidationError = async (storeContent, error) => {

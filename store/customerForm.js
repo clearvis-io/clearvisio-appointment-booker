@@ -11,7 +11,7 @@ const validateEmail = (value, fieldConfig) => {
     return;
   }
 
-  if (!emailValidator.test(value.toLowerCase())) {
+  if (!emailValidator.test(value.trim().toLowerCase())) {
     fieldConfig.errors.push('Invalid email address.');
   }
 }

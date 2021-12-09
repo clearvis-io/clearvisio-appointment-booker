@@ -1,4 +1,4 @@
-import {api, createNextFreeSlotsForDateKey} from '../helper/index.js'
+import {api, createNextFreeSlotsForDateKey, dateTimesMatch} from '../helper/index.js'
 
 const nextFreeSlotsAreLoadedFor = (storeValue, date) => {
   const {appointment, selectedCalendar, nextFreeSlots} = storeValue;
@@ -56,6 +56,10 @@ const requestNextFreeSlots = async (store, date) => {
   }
 
   store.dispatch('nextFreeSlots/add', nextFreeSlotsForDates);
+
+  if (dateTimesMatch(lastDate, date)) {
+    lastDate.setDate(date.getDate() + 7);
+  }
 
   return requestNextFreeSlots(store, lastDate);
 }

@@ -2,9 +2,13 @@ import {useStoreon} from 'storeon/preact'
 import {html} from '../helper/index.js'
 
 export default (props) => {
-  const { selectedCalendar, dispatch } = useStoreon('selectedCalendar')
+  const { selectedCalendar, dispatch, currentStep } = useStoreon('selectedCalendar', 'currentStep')
 
   const onClick = () => {
+    if (currentStep !== 'calendar') {
+      return;
+    }
+
     dispatch('selectedCalendar/set', props.item['@id'] ? props.item : null);
     dispatch('currentStep/next');
   }

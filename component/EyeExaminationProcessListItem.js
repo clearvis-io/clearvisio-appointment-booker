@@ -3,9 +3,13 @@ import {html, translator as __} from '../helper/index.js'
 import ProcessPrice from './ProcessPrice.js'
 
 export default (props) => {
-  const { appointment, dispatch } = useStoreon('appointment')
+  const { appointment, dispatch, currentStep } = useStoreon('appointment', 'currentStep')
 
   const onClick = () => {
+    if (currentStep !== 'process') {
+      return;
+    }
+
     dispatch('appointment/set', {eye_examination_process: props.item});
     dispatch('currentStep/eyeExaminationProcessSelected');
     dispatch('currentStep/next');

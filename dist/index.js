@@ -155,8 +155,8 @@ var ee,h,Le,q,He,Ge,Re,te={},Ue=[],Sr=/acit|ex(?:s|g|n|p|$)|rph|grid|ows|mnc|ntw
         </div>
       </div>
     </div>
-  `};var nr=e=>{let{appointment:t,dispatch:r}=_("appointment"),a=()=>{r("appointment/set",{eye_examination_process:e.item}),r("currentStep/eyeExaminationProcessSelected"),r("currentStep/next")};return l`
-    <li class="row list-group-item ${t.eye_examination_process==e.item?"selected":""}" onClick=${a}>
+  `};var nr=e=>{let{appointment:t,dispatch:r,currentStep:a}=_("appointment","currentStep"),n=()=>{a==="process"&&(r("appointment/set",{eye_examination_process:e.item}),r("currentStep/eyeExaminationProcessSelected"),r("currentStep/next"))};return l`
+    <li class="row list-group-item ${t.eye_examination_process==e.item?"selected":""}" onClick=${n}>
       <div class="row">
         <div class="col-11 p-0">
           <h4>${e.item.name}</h4>
@@ -173,8 +173,8 @@ var ee,h,Le,q,He,Ge,Re,te={},Ue=[],Sr=/acit|ex(?:s|g|n|p|$)|rph|grid|ows|mnc|ntw
     <ul class="list-group">
       ${t.length?t.map(r=>l`<${nr} item=${r} />`):l`<li class="list-group-item"><${A}/></li>`}
     </ul>
-  `};var ze=e=>{let{selectedCalendar:t,dispatch:r}=_("selectedCalendar"),a=()=>{r("selectedCalendar/set",e.item["@id"]?e.item:null),r("currentStep/next")};return l`
-    <li class="list-group-item${t==e.item||!e.item["@id"]&&!t?" selected":""}" onClick=${a}>
+  `};var ze=e=>{let{selectedCalendar:t,dispatch:r,currentStep:a}=_("selectedCalendar","currentStep"),n=()=>{a==="calendar"&&(r("selectedCalendar/set",e.item["@id"]?e.item:null),r("currentStep/next"))};return l`
+    <li class="list-group-item${t==e.item||!e.item["@id"]&&!t?" selected":""}" onClick=${n}>
       <div class="row">
         <div class="col-auto">
           <div class="avatar me-2">
@@ -258,8 +258,8 @@ var ee,h,Le,q,He,Ge,Re,te={},Ue=[],Sr=/acit|ex(?:s|g|n|p|$)|rph|grid|ows|mnc|ntw
           </button>
         `}
     </li>
-  `};var dr=e=>{let{appointment:t,calendars:r,dispatch:a}=_("appointment","calendars"),n=()=>{var o=null;for(let i=0;i<r.length;i++)if(e.slot.calendar["@id"]==r[i]["@id"])var o=r[i];if(!o)throw new Error("Could not find calendar");a("appointment/set",{start:e.slot.start,end:e.slot.end,calendar:o}),a("currentStep/next")};return l`
-    <li class="list-group-item${Z(new Date(t.start),new Date(e.slot.start))?" selected":""}" onClick=${n}>
+  `};var dr=e=>{let{appointment:t,calendars:r,dispatch:a,currentStep:n}=_("appointment","calendars","currentStep"),o=()=>{if(n==="appointment"){var i=null;for(let p=0;p<r.length;p++)if(e.slot.calendar["@id"]==r[p]["@id"])var i=r[p];if(!i)throw new Error("Could not find calendar");a("appointment/set",{start:e.slot.start,end:e.slot.end,calendar:i}),a("currentStep/next")}};return l`
+    <li class="list-group-item${Z(new Date(t.start),new Date(e.slot.start))?" selected":""}" onClick=${o}>
       <div class="row align-items-center ms-2">
         <div class="col-11">${$.formatTime(e.slot.start)}</div>
         <div class="col text-end p-2">

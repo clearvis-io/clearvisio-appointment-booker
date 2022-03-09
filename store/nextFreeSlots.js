@@ -112,6 +112,10 @@ export function nextFreeSlots (store) {
 
   store.on('firstEligibleTime/set', (storedValue, firstEligibleTimeConstant) => {
     var firstEligibleDate = new Date;
+    if (firstEligibleTimeConstant == 'now') {
+      store.dispatch('selectedDate/set', firstEligibleDate);
+      return {firstEligibleDate, firstEligibleTime: firstEligibleDate};
+    }
     firstEligibleDate.setDate(firstEligibleDate.getDate() + 1);
     firstEligibleDate.setHours(0);
     firstEligibleDate.setMinutes(0);

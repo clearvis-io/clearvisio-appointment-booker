@@ -66,6 +66,7 @@ This module is a frontend for the Appointment Booking API of clearvis.io. The AP
 * **showFirstAvailableUserItem**: When set to `false` it will hide "First available user" option on the calendar list. (The default value is `true`.)
 * **priceComment**: Text that will be showed on summary card below the price of examination
 * **firstEligibleTime**: Determines the first free time slot that can be selected. Default value is `tomorrow`. The available values are:
+  * *now*: The very first free slot will be available for selection
   * *tomorrow*: The first free slot tomorrow will be available for selection
   * *tomorrowNoon*: The first free slot after tomorrow 12:00 will be available for selection
   * *plus24Hours*: The first free slot tomorrow later than the current time will be available for selection

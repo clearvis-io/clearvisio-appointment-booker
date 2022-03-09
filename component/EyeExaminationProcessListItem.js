@@ -24,8 +24,8 @@ export default (props) => {
           <span class="badge bg-primary me-1">${props.item.length} ${__('@abbrMinute')}</span>
           <span class="badge bg-primary"><${ProcessPrice} process=${props.item}/></span>
         </div>
-        <div class="col text-end p-2">
-          \u00BB
+        <div class="col text-end p-2 next item icon">
+          \u203A
         </div>
       </div>
     </li>

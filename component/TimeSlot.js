@@ -30,8 +30,8 @@ export default (props) => {
     <li class="list-group-item${dateTimesMatch(new Date(appointment.start), new Date(props.slot.start)) ? ' selected' : ''}" onClick=${onClick}>
       <div class="row align-items-center ms-2">
         <div class="col-11">${dateTimeFormatter.formatTime(props.slot.start)}</div>
-        <div class="col text-end p-2">
-          \u00BB
+        <div class="col text-end p-2 next item icon">
+          \u203A
         </div>
       </div>
     </li>

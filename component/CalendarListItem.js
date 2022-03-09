@@ -29,8 +29,8 @@ export default (props) => {
           <div class="fw-bold">${props.item.user.name}</div>
           ${props.item.user.description || ''}
         </div>
-        <div class="col text-end p-2">
-          \u00BB
+        <div class="col text-end p-2 next item icon">
+          \u203A
         </div>
       </div>
     </li>

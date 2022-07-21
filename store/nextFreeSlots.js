@@ -20,10 +20,10 @@ const requestNextFreeSlots = async (store, date) => {
   );
 
   if (nextFreeSlots.length == 0) {
-    var weekLater = new Date(date);
-    weekLater.setDate(date.getDate() + 7);
-    store.dispatch('nextFreeSlots/add', createEmptyNextFreeSlotsForDates(store, date, weekLater))
-    return requestNextFreeSlots(store, weekLater);
+    var endOfWeek = new Date(date);
+    endOfWeek.setDate(date.getDate() + 6);
+    store.dispatch('nextFreeSlots/add', createEmptyNextFreeSlotsForDates(store, date, endOfWeek))
+    return requestNextFreeSlots(store, endOfWeek);
   }
 
   const lastDate = new Date(nextFreeSlots[nextFreeSlots.length - 1].start);

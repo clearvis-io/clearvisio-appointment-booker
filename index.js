@@ -56,6 +56,9 @@ export default class ClearvisioAppointmentBooker {
     if (options.calendarStepShouldBeHidden) {
       store.dispatch('calendarStepShouldBeHidden/set', options.calendarStepShouldBeHidden);
     }
+    if (options.calendarRoleCheckMode) {
+      store.dispatch('calendarRoleCheckMode/set', options.calendarRoleCheckMode);
+    }
     if (options.showFirstAvailableUserItem !== undefined) {
       store.dispatch('showFirstAvailableUserItem/set', options.showFirstAvailableUserItem);
     }

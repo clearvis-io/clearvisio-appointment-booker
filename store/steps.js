@@ -61,12 +61,12 @@ export function steps (store) {
 
   store.on(
       'currentStep/eyeExaminationProcessSelected',
-      ({ availableSteps, appointment, calendars, currentStep, calendarStepShouldBeHidden }) => {
+      ({ availableSteps, appointment, calendars, currentStep, calendarStepShouldBeHidden, calendarRoleCheckMode }) => {
     if (calendarStepShouldBeHidden) {
       return;
     }
 
-    var availableCalendars = availableCalendarFilter({appointment, calendars});
+    var availableCalendars = availableCalendarFilter({appointment, calendars, calendarRoleCheckMode});
 
     return { availableSteps: addStep(availableSteps, 'calendar') };
   });

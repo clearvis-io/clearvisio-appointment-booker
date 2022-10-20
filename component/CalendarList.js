@@ -5,7 +5,7 @@ import Spinner from './Spinner.js'
 
 export default (props) => {
   const {appointment, showFirstAvailableUserItem, dispatch} = useStoreon('appointment', 'showFirstAvailableUserItem');
-  const calendars = availableCalendarFilter(useStoreon('calendars', 'appointment'));
+  const calendars = availableCalendarFilter(useStoreon('calendars', 'appointment', 'calendarRoleCheckMode'));
 
   const firstAvailableUser = {
     user: {

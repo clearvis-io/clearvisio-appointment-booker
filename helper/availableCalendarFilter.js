@@ -4,7 +4,7 @@ const roleHierarchy = [
   {name: 'ROLE_OPTOMETRIST', includes: []}
 ];
 
-export default function ({appointment, calendars}) {
+export default function ({appointment, calendars, calendarRoleCheckMode}) {
   var process = appointment ? appointment.eye_examination_process : null;
 
   return calendars.filter(function(calendar) {
@@ -18,8 +18,11 @@ export default function ({appointment, calendars}) {
         continue;
       }
 
-      if (process.highestRequiredRole == role.name ||
-        role.includes.indexOf(process.highestRequiredRole) != -1) {
+      if (process.highestRequiredRole == role.name) {
+        return true;
+      }
+
+      if (calendarRoleCheckMode == 'hierachical' && role.includes.indexOf(process.highestRequiredRole) != -1) {
         return true;
       }
     }

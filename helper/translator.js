@@ -93,7 +93,7 @@ const messages = {
   },
   ro: {
     "Are you sure you want to cancel this appointment?":
-      "Sunteți sigur că doriți să renunțați la programare?,
+      "Sunteți sigur că doriți să renunțați la programare?",
     "All inputed data will be lost.": "Datele întroduse se vor pierde.",
     "No, continue editing appointment": "Nu, continuare programare.",
     "Cancel appointment": "Întreruperea programării",
@@ -168,7 +168,7 @@ const messages = {
     'I have accepted the privacy policy': html`Accept <${PrivacyPolicyLink}>Termenile și condițiile<//>`,
     'I agree to the use of my medical records according to privacy policy': 'Dau acordul pentru prelucrarea datelor medicale conform Termenilor și condițiilor generale.',
     'Privacy policy': 'Termeni și condiții',
-    'Close': Închidere',
+    'Close': 'Închidere',
     'Start Time': 'Data',
     'Subject': 'Subiect',
     'Location': 'Locație',

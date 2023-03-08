@@ -23,6 +23,10 @@ export default function ({appointment, calendars, calendarRoleCheckMode}) {
       return true;
     }
 
+    if (typeof calendar.online_reservation_allowed != 'undefined' && calendar.online_reservation_allowed == false) {
+      return false;
+    }
+
     if (!proccesMatchesCalendarProcessExpectations(calendar, process)) {
       return false;
     }

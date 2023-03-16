@@ -74,7 +74,7 @@ const messages = {
     'The examination will start at %start%, please arrive 5 minutes early.':
       'A vizsgálat kezdete: %start%, kérjük érkezzen 5 perccel korábban.',
     'If you have any further questions, please contact us through our customer service.':
-      'Ha további kérdése van, keresse fel ügyfélszolgálatunkat.',
+      'Ha kérdése van vagy szeretné módosítani a foglalását, kérjük keresse szaküzletünket.',
     'Appointment booked!': 'Időpont lefoglalva!',
     'examiner: %examiner%': 'végzi: %examiner%',
     'It takes up to %length% minutes': 'Időtartam: %length% perc',

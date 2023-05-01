@@ -62,6 +62,9 @@ export default class ClearvisioAppointmentBooker {
     if (options.showFirstAvailableUserItem !== undefined) {
       store.dispatch('showFirstAvailableUserItem/set', options.showFirstAvailableUserItem);
     }
+    if (options.showExaminerName !== undefined) {
+      store.dispatch('showExaminerName/set', options.showExaminerName);
+    }
     if (options.firstEligibleTime) {
       store.dispatch('firstEligibleTime/set', options.firstEligibleTime);
     }

@@ -21,8 +21,12 @@ export default ({process}) => {
         return html``;
     }
 
+    const { store, language, showPrice } = useStoreon('store', 'language', 'showPrice')
+    if (!showPrice) {
+      return html``;
+    }
+
     const processServices = process.process_services;
-    const { store, language } = useStoreon('store', 'language')
 
     var minPrice = null;
     var maxPrice = null;

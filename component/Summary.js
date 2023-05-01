@@ -6,8 +6,8 @@ import BookAppointmentButton from './summary/BookAppointmentButton.js'
 import ProcessPrice from './ProcessPrice.js';
 
 export default (props) => {
-  const { appointment, language, currentStep, store, selectedCalendar, priceComment } =
-    useStoreon('appointment', 'language', 'currentStep', 'store', 'selectedCalendar', 'priceComment');
+  const { appointment, language, currentStep, store, selectedCalendar, priceComment, showPrice } =
+    useStoreon('appointment', 'language', 'currentStep', 'store', 'selectedCalendar', 'priceComment', 'showPrice');
 
   if (!store) {
     return;
@@ -75,8 +75,10 @@ export default (props) => {
         <div>${options.storeAddress}</div>
       </li>
       <li class="list-group-item">
-        <div>${__('Price')}:</div>
-        <div class="fw-bold"><${ProcessPrice} process=${options.process}/></div>
+        ${ showPrice ? html`
+          <div>${__('Price')}:</div>
+          <div class="fw-bold"><${ProcessPrice} process=${options.process}/></div>
+        ` : ''}
         <div>${priceComment || ''}</div>
       </li>
       ${

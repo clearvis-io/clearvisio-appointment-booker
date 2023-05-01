@@ -80,6 +80,9 @@ export default class ClearvisioAppointmentBooker {
     if (options.priceComment) {
       store.dispatch('priceComment/set', options.priceComment);
     }
+    if (options.showPrice !== undefined) {
+      store.dispatch('showPrice/set', options.showPrice);
+    }
     if (options.privacyPolicyLink) {
       store.dispatch('privacyPolicyLink/set', options.privacyPolicyLink);
     }

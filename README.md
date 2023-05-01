@@ -65,6 +65,7 @@ This module is a frontend for the Appointment Booking API of clearvis.io. The AP
 * **calendarStepShouldBeHidden**: When set to `true` it will hide the calendar/optometrist selection step, if customers should not be allowed to check free slots by user
 * **calendarRoleCheckMode**: Allowed values: hierarchical, exact. Hierarchical mode allows appointment reservation for opthalmologists when the protocol requires optometry role. Exact mode only allows appointments for users with exact same roles. Default: hierachical.
 * **showFirstAvailableUserItem**: When set to `false` it will hide "First available user" option on the calendar list. (The default value is `true`.)
+* **showExaminerName**: When set to `false` it will hide the examiner's name on the summary screen. (The default value is `true`.)
 * **priceComment**: Text that will be showed on summary card below the price of examination
 * **showPrice**: When set to `false` it will hide any price related info (The default value is `true`.)
 * **privacyPolicyLink**: An optional link which point to a custom privacy policy url, otherwise it is use the configured text from the Clearvis.io instance

@@ -14,6 +14,7 @@ import { customerForm } from './customerForm.js'
 import { headerTitle } from './headerTitle.js'
 import { priceComment } from './priceComment.js'
 import { price } from './price.js'
+import { showExaminerName } from './showExaminerName.js'
 import { booking } from './booking.js'
 import { country } from './country.js'
 import { selectedCalendar } from './selectedCalendar.js'
@@ -28,6 +29,6 @@ export default () => {
     eyeExaminationProcesses, steps, appointment, moduleState, language, api, privacyPolicyModalState,
     storeStore, calendars, selectedDate, nextFreeSlots, customerForm, privacyPolicy,
     closeConfirmModalState, globalModalState, headerTitle, booking, country, selectedCalendar,
-    priceComment, price
+    priceComment, price, showExaminerName
   ]);
 }

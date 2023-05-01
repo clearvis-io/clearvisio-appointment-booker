@@ -6,8 +6,12 @@ import BookAppointmentButton from './summary/BookAppointmentButton.js'
 import ProcessPrice from './ProcessPrice.js';
 
 export default (props) => {
-  const { appointment, language, currentStep, store, selectedCalendar, priceComment, showPrice } =
-    useStoreon('appointment', 'language', 'currentStep', 'store', 'selectedCalendar', 'priceComment', 'showPrice');
+  const { appointment, language, currentStep, store, selectedCalendar,
+          priceComment, showPrice, showExaminerName
+  } = useStoreon('appointment', 'language', 'currentStep', 'store',
+                 'selectedCalendar', 'priceComment', 'showPrice',
+                 'showExaminerName'
+  );
 
   if (!store) {
     return;
@@ -31,7 +35,7 @@ export default (props) => {
     processLength: appointment['eye_examination_process'] ? appointment['eye_examination_process'].length : null,
     processName: appointment['eye_examination_process'] ? appointment['eye_examination_process'].name : null,
     process: appointment['eye_examination_process'],
-    examinerName: calendar ? calendar.user.name : null,
+    examinerName: showExaminerName && calendar ? calendar.user.name : null,
     customer: appointment.customer,
     customerAddress: addressParts.join(', '),
     storeAddress: store.postal_code + ' ' + store.city + ', ' + store.street_address

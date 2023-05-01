@@ -68,7 +68,11 @@ const createConsent = async (storeContent, customer) => {
 }
 
 const createAppointmet = async (storeContent, customer) => {
-  const {appointment, language, translationOverrides} = storeContent;
+  const {appointment, language, translationOverrides, constantAppointmentCommentText} = storeContent;
+  let comment = constantAppointmentCommentText ? constantAppointmentCommentText : '';
+  if (appointment.comment) {
+    comment = (comment ? comment + "\n\n" : '') + appointment.comment;
+  }
 
   await api.post(
     storeContent,
@@ -77,6 +81,7 @@ const createAppointmet = async (storeContent, customer) => {
       customer: customer['@id'],
       eye_examination_process: appointment.eye_examination_process['@id'],
       calendar: appointment.calendar['@id'],
+      comment: comment ? comment : undefined,
       title: __(
         "%customer%'s examination",
         {customer: nameFormatter.format(customer, language)},
@@ -92,7 +97,7 @@ const createAppointmet = async (storeContent, customer) => {
 export default (props) => {
   var storeContent = useStoreon(
     'appointment', 'api', 'booking', 'language', 'customerForm', 'customerFormGlobalErrors',
-    'country', 'moduleState', 'store', 'translationOverrides'
+    'country', 'moduleState', 'store', 'translationOverrides', 'constantAppointmentCommentText'
   );
   const { booking, moduleState, dispatch } = storeContent;
 

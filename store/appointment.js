@@ -8,4 +8,8 @@ export function appointment (store) {
   store.on('showAppointmentComment/set', (previousValue, showAppointmentComment) => {
     return { showAppointmentComment };
   })
+
+  store.on('constantAppointmentCommentText/set', (previousValue, constantAppointmentCommentText) => {
+    return { constantAppointmentCommentText };
+  })
 }

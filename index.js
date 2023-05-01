@@ -92,6 +92,9 @@ export default class ClearvisioAppointmentBooker {
     if (options.showAppointmentComment) {
       store.dispatch('showAppointmentComment/set', options.showAppointmentComment);
     }
+    if (options.constantAppointmentCommentText) {
+      store.dispatch('constantAppointmentCommentText/set', options.constantAppointmentCommentText);
+    }
 
     this.createElementAndRender(options);
   }

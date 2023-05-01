@@ -38,7 +38,8 @@ export default (props) => {
     examinerName: showExaminerName && calendar ? calendar.user.name : null,
     customer: appointment.customer,
     customerAddress: addressParts.join(', '),
-    storeAddress: store.postal_code + ' ' + store.city + ', ' + store.street_address
+    storeAddress: store.postal_code + ' ' + store.city + ', ' + store.street_address,
+    appointmentComment: appointment.comment
   };
 
   return html`
@@ -71,6 +72,11 @@ export default (props) => {
       ${currentStep == 'summary' ? html`
         <li class="list-group-item">
           <${SummaryCustomer} customer=${options.customer} customerAddress=${options.customerAddress}/>
+        </li>
+      ` : ''}
+      ${currentStep == 'summary' && options.appointmentComment ? html`
+        <li class="list-group-item">
+          ${__('Comment')}: ${options.appointmentComment}
         </li>
       ` : ''}
       <li class="list-group-item">

@@ -89,7 +89,8 @@ const messages = {
     'Select eye examination type': 'Vizsgálattípus választása',
     'Select a vision expert': 'Látásszakértő választása',
     'Select your desired appointment time': 'Időpont választása',
-    'Enter customer details': 'Ügyféladatok megadása'
+    'Enter customer details': 'Ügyféladatok megadása',
+    'Comment': 'Megjegyzés'
   },
   ro: {
     "Are you sure you want to cancel this appointment?":

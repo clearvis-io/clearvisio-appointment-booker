@@ -1,6 +1,7 @@
 import {useStoreon} from 'storeon/preact'
 import {html, translator as __, nameFormatter} from '../helper/index.js'
 import InputContainer from './InputContainer.js'
+import AppointmentComment from './form/AppointmentComment.js'
 import DateInput from './form/DateInput.js'
 import GenderDropdown from './form/GenderDropdown.js'
 import AcceptPrivacyPolicyCheckbox from './form/AcceptPrivacyPolicyCheckbox.js'
@@ -54,6 +55,7 @@ export default (props) => {
       <div class="row mx-2">
         <${InputContainer} property="mobile" label="Mobile"/><${InputContainer} property="email" label="Email"/>
       </div>
+      <${AppointmentComment}/>
       <div class="row mx-2">
         <${InputContainer} property="acceptPrivacyPolicy" inputClass=${AcceptPrivacyPolicyCheckbox}/>
       </div>

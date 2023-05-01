@@ -51,7 +51,8 @@ This module is a frontend for the Appointment Booking API of clearvis.io. The AP
 * **customerFields**: List of fields in an array that can be set on the customer registration page. The available values are: `[birth, gender, ssn, state, postal_code, city, street_address, mobile, email]`. The default value is: `['mobile', 'email']`.
 * **requiredCustomerFields**: List of fields that are required to be set on the customer registration page. (The available values are the same.)
 * **country**: The country of the address of the customer, it is required to be set if any of the address parts are available in the customerFields. Two character ISO country codes are accepted. Eg. "HU".
-* **language**: The language of the booker UI. If not set, then navigator.language is used. (The available languages are currently en and hu.)
+* **language**: The language of the booker UI. If not set, then navigator.language is used. (The available languages are currently en, ro, hu.)
+* **showAppointmentComment**: When set to `true` it will show a comment field (The default value is `false`.)
 * **translationOverrides**: Plain object storing source-translation pairs for translation overrides. Only English source strings can be overridden, so please switch language to en to find out translation override key.
   ```js
     new ClearvisioAppointmentBooker({

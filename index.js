@@ -89,6 +89,9 @@ export default class ClearvisioAppointmentBooker {
     if (options.privacyPolicyLink) {
       store.dispatch('privacyPolicyLink/set', options.privacyPolicyLink);
     }
+    if (options.showAppointmentComment) {
+      store.dispatch('showAppointmentComment/set', options.showAppointmentComment);
+    }
 
     this.createElementAndRender(options);
   }

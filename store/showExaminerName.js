@@ -1,7 +1,7 @@
 export function showExaminerName (store)  {
-  store.on('@init', () => ({ showOptometristName: null }))
+  store.on('@init', () => ({ showExaminerName: null }))
 
-  store.on('showExaminerName/set', (previousValue, showOptometristName) => {
+  store.on('showExaminerName/set', (previousValue, showExaminerName) => {
     return { showExaminerName };
   })
 }

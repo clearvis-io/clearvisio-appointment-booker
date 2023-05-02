@@ -89,7 +89,8 @@ const createAppointmet = async (storeContent, customer) => {
       ),
       status: 'booked',
       should_send_confirmation_email: true,
-      should_send_reminder_email: true
+      should_send_reminder_email: true,
+      source: 'online'
     })
   );
 }

@@ -16,11 +16,11 @@ const api = {
         await fetch(`${path}/${model}`, {headers: extendHeaders(headers)})
       ).json();
 
-      if (!result['hydra:member']) {
+      if (typeof result !== 'object') {
         throw new Error('Invalid response');
       }
 
-      return result['hydra:member'];
+      return result['hydra:member'] ?? result;
     } catch (error) {
       store.dispatch('moduleState/set', 'error');
       throw error;

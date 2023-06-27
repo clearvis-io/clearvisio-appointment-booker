@@ -95,6 +95,15 @@ export default class ClearvisioAppointmentBooker {
     if (options.constantAppointmentCommentText) {
       store.dispatch('constantAppointmentCommentText/set', options.constantAppointmentCommentText);
     }
+    if (options.locationName !== undefined) {
+      store.dispatch('locationName/set', options.locationName);
+    }
+    if (options.locationAddress !== undefined) {
+      store.dispatch('locationAddress/set', options.locationAddress);
+    }
+    if (options.showLocation !== undefined) {
+      store.dispatch('showLocation/set', options.showLocation);
+    }
 
     this.createElementAndRender(options);
   }

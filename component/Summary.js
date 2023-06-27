@@ -7,10 +7,12 @@ import ProcessPrice from './ProcessPrice.js';
 
 export default (props) => {
   const { appointment, language, currentStep, store, selectedCalendar,
-          priceComment, showPrice, showExaminerName
+          priceComment, showPrice, showExaminerName, locationName, locationAddress,
+          showLocation
   } = useStoreon('appointment', 'language', 'currentStep', 'store',
                  'selectedCalendar', 'priceComment', 'showPrice',
-                 'showExaminerName'
+                 'showExaminerName', 'locationName', 'locationAddress',
+                 'showLocation'
   );
 
   if (!store) {
@@ -38,7 +40,9 @@ export default (props) => {
     examinerName: showExaminerName && calendar ? calendar.user.name : null,
     customer: appointment.customer,
     customerAddress: addressParts.join(', '),
-    storeAddress: store.postal_code + ' ' + store.city + ', ' + store.street_address,
+    showLocation: showLocation,
+    locationName: locationName !== null ? locationName : store.name,
+    locationAddress: locationAddress !== null ? locationAddress : (store.postal_code + ' ' + store.city + ', ' + store.street_address),
     appointmentComment: appointment.comment
   };
 
@@ -79,11 +83,16 @@ export default (props) => {
           ${__('Comment')}: ${options.appointmentComment}
         </li>
       ` : ''}
-      <li class="list-group-item">
-        <div>${__('Location')}:</div>
-        <div class="fw-bold">${store.name}</div>
-        <div>${options.storeAddress}</div>
-      </li>
+      ${
+        options.showLocation ?
+          html`
+            <li class="list-group-item">
+              <div>${__('Location')}:</div>
+              <div class="fw-bold">${options.locationName}</div>
+              <div>${options.locationAddress}</div>
+            </li>
+        ` : ''
+      }
       <li class="list-group-item">
         ${ showPrice ? html`
           <div>${__('Price')}:</div>

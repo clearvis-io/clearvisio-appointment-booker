@@ -19,6 +19,7 @@ import { booking } from './booking.js'
 import { country } from './country.js'
 import { selectedCalendar } from './selectedCalendar.js'
 import { privacyPolicy } from './privacyPolicy.js'
+import { location } from './location.js'
 
 var closeConfirmModalState = modalStateStore('closeConfirmModalState');
 var globalModalState = modalStateStore('globalModalState', {visible: true});
@@ -29,6 +30,6 @@ export default () => {
     eyeExaminationProcesses, steps, appointment, moduleState, language, api, privacyPolicyModalState,
     storeStore, calendars, selectedDate, nextFreeSlots, customerForm, privacyPolicy,
     closeConfirmModalState, globalModalState, headerTitle, booking, country, selectedCalendar,
-    priceComment, price, showExaminerName
+    priceComment, price, showExaminerName, location
   ]);
 }

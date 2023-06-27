@@ -71,6 +71,9 @@ This module is a frontend for the Appointment Booking API of clearvis.io. The AP
 * **eyeExaminationProcessId**: When filled, only that eye examination process will be retrieved from the backend, will be used in the appointment and thus the process selection screen will be skipped
 * **priceComment**: Text that will be showed on summary card below the price of examination
 * **showPrice**: When set to `false` it will hide any price related info (The default value is `true`.)
+* **showLocation**: Whether to show location in summary screen (The default value is `true`.)
+* **locationName**: Name of location. Default value is the store name.
+* **locationAddress**: Address of appointment. Default value is the store address.
 * **privacyPolicyLink**: An optional link which point to a custom privacy policy url, otherwise it is use the configured text from the Clearvis.io instance
 * **firstEligibleTime**: Determines the first free time slot that can be selected. Default value is `tomorrow`. The available values are:
   * *now*: The very first free slot will be available for selection

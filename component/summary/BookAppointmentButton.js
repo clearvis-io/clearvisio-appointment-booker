@@ -22,6 +22,7 @@ const createCustomerAndAppointmet = async (storeContent) => {
 const createCustomer = async (storeContent) => {
   let customer = Object.assign(
     {}, storeContent.appointment.customer, {
+      medical_records_allowed: (storeContent.medicalConsent != 'disabled') ? true : null,
       country: storeContent.country,
       mobile: storeContent.appointment.customer.mobile ?
         phoneNumberParser(storeContent.store.chain.language, storeContent.appointment.customer.mobile) :
@@ -62,7 +63,7 @@ const createConsent = async (storeContent, customer) => {
   await api.post(storeContent, 'customer_consents', {
     customer: customer['@id'],
     approved_at: new Date,
-    medical_records_allowed: true,
+    medical_records_allowed: (storeContent.medicalConsent != 'disabled'),
     source: 'api'
   });
 }
@@ -98,7 +99,8 @@ const createAppointmet = async (storeContent, customer) => {
 export default (props) => {
   var storeContent = useStoreon(
     'appointment', 'api', 'booking', 'language', 'customerForm', 'customerFormGlobalErrors',
-    'country', 'moduleState', 'store', 'translationOverrides', 'constantAppointmentCommentText'
+    'country', 'moduleState', 'store', 'translationOverrides', 'constantAppointmentCommentText',
+    'medicalConsent'
   );
   const { booking, moduleState, dispatch } = storeContent;
 

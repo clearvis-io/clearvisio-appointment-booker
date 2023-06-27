@@ -18,7 +18,7 @@ import { showExaminerName } from './showExaminerName.js'
 import { booking } from './booking.js'
 import { country } from './country.js'
 import { selectedCalendar } from './selectedCalendar.js'
-import { privacyPolicy } from './privacyPolicy.js'
+import { privacy } from './privacy.js'
 import { location } from './location.js'
 
 var closeConfirmModalState = modalStateStore('closeConfirmModalState');
@@ -28,7 +28,7 @@ var privacyPolicyModalState = modalStateStore('privacyPolicyModalState');
 export default () => {
   return createStoreon([
     eyeExaminationProcesses, steps, appointment, moduleState, language, api, privacyPolicyModalState,
-    storeStore, calendars, selectedDate, nextFreeSlots, customerForm, privacyPolicy,
+    storeStore, calendars, selectedDate, nextFreeSlots, customerForm, privacy,
     closeConfirmModalState, globalModalState, headerTitle, booking, country, selectedCalendar,
     priceComment, price, showExaminerName, location
   ]);

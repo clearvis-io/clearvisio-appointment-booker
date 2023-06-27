@@ -1,7 +1,7 @@
 import {api} from '../helper/index.js'
 
-export function privacyPolicy (store) {
-  store.on('@init', () => ({ privacyPolicy: null, privacyPolicyLink: null }));
+export function privacy (store) {
+  store.on('@init', () => ({ privacyPolicy: null, privacyPolicyLink: null, medicalConsent: 'explicit' }));
 
   store.on('bookerInit', async (previousValue) => {
     var privacyPolicies = await api.get(store, `privacy_policies?chain=${previousValue.store.chain['@id']}`);
@@ -16,4 +16,5 @@ export function privacyPolicy (store) {
 
   store.on('privacyPolicy/set', (previousValue, privacyPolicy) => ({privacyPolicy}));
   store.on('privacyPolicyLink/set', (previousValue, privacyPolicyLink) => ({privacyPolicyLink}));
+  store.on('medicalConsent/set', (previousValue, medicalConsent) => ({ medicalConsent }));
 }

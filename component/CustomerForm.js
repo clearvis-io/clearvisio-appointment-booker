@@ -8,8 +8,8 @@ import AcceptPrivacyPolicyCheckbox from './form/AcceptPrivacyPolicyCheckbox.js'
 import AcceptMedicalRecordsUseCheckbox from './form/AcceptMedicalRecordsUseCheckbox.js'
 
 export default (props) => {
-  const { customerForm, customerFormGlobalErrors, dispatch } =
-    useStoreon('customerForm', 'customerFormGlobalErrors', 'language');
+  const { customerForm, customerFormGlobalErrors, medicalConsent, dispatch } =
+    useStoreon('customerForm', 'customerFormGlobalErrors', 'language', 'medicalConsent');
   const onNext = () => {
     dispatch('customerForm/validateAndNext');
   }
@@ -59,9 +59,15 @@ export default (props) => {
       <div class="row mx-2">
         <${InputContainer} property="acceptPrivacyPolicy" inputClass=${AcceptPrivacyPolicyCheckbox}/>
       </div>
-      <div class="row mx-2">
-        <${InputContainer} property="acceptMedicalRecordsUse" inputClass=${AcceptMedicalRecordsUseCheckbox}/>
-      </div>
+      ${
+        medicalConsent == 'explicit' ?
+        html`
+          <div class="row mx-2">
+            <${InputContainer} property="acceptMedicalRecordsUse" inputClass=${AcceptMedicalRecordsUseCheckbox}/>
+          </div>
+        ` :
+        ''
+      }
       <button class="mx-2 btn btn-primary" onClick=${onNext}>${__('Next')}</button>
     </div>
   `;

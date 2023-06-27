@@ -39,6 +39,9 @@ export default class ClearvisioAppointmentBooker {
   constructor(options) {
     var store = createStore();
     this.store = store;
+    if (!options.medicalConsent) {
+      options.medicalConsent = 'explicit';
+    }
     this.setupCustomerFields(options);
     this.setupApi(options);
     this.loadStore(options.storeCode)
@@ -104,15 +107,19 @@ export default class ClearvisioAppointmentBooker {
     if (options.showLocation !== undefined) {
       store.dispatch('showLocation/set', options.showLocation);
     }
+    store.dispatch('medicalConsent/set', options.medicalConsent);
 
     this.createElementAndRender(options);
   }
 
-  setupCustomerFields({customerFields, requiredCustomerFields}) {
+  setupCustomerFields({customerFields, requiredCustomerFields, medicalConsent}) {
     var config = {};
     requiredCustomerFields =
-      ['first_name', 'last_name', 'acceptPrivacyPolicy', 'acceptMedicalRecordsUse'].concat(requiredCustomerFields || ['email']);
-    ['first_name', 'last_name', 'acceptPrivacyPolicy', 'acceptMedicalRecordsUse']
+      ['first_name', 'last_name', 'acceptPrivacyPolicy']
+        .concat((medicalConsent != 'disabled') ? ['acceptMedicalRecordsUse'] : [])
+        .concat(requiredCustomerFields || ['email']);
+    ['first_name', 'last_name', 'acceptPrivacyPolicy']
+      .concat((medicalConsent != 'disabled') ? ['acceptMedicalRecordsUse'] : [])
       .concat(customerFields || ['mobile', 'email'])
       .forEach((key) => {
         config[key] = {required: requiredCustomerFields.indexOf(key) != -1}

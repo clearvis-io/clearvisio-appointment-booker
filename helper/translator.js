@@ -90,7 +90,8 @@ const messages = {
     'Select a vision expert': 'Látásszakértő választása',
     'Select your desired appointment time': 'Időpont választása',
     'Enter customer details': 'Ügyféladatok megadása',
-    'Comment': 'Megjegyzés'
+    'Comment': 'Megjegyzés',
+    'change date': 'időpont cseréje'
   },
   ro: {
     "Are you sure you want to cancel this appointment?":
@@ -177,7 +178,8 @@ const messages = {
     'Select eye examination type': 'Selectare tip de examinare',
     'Select a vision expert': 'Selectare specialist în vedere',
     'Select your desired appointment time': 'Selectare dată și oră',
-    'Enter customer details': 'Datele clientului'
+    'Enter customer details': 'Datele clientului',
+    'change date': 'change date'
   },
   hr: {
     "Are you sure you want to cancel this appointment?": "Jeste li sigurni da želite otkazati ovaj termin?",
@@ -287,7 +289,8 @@ const messages = {
     'December': 'December',
     '@abbrMinute': 'm.',
     'I have accepted the privacy policy': html`I accept the terms of <${PrivacyPolicyLink}>privacy policy<//>`,
-    'Your appointment starts at startTime': html`Your appointment starts at <${StartTime}//>`
+    'Your appointment starts at startTime': html`Your appointment starts at <${StartTime}//>`,
+    'change date': 'change date'
   }
 };
 

@@ -8,7 +8,7 @@ import ProcessPrice from './ProcessPrice.js';
 export default (props) => {
   const { appointment, language, currentStep, store, selectedCalendar,
           priceComment, showPrice, showExaminerName, locationName, locationAddress,
-          showLocation
+          showLocation, dispatch
   } = useStoreon('appointment', 'language', 'currentStep', 'store',
                  'selectedCalendar', 'priceComment', 'showPrice',
                  'showExaminerName', 'locationName', 'locationAddress',
@@ -46,6 +46,10 @@ export default (props) => {
     appointmentComment: appointment.comment
   };
 
+  const reschedule = () => {
+    dispatch('currentStep/set', 'appointment');
+  }
+
   return html`
     <ul class="list-group${currentStep == 'summary' ? '' : ' text-end'}">
       ${
@@ -70,6 +74,9 @@ export default (props) => {
           </div>
           <div class="text-muted">
             ${__('It takes up to %length% minutes', {length: options.processLength})}
+          </div>
+          <div class="fs-6">
+            <a href="#" onClick="${reschedule}">${__('change date')}</a>
           </div>
         </li>
       ` : ''}

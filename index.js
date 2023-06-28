@@ -95,6 +95,9 @@ export default class ClearvisioAppointmentBooker {
     if (options.showAppointmentComment) {
       store.dispatch('showAppointmentComment/set', options.showAppointmentComment);
     }
+    if (options.autoselectNextFreeSlot) {
+      store.dispatch('autoselectNextFreeSlot/set', options.autoselectNextFreeSlot);
+    }
     if (options.constantAppointmentCommentText) {
       store.dispatch('constantAppointmentCommentText/set', options.constantAppointmentCommentText);
     }

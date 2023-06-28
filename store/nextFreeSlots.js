@@ -107,7 +107,7 @@ export function nextFreeSlots (store) {
     date.setMinutes(0);
     date.setSeconds(0);
 
-    return { nextFreeSlots: {}, firstEligibleDate: date, firstEligibleTime: date };
+    return { nextFreeSlots: {}, firstEligibleDate: date, firstEligibleTime: date, autoselectNextFreeSlot: false };
   });
 
   store.on('firstEligibleTime/set', (storedValue, firstEligibleTimeConstant) => {
@@ -165,7 +165,46 @@ export function nextFreeSlots (store) {
     }
   });
 
-  store.on('nextFreeSlots/add', ({ nextFreeSlots }, newNextFreeSlots) => {
-    return { nextFreeSlots: Object.assign(nextFreeSlots, newNextFreeSlots) };
-  })
+  store.on('appointment/selectSlot', async ({ appointment, calendars, currentStep, autoselectNextFreeSlot }, slot) => {
+    if (currentStep !== 'appointment') {
+      return;
+    }
+
+    var calendar = null;
+    for (let i = 0; i < calendars.length; i++) {
+      if (slot.calendar['@id'] == calendars[i]['@id']) {
+        var calendar = calendars[i];
+      }
+    }
+    if (!calendar) {
+      throw new Error('Could not find calendar');
+    }
+
+    store.dispatch(
+      'appointment/set',
+      { start: slot.start, end: slot.end, calendar: calendar }
+    );
+    store.dispatch('currentStep/next');
+  });
+
+  store.on('autoselectNextFreeSlot/set', (currentValue, autoselectNextFreeSlot) => {
+    return { autoselectNextFreeSlot };
+  });
+
+  store.on('nextFreeSlots/add', ({ nextFreeSlots, autoselectNextFreeSlot }, newNextFreeSlots) => {
+    var result = { nextFreeSlots: Object.assign(nextFreeSlots, newNextFreeSlots) };
+    if (!autoselectNextFreeSlot) {
+      return result;
+    }
+
+    for (let key in nextFreeSlots) {
+      if (nextFreeSlots[key].status != 'empty' && nextFreeSlots[key].slots.length > 0) {
+        store.dispatch('appointment/selectSlot', nextFreeSlots[key].slots[0]);
+        result.autoselectNextFreeSlot = false;
+        break;
+      }
+    }
+
+    return result;
+  });
 }

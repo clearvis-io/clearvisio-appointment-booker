@@ -74,6 +74,7 @@ This module is a frontend for the Appointment Booking API of clearvis.io. The AP
 * **showLocation**: Whether to show location in summary screen (The default value is `true`.)
 * **locationName**: Name of location. Default value is the store name.
 * **locationAddress**: Address of appointment. Default value is the store address.
+* **autoselectNextFreeSlot**: When set to `true`, automatically select next free slot for appointment. Defaults to `false`.
 * **medicalConsent**: Allowed values: explicit, disabled. In explicit mode, a separate checkbox is shown for medical data processing. In disabled mode, data processing consent will not contain medical data processing. Default: `explicit`.
 * **privacyPolicyLink**: An optional link which point to a custom privacy policy url, otherwise it is use the configured text from the Clearvis.io instance
 * **firstEligibleTime**: Determines the first free time slot that can be selected. Default value is `tomorrow`. The available values are:

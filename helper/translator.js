@@ -157,7 +157,7 @@ const messages = {
     'Appointment details verification': 'Verificare datele rezervării',
     'Appointment summary': 'Sumar rezervare',
     'Price': 'Preț',
-    'Confirm appointment': 'Aprobare verificare',
+    'Confirm appointment': 'Rezervare',
     "%customer%'s examination": 'Verificare %customer%',
     'Your appointment have been recorded.': 'Rezervare salvată',
     'The examination will start at %start%, please arrive 5 minutes early.':
@@ -179,7 +179,7 @@ const messages = {
     'Select a vision expert': 'Selectare specialist în vedere',
     'Select your desired appointment time': 'Selectare dată și oră',
     'Enter customer details': 'Datele clientului',
-    'change date': 'change date'
+    'change date': 'modificare dată'
   },
   hr: {
     "Are you sure you want to cancel this appointment?": "Jeste li sigurni da želite otkazati ovaj termin?",

@@ -158,7 +158,7 @@ const messages = {
     'Appointment summary': 'Sumar rezervare',
     'Price': 'Preț',
     'Confirm appointment': 'Rezervare',
-    "%customer%'s examination": 'Verificare %customer%',
+    "%customer%'s examination": 'Consultație %customer%',
     'Your appointment have been recorded.': 'Rezervare salvată',
     'The examination will start at %start%, please arrive 5 minutes early.':
       'Data începerii rezervării: %start%, vă rugăm, prezentați cu 5 minute mai devreme.',

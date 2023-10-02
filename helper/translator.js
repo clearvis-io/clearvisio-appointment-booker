@@ -161,7 +161,7 @@ const messages = {
     "%customer%'s examination": 'Consultație %customer%',
     'Your appointment have been recorded.': 'Rezervare salvată',
     'The examination will start at %start%, please arrive 5 minutes early.':
-      'Data începerii rezervării: %start%, vă rugăm, prezentați cu 5 minute mai devreme.',
+      'Vă rugăm să vă prezentați cu 5 minute mai devreme. Ora inceperii rezervării: %start%',
     'If you have any further questions, please contact us through our customer service.':
       'Dacă aveți alte întrebări, vă rugăm contactați serviciul clienți.',
     'Appointment booked!': 'Programare rezervată!',

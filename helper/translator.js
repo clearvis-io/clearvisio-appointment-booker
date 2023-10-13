@@ -215,8 +215,7 @@ const messages = {
     'There are no free appointment times for this day': 'Za ovaj dan nema slobodnih termina',
     "The next free slot is available on %date%": "Datum sljedećeg slobodnog termina je %date%",
     'Go to date': 'Skoči na datum',
-    'Click here to search for the next free appointment':
-      'Kliknite ovdje za traženje sljedećeg slobodnog termina',
+    'Click here to search for the next free appointment': 'Traženje sljedećeg slobodnog termina',
     'Last name': 'Prezime',
     'First name': 'Ime',
     'Birth': 'Datum rođenja',

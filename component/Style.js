@@ -60,7 +60,7 @@ export default ({colors}) => {
           .cvio-ab-text-danger, .cvio-ab-link-danger, .cvio-ab-invalid-feedback {
             color: ${colors.danger} !important;
           }
-          .cvio-ab-form-control {
+          .cvio-ab-form-control.cvio-ab-is-invalid {
             border-color: ${colors.danger} !important;
           }
         ` :

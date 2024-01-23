@@ -24,12 +24,13 @@ import { location } from './location.js'
 var closeConfirmModalState = modalStateStore('closeConfirmModalState');
 var globalModalState = modalStateStore('globalModalState', {visible: true});
 var privacyPolicyModalState = modalStateStore('privacyPolicyModalState');
+var detailedDescriptionModalState = modalStateStore('detailedDescriptionModalState');
 
 export default () => {
   return createStoreon([
     eyeExaminationProcesses, steps, appointment, moduleState, language, api, privacyPolicyModalState,
     storeStore, calendars, selectedDate, nextFreeSlots, customerForm, privacy,
     closeConfirmModalState, globalModalState, headerTitle, booking, country, selectedCalendar,
-    priceComment, price, showExaminerName, location
+    priceComment, price, showExaminerName, location, detailedDescriptionModalState
   ]);
 }

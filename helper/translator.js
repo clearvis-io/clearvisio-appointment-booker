@@ -91,7 +91,9 @@ const messages = {
     'Select your desired appointment time': 'Időpont választása',
     'Enter customer details': 'Ügyféladatok megadása',
     'Comment': 'Megjegyzés',
-    'change date': 'időpont cseréje'
+    'change date': 'időpont cseréje',
+    'More...': 'Bővebben...',
+    'Detailed description': 'Részletes leírás'
   },
   ro: {
     "Are you sure you want to cancel this appointment?":

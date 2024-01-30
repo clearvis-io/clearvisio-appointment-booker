@@ -4,6 +4,7 @@ import {html, api} from './helper/index.js';
 import createStore from './store/createStore.js';
 import {Carousel, BackButton, CloseButton, GlobalModal, Style} from './component/index.js'
 import Header from './component/Header.js';
+import availableProcessFilter from '../helper/availableProcessFilter.js'
 
 const knownCustomerFields = [
   'first_name',
@@ -45,12 +46,8 @@ export default class ClearvisioAppointmentBooker {
     this.setupCustomerFields(options);
     this.setupApi(options);
     this.loadStore(options.storeCode)
-      .then(() => {
-        return Promise.all([
-          this.loadEyeExaminationProcesses(options),
-          this.loadCalendars()
-        ]);
-      })
+      .then(() => this.loadCalendars())
+      .then(() => this.loadEyeExaminationProcesses(options))
       .then(() => {
         store.dispatch('moduleState/set', 'idle');
         this.store.dispatch('bookerInit');
@@ -144,7 +141,15 @@ export default class ClearvisioAppointmentBooker {
     this.store.dispatch('store/set', stores[0]);
   }
 
-  async loadEyeExaminationProcesses({eyeExaminationProcessId}) {
+  async loadCalendars() {
+    this.calendars = await api.get(
+      this.store,
+      `appointment_calendars?groups[]=userProfilePictureRead&store=${this.store.get().store['@id']}`
+    );
+    this.store.dispatch('calendars/set', this.calendars);
+  }
+
+  async loadEyeExaminationProcesses({eyeExaminationProcessId, calendarRoleCheckMode}) {
     var storeEntity = this.store.get().store;
     if (eyeExaminationProcessId) {
       var processes = [await api.get(this.store, `eye_examination_processes/${eyeExaminationProcessId}`)]
@@ -152,16 +157,8 @@ export default class ClearvisioAppointmentBooker {
     } else {
       var processes = await api.get(this.store, `eye_examination_processes?hasLength&chain=${storeEntity.chain['@id']}`);
     }
-    this.store.dispatch('eyeExaminationProcesses/set', processes);
-  }
-
-  async loadCalendars() {
-    this.store.dispatch(
-      'calendars/set',
-      await api.get(
-        this.store,
-        `appointment_calendars?groups[]=userProfilePictureRead&store=${this.store.get().store['@id']}`
-      )
+    this.store.dispatch('eyeExaminationProcesses/set',
+      availableProcessFilter(processes, this.calendars, calendarRoleCheckMode)
     );
   }
 

@@ -46,9 +46,17 @@ export default class ClearvisioAppointmentBooker {
     this.setupCustomerFields(options);
     this.setupApi(options);
     this.loadStore(options.storeCode)
-      .then(() => this.loadCalendars())
-      .then(() => this.loadEyeExaminationProcesses(options))
       .then(() => {
+        return Promise.all([
+          this.loadEyeExaminationProcesses(options),
+          this.loadCalendars()
+        ]);
+      })
+      .then(([processes, calendars]) => {
+        this.store.dispatch('eyeExaminationProcesses/set',
+          availableProcessFilter(processes, calendars, options.calendarRoleCheckMode)
+        );
+        this.store.dispatch('calendars/set', calendars);
         store.dispatch('moduleState/set', 'idle');
         this.store.dispatch('bookerInit');
       });
@@ -141,24 +149,18 @@ export default class ClearvisioAppointmentBooker {
     this.store.dispatch('store/set', stores[0]);
   }
 
-  async loadCalendars() {
-    this.calendars = await api.get(
-      this.store,
-      `appointment_calendars?groups[]=userProfilePictureRead&store=${this.store.get().store['@id']}`
-    );
-    this.store.dispatch('calendars/set', this.calendars);
+  async loadEyeExaminationProcesses({eyeExaminationProcessId}) {
+    if (eyeExaminationProcessId) {
+      return [await api.get(this.store, `eye_examination_processes/${eyeExaminationProcessId}`)]
+        .filter((process) => process);
+    }
+    var storeEntity = this.store.get().store;
+    return await api.get(this.store, `eye_examination_processes?hasLength&chain=${storeEntity.chain['@id']}`);
   }
 
-  async loadEyeExaminationProcesses({eyeExaminationProcessId, calendarRoleCheckMode}) {
-    var storeEntity = this.store.get().store;
-    if (eyeExaminationProcessId) {
-      var processes = [await api.get(this.store, `eye_examination_processes/${eyeExaminationProcessId}`)]
-        .filter((process) => process);
-    } else {
-      var processes = await api.get(this.store, `eye_examination_processes?hasLength&chain=${storeEntity.chain['@id']}`);
-    }
-    this.store.dispatch('eyeExaminationProcesses/set',
-      availableProcessFilter(processes, this.calendars, calendarRoleCheckMode)
+  async loadCalendars() {
+    return await api.get(this.store,
+      `appointment_calendars?groups[]=userProfilePictureRead&store=${this.store.get().store['@id']}`
     );
   }
 

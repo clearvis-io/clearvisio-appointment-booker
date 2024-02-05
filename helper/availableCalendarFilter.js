@@ -8,10 +8,6 @@ export default function ({appointment, calendars, calendarRoleCheckMode}) {
       return true;
     }
 
-    if (proccesMatchesCalendarAndRoleChecker(process, calendar, calendarRoleCheckMode)) {
-      return true;
-    }
-
-    return false;
+    return proccesMatchesCalendarAndRoleChecker(process, calendar, calendarRoleCheckMode);
   })
 }

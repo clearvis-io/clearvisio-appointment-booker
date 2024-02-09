@@ -1,4 +1,4 @@
 module.exports = {
-  exclude: ['**/dist/**/*'],
+  exclude: ['**/dist/**/*', '**/.git/**/*'],
   plugins: ['@snowpack/plugin-postcss'],
 }

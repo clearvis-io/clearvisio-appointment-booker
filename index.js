@@ -4,6 +4,7 @@ import {html, api} from './helper/index.js';
 import createStore from './store/createStore.js';
 import {Carousel, BackButton, CloseButton, GlobalModal, Style} from './component/index.js'
 import Header from './component/Header.js';
+import availableProcessFilter from '../helper/availableProcessFilter.js'
 
 const knownCustomerFields = [
   'first_name',
@@ -51,7 +52,11 @@ export default class ClearvisioAppointmentBooker {
           this.loadCalendars()
         ]);
       })
-      .then(() => {
+      .then(([processes, calendars]) => {
+        this.store.dispatch('eyeExaminationProcesses/set',
+          availableProcessFilter(processes, calendars, options.calendarRoleCheckMode)
+        );
+        this.store.dispatch('calendars/set', calendars);
         store.dispatch('moduleState/set', 'idle');
         this.store.dispatch('bookerInit');
       });
@@ -110,6 +115,9 @@ export default class ClearvisioAppointmentBooker {
     if (options.showLocation !== undefined) {
       store.dispatch('showLocation/set', options.showLocation);
     }
+    if (options.confirmationStatus !== undefined) {
+      store.dispatch('appointment/set', {confirmation_status: options.confirmationStatus});
+    }
     store.dispatch('medicalConsent/set', options.medicalConsent);
 
     this.createElementAndRender(options);
@@ -145,23 +153,17 @@ export default class ClearvisioAppointmentBooker {
   }
 
   async loadEyeExaminationProcesses({eyeExaminationProcessId}) {
-    var storeEntity = this.store.get().store;
     if (eyeExaminationProcessId) {
-      var processes = [await api.get(this.store, `eye_examination_processes/${eyeExaminationProcessId}`)]
+      return [await api.get(this.store, `eye_examination_processes/${eyeExaminationProcessId}`)]
         .filter((process) => process);
-    } else {
-      var processes = await api.get(this.store, `eye_examination_processes?hasLength&chain=${storeEntity.chain['@id']}`);
     }
-    this.store.dispatch('eyeExaminationProcesses/set', processes);
+    var storeEntity = this.store.get().store;
+    return await api.get(this.store, `eye_examination_processes?hasLength&chain=${storeEntity.chain['@id']}`);
   }
 
   async loadCalendars() {
-    this.store.dispatch(
-      'calendars/set',
-      await api.get(
-        this.store,
-        `appointment_calendars?groups[]=userProfilePictureRead&store=${this.store.get().store['@id']}`
-      )
+    return await api.get(this.store,
+      `appointment_calendars?groups[]=userProfilePictureRead&store=${this.store.get().store['@id']}`
     );
   }
 

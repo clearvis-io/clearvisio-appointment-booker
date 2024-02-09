@@ -69,6 +69,7 @@ This module is a frontend for the Appointment Booking API of clearvis.io. The AP
 * **showFirstAvailableUserItem**: When set to `false` it will hide "First available user" option on the calendar list. (The default value is `true`.)
 * **showExaminerName**: When set to `false` it will hide the examiner's name on the summary screen. (The default value is `true`.)
 * **eyeExaminationProcessId**: When filled, only that eye examination process will be retrieved from the backend, will be used in the appointment and thus the process selection screen will be skipped
+* **confirmationStatus**: If the appointment should be tentative or not. Available values are `tentative` and `confirmed`. Default value is implicit `confirmed`.
 * **priceComment**: Text that will be showed on summary card below the price of examination
 * **showPrice**: When set to `false` it will hide any price related info (The default value is `true`.)
 * **showLocation**: Whether to show location in summary screen (The default value is `true`.)

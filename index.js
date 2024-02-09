@@ -1,10 +1,9 @@
 import { render } from 'preact';
 import { StoreContext, useStoreon } from 'storeon/preact'
-import {html, api} from './helper/index.js';
+import {html, api, availableProcessFilter} from './helper/index.js';
 import createStore from './store/createStore.js';
 import {Carousel, BackButton, CloseButton, GlobalModal, Style} from './component/index.js'
 import Header from './component/Header.js';
-import availableProcessFilter from '../helper/availableProcessFilter.js'
 
 const knownCustomerFields = [
   'first_name',

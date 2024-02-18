@@ -4,6 +4,12 @@ const knownCountryCallingCodeMappings = {
   'hu_HU': {
     "06": "+36",
     "36": "+36"
+  },
+  'hr_HR': {
+    "0": "+385"
+  },
+  'ro_RO': {
+    "0": "+40"
   }
 };
 

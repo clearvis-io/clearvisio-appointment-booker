@@ -266,7 +266,8 @@ const messages = {
     'Select eye examination type': 'Izbor vrste pregleda',
     'Select a vision expert': 'Odaberite stručnjaka za vid',
     'Select your desired appointment time': 'Odaberite željeno vrijeme termina',
-    'Enter customer details': 'Unos podataka o klijentu'
+    'Enter customer details': 'Unos podataka o klijentu',
+    'change date': 'promijeni termin'
   },
   en: {
     '@abbrSunday': 'Sun',

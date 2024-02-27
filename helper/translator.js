@@ -41,6 +41,7 @@ const messages = {
     'Go to date': 'Ugrás dátumra',
     'Click here to search for the next free appointment':
       'Kattintson ide a következő szabad időpont kereséséhez',
+    'Search in progress...': 'Keresés folyamatban...',
     'Last name': 'Vezetéknév',
     'First name': 'Keresztnév',
     'Birth': 'Születési dátum',
@@ -132,6 +133,7 @@ const messages = {
     'Go to date': 'Salt la dată',
     'Click here to search for the next free appointment':
       'Click aici pentru căutarea următorului timp liber',
+    'Search in progress...': 'Keresés folyamatban',
     'Last name': 'Nume',
     'First name': 'Prenume',
     'Birth': 'Data naștere',
@@ -218,6 +220,7 @@ const messages = {
     "The next free slot is available on %date%": "Datum sljedećeg slobodnog termina je %date%",
     'Go to date': 'Skoči na datum',
     'Click here to search for the next free appointment': 'Traženje sljedećeg slobodnog termina',
+    'Search in progress...': 'Pretraživanje je u tijeku...',
     'Last name': 'Prezime',
     'First name': 'Ime',
     'Birth': 'Datum rođenja',

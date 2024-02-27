@@ -1,17 +1,29 @@
 import {api, createNextFreeSlotsForDateKey, dateTimesMatch} from '../helper/index.js'
 
-const nextFreeSlotsAreLoadedFor = (storeValue, date) => {
+const isFreeSlotForDateLookedUp = (storeValue, date) => {
   const {appointment, selectedCalendar, nextFreeSlots} = storeValue;
   const nextFreeSlotsForDate = nextFreeSlots[createNextFreeSlotsForDateKey(appointment, selectedCalendar, date)];
 
-  return nextFreeSlotsForDate && nextFreeSlotsForDate.status != 'incomplete'
+  if (nextFreeSlotsForDate && nextFreeSlotsForDate.status == 'empty') {
+    let nextWeek = new Date(date);
+    nextWeek.setDate(date.getDate() + 6);
+    let freeSlotsForNextWeek = nextFreeSlots[createNextFreeSlotsForDateKey(appointment, selectedCalendar, nextWeek)];
+
+    return freeSlotsForNextWeek;
+  }
+
+  return nextFreeSlotsForDate && nextFreeSlotsForDate.status == 'complete';
 }
 
 const requestNextFreeSlots = async (store, date) => {
   const {appointment, selectedCalendar, firstEligibleTime} = store.get();
+
+  store.dispatch('nextFreeSlotLoading/set', true);
+
   if (!appointment.eye_examination_process || dateIsTooFarFromSelectedDate(store, date) ||
-    nextFreeSlotsAreLoadedFor(store.get(), date)) {
-    return;
+    isFreeSlotForDateLookedUp(store.get(), date)) {
+      store.dispatch('nextFreeSlotLoading/set', false);
+      return;
   }
 
   const nextFreeSlots = await api.get(
@@ -56,16 +68,10 @@ const requestNextFreeSlots = async (store, date) => {
   }
 
   store.dispatch('nextFreeSlots/add', nextFreeSlotsForDates);
-
-  if (dateTimesMatch(lastDate, date)) {
-    lastDate.setDate(date.getDate() + 7);
-  }
-
-  return requestNextFreeSlots(store, lastDate);
 }
 
 const dateIsTooFarFromSelectedDate = (store, date) => {
-  return (date - store.get().selectedDate) / 1000 / 60 / 60 / 24 > 21;
+  return (date - store.get().selectedDate) / 1000 / 60 / 60 / 24 > 90;
 }
 
 const createNextFreeSlotRequest = (store, date) => {
@@ -107,7 +113,7 @@ export function nextFreeSlots (store) {
     date.setMinutes(0);
     date.setSeconds(0);
 
-    return { nextFreeSlots: {}, firstEligibleDate: date, firstEligibleTime: date, autoselectNextFreeSlot: false };
+    return { nextFreeSlots: {}, firstEligibleDate: date, firstEligibleTime: date, autoselectNextFreeSlot: false, nextFreeSlotLoading: false };
   });
 
   store.on('firstEligibleTime/set', (storedValue, firstEligibleTimeConstant) => {
@@ -206,5 +212,9 @@ export function nextFreeSlots (store) {
     }
 
     return result;
+  });
+
+  store.on('nextFreeSlotLoading/set', (currentValue, nextFreeSlotLoading) => {
+    return { nextFreeSlotLoading };
   });
 }

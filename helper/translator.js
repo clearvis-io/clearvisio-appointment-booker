@@ -133,7 +133,7 @@ const messages = {
     'Go to date': 'Salt la dată',
     'Click here to search for the next free appointment':
       'Click aici pentru căutarea următorului timp liber',
-    'Search in progress...': 'Keresés folyamatban',
+    'Search in progress...': 'Căutare în curs...',
     'Last name': 'Nume',
     'First name': 'Prenume',
     'Birth': 'Data naștere',

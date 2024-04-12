@@ -94,7 +94,10 @@ const messages = {
     'Comment': 'Megjegyzés',
     'change date': 'időpont cseréje',
     'More...': 'Bővebben...',
-    'Detailed description': 'Részletes leírás'
+    'Detailed description': 'Részletes leírás',
+    'Morning': 'Délelőtt',
+    'Afternoon': 'Délután',
+    'Evening': 'Este'
   },
   ro: {
     "Are you sure you want to cancel this appointment?":
@@ -183,7 +186,10 @@ const messages = {
     'Select a vision expert': 'Selectare specialist în vedere',
     'Select your desired appointment time': 'Selectare dată și oră',
     'Enter customer details': 'Datele clientului',
-    'change date': 'modificare dată'
+    'change date': 'modificare dată',
+    'Morning': 'Dimineața',
+    'Afternoon': 'Dupa amiaza',
+    'Evening': 'Seară'
   },
   hr: {
     "Are you sure you want to cancel this appointment?": "Jeste li sigurni da želite otkazati ovaj termin?",
@@ -270,7 +276,10 @@ const messages = {
     'Select a vision expert': 'Odaberite stručnjaka za vid',
     'Select your desired appointment time': 'Odaberite željeno vrijeme termina',
     'Enter customer details': 'Unos podataka o klijentu',
-    'change date': 'promijeni termin'
+    'change date': 'promijeni termin',
+    'Morning': 'Prijepodne',
+    'Afternoon': 'Poslijepodne',
+    'Evening': 'Večer'
   },
   en: {
     '@abbrSunday': 'Sun',

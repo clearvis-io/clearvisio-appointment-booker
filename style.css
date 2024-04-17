@@ -59,3 +59,24 @@
 .partOFDayDiv {
   padding-top: 1rem;
 }
+
+.calendar {
+  table-layout: fixed!important;
+}
+
+.disabled {
+  background-color: rgba(177, 177, 177, 0.651)!important;
+}
+
+.month-next {
+  float: right;
+}
+
+.month-previus {
+  float: left;
+}
+
+caption {
+  font-size: 1.5em;
+  text-align: center;
+}

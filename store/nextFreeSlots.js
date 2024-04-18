@@ -1,8 +1,18 @@
 import {api, createNextFreeSlotsForDateKey, dateTimesMatch} from '../helper/index.js'
 
-const isFreeSlotForDateLookedUp = (storeValue, date) => {
-  const {appointment, selectedCalendar, nextFreeSlots} = storeValue;
+const noAdditionalLookupNeeded = (storeValue, date) => {
+  const {appointment, selectedCalendar, nextFreeSlots, selectedDate, calendarRange} = storeValue;
   const nextFreeSlotsForDate = nextFreeSlots[createNextFreeSlotsForDateKey(appointment, selectedCalendar, date)];
+
+  const year = selectedDate.getFullYear();
+  const month = selectedDate.getMonth();
+
+  for (let i = 1; i < new Date(year, month + 1, 0); i++) {
+    const freeSlot = nextFreeSlots[createNextFreeSlotsForDateKey(appointment, selectedCalendar, new Date(year, month, i))]
+    if (calendarRange == 'fiveDays' && (freeSlot == undefined || freeSlot.status =='incomplete')) {
+      return false;
+    }
+  }
 
   if (nextFreeSlotsForDate && nextFreeSlotsForDate.status == 'empty') {
     let nextWeek = new Date(date);
@@ -15,14 +25,41 @@ const isFreeSlotForDateLookedUp = (storeValue, date) => {
   return nextFreeSlotsForDate && nextFreeSlotsForDate.status == 'complete';
 }
 
+const requestMoreForThisMonthIfNecesarry = async (store, nextFreeSlotsForDates) => {
+  console.log('rekvesztmór', nextFreeSlotsForDates)
+  const {selectedDate} = store.get();
+
+  const year = selectedDate.getFullYear();
+  const month = selectedDate.getMonth();
+
+  const lastKey = Object.keys(nextFreeSlotsForDates).sort().pop();
+  const lastObj = nextFreeSlotsForDates[lastKey];
+  
+  const regex = /(?<=^(?:[^-]*-){2})(.*)/;
+  const lastDateParts = lastKey.match(regex)[1].split('-');
+  
+  var lastDate = new Date(lastDateParts[0], parseInt(lastDateParts[1]) - 1, parseInt(lastDateParts[2]));
+
+  if (lastObj.status !== 'incomplete') {
+    lastDate = new Date(lastDateParts[0], parseInt(lastDateParts[1]) - 1, parseInt(lastDateParts[2]) + 1)
+  }
+
+  if (lastDate < new Date(year, month + 1, 0)) {
+    console.log('BENNE')
+    requestNextFreeSlots(store, lastDate);
+  }
+}
+
 const requestNextFreeSlots = async (store, date) => {
-  const {appointment, selectedCalendar, firstEligibleTime} = store.get();
+  console.log('rekveszt', date)
+  const {appointment, selectedCalendar, firstEligibleTime, calendarRange} = store.get();
 
   store.dispatch('nextFreeSlotLoading/set', true);
 
   if (!appointment.eye_examination_process || dateIsTooFarFromSelectedDate(store, date) ||
-    isFreeSlotForDateLookedUp(store.get(), date)) {
+    noAdditionalLookupNeeded(store.get(), date)) {
       store.dispatch('nextFreeSlotLoading/set', false);
+      console.log('EZ');
       return;
   }
 
@@ -68,6 +105,12 @@ const requestNextFreeSlots = async (store, date) => {
   }
 
   store.dispatch('nextFreeSlots/add', nextFreeSlotsForDates);
+
+  if (calendarRange == 'fiveDays') {
+    return false;
+  } else {
+    requestMoreForThisMonthIfNecesarry(store, nextFreeSlotsForDates);
+  }
 }
 
 const dateIsTooFarFromSelectedDate = (store, date) => {

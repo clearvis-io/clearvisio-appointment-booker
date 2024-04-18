@@ -4,8 +4,8 @@ import {html, datesMatch, createNextFreeSlotsForDateKey, translator as __} from 
 
 
 export default ({day}) => {
-  const { selectedCalendar, selectedDate, nextFreeSlots, appointment, dispatch, nextFreeSlotLoading } =
-    useStoreon('selectedCalendar', 'appointment', 'nextFreeSlots', 'selectedDate', 'nextFreeSlotLoading')
+  const { selectedCalendar, selectedDate, nextFreeSlots, appointment, dispatch} =
+    useStoreon('selectedCalendar', 'appointment', 'nextFreeSlots', 'selectedDate')
   const nextFreeSlotsOfDay = nextFreeSlots[createNextFreeSlotsForDateKey(appointment, selectedCalendar, day)]
 
   const handleOnClick = (day) => {

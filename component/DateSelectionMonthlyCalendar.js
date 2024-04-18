@@ -1,5 +1,6 @@
 import {useStoreon} from 'storeon/preact'
-import {html, datesMatch, translator as __} from '../helper/index.js'
+import {html, translator as __} from '../helper/index.js'
+import DateSelectionMonthlyCalendarCell from './DateSelectionMonthlyCalendarCell.js';
 
 const monthsOfYear = [
   'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August',
@@ -17,7 +18,7 @@ const abbrivedDayOfTheWeek = [
 
 export default () => {
   const { selectedDate, dispatch } = useStoreon('selectedDate')
-  
+
   const year = selectedDate.getFullYear();
   const month = selectedDate.getMonth();
   const daysInMonth = new Date(year, month + 1, 0).getDate();
@@ -44,10 +45,6 @@ export default () => {
 
   const previusMonth = () => {
     dispatch('selectedDate/set', new Date(year, month, 0));
-  }
-
-  const handleOnClick = (day) => {
-    dispatch('selectedDate/set', day);
   }
   
   return html`
@@ -77,16 +74,7 @@ export default () => {
                 <tr>
                   ${week.map(day => day ?
                     html`
-                      <td
-                        class="${
-                          day < new Date() ?
-                            'disabled' :
-                            datesMatch(day, selectedDate) ? 'bg-primary text-light' : null
-                        }" 
-                        onClick="${() => handleOnClick(day)}"
-                      >
-                        ${day.getDate()}
-                      </td>
+                      <${DateSelectionMonthlyCalendarCell} day=${day}/>
                     `: 
                       html`<td></td>`
                   )}

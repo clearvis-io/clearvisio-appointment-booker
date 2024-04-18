@@ -187,9 +187,9 @@ const messages = {
     'Select your desired appointment time': 'Selectare dată și oră',
     'Enter customer details': 'Datele clientului',
     'change date': 'modificare dată',
-    'Morning': 'Dimineața',
-    'Afternoon': 'Dupa amiaza',
-    'Evening': 'Seară'
+    'Morning': 'Înainte de masă',
+    'Afternoon': 'După masă',
+    'Evening': 'Seara'
   },
   hr: {
     "Are you sure you want to cancel this appointment?": "Jeste li sigurni da želite otkazati ovaj termin?",

@@ -1,15 +1,17 @@
 import {useStoreon} from 'storeon/preact'
 import {html, dateTimeFormatter, dateTimesMatch} from '../helper/index.js'
 
-export default (props) => {
+export default ({slot}) => {
   const { dispatch, appointment } = useStoreon('appointment');
   const onClick = () => {
-    dispatch('appointment/selectSlot', props.slot);
+    dispatch('appointment/selectSlot', slot);
   }
 
+  const selected = dateTimesMatch(new Date(appointment.start), new Date(slot.start));
+
   return html`
-    <button class="btn partOFDayButton ${dateTimesMatch(new Date(appointment.start), new Date(props.slot.start)) ? ' selected' : ''}" onClick=${onClick}>
-        ${dateTimeFormatter.formatTime(props.slot.start)}
+    <button class="btn btn-outline-secondary m-1 ${selected ? ' selected' : ''}" onClick=${onClick}>
+      ${dateTimeFormatter.formatTime(slot.start)}
     </button>
   `;
 }

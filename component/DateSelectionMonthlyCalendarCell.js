@@ -17,7 +17,7 @@ export default ({day}) => {
   }
 
   if (!nextFreeSlotsOfDay) {
-    return html`<td class='placeholder-glow'><span class="placeholder bg-secondary">${day.getDate()}</span></td>`
+    return html`<td class="placeholder">${day.getDate()}</td>`
   }
 
   return html`

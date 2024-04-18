@@ -44,8 +44,16 @@
   table-layout: fixed!important;
 }
 
+.calendar td {
+  display: table-cell!important;
+}
+
 .disabled {
   background-color: rgba(177, 177, 177, 0.651)!important;
+}
+
+.disabled:hover {
+  cursor:not-allowed;
 }
 
 .month-next {
@@ -66,5 +74,5 @@ caption {
 }
 
 .active-cell:hover {
-  cursor: pointer;
+  cursor:pointer;
 }

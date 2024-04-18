@@ -51,7 +51,7 @@ export default () => {
     <div class="container text-center">
       <div class="row">
         <div class="col">
-          <table class="table table caption-top calendar">
+          <table class="table table caption-top calendar placeholder-glow">
             <caption>
               <button
                 class="btn btn-outline-secondary month-previus ${previoudMonthAvailable ? null : 'disabled'}" 

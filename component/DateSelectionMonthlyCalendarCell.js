@@ -13,7 +13,7 @@ export default ({day}) => {
   };
   
   if (day < new Date() || (nextFreeSlotsOfDay && nextFreeSlotsOfDay.status == 'empty')) {
-    return html`<td class='disabled'>${day.getDate()}</td>`;
+    return html`<td class='table-active disabled'>${day.getDate()}</td>`;
   }
 
   if (!nextFreeSlotsOfDay) {

@@ -42,18 +42,17 @@
 
 .calendar {
   table-layout: fixed!important;
+  padding-left: 0px;
+  padding-right: 0px;
 }
 
 .calendar td {
   display: table-cell!important;
 }
 
-.disabled {
-  background-color: rgba(177, 177, 177, 0.651)!important;
-}
-
-.disabled:hover {
-  cursor:not-allowed;
+.header {
+  padding-left: 0px;
+  padding-right: 0px;
 }
 
 .month-next {
@@ -64,15 +63,14 @@
   float: left;
 }
 
-caption {
-  font-size: 1.5em;
-  text-align: center;
-}
-
 .placeholder {
   display: block!important;
 }
 
-.active-cell:hover {
+.active-cell {
   cursor:pointer;
+}
+
+.disabled {
+  cursor:not-allowed;
 }

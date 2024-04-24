@@ -9,7 +9,7 @@ const calendarRangeLoaded = (storeValue, date) => {
     selectedDate.getDate() + 7 :
     new Date(year, month + 1, 0).getDate();
 
-  for (let i = selectedDate.getDate(); i < lastRequiredDayOfMonth; i++) {
+  for (let i = selectedDate.getDate(); i <= lastRequiredDayOfMonth; i++) {
     const freeSlot = nextFreeSlots[createNextFreeSlotsForDateKey(appointment, selectedCalendar, new Date(year, month, i))]
     if (freeSlot == undefined || freeSlot.status == 'incomplete') {
       return false;
@@ -20,7 +20,6 @@ const calendarRangeLoaded = (storeValue, date) => {
 }
 
 const requestMoreForThisMonthIfNecesarry = async (store, nextFreeSlotsForDates) => {
-  console.log('rekvesztmór', nextFreeSlotsForDates)
   const {selectedDate} = store.get();
 
   const year = selectedDate.getFullYear();
@@ -38,14 +37,12 @@ const requestMoreForThisMonthIfNecesarry = async (store, nextFreeSlotsForDates) 
     lastDate = new Date(lastDateParts[0], parseInt(lastDateParts[1]) - 1, parseInt(lastDateParts[2]) + 1)
   }
 
-  if (lastDate < new Date(year, month + 1, 0)) {
-    console.log('BENNE')
+  if (lastDate <= new Date(year, month + 1, 0)) {
     requestNextFreeSlots(store, lastDate);
   }
 }
 
 const requestNextFreeSlots = async (store, date) => {
-  console.log('rekveszt', date)
   const {appointment, selectedCalendar, firstEligibleTime, calendarRange} = store.get();
 
   store.dispatch('nextFreeSlotLoading/set', true);
@@ -53,7 +50,6 @@ const requestNextFreeSlots = async (store, date) => {
   if (!appointment.eye_examination_process || dateIsTooFarFromSelectedDate(store, date) ||
     calendarRangeLoaded(store.get(), date)) {
       store.dispatch('nextFreeSlotLoading/set', false);
-      console.log('EZ');
       return;
   }
 
@@ -100,11 +96,7 @@ const requestNextFreeSlots = async (store, date) => {
 
   store.dispatch('nextFreeSlots/add', nextFreeSlotsForDates);
 
-  if (calendarRange == 'fiveDays') {
-    return false;
-  } else {
-    requestMoreForThisMonthIfNecesarry(store, nextFreeSlotsForDates);
-  }
+  requestMoreForThisMonthIfNecesarry(store, nextFreeSlotsForDates);
 }
 
 const dateIsTooFarFromSelectedDate = (store, date) => {

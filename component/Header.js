@@ -29,7 +29,7 @@ export default (props) => {
     <div class="booker-header bg-primary bg-gradient text-light p-2">
       <div class="container col-sm-10 col-md-8">
         <div class="row">
-          <div class="col-8">
+          <div class="col-8 header">
             <h3 class="text-truncate">
               ${headerTitle || __('Appointment booking')}
             </h3>

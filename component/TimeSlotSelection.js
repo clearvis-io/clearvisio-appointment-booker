@@ -10,6 +10,6 @@ export default () => {
 
   return html`
     <${calendarRange == 'fiveDays' ? DateSelectionCarousel : DateSelectionMonthlyCalendar}/>
-    <${timeSlotMode == 'partOfDay' ? TimeSlotListSingleColumn : TimeSlotListPartOfDay}/>
+    <${timeSlotMode == 'singleColumn' ? TimeSlotListSingleColumn : TimeSlotListPartOfDay}/>
   `;
 }

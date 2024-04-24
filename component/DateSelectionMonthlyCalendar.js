@@ -1,5 +1,6 @@
 import {useStoreon} from 'storeon/preact'
-import {html, createNextFreeSlotsForDateKey as __, createNextFreeSlotsForDateKey} from '../helper/index.js'
+import {html, createNextFreeSlotsForDateKey} from '../helper/index.js'
+import {translator as __} from '../helper/index.js'
 import DateSelectionMonthlyCalendarCell from './DateSelectionMonthlyCalendarCell.js';
 
 const monthsOfYear = [
@@ -23,19 +24,19 @@ export default () => {
   const year = selectedDate.getFullYear();
   const month = selectedDate.getMonth();
   const daysInMonth = new Date(year, month + 1, 0).getDate();
-  const previoudMonthAvailable = new Date() < new Date(year, month, 0);
+  const previousMonthAvailable = new Date() < new Date(year, month, 0);
 
   const firstDay = new Date(year, month, 1);
   const days = [];
   const daysSliced = [];
-  var monthLoaded = false;
+  var monthLoaded = true;
 
   for (let i = selectedDate.getDate(); i <= daysInMonth; i++) {
     const freeSlot = nextFreeSlots[createNextFreeSlotsForDateKey(appointment, selectedCalendar, new Date(year, month, i))];
     if (freeSlot == undefined || freeSlot.status == 'incomplete') {
+      console.log('EZZ', freeSlot, new Date(year, month, i))
       monthLoaded = false;
-    } else {
-      monthLoaded = true;
+      break;
     }
   }
 
@@ -59,13 +60,13 @@ export default () => {
   }
   
   return html`
-    <div class="container text-center">
+    <div class="container text-center calendar">
       <div class="row">
         <div class="col">
-          <table class="table table caption-top calendar placeholder-glow">
-            <caption>
+          <table class="table table caption-top placeholder-glow">
+            <caption class="text-center display-6">
               <button
-                class="btn btn-outline-secondary month-previus ${previoudMonthAvailable ? 
+                class="btn btn-outline-secondary month-previus ${previousMonthAvailable ? 
                   monthLoaded ? null : 'disabled'
                   : 'disabled'}" 
                 onClick="${previusMonth}"

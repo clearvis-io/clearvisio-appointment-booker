@@ -93,7 +93,7 @@ This module is a frontend for the Appointment Booking API of clearvis.io. The AP
   * *success*: Sets the header color of the success dialog
 * **timeSlotMode**: Lists the available time slots with different appearances.
   * The deafult value is `singleColumn`, that means all the available times will appear beneath each other in one column.
-  * When set to `partOfDay` the available times will group up in 3 mayor categories, morning, afternoon and evening.
+  * When set to `partOfDay` the available time slots will be grouped into morning, afternoon and evening.
 * **calendarRange**: Allows different options for the day selection at the appoinment interface.
   * When it is set to `fiveDays` the day selection modul will only appear as five days and you can turn pages for more opportunities.
   * When set to `month` the actual month will appear as a calendar and you can chose the prefferd day in there.

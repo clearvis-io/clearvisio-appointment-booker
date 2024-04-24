@@ -11,7 +11,7 @@ export default ({day}) => {
   const handleOnClick = (day) => {
     dispatch('selectedDate/set', day);
   };
-
+  
   if (day < new Date() || (nextFreeSlotsOfDay && nextFreeSlotsOfDay.status == 'empty')) {
     return html`<td class='disabled'>${day.getDate()}</td>`;
   }

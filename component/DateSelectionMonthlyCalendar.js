@@ -1,5 +1,5 @@
 import {useStoreon} from 'storeon/preact'
-import {html, translator as __} from '../helper/index.js'
+import {html, createNextFreeSlotsForDateKey as __, createNextFreeSlotsForDateKey} from '../helper/index.js'
 import DateSelectionMonthlyCalendarCell from './DateSelectionMonthlyCalendarCell.js';
 
 const monthsOfYear = [
@@ -17,7 +17,8 @@ const abbrivedDayOfTheWeek = [
 ];
 
 export default () => {
-  const { selectedDate, dispatch } = useStoreon('selectedDate')
+  const { selectedCalendar, selectedDate, nextFreeSlots, appointment, dispatch} =
+    useStoreon('selectedCalendar', 'appointment', 'nextFreeSlots', 'selectedDate')
 
   const year = selectedDate.getFullYear();
   const month = selectedDate.getMonth();
@@ -27,6 +28,16 @@ export default () => {
   const firstDay = new Date(year, month, 1);
   const days = [];
   const daysSliced = [];
+  var monthLoaded = false;
+
+  for (let i = selectedDate.getDate(); i <= daysInMonth; i++) {
+    const freeSlot = nextFreeSlots[createNextFreeSlotsForDateKey(appointment, selectedCalendar, new Date(year, month, i))];
+    if (freeSlot == undefined || freeSlot.status == 'incomplete') {
+      monthLoaded = false;
+    } else {
+      monthLoaded = true;
+    }
+  }
 
   for (let i = 0 ; i < (firstDay.getDay() || 7) - 1; i++) {
     days.push(null)
@@ -54,13 +65,15 @@ export default () => {
           <table class="table table caption-top calendar placeholder-glow">
             <caption>
               <button
-                class="btn btn-outline-secondary month-previus ${previoudMonthAvailable ? null : 'disabled'}" 
+                class="btn btn-outline-secondary month-previus ${previoudMonthAvailable ? 
+                  monthLoaded ? null : 'disabled'
+                  : 'disabled'}" 
                 onClick="${previusMonth}"
               >
                 ${'<'}
               </button>
               ${year + ' ' + __(monthsOfYear[month])}
-              <button class="btn btn-outline-secondary month-next" onClick="${nextMonth}">
+              <button class="btn btn-outline-secondary month-next ${monthLoaded ? null : 'disabled'}" onClick="${nextMonth}">
                 ${'>'}
               </button>
             </caption>

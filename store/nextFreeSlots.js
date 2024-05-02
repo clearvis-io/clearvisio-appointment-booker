@@ -204,32 +204,6 @@ export function nextFreeSlots (store) {
     }
   });
 
-  store.on('appointment/selectSlot', async ({ appointment, calendars, currentStep, autoselectNextFreeSlot }, slot) => {
-    if (currentStep !== 'appointment') {
-      return;
-    }
-
-    var calendar = null;
-    for (let i = 0; i < calendars.length; i++) {
-      if (slot.calendar['@id'] == calendars[i]['@id']) {
-        var calendar = calendars[i];
-      }
-    }
-    if (!calendar) {
-      throw new Error('Could not find calendar');
-    }
-
-    store.dispatch(
-      'appointment/set',
-      { start: slot.start, end: slot.end, calendar: calendar }
-    );
-    store.dispatch('currentStep/next');
-  });
-
-  store.on('autoselectNextFreeSlot/set', (currentValue, autoselectNextFreeSlot) => {
-    return { autoselectNextFreeSlot };
-  });
-
   store.on('nextFreeSlots/add', ({ nextFreeSlots, autoselectNextFreeSlot }, newNextFreeSlots) => {
     const result = { nextFreeSlots: Object.assign(nextFreeSlots, newNextFreeSlots) };
     if (!autoselectNextFreeSlot) {

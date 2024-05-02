@@ -42,17 +42,10 @@
 
 .calendar {
   table-layout: fixed!important;
-  padding-left: 0px;
-  padding-right: 0px;
 }
 
 .calendar td {
   display: table-cell!important;
-}
-
-.header {
-  padding-left: 0.25rem;
-  padding-right: 0.25rem;
 }
 
 .month-next {

@@ -20,7 +20,9 @@ const calendarRangeLoaded = (storeValue, date) => {
 }
 
 const requestMoreForThisMonthIfNecesarry = async (store, nextFreeSlotsForDates) => {
-  const {selectedDate} = store.get();
+  const {selectedDate, calendarRange} = store.get();
+
+  breakme: if (calendarRange == 'fiveDays'){break breakme;}
 
   const year = selectedDate.getFullYear();
   const month = selectedDate.getMonth();

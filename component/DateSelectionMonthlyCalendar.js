@@ -1,6 +1,5 @@
 import {useStoreon} from 'storeon/preact'
-import {html, createNextFreeSlotsForDateKey} from '../helper/index.js'
-import {translator as __} from '../helper/index.js'
+import {html, createNextFreeSlotsForDateKey, translator as __} from '../helper/index.js'
 import DateSelectionMonthlyCalendarCell from './DateSelectionMonthlyCalendarCell.js';
 
 const monthsOfYear = [
@@ -34,7 +33,6 @@ export default () => {
   for (let i = selectedDate.getDate(); i <= daysInMonth; i++) {
     const freeSlot = nextFreeSlots[createNextFreeSlotsForDateKey(appointment, selectedCalendar, new Date(year, month, i))];
     if (freeSlot == undefined || freeSlot.status == 'incomplete') {
-      console.log('EZZ', freeSlot, new Date(year, month, i))
       monthLoaded = false;
       break;
     }
@@ -60,7 +58,7 @@ export default () => {
   }
   
   return html`
-    <div class="container text-center calendar">
+    <div class="container text-center calendar px-0">
       <div class="row">
         <div class="col">
           <table class="table table caption-top placeholder-glow">

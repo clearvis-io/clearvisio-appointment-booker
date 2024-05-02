@@ -117,6 +117,13 @@ export default class ClearvisioAppointmentBooker {
     if (options.confirmationStatus !== undefined) {
       store.dispatch('appointment/set', {confirmation_status: options.confirmationStatus});
     }
+    if (options.timeSlotMode) {
+      store.dispatch('timeSelectionUi/timeSlotMode/set', options.timeSlotMode);
+    }
+    if (options.calendarRange) {
+      store.dispatch('timeSelectionUi/calendarRange/set', options.calendarRange);
+    }
+
     store.dispatch('medicalConsent/set', options.medicalConsent);
 
     this.createElementAndRender(options);

@@ -39,3 +39,31 @@
 .next.item.icon {
   font-size: 2em;
 }
+
+.calendar {
+  table-layout: fixed!important;
+}
+
+.calendar td {
+  display: table-cell!important;
+}
+
+.month-next {
+  float: right;
+}
+
+.month-previus {
+  float: left;
+}
+
+.placeholder {
+  display: block!important;
+}
+
+.active-cell {
+  cursor:pointer;
+}
+
+.disabled {
+  cursor:not-allowed;
+}

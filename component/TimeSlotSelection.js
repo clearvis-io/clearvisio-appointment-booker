@@ -1,28 +1,15 @@
-import {html, createNextFreeSlotsForDateKey} from '../helper/index.js'
-import DateSelectionCarousel from './DateSelectionCarousel.js'
+import {html} from '../helper/index.js'
 import {useStoreon} from 'storeon/preact'
-import Spinner from './Spinner.js'
-import TimeSlotEmptyDay from './TimeSlotEmptyDay.js'
-import TimeSlot from './TimeSlot.js'
-
+import DateSelectionCarousel from './DateSelectionCarousel.js'
+import DateSelectionMonthlyCalendar from './DateSelectionMonthlyCalendar.js'
+import TimeSlotListSingleColumn from './TimeSlotListSingleColumn.js'
+import TimeSlotListPartOfDay from './TimeSlotListPartOfDay.js'
+ 
 export default () => {
-  const { selectedDate, selectedCalendar, appointment, nextFreeSlots } =
-    useStoreon('selectedCalendar', 'selectedDate', 'nextFreeSlots', 'appointment')
-
-  var key = createNextFreeSlotsForDateKey(appointment, selectedCalendar, selectedDate);
+  const { calendarRange, timeSlotMode } = useStoreon('calendarRange', 'timeSlotMode')
 
   return html`
-    <${DateSelectionCarousel}/>
-    <ul class="list-group mt-3">
-      ${
-        nextFreeSlots[key] ?
-        (
-          nextFreeSlots[key].status == 'empty' ?
-          html`<${TimeSlotEmptyDay}/>` :
-          nextFreeSlots[key].slots.map((slot) => html`<${TimeSlot} slot=${slot}/>`)
-        ):
-        html`<li class="list-group-item"><${Spinner}/></li>`
-      }
-    </ul>
+    <${calendarRange == 'fiveDays' ? DateSelectionCarousel : DateSelectionMonthlyCalendar}/>
+    <${timeSlotMode == 'singleColumn' ? TimeSlotListSingleColumn : TimeSlotListPartOfDay}/>
   `;
 }

@@ -12,6 +12,7 @@ import { selectedDate } from './selectedDate.js'
 import { nextFreeSlots } from './nextFreeSlots.js'
 import { customerForm } from './customerForm.js'
 import { headerTitle } from './headerTitle.js'
+import { timeSelectionUi } from './timeSelectionUi.js'
 import { priceComment } from './priceComment.js'
 import { price } from './price.js'
 import { showExaminerName } from './showExaminerName.js'
@@ -31,6 +32,6 @@ export default () => {
     eyeExaminationProcesses, steps, appointment, moduleState, language, api, privacyPolicyModalState,
     storeStore, calendars, selectedDate, nextFreeSlots, customerForm, privacy,
     closeConfirmModalState, globalModalState, headerTitle, booking, country, selectedCalendar,
-    priceComment, price, showExaminerName, location, detailedDescriptionModalState
+    priceComment, price, showExaminerName, location, detailedDescriptionModalState, timeSelectionUi
   ]);
 }

@@ -74,10 +74,10 @@ const createAppointmet = async (storeContent, customer) => {
   if (appointment.comment) {
     comment = (comment ? comment + "\n\n" : '') + appointment.comment;
   }
-
-  await api.post(
+  console.log(appointment['id']);
+  await api.put(
     storeContent,
-    'appointment_events',
+    appointment['id'],
     Object.assign({}, appointment, {
       customer: customer['@id'],
       eye_examination_process: appointment.eye_examination_process['@id'],

@@ -198,12 +198,6 @@ export function nextFreeSlots (store) {
     }
   });
 
-  store.on('appointment/set', async (storedValue) => {
-    if (storedValue.currentStep == 'appointment') {
-      requestNextFreeSlots(store, storedValue.selectedDate);
-    }
-  });
-
   store.on('nextFreeSlots/add', ({ nextFreeSlots, autoselectNextFreeSlot }, newNextFreeSlots) => {
     const result = { nextFreeSlots: Object.assign(nextFreeSlots, newNextFreeSlots) };
     if (!autoselectNextFreeSlot) {

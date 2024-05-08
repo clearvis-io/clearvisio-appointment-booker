@@ -1,8 +1,9 @@
-import {api} from '../helper/index.js'
-import {translator as __} from '../helper/index.js'
+import { api } from '../helper/index.js'
+import { translator as __ } from '../helper/index.js'
 
-export function slotSelection (store)  {
-  store.on('@init', () => ({inProgress: false, errorMessage: null}))
+
+export function slotSelection(store) {
+  store.on('@init', () => ({ inProgress: false, errorMessage: null }))
 
   store.on('slotSelection/inProgress/set', (previousValue, inProgress) => {
     return { inProgress };
@@ -30,24 +31,25 @@ export function slotSelection (store)  {
 
     store.dispatch('slotSelection/inProgress/set', true);
 
-
-    //id kinyerése a try blockból
     try {
-      const postedAppointment = await api.post(
-        storeContent,
-        'appointment_events',
-        {
-          title: __('Event draft'),
-          calendar: calendar['@id'],
-          status: 'draft',
-          start: slot.start,
-          end: slot.end,
-          source: 'online'
-        }
-      );
-      const id = postedAppointment['@id'];
+      const draftEvent = {
+        title: __('Event draft', {}, storeContent),
+        calendar: calendar['@id'],
+        status: 'draft',
+        start: slot.start,
+        end: slot.end,
+        source: 'online'
+      }
+      const storeContentForApi = { ...storeContent, dispatch: store.dispatch };
+
+      const postedAppointment = appointment['id'] ? 
+        await api.put(storeContentForApi, appointment['id'], draftEvent) :
+        await api.post(storeContentForApi, 'appointment_events', draftEvent);
+
+      var id = postedAppointment['@id'];
     } catch (error) {
-      store.dispatch('slotSelection/errorMessage/set','Nem sikerült a foglalás válasszon másik időpontot vagy kezdje újra.');
+      console.log(error)
+      store.dispatch('slotSelection/errorMessage/set', 'Nem sikerült a foglalás válasszon másik időpontot vagy kezdje újra.');
       return;
     } finally {
       store.dispatch('slotSelection/inProgress/set', false);
@@ -55,7 +57,7 @@ export function slotSelection (store)  {
 
     store.dispatch(
       'appointment/set',
-      { start: slot.start, end: slot.end, calendar: calendar}
+      { start: slot.start, end: slot.end, calendar: calendar, id: id }
     );
     store.dispatch('currentStep/next');
   });

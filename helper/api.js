@@ -28,10 +28,12 @@ const api = {
   },
 
   post: async (storeContent, model, body) => {
-    return api.doRequest(storeContent, 'POST', `${storeContent.api.path}/${model}`, body);
+    return api.doRequest(storeContent, 'POST', model, body);
   },
 
   doRequest: async ({api, dispatch}, method, path, body) => {
+    path = `${api.path}/${path}`
+
     const {headers} = api;
 
     const options = {
@@ -58,8 +60,12 @@ const api = {
     throw new Error('Invalid result');
   },
 
-  put: async (storeContent, id, body) => {
-    return api.doRequest(storeContent, 'PUT', id, body);
+  put: async (storeContent, iri, body) => {
+    const parts = iri.split('/');
+    const model = parts[parts.length - 2];
+    const id = parts[parts.length - 1];
+
+    return api.doRequest(storeContent, 'PUT', `${model}/${id}`, body);
   }
 };
 

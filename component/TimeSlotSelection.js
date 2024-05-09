@@ -7,7 +7,6 @@ import TimeSlotListPartOfDay from './TimeSlotListPartOfDay.js'
 import SlotSpinner from './SlotSpinner.js'
 import ErrorMessage from './ErrorMessage.js'
 
- 
 export default () => {
   const { calendarRange, timeSlotMode, slotSelection} = 
     useStoreon('calendarRange', 'timeSlotMode','slotSelection')

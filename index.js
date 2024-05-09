@@ -176,7 +176,13 @@ export default class ClearvisioAppointmentBooker {
         .filter((process) => process);
     }
     var storeEntity = this.store.get().store;
-    return await api.get(this.store, `eye_examination_processes?hasLength&chain=${storeEntity.chain['@id']}`);
+    var examination = await api.get(this.store, `eye_examination_processes?hasLength&chain=${storeEntity.chain['@id']}`);
+    if (examination.length == 0) {
+      this.store.dispatch('moduleState/set', 'error.noLenght');
+      return;
+    } else{
+      return examination;
+    }
   }
 
   async loadCalendars() {

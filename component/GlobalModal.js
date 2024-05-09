@@ -59,6 +59,17 @@ export default (props) => {
           approveButtonLabel="OK"
           onApprove=${onClose}/>
       `;
+    case 'error.noLenght':
+      return html`
+        <${SimpleModal} modalStateStore="globalModalState"
+          headerClasses="bg-danger text-light"
+          contentClasses="text-danger"
+          approveButtonClasses="btn-danger"
+          title="Appointment booking failed"
+          content="Nincs választható vizsgálati protokoll. Az online foglaláshoz a CRM rendszerben konfigurált vizsgálati protokolloknál állítsa be a vizsgálat hosszát."
+          approveButtonLabel="OK"
+          onApprove=${onClose}/>
+      `;
     default:
       return html`
         <${SimpleModal} modalClasses="modal-fullscreen" modalStateStore="globalModalState"/>

@@ -1,15 +1,14 @@
 import { api } from '../helper/index.js'
 import { translator as __ } from '../helper/index.js'
 
-
 export function slotSelection(store) {
-  store.on('@init', () => ({ inProgress: false, errorMessage: null }))
+  store.on('@init', () => ({ slotSelection: {inProgress: false, errorMessage: null }}))
 
-  store.on('slotSelection/inProgress/set', (previousValue, inProgress) => {
-    return { inProgress };
+  store.on('slotSelection/inProgress/set', ({slotSelection}, inProgress) => {
+    return {slotSelection: { ...slotSelection, inProgress }};
   })
-  store.on('slotSelection/errorMessage/set', (previousValue, errorMessage) => {
-    return { errorMessage };
+  store.on('slotSelection/errorMessage/set', ({slotSelection}, errorMessage) => {
+    return {slotSelection: { ...slotSelection, errorMessage }};
   })
 
   store.on('appointment/selectSlot', async (storeContent, slot) => {
@@ -42,13 +41,13 @@ export function slotSelection(store) {
       }
       const storeContentForApi = { ...storeContent, dispatch: store.dispatch };
 
-      const postedAppointment = appointment['id'] ? 
+      const returnedAppointment = appointment['id'] ? 
         await api.put(storeContentForApi, appointment['id'], draftEvent) :
         await api.post(storeContentForApi, 'appointment_events', draftEvent);
 
-      var id = postedAppointment['@id'];
+      var id = returnedAppointment['@id'];
+      store.dispatch('slotSelection/errorMessage/set', null);
     } catch (error) {
-      console.log(error)
       store.dispatch('slotSelection/errorMessage/set', 'Nem sikerült a foglalás válasszon másik időpontot vagy kezdje újra.');
       return;
     } finally {

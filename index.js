@@ -4,6 +4,7 @@ import {html, api, availableProcessFilter} from './helper/index.js';
 import createStore from './store/createStore.js';
 import {Carousel, BackButton, CloseButton, GlobalModal, Style} from './component/index.js'
 import Header from './component/Header.js';
+import { slotSelection } from './store/slotSelection.js';
 
 const knownCustomerFields = [
   'first_name',
@@ -122,12 +123,6 @@ export default class ClearvisioAppointmentBooker {
     }
     if (options.calendarRange) {
       store.dispatch('timeSelectionUi/calendarRange/set', options.calendarRange);
-    }
-    if (options.inProgress) {
-      store.dispatch('slotSelection/inProgress/set', options.inProgress);
-    }
-    if (options.errorMessage) {
-      store.dispatch('slotSelection/errorMessage/set', options.errorMessage);
     }
 
     store.dispatch('medicalConsent/set', options.medicalConsent);

@@ -4,18 +4,18 @@ import DateSelectionCarousel from './DateSelectionCarousel.js'
 import DateSelectionMonthlyCalendar from './DateSelectionMonthlyCalendar.js'
 import TimeSlotListSingleColumn from './TimeSlotListSingleColumn.js'
 import TimeSlotListPartOfDay from './TimeSlotListPartOfDay.js'
-import slotSpinner from './slotSpinner.js'
+import SlotSpinner from './SlotSpinner.js'
 import ErrorMessage from './ErrorMessage.js'
 
  
 export default () => {
-  const { calendarRange, timeSlotMode, inProgress, errorMessage} = 
-    useStoreon('calendarRange', 'timeSlotMode', 'inProgress', 'errorMessage')
+  const { calendarRange, timeSlotMode, slotSelection} = 
+    useStoreon('calendarRange', 'timeSlotMode','slotSelection')
 
   return html`
-    ${inProgress ? html`<${slotSpinner}/>` : html`
+    ${slotSelection.inProgress ? html`<${SlotSpinner}/>` : html`
       <${calendarRange == 'fiveDays' ? DateSelectionCarousel : DateSelectionMonthlyCalendar}/>
-      ${errorMessage != null ? html`<${ErrorMessage}/>` : null}
+      ${slotSelection.errorMessage != null ? html`<${ErrorMessage} message=${slotSelection.errorMessage}/>` : null}
       <${timeSlotMode == 'singleColumn' ? TimeSlotListSingleColumn : TimeSlotListPartOfDay}/>
     `}
   `;

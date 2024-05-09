@@ -198,6 +198,10 @@ export function nextFreeSlots (store) {
     }
   });
 
+  store.on('autoselectNextFreeSlot/set', (currentValue, autoselectNextFreeSlot) => {
+    return { autoselectNextFreeSlot };
+  });
+
   store.on('nextFreeSlots/add', ({ nextFreeSlots, autoselectNextFreeSlot }, newNextFreeSlots) => {
     const result = { nextFreeSlots: Object.assign(nextFreeSlots, newNextFreeSlots) };
     if (!autoselectNextFreeSlot) {

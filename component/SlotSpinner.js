@@ -11,6 +11,5 @@ export default () => {
         ${__('Booking the appointment')}
       </li>
     </ul>
-    
   `;
 }

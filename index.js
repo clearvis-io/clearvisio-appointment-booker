@@ -154,8 +154,20 @@ export default class ClearvisioAppointmentBooker {
   }
 
   async loadStore(storeCode) {
-    var stores = await api.get(this.store, `stores?code=${storeCode}`);
-    this.store.dispatch('store/set', stores[0]);
+    try {
+      var stores = await api.get(this.store, `stores?code=${storeCode}`);
+      if ( stores[0] == undefined) {
+        this.store.dispatch('moduleState/set', 'error.storeCode');
+        return;
+      }
+      this.store.dispatch('store/set', stores[0]);
+    } catch (error) {
+      if (error.code == 403) {
+        this.store.dispatch('moduleState/set', 'error.403');
+      } else {
+        this.store.dispatch('moduleState/set', 'error.storeCode');
+      }
+    }
   }
 
   async loadEyeExaminationProcesses({eyeExaminationProcessId}) {

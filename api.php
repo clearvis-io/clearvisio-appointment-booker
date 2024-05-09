@@ -14,7 +14,8 @@ $result = @file_get_contents(
         'http' => [
             'header' => $headers,
             'method' => $_SERVER['REQUEST_METHOD'],
-            'content' => file_get_contents('php://input')
+            'content' => file_get_contents('php://input'),
+            'ignore_errors' => true
         ],
     ])
 );

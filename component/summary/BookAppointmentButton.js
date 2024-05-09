@@ -74,7 +74,6 @@ const createAppointmet = async (storeContent, customer) => {
   if (appointment.comment) {
     comment = (comment ? comment + "\n\n" : '') + appointment.comment;
   }
-  console.log(appointment['id']);
   await api.put(
     storeContent,
     appointment['id'],

@@ -97,6 +97,10 @@ This module is a frontend for the Appointment Booking API of clearvis.io. The AP
 * **calendarRange**: Allows different options for the day selection at the appoinment interface.
   * When it is set to `fiveDays` the day selection modul will only appear as five days and you can turn pages for more opportunities.
   * When set to `month` the actual month will appear as a calendar and you can chose the prefferd day in there.
+* **storeSelection**: Allows three types of store selection based on preferences.
+  * `no (default)`: Cannot select stores, thus the first screen shows the processes.
+  * `onlyInSameChain`: User can select stores only from the same chain.
+  * `all`: User can select from all the stores avaible.
 ## Example backend proxy in PHP
 ```php
 <?php

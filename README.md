@@ -100,7 +100,7 @@ This module is a frontend for the Appointment Booking API of clearvis.io. The AP
 * **storeSelection**: Allows three types of store selection based on preferences.
   * `no (default)`: Cannot select stores, thus the first screen shows the processes.
   * `onlyInSameChain`: User can select stores only from the same chain.
-  * `all`: User can select from all the stores avaible.
+  * `all`: User can select from all the stores availble.
 ## Example backend proxy in PHP
 ```php
 <?php

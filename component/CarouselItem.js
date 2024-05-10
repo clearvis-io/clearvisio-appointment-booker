@@ -11,7 +11,8 @@ export default (props) => {
     return html``;
   }
 
-  var needsSummaryCard = currentStep != 'process' && currentStep != 'summary';
+  var needsSummaryCard = currentStep != 'process' && currentStep != 'summary' &&
+    currentStep != 'storeSelection';
 
   return html`
     <div class="carousel-item

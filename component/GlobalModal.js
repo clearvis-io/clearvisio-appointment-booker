@@ -70,6 +70,17 @@ export default (props) => {
           approveButtonLabel="OK"
           onApprove=${onClose}/>
       `;
+    case 'error.storeEmail':
+      return html`
+        <${SimpleModal} modalStateStore="globalModalState"
+          headerClasses="bg-danger text-light"
+          contentClasses="text-danger"
+          approveButtonClasses="btn-danger"
+          title="Appointment booking failed"
+          content="Nincs a boltnak email címe. Az online foglaláshoz a CRM rendszerben adjon meg a bolnak egy e-mail címet."
+          approveButtonLabel="OK"
+          onApprove=${onClose}/>
+      `;
     default:
       return html`
         <${SimpleModal} modalClasses="modal-fullscreen" modalStateStore="globalModalState"/>

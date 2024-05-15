@@ -192,6 +192,7 @@ const messages = {
     'Morning': 'Înainte de masă',
     'Afternoon': 'După masă',
     'Evening': 'Seara',
+    'Booking the appointment': 'Rezervarea unei programări',
     'Event draft': 'Eveniment schiță'
   },
   hr: {
@@ -283,6 +284,7 @@ const messages = {
     'Morning': 'Prijepodne',
     'Afternoon': 'Poslijepodne',
     'Evening': 'Večer',
+    'Booking the appointment': 'Rezerviranje termina',
     'Event draft': 'Skica za događaj'
   },
   en: {

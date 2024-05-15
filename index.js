@@ -172,8 +172,15 @@ export default class ClearvisioAppointmentBooker {
 
   async loadEyeExaminationProcesses({eyeExaminationProcessId}) {
     if (eyeExaminationProcessId) {
-      return [await api.get(this.store, `eye_examination_processes/${eyeExaminationProcessId}`)]
-        .filter((process) => process);
+      try {
+        const  process = await api.get(this.store, `eye_examination_processes/${eyeExaminationProcessId}`);
+        return process
+      } catch(error) {
+        if (error.code == 404){
+          this.store.dispatch('moduleState/set', 'error.missingConfiguredProcessId');
+          return;
+        } 
+      }
     }
     var storeEntity = this.store.get().store;
     var examination = await api.get(this.store, `eye_examination_processes?hasLength&chain=${storeEntity.chain['@id']}`);

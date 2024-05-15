@@ -3,6 +3,7 @@ import {html} from '../helper/index.js'
 import EyeExaminationProcessListItem from './EyeExaminationProcessListItem.js'
 import Spinner from './Spinner.js'
 import SimpleModal from './SimpleModal.js'
+import ErrorMessage from './ErrorMessage.js'
 
 export default (props) => {
   const { eyeExaminationProcesses } = useStoreon('eyeExaminationProcesses')
@@ -13,9 +14,10 @@ export default (props) => {
   return html`
     <ul class="list-group">
       ${
-        eyeExaminationProcesses.length ?
+        eyeExaminationProcesses == null ? html`<li class="list-group-item"><${Spinner}/></li>` :
+          eyeExaminationProcesses.length ?
           eyeExaminationProcesses.map(item => html`<${EyeExaminationProcessListItem} item=${item} />`) :
-          html`<li class="list-group-item"><${Spinner}/></li>`
+          html`<${ErrorMessage} message="Jelenleg ebben az üzletben CRM rendszer konfigurációja nem engedi meg bármilyen elérhető vizsgálat típus választását"/>`
       }
     </ul>
 

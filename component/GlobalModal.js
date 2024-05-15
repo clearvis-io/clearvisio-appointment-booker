@@ -81,6 +81,17 @@ export default (props) => {
           approveButtonLabel="OK"
           onApprove=${onClose}/>
       `;
+    case 'error.missingConfiguredProcessId':
+      return html`
+        <${SimpleModal} modalStateStore="globalModalState"
+          headerClasses="bg-danger text-light"
+          contentClasses="text-danger"
+          approveButtonClasses="btn-danger"
+          title="Appointment booking failed"
+          content="Egy nem létező process ID van megadva eyeExaminationProcessId-nak."
+          approveButtonLabel="OK"
+          onApprove=${onClose}/>
+      `;
     default:
       return html`
         <${SimpleModal} modalClasses="modal-fullscreen" modalStateStore="globalModalState"/>

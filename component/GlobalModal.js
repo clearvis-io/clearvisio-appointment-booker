@@ -3,9 +3,15 @@ import {html, dateTimeFormatter, translator as __} from '../helper/index.js'
 import SimpleModal from './SimpleModal.js'
 
 export default (props) => {
-  const { moduleState, appointment, dispatch } = useStoreon('moduleState', 'appointment');
+  const { moduleState, appointment, dispatch, store} = useStoreon('moduleState', 'appointment', 'store');
 
   const onClose = () => dispatch('close');
+
+  if (store != null) { 
+    var tel = store["phone"];
+    var mail = store["email"]; 
+  }
+  const baseText = "Az időpontfoglaló beállítási hibája miatt nem lehetséges az online időpontfoglalás. Kérjük keresse szaküzletünket a " + tel + " telefonszámon vagy " + mail + " email címen és jelezze nekünk ezt a hibát a telefonos időpontkérés során:"
 
   switch (moduleState) {
     case 'success':
@@ -43,8 +49,8 @@ export default (props) => {
           headerClasses="bg-danger text-light"
           contentClasses="text-danger"
           approveButtonClasses="btn-danger"
-          title="Appointment booking failed"
-          content="Rossz a megadott bolt kódja"
+          title="Hiba! Időpontfoglalás nem lehetséges!"
+          content=${baseText} "Téves üzlet kód"
           approveButtonLabel="OK"
           onApprove=${onClose}/>
       `;
@@ -54,8 +60,8 @@ export default (props) => {
           headerClasses="bg-danger text-light"
           contentClasses="text-danger"
           approveButtonClasses="btn-danger"
-          title="Appointment booking failed"
-          content="Rossz a megadott APi kulcs, vagy inaktív a technikai felhasználó"
+          title="Hiba! Időpontfoglalás nem lehetséges!"
+          content="${baseText} Hibás API kulcs vagy inaktív API felhasználó."
           approveButtonLabel="OK"
           onApprove=${onClose}/>
       `;
@@ -65,8 +71,8 @@ export default (props) => {
           headerClasses="bg-danger text-light"
           contentClasses="text-danger"
           approveButtonClasses="btn-danger"
-          title="Appointment booking failed"
-          content="Nincs választható vizsgálati protokoll. Az online foglaláshoz a CRM rendszerben konfigurált vizsgálati protokolloknál állítsa be a vizsgálat hosszát."
+          title="Hiba! Időpontfoglalás nem lehetséges!"
+          content="${baseText} A vizsgálati protokollokhoz nincs időtartam megadva."
           approveButtonLabel="OK"
           onApprove=${onClose}/>
       `;
@@ -76,8 +82,8 @@ export default (props) => {
           headerClasses="bg-danger text-light"
           contentClasses="text-danger"
           approveButtonClasses="btn-danger"
-          title="Appointment booking failed"
-          content="Nincs a boltnak email címe. Az online foglaláshoz a CRM rendszerben adjon meg a bolnak egy e-mail címet."
+          title="Hiba! Időpontfoglalás nem lehetséges!"
+          content="${baseText} Nincs email cím beállítva a szaküzlethez."
           approveButtonLabel="OK"
           onApprove=${onClose}/>
       `;
@@ -87,8 +93,8 @@ export default (props) => {
           headerClasses="bg-danger text-light"
           contentClasses="text-danger"
           approveButtonClasses="btn-danger"
-          title="Appointment booking failed"
-          content="Egy nem létező process ID van megadva eyeExaminationProcessId-nak."
+          title="Hiba! Időpontfoglalás nem lehetséges!"
+          content="${baseText} Az időpontfoglalóban beállított vizsgálati protokollt időközben törölték."
           approveButtonLabel="OK"
           onApprove=${onClose}/>
       `;

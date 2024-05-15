@@ -7,17 +7,17 @@ import ErrorMessage from './ErrorMessage.js'
 
 export default (props) => {
   const { eyeExaminationProcesses } = useStoreon('eyeExaminationProcesses')
-  const { detailedDescriptionModalState, dispatch } = useStoreon('detailedDescriptionModalState')
+  const { detailedDescriptionModalState, dispatch, calendars} = useStoreon('detailedDescriptionModalState', 'calendars')
 
   const onCloseDetailedDescriptionModal = () => dispatch(`detailedDescriptionModalState/set`, false);
-
   return html`
     <ul class="list-group">
       ${
         eyeExaminationProcesses == null ? html`<li class="list-group-item"><${Spinner}/></li>` :
           eyeExaminationProcesses.length ?
-          eyeExaminationProcesses.map(item => html`<${EyeExaminationProcessListItem} item=${item} />`) :
-          html`<${ErrorMessage} message="Jelenleg ebben az üzletben CRM rendszer konfigurációja nem engedi meg bármilyen elérhető vizsgálat típus választását"/>`
+          eyeExaminationProcesses.map(item => html`<${EyeExaminationProcessListItem} item=${item} />`) : 
+          calendars == null ? html`<${ErrorMessage} message="Nincs munkaóra"/>`:
+          html`<${ErrorMessage} message="Nincs naptár"/>`
       }
     </ul>
 

@@ -22,16 +22,24 @@ const knownCustomerFields = [
 const BookerComponent = (props) => {
   return html`
     <${Style} colors=${props.colors}/>
-    <div class="booker-widget fixed-top">
-      <${StoreContext.Provider} value=${props.store}>
-        <${GlobalModal}/>
-        <${Header}/>
-        <div class="bg-body content">
-          <${Carousel}/>
-          <div class="content-spacer"></div>
+
+    <div class="modal" style="display: block">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-body modal-xl booker-widget">
+            <${StoreContext.Provider} value=${props.store}>
+              <${GlobalModal}/>
+              <${Header}/>
+              <div class="bg-body content">
+                <${Carousel}/>
+                <div class="content-spacer"></div>
+              </div>
+            <//>
+          </div>
         </div>
-      <//>
+      </div>
     </div>
+    <div class="modal-backdrop fade show"></div>
   `;
 }
 
@@ -125,6 +133,9 @@ export default class ClearvisioAppointmentBooker {
     }
     if (options.calendarRange) {
       store.dispatch('timeSelectionUi/calendarRange/set', options.calendarRange);
+    }
+    if (options.style) {
+      store.dispatch('style/set', options.style);
     }
 
     store.dispatch('medicalConsent/set', options.medicalConsent);

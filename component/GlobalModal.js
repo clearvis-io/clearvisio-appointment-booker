@@ -84,7 +84,7 @@ export default (props) => {
           approveButtonClasses="btn-danger"
           title="Hiba! Időpontfoglalás nem lehetséges!"
           content=${ !store['phone'] ? html`
-            Az időpontfoglaló beállítási hibája miatt nem lehetséges az online időpontfoglalás. Kérjük keresse szaküzletünket és jelezze nekünk ezt a hibát a telefonos időpontkérés során: Nincs email cím beállítva a szaküzlethez111.
+            Az időpontfoglaló beállítási hibája miatt nem lehetséges az online időpontfoglalás. Kérjük keresse szaküzletünket és jelezze nekünk ezt a hibát a telefonos időpontkérés során: Nincs email cím beállítva a szaküzlethez.
           ` : 
           html`
             Az időpontfoglaló beállítási hibája miatt nem lehetséges az online időpontfoglalás. Kérjük keresse szaküzletünket a ${tel} telefonszámon és jelezze nekünk ezt a hibát a telefonos időpontkérés során: Nincs email cím beállítva a szaküzlethez.

@@ -48,13 +48,20 @@ export function steps (store) {
     document.querySelector('.cvio-ab-content').scrollTop = 0;
     return { currentStep: index > 0 ? availableSteps[index - 1] : currentStep };
   });
-
+  
   store.on('eyeExaminationProcesses/set', ({ eyeExaminationProcesses, availableSteps, currentStep }) => {
     if (eyeExaminationProcesses.length == 1) {
       document.querySelector('.cvio-ab-content').scrollTop = 0;
+      if (currentStep == 'process') {
+        currentStep = availableSteps.filter((step) => step != 'storeSelection' && step != 'process')[0]
+      }
       return {
         availableSteps: availableSteps = removeStep(availableSteps, 'process'),
-        currentStep: currentStep == 'process' ? availableSteps[0] : currentStep
+        currentStep: currentStep
+      };
+    } else {
+      return {
+        availableSteps: availableSteps = addStep(availableSteps, 'process'),
       };
     }
   });

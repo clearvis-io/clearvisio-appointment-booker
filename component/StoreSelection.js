@@ -4,10 +4,12 @@ import StoreItem from './StoreItem.js'
 
 export default (props) => {
 	const { stores } = useStoreon('stores')
+
   return html`
 		${
 			stores !== null ?
-				stores.map(item => html`<${StoreItem} item=${item}/>`) :
+			(stores.sort((store1, store2) => store1.name.localeCompare(store2.name)), 
+			stores.map(item => html`<${StoreItem} item=${item}/>`)) :
 				html`
 				<div class="card-body">
 					<p class="card-text placeholder-glow">

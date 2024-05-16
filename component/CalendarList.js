@@ -6,7 +6,7 @@ import Spinner from './Spinner.js'
 export default (props) => {
   const {appointment, showFirstAvailableUserItem, dispatch} = useStoreon('appointment', 'showFirstAvailableUserItem');
   const calendars = availableCalendarFilter(useStoreon('calendars', 'appointment', 'calendarRoleCheckMode'));
-
+  
   const firstAvailableUser = {
     user: {
       name: __('First free'),
@@ -19,7 +19,7 @@ export default (props) => {
   return html`
     <ul class="list-group">
       ${
-        appointment.eye_examination_process ?
+        appointment.eye_examination_process && calendars?
         (
           calendars.length ?
             html`
@@ -35,7 +35,51 @@ export default (props) => {
               </li>
           `
         ) :
-        ''
+        html`
+        <li class="list-group-item">
+          <div class="row">
+            <div class="col-auto">
+              <div class="avatar me-2">
+                  <img class="placeholder image"/>
+              </div>
+            </div>
+            <div class="col-8">
+              <div class="placeholder fw-bold col-6"></div>
+              <div class="card-body">
+                <p class="card-text placeholder-glow">
+                  <span class="placeholder m-1 placeholder-lg"></span>
+                  <span class="placeholder m-1 placeholder-lg"></span>
+                  <span class="placeholder m-1 placeholder-lg"></span>
+                </p>
+              </div>
+            </div>
+            <div class="col text-end p-2 next item icon">
+              \u203A
+            </div>
+          </div>
+        </li>
+        <li class="list-group-item">
+          <div class="row">
+            <div class="col-auto">
+              <div class="avatar me-2">
+                  <img class="placeholder image"/>
+              </div>
+            </div>
+            <div class="col-8">
+              <div class="placeholder fw-bold col-6"></div>
+              <div class="card-body">
+                <p class="card-text placeholder-glow">
+                  <span class="placeholder m-1 placeholder-lg"></span>
+                  <span class="placeholder m-1 placeholder-lg"></span>
+                  <span class="placeholder m-1 placeholder-lg"></span>
+                </p>
+              </div>
+            </div>
+            <div class="col text-end p-2 next item icon">
+              \u203A
+            </div>
+          </div>
+        </li>`
       }
     </ul>
   `;

@@ -12,7 +12,7 @@ export default (props) => {
     var mail = store["email"]; 
   }
   const baseText = "Az időpontfoglaló beállítási hibája miatt nem lehetséges az online időpontfoglalás. Kérjük keresse szaküzletünket a " + tel + " telefonszámon vagy " + mail + " email címen és jelezze nekünk ezt a hibát a telefonos időpontkérés során:"
-
+  const baseNoPhoneText = "Az időpontfoglaló beállítási hibája miatt nem lehetséges az online időpontfoglalás. Kérjük keresse szaküzletünket a " + mail + " email címen vagy jelezze nekünk ezt a hibát a telefonos időpontkérés során:"
   switch (moduleState) {
     case 'success':
       return html`
@@ -50,7 +50,7 @@ export default (props) => {
           contentClasses="text-danger"
           approveButtonClasses="btn-danger"
           title="Hiba! Időpontfoglalás nem lehetséges!"
-          content=${baseText} "Téves üzlet kód"
+          content="${ !store['phone'] ? baseNoPhoneText : baseText} Téves üzlet kód"
           approveButtonLabel="OK"
           onApprove=${onClose}/>
       `;
@@ -61,7 +61,7 @@ export default (props) => {
           contentClasses="text-danger"
           approveButtonClasses="btn-danger"
           title="Hiba! Időpontfoglalás nem lehetséges!"
-          content="${baseText} Hibás API kulcs vagy inaktív API felhasználó."
+          content="${ !store['phone'] ? baseNoPhoneText : baseText} Hibás API kulcs vagy inaktív API felhasználó."
           approveButtonLabel="OK"
           onApprove=${onClose}/>
       `;
@@ -72,7 +72,7 @@ export default (props) => {
           contentClasses="text-danger"
           approveButtonClasses="btn-danger"
           title="Hiba! Időpontfoglalás nem lehetséges!"
-          content="${baseText} A vizsgálati protokollokhoz nincs időtartam megadva."
+          content="${ !store['phone'] ? baseNoPhoneText : baseText} A vizsgálati protokollokhoz nincs időtartam megadva."
           approveButtonLabel="OK"
           onApprove=${onClose}/>
       `;
@@ -83,7 +83,12 @@ export default (props) => {
           contentClasses="text-danger"
           approveButtonClasses="btn-danger"
           title="Hiba! Időpontfoglalás nem lehetséges!"
-          content="${baseText} Nincs email cím beállítva a szaküzlethez."
+          content=${ !store['phone'] ? html`
+            Az időpontfoglaló beállítási hibája miatt nem lehetséges az online időpontfoglalás. Kérjük keresse szaküzletünket és jelezze nekünk ezt a hibát a telefonos időpontkérés során: Nincs email cím beállítva a szaküzlethez111.
+          ` : 
+          html`
+            Az időpontfoglaló beállítási hibája miatt nem lehetséges az online időpontfoglalás. Kérjük keresse szaküzletünket a ${tel} telefonszámon és jelezze nekünk ezt a hibát a telefonos időpontkérés során: Nincs email cím beállítva a szaküzlethez.
+          `}
           approveButtonLabel="OK"
           onApprove=${onClose}/>
       `;
@@ -94,7 +99,7 @@ export default (props) => {
           contentClasses="text-danger"
           approveButtonClasses="btn-danger"
           title="Hiba! Időpontfoglalás nem lehetséges!"
-          content="${baseText} Az időpontfoglalóban beállított vizsgálati protokollt időközben törölték."
+          content="${ !store['phone'] ? baseNoPhoneText : baseText} Az időpontfoglalóban beállított vizsgálati protokollt időközben törölték."
           approveButtonLabel="OK"
           onApprove=${onClose}/>
       `;

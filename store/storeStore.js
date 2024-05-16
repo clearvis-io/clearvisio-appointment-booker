@@ -6,8 +6,7 @@ export function storeStore (store) {
   store.on('store/set', (perviousStoreValue, newStore) => {
     if (!newStore['email']){
       store.dispatch('moduleState/set', 'error.storeEmail')
-    } else {
-      return { store: newStore };
     }
+    return { store: newStore };
   })
 }

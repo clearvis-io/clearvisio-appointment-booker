@@ -1,12 +1,11 @@
 import {useStoreon} from 'storeon/preact'
 import {html, availableCalendarFilter, translator as __} from '../helper/index.js'
 import CalendarListItem from './CalendarListItem.js'
-import Spinner from './Spinner.js'
+import CalendarListPlaceHolder from './CalendarListPlaceHolder.js'
 
 export default (props) => {
   const {appointment, showFirstAvailableUserItem, dispatch} = useStoreon('appointment', 'showFirstAvailableUserItem');
   const calendars = availableCalendarFilter(useStoreon('calendars', 'appointment', 'calendarRoleCheckMode'));
-  
   const firstAvailableUser = {
     user: {
       name: __('First free'),
@@ -34,52 +33,8 @@ export default (props) => {
                 </button>
               </li>
           `
-        ) :
-        html`
-        <li class="list-group-item">
-          <div class="row">
-            <div class="col-auto">
-              <div class="avatar me-2">
-                  <img class="placeholder image"/>
-              </div>
-            </div>
-            <div class="col-8">
-              <div class="placeholder fw-bold col-6"></div>
-              <div class="card-body">
-                <p class="card-text placeholder-glow">
-                  <span class="placeholder m-1 placeholder-lg"></span>
-                  <span class="placeholder m-1 placeholder-lg"></span>
-                  <span class="placeholder m-1 placeholder-lg"></span>
-                </p>
-              </div>
-            </div>
-            <div class="col text-end p-2 next item icon">
-              \u203A
-            </div>
-          </div>
-        </li>
-        <li class="list-group-item">
-          <div class="row">
-            <div class="col-auto">
-              <div class="avatar me-2">
-                  <img class="placeholder image"/>
-              </div>
-            </div>
-            <div class="col-8">
-              <div class="placeholder fw-bold col-6"></div>
-              <div class="card-body">
-                <p class="card-text placeholder-glow">
-                  <span class="placeholder m-1 placeholder-lg"></span>
-                  <span class="placeholder m-1 placeholder-lg"></span>
-                  <span class="placeholder m-1 placeholder-lg"></span>
-                </p>
-              </div>
-            </div>
-            <div class="col text-end p-2 next item icon">
-              \u203A
-            </div>
-          </div>
-        </li>`
+        ) : html`<${CalendarListPlaceHolder}/>`
+
       }
     </ul>
   `;

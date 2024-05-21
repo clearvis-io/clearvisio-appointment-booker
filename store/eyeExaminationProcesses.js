@@ -2,7 +2,7 @@ import { useStoreon } from 'storeon/preact';
 import {api, availableProcessFilter} from '../helper/index.js'
 
 export function eyeExaminationProcesses (store) {
-  store.on('@init', () => ({ 
+  store.on('@init', () => ({
     eyeExaminationProcesses: [], eyeExaminationProcessId: null, unfilteredEyeExaminationProcesses: []
   }))
 
@@ -31,7 +31,7 @@ export function eyeExaminationProcesses (store) {
     } else {
       processes = await api.get(store, `eye_examination_processes?hasLength&chain=${storeEntity.chain['@id']}`);
     }
-    
+
     store.dispatch('unfilteredEyeExaminationProcesses/set', processes);
 
     const {calendars, calendarRoleCheckMode} = store.get();

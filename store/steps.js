@@ -48,7 +48,7 @@ export function steps (store) {
     document.querySelector('.cvio-ab-content').scrollTop = 0;
     return { currentStep: index > 0 ? availableSteps[index - 1] : currentStep };
   });
-  
+
   store.on('eyeExaminationProcesses/set', ({ eyeExaminationProcesses, availableSteps, currentStep }) => {
     if (eyeExaminationProcesses.length == 1) {
       document.querySelector('.cvio-ab-content').scrollTop = 0;
@@ -80,7 +80,7 @@ export function steps (store) {
 
   store.on('store/setStoreSelection/set', ({ availableSteps, currentStep }, storeSelection) => {
     if (storeSelection == 'no') {
-      return { 
+      return {
         availableSteps: availableSteps = removeStep(availableSteps, 'storeSelection'),
         currentStep: currentStep == 'storeSelection' ? availableSteps[0] : currentStep
       };

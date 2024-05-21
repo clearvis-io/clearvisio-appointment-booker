@@ -112,9 +112,7 @@ export default class ClearvisioAppointmentBooker {
     if (options.eyeExaminationProcessId) {
       store.dispatch('eyeExaminationProcessId/set', options.eyeExaminationProcessId);
     }
-    if (options.unfilteredEyeExaminationProcesses) {
-      store.dispatch('unfilteredEyeExaminationProcesses/set', options.unfilteredEyeExaminationProcesses);
-    }
+
     store.dispatch('store/setStoreSelection/set', options.storeSelection ?? 'no');
 
     store.dispatch('medicalConsent/set', options.medicalConsent);

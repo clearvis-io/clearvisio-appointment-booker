@@ -7,11 +7,9 @@ export default function (processes, calendars, calendarRoleCheckMode) {
       return true;
     }
 
-    if (calendars !== null) {
-      for (let j = 0; j < calendars.length; j++) {
-        if (proccesMatchesCalendarAndRoleChecker(process, calendars[j], calendarRoleCheckMode)) {
-          return true;
-        }
+    for (let j = 0; j < (calendars || []).length; j++) {
+      if (proccesMatchesCalendarAndRoleChecker(process, calendars[j], calendarRoleCheckMode)) {
+        return true;
       }
     }
 

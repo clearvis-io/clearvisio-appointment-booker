@@ -5,7 +5,7 @@ export function calendars (store) {
 
   store.on('calendars/set', (storedValue, calendars) => {
     if (calendars !== null) {
-      return { calendars: calendars.filter(({user}) => user)};
+      return {calendars: calendars.filter(({user}) => user)};
     } else {
       return {calendars: null};
     }

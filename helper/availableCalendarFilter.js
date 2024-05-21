@@ -3,7 +3,7 @@ import proccesMatchesCalendarAndRoleChecker from './proccesMatchesCalendarAndRol
 export default function ({appointment, calendars, calendarRoleCheckMode}) {
   var process = appointment ? appointment.eye_examination_process : null;
 
-  return calendars.filter(function(calendar) {
+  return (calendars || []).filter(function(calendar) {
     if (!process || !process.highestRequiredRole) {
       return true;
     }

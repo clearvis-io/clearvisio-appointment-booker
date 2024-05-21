@@ -67,3 +67,8 @@
 .disabled {
   cursor:not-allowed;
 }
+
+.storeItem.row .iconHolder {
+  display: inline-block;
+  width: 13px;
+}

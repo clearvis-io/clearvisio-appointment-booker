@@ -45,20 +45,6 @@ export default class ClearvisioAppointmentBooker {
     this.setupCustomerFields(options);
     this.setupApi(options);
     this.loadStore(options.storeCode)
-      .then(() => {
-        return Promise.all([
-          this.loadEyeExaminationProcesses(options),
-          this.loadCalendars()
-        ]);
-      })
-      .then(([processes, calendars]) => {
-        this.store.dispatch('eyeExaminationProcesses/set',
-          availableProcessFilter(processes, calendars, options.calendarRoleCheckMode)
-        );
-        this.store.dispatch('calendars/set', calendars);
-        store.dispatch('moduleState/set', 'idle');
-        this.store.dispatch('bookerInit');
-      });
 
     if (options.calendarStepShouldBeHidden) {
       store.dispatch('calendarStepShouldBeHidden/set', options.calendarStepShouldBeHidden);
@@ -126,6 +112,11 @@ export default class ClearvisioAppointmentBooker {
     if (options.calendarRange) {
       store.dispatch('timeSelectionUi/calendarRange/set', options.calendarRange);
     }
+    if (options.eyeExaminationProcessId) {
+      store.dispatch('eyeExaminationProcessId/set', options.eyeExaminationProcessId);
+    }
+
+    store.dispatch('store/setStoreSelection/set', options.storeSelection ?? 'no');
 
     store.dispatch('medicalConsent/set', options.medicalConsent);
 
@@ -159,21 +150,6 @@ export default class ClearvisioAppointmentBooker {
   async loadStore(storeCode) {
     var stores = await api.get(this.store, `stores?code=${storeCode}`);
     this.store.dispatch('store/set', stores[0]);
-  }
-
-  async loadEyeExaminationProcesses({eyeExaminationProcessId}) {
-    if (eyeExaminationProcessId) {
-      return [await api.get(this.store, `eye_examination_processes/${eyeExaminationProcessId}`)]
-        .filter((process) => process);
-    }
-    var storeEntity = this.store.get().store;
-    return await api.get(this.store, `eye_examination_processes?hasLength&chain=${storeEntity.chain['@id']}`);
-  }
-
-  async loadCalendars() {
-    return await api.get(this.store,
-      `appointment_calendars?groups[]=userProfilePictureRead&store=${this.store.get().store['@id']}`
-    );
   }
 
   createElementAndRender({parentElement, colors}) {

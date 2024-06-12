@@ -1,9 +1,13 @@
-import { render } from 'preact';
+import { options, render } from 'preact';
 import { StoreContext, useStoreon } from 'storeon/preact'
 import {html, api, availableProcessFilter} from './helper/index.js';
 import createStore from './store/createStore.js';
 import {Carousel, BackButton, CloseButton, GlobalModal, Style} from './component/index.js'
 import Header from './component/Header.js';
+import EmbededBooker from './component/EmbededBooker.js';
+import NormalBooker from './component/NormalBooker.js';
+import { style } from './store/style.js';
+import { storeStore } from './store/storeStore.js';
 
 const knownCustomerFields = [
   'first_name',
@@ -21,25 +25,8 @@ const knownCustomerFields = [
 
 const BookerComponent = (props) => {
   return html`
-    <${Style} colors=${props.colors}/>
-
-    <div class="modal" style="display: block">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-body modal-xl booker-widget">
-            <${StoreContext.Provider} value=${props.store}>
-              <${GlobalModal}/>
-              <${Header}/>
-              <div class="bg-body content">
-                <${Carousel}/>
-                <div class="content-spacer"></div>
-              </div>
-            <//>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="modal-backdrop fade show"></div>
+    <${props.style == 'embeded' ? html`<${EmbededBooker} store=${props.store} colors=${props.colors}/>` :
+      html`<${NormalBooker} store=${props.store} colors=${props.colors}/>`}>
   `;
 }
 
@@ -190,7 +177,7 @@ export default class ClearvisioAppointmentBooker {
   createElementAndRender({parentElement, colors}) {
     var element = document.createElement('div');
     (parentElement || document.body).appendChild(element);
-    render(html`<${BookerComponent} store=${this.store} colors=${colors}/>`, element);
+    render(html`<${BookerComponent} store=${this.store} colors=${colors} style=${this.store.get().style}/>`, element);
 
     this.store.on('close', () => element.remove());
   }

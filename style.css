@@ -68,3 +68,7 @@
 .disabled {
   cursor:not-allowed;
 }
+
+.fit-content {
+  max-width: fit-content;
+}

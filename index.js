@@ -4,7 +4,7 @@ import {html, api, availableProcessFilter} from './helper/index.js';
 import createStore from './store/createStore.js';
 import {Carousel, BackButton, CloseButton, GlobalModal, Style} from './component/index.js'
 import Header from './component/Header.js';
-import EmbededBooker from './component/EmbededBooker.js';
+import ModalViewBooker from './component/ModalViewBooker.js';
 import NormalBooker from './component/NormalBooker.js';
 import { style } from './store/style.js';
 import { storeStore } from './store/storeStore.js';
@@ -25,7 +25,7 @@ const knownCustomerFields = [
 
 const BookerComponent = (props) => {
   return html`
-    <${props.style == 'embeded' ? html`<${EmbededBooker} store=${props.store} colors=${props.colors}/>` :
+    <${props.style == 'modalView' ? html`<${ModalViewBooker} store=${props.store} colors=${props.colors}/>` :
       html`<${NormalBooker} store=${props.store} colors=${props.colors}/>`}>
   `;
 }

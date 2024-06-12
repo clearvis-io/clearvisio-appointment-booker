@@ -1,7 +1,7 @@
 import {html} from '../helper/index.js'
 import { StoreContext } from 'storeon/preact'
-import {Carousel, GlobalModal, Style} from '../component/index.js'
-import Header from '../component/Header.js';
+import {Carousel, GlobalModal, Style} from './index.js'
+import Header from './Header.js';
 
 export default (props) => {
   return html`

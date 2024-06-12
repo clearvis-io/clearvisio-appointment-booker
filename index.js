@@ -4,8 +4,6 @@ import {html, api, availableProcessFilter} from './helper/index.js';
 import createStore from './store/createStore.js';
 import {Carousel, BackButton, CloseButton, GlobalModal, Style} from './component/index.js'
 import Header from './component/Header.js';
-import ModalViewBooker from './component/ModalViewBooker.js';
-import NormalBooker from './component/NormalBooker.js';
 import { style } from './store/style.js';
 import { storeStore } from './store/storeStore.js';
 
@@ -25,8 +23,17 @@ const knownCustomerFields = [
 
 const BookerComponent = (props) => {
   return html`
-    <${props.style == 'modalView' ? html`<${ModalViewBooker} store=${props.store} colors=${props.colors}/>` :
-      html`<${NormalBooker} store=${props.store} colors=${props.colors}/>`}>
+    <${Style} colors=${props.colors}/>
+    <div data-bs-spy="scroll" class="booker-widget fixed-top ${props.style}">
+      <${StoreContext.Provider} value=${props.store}>
+        <${GlobalModal}/>
+        <${Header}/>
+        <div class="bg-body content">
+          <${Carousel}/>
+          <div class="content-spacer"></div>
+        </div>
+      <//>
+    </div>
   `;
 }
 

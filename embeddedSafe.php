@@ -2,7 +2,6 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <link href="./build/style.css" rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Clearvisio Appointment Booker Development Environment</title>
   </head>
@@ -15,15 +14,7 @@
         <li>API_KEY: <?php echo $_ENV['API_KEY'] ? $_ENV['API_KEY'] : 'Not configured, please specificy API_KEY env var before startup.'; ?></li>
         <li>API_STORE_CODE: <?php echo $_ENV['API_STORE_CODE'] ? $_ENV['API_STORE_CODE'] : 'Not configured, please specificy API_STORE_CODE env var before startup.'; ?></li>
     </ul>
-    <p>Click this button to start booking an appointment:
-    </p>
-    <button id="bookAppointmentsFullScreen">Book my appointment! fullscreen</button>
-    <button id="bookAppointmentsModal">Book my appointment! modal</button>
-    <button id="bookAppointmentsEmbedded">Book my appointment! embedded</button>
-    <button id="bookAppointmentsEmbeddedSafe">Book my appointment! embeddedSafe</button>
-    <div id="embedded">
-      Placeholder of embedded modal!
-    </div>
+    <div id="embeddedShadow"></div>
     <script type="module">
       import ClearvisioAppointmentBooker from './build/index.js';
 
@@ -32,22 +23,33 @@
           storeCode: '<?php echo $_ENV['API_STORE_CODE']; ?>',
           apiPath: '/api.php',
           style: bookerStyle,
-          parentElement: parentElement
+          parentElement: parentElement,
+          cssUrls: [ './build/style.css' ]
         });
       };
 
-      document.getElementById('bookAppointmentsFullScreen').addEventListener('click', () => {
-        createBooker('fullscreen');
+      createBooker('embedded-safe', document.getElementById('embeddedShadow'));
+
+      if(document.getElementById('embeddedShadow') == null) {
+        window.location.href = './';
+      }
+
+      const parentElement = document.getElementById('embeddedShadow');
+      const observer = new MutationObserver((mutationsList) => {
+          for (const mutation of mutationsList) {
+              if (mutation.type === 'childList') {
+                  mutation.removedNodes.forEach((node) => {
+                      if (node.id === 'embeddedShadowBooker') {
+                        console.log('111111')
+                        window.location.href = './';
+                      }
+                  });
+              }
+          }
       });
-      document.getElementById('bookAppointmentsModal').addEventListener('click', () => {
-        createBooker('modal-view');
-      });
-      document.getElementById('bookAppointmentsEmbedded').addEventListener('click', () => {
-        window.location.href = '/embedded.php';
-      });
-      document.getElementById('bookAppointmentsEmbeddedSafe').addEventListener('click', () => {
-        window.location.href = '/embeddedSafe.php';
-      });
+
+      const config = { childList: true, subtree: false };
+      observer.observe(parentElement, config);
     </script>
   </body>
 </html>

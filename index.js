@@ -24,11 +24,11 @@ const knownCustomerFields = [
 const BookerComponent = (props) => {
   return html`
     <${Style} colors=${props.colors}/>
-    <div data-bs-spy="scroll" class="booker-widget fixed-top ${props.style}">
+    <div class="booker-widget fixed-top ${props.style}">
       <${StoreContext.Provider} value=${props.store}>
         <${GlobalModal}/>
         <${Header}/>
-        <div class="bg-body content">
+        <div class="bg-body content ${props.style}-content">
           <${Carousel}/>
           <div class="content-spacer"></div>
         </div>
@@ -181,12 +181,34 @@ export default class ClearvisioAppointmentBooker {
     );
   }
 
-  createElementAndRender({parentElement, colors}) {
-    var element = document.createElement('div');
-    (parentElement || document.body).appendChild(element);
+  createElementAndRender({parentElement, colors, cssUrls}) {
+    if(this.store.get().style == 'embedded-safe') {
+      const shadowRoot = parentElement.attachShadow({ mode: 'open' });
+      function loadCSSFiles(cssFiles) {
+        for(let x = 0; x <= cssFiles.length; x++) {
+          const link = document.createElement('link');
+          link.setAttribute('rel', 'stylesheet');
+          link.setAttribute('href', cssFile[x]);
+          shadowRoot.appendChild(link);
+          link.onload = () => {
+            x++
+            console.log('loaded');
+          };
+        };
+      };
+      var element = document.createElement('div');
+      element.id = 'embeddedShadowBooker';
+      loadCSSFiles(cssUrls);
+      shadowRoot.appendChild(element);
+    } else {
+      var element = document.createElement('div');
+      (parentElement || document.body).appendChild(element);
+    }
     render(html`<${BookerComponent} store=${this.store} colors=${colors} style=${this.store.get().style}/>`, element);
 
-    this.store.on('close', () => element.remove());
+    this.store.on('close', () => {
+      element.remove();
+    });
   }
 
   getStore() { return this.store; }

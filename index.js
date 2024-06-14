@@ -182,20 +182,28 @@ export default class ClearvisioAppointmentBooker {
   }
 
   createElementAndRender({parentElement, colors, cssUrls}) {
-    if(this.store.get().style == 'embedded-safe') {
+    if (this.store.get().style == 'embedded-safe') {
       const shadowRoot = parentElement.attachShadow({ mode: 'open' });
-      function loadCSSFiles(cssFiles) {
-        for(let x = 0; x <= cssFiles.length; x++) {
-          const link = document.createElement('link');
-          link.setAttribute('rel', 'stylesheet');
-          link.setAttribute('href', cssFile[x]);
-          shadowRoot.appendChild(link);
-          link.onload = () => {
-            x++
-            console.log('loaded');
-          };
+
+      async function loadCSSFiles(cssFiles) {
+        for(let x = 0; x < cssFiles.length; x++) {
+          try {
+            const response = await fetch(cssFiles[x]);
+            if (!response.ok) {
+                throw new Error('Failed to load CSS file');
+            }
+            let cssText = await response.text();
+            cssText = cssText.replace(/:root/g, ':host');
+            
+            const style = document.createElement('style');
+            style.textContent = cssText;
+            shadowRoot.appendChild(style);
+          } catch (error) {
+            console.error('Error loading CSS:', error);
+        }
         };
       };
+
       var element = document.createElement('div');
       element.id = 'embeddedShadowBooker';
       loadCSSFiles(cssUrls);
@@ -204,10 +212,14 @@ export default class ClearvisioAppointmentBooker {
       var element = document.createElement('div');
       (parentElement || document.body).appendChild(element);
     }
+    this.store.dispatch('rootElement/set', element);
     render(html`<${BookerComponent} store=${this.store} colors=${colors} style=${this.store.get().style}/>`, element);
 
     this.store.on('close', () => {
       element.remove();
+      if (parentElement) {
+        parentElement.remove();
+      }
     });
   }
 

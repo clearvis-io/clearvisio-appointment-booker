@@ -24,8 +24,8 @@ export function steps (store) {
     };
   });
 
-  store.on('currentStep/set', ({ availableSteps, currentStep }, newStep) => {
-    document.querySelector('.cvio-ab-content').scrollTop = 0;
+  store.on('currentStep/set', ({ availableSteps, currentStep , rootElement}, newStep) => {
+    rootElement.querySelector('.cvio-ab-content').scrollTop = 0;
     return { currentStep: availableSteps.indexOf(newStep) != -1 ? newStep : currentStep };
   });
 
@@ -37,21 +37,21 @@ export function steps (store) {
     return {showFirstAvailableUserItem};
   });
 
-  store.on('currentStep/next', ({ currentStep, availableSteps }) => {
+  store.on('currentStep/next', ({ currentStep, availableSteps, rootElement}) => {
     var index = availableSteps.indexOf(currentStep);
-    document.querySelector('.cvio-ab-content').scrollTop = 0;
+    rootElement.querySelector('.cvio-ab-content').scrollTop = 0;
     return { currentStep: index < availableSteps.length - 1 ? availableSteps[index + 1] : currentStep };
   });
 
-  store.on('currentStep/previous', ({ currentStep, availableSteps }) => {
+  store.on('currentStep/previous', ({ currentStep, availableSteps, rootElement}) => {
     var index = availableSteps.indexOf(currentStep);
-    document.querySelector('.cvio-ab-content').scrollTop = 0;
+    rootElement.querySelector('.cvio-ab-content').scrollTop = 0;
     return { currentStep: index > 0 ? availableSteps[index - 1] : currentStep };
   });
 
-  store.on('eyeExaminationProcesses/set', ({ eyeExaminationProcesses, availableSteps, currentStep }) => {
+  store.on('eyeExaminationProcesses/set', ({ eyeExaminationProcesses, availableSteps, currentStep, rootElement }) => {
     if (eyeExaminationProcesses.length == 1) {
-      document.querySelector('.cvio-ab-content').scrollTop = 0;
+      rootElement.querySelector('.cvio-ab-content').scrollTop = 0;
       return {
         availableSteps: availableSteps = removeStep(availableSteps, 'process'),
         currentStep: currentStep == 'process' ? availableSteps[0] : currentStep

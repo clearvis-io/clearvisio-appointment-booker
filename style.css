@@ -73,25 +73,13 @@
   max-width: fit-content;
 }
 
-.embedded {
-  position:static;
-  width: 1200px;
-  height: 700px; 
-  border: 2px solid black;
-  overflow-x: scroll;
-  overflow-y: hidden;
-}
 .embedded-safe {
-  /* position:static;
-  width: 1200px; 
-  height: 700px; 
+  position:static;
+  width: 100%; 
+  height: 100%; 
   border: 2px solid black; 
   overflow-x: scroll; 
-  overflow-y: hidden; */
-}
-
-.embedded-content {
-  height: inherit !important;
+  overflow-y: hidden;
 }
 
 @media screen and (min-width: 1000px){
@@ -100,3 +88,15 @@
     background: #00000099;
   }  
 }
+
+.embedded {
+  position:static;
+  width: 100%;
+  height: 100%; 
+  border: 2px solid black;
+  overflow-x: scroll;
+  overflow-y: hidden;
+}
+.embedded-content {
+  height: inherit !important;
+}  

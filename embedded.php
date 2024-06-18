@@ -20,7 +20,7 @@
       import ClearvisioAppointmentBooker from './build/index.js';
 
       function createBooker(bookerStyle, parentElement) {
-        window.booker = new ClearvisioAppointmentBooker({
+        new ClearvisioAppointmentBooker({
           storeCode: '<?php echo $_ENV['API_STORE_CODE']; ?>',
           apiPath: '/api.php',
           style: bookerStyle,

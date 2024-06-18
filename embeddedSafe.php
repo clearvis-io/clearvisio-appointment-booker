@@ -14,12 +14,12 @@
         <li>API_KEY: <?php echo $_ENV['API_KEY'] ? $_ENV['API_KEY'] : 'Not configured, please specificy API_KEY env var before startup.'; ?></li>
         <li>API_STORE_CODE: <?php echo $_ENV['API_STORE_CODE'] ? $_ENV['API_STORE_CODE'] : 'Not configured, please specificy API_STORE_CODE env var before startup.'; ?></li>
     </ul>
-    <my-element id="embeddedShadow"></my-element>
+    <div id="embeddedShadow"></div>
     <script type="module">
       import ClearvisioAppointmentBooker from './build/index.js';
 
       function createBooker(bookerStyle, parentElement) {
-        window.booker = new ClearvisioAppointmentBooker({
+        new ClearvisioAppointmentBooker({
           storeCode: '<?php echo $_ENV['API_STORE_CODE']; ?>',
           apiPath: '/api.php',
           style: bookerStyle,

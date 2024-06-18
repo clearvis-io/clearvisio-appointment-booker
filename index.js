@@ -1,11 +1,9 @@
-import { options, render } from 'preact';
+import { render } from 'preact';
 import { StoreContext, useStoreon } from 'storeon/preact'
 import {html, api, availableProcessFilter} from './helper/index.js';
 import createStore from './store/createStore.js';
 import {Carousel, BackButton, CloseButton, GlobalModal, Style} from './component/index.js'
 import Header from './component/Header.js';
-import { style } from './store/style.js';
-import { storeStore } from './store/storeStore.js';
 
 const knownCustomerFields = [
   'first_name',
@@ -193,7 +191,7 @@ export default class ClearvisioAppointmentBooker {
                 throw new Error('Failed to load CSS file');
             }
             let cssText = await response.text();
-            cssText = cssText.replace(/:root/g, ':host');
+            cssText = cssText.replace(/:root\s*{/, ':host {');
             
             const style = document.createElement('style');
             style.textContent = cssText;

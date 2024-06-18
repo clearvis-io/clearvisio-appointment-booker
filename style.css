@@ -100,3 +100,8 @@
 .embedded-content {
   height: inherit !important;
 }  
+
+.storeItem.row .iconHolder {
+  display: inline-block;
+  width: 13px;
+}

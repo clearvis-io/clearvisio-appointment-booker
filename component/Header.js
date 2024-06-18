@@ -8,6 +8,9 @@ export default (props) => {
 
 
   switch (currentStep) {
+    case 'storeSelection':
+      var subtitle = __('Store selection');
+      break;
     case 'process':
       var subtitle = __('Select eye examination type');
       break;

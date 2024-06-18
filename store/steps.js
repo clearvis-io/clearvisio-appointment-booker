@@ -1,6 +1,6 @@
 import availableCalendarFilter from '../helper/availableCalendarFilter.js'
 
-const defaultAvailableSteps = ['process', 'calendar', 'appointment', 'customer', 'summary'];
+const defaultAvailableSteps = ['storeSelection', 'process', 'calendar', 'appointment', 'customer', 'summary'];
 
 export function steps (store) {
   var removeStep = (availableSteps, removedStep) => {
@@ -17,7 +17,7 @@ export function steps (store) {
 
   store.on('@init', () => {
     return {
-      currentStep: 'process',
+      currentStep: 'storeSelection',
       availableSteps: defaultAvailableSteps,
       calendarStepShouldBeHidden: false,
       showFirstAvailableUserItem: true
@@ -52,9 +52,16 @@ export function steps (store) {
   store.on('eyeExaminationProcesses/set', ({ eyeExaminationProcesses, availableSteps, currentStep, rootElement }) => {
     if (eyeExaminationProcesses.length == 1) {
       rootElement.querySelector('.cvio-ab-content').scrollTop = 0;
+      if (currentStep == 'process') {
+        currentStep = availableSteps.filter((step) => step != 'storeSelection' && step != 'process')[0]
+      }
       return {
         availableSteps: availableSteps = removeStep(availableSteps, 'process'),
-        currentStep: currentStep == 'process' ? availableSteps[0] : currentStep
+        currentStep: currentStep
+      };
+    } else {
+      return {
+        availableSteps: availableSteps = addStep(availableSteps, 'process'),
       };
     }
   });
@@ -69,5 +76,14 @@ export function steps (store) {
     var availableCalendars = availableCalendarFilter({appointment, calendars, calendarRoleCheckMode});
 
     return { availableSteps: addStep(availableSteps, 'calendar') };
+  });
+
+  store.on('store/setStoreSelection/set', ({ availableSteps, currentStep }, storeSelection) => {
+    if (storeSelection == 'no') {
+      return {
+        availableSteps: availableSteps = removeStep(availableSteps, 'storeSelection'),
+        currentStep: currentStep == 'storeSelection' ? availableSteps[0] : currentStep
+      };
+    }
   });
 }

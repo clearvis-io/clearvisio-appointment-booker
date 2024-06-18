@@ -1,4 +1,4 @@
-import {translator as __, dateTimeFormatter, html} from '../helper/index.js'
+import {translator as __, dateTimeFormatter, html, addressFormatter} from '../helper/index.js'
 import {useStoreon} from 'storeon/preact'
 import SummaryCustomer from './summary/SummaryCustomer.js'
 import StartTime from './summary/StartTime.js'
@@ -19,16 +19,6 @@ export default (props) => {
     return;
   }
 
-  var addressPartKeys = ['state', 'postal_code', 'city', 'street_address'];
-  var addressParts = [];
-  addressPartKeys.forEach(key => {
-    if (!appointment.customer[key]) {
-      return;
-    }
-
-    addressParts.push(appointment.customer[key]);
-  })
-
   var calendar = appointment.calendar || selectedCalendar;
 
   var options = {
@@ -39,10 +29,10 @@ export default (props) => {
     process: appointment['eye_examination_process'],
     examinerName: showExaminerName && calendar ? calendar.user.name : null,
     customer: appointment.customer,
-    customerAddress: addressParts.join(', '),
+    customerAddress: addressFormatter.formatAddress(appointment.customer),
     showLocation: showLocation,
     locationName: locationName !== null ? locationName : store.name,
-    locationAddress: locationAddress !== null ? locationAddress : (store.postal_code + ' ' + store.city + ', ' + store.street_address),
+    locationAddress: locationAddress !== null ? locationAddress : (addressFormatter.formatAddress(store)),
     appointmentComment: appointment.comment
   };
 

@@ -45,20 +45,6 @@ export default class ClearvisioAppointmentBooker {
     this.setupCustomerFields(options);
     this.setupApi(options);
     this.loadStore(options.storeCode)
-      .then(() => {
-        return Promise.all([
-          this.loadEyeExaminationProcesses(options),
-          this.loadCalendars()
-        ]);
-      })
-      .then(([processes, calendars]) => {
-        this.store.dispatch('eyeExaminationProcesses/set',
-          availableProcessFilter(processes, calendars, options.calendarRoleCheckMode)
-        );
-        this.store.dispatch('calendars/set', calendars);
-        store.dispatch('moduleState/set', 'idle');
-        this.store.dispatch('bookerInit');
-      });
 
     if (options.calendarStepShouldBeHidden) {
       store.dispatch('calendarStepShouldBeHidden/set', options.calendarStepShouldBeHidden);
@@ -130,6 +116,12 @@ export default class ClearvisioAppointmentBooker {
       store.dispatch('style/set', options.style);
     }
 
+    if (options.eyeExaminationProcessId) {
+      store.dispatch('eyeExaminationProcessId/set', options.eyeExaminationProcessId);
+    }
+
+    store.dispatch('store/setStoreSelection/set', options.storeSelection ?? 'no');
+
     store.dispatch('medicalConsent/set', options.medicalConsent);
 
     this.createElementAndRender(options);
@@ -163,7 +155,7 @@ export default class ClearvisioAppointmentBooker {
     var stores = await api.get(this.store, `stores?code=${storeCode}`);
     this.store.dispatch('store/set', stores[0]);
   }
-
+  
   async loadEyeExaminationProcesses({eyeExaminationProcessId}) {
     if (eyeExaminationProcessId) {
       return [await api.get(this.store, `eye_examination_processes/${eyeExaminationProcessId}`)]

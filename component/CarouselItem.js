@@ -3,7 +3,7 @@ import {html} from '../helper/index.js'
 import Summary from './Summary.js'
 
 export default (props) => {
-  const { currentStep, availableSteps } = useStoreon('currentStep', 'availableSteps')
+  const { currentStep, availableSteps, style, parentWidth } = useStoreon('currentStep', 'availableSteps', 'style', 'parentWidth')
   const index = availableSteps.indexOf(props.step);
   const currentIndex = availableSteps.indexOf(currentStep);
 
@@ -13,6 +13,9 @@ export default (props) => {
 
   var needsSummaryCard = currentStep != 'process' && currentStep != 'summary' &&
     currentStep != 'storeSelection';
+  if ((style === 'embedded' || style === 'embedded-safe') && parentWidth === 'small') {
+    needsSummaryCard = false;
+  }
 
   return html`
     <div class="carousel-item
@@ -20,7 +23,9 @@ export default (props) => {
       ${currentStep == props.step ? 'active' : ''}
       ${currentIndex + 1 == index ? 'carousel-item-next' : ''}
     ">
-      <div class="container-sm p-1 col-sm-10 col-md-8">
+      <div class="container-sm p-1 ${(style === 'embedded' || style === 'embedded-safe') && parentWidth === 'small' ? '' :
+        (style === 'embedded' || style === 'embedded-safe') && parentWidth === 'medium' ? html`col-sm-10` : html`col-sm-10 col-md-8`
+      } ${style}-container">
         <div class="row">
           <div class="${needsSummaryCard ? 'col col-sm-8' : 'col'}">
             <div class="p-1">

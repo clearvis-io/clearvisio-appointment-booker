@@ -14,12 +14,12 @@
         <li>API_KEY: <?php echo $_ENV['API_KEY'] ? $_ENV['API_KEY'] : 'Not configured, please specificy API_KEY env var before startup.'; ?></li>
         <li>API_STORE_CODE: <?php echo $_ENV['API_STORE_CODE'] ? $_ENV['API_STORE_CODE'] : 'Not configured, please specificy API_STORE_CODE env var before startup.'; ?></li>
     </ul>
-    <div id="embeddedShadow"></div>
+    <div id="embeddedShadow" style="width: 500px"></div>
     <script type="module">
       import ClearvisioAppointmentBooker from './build/index.js';
 
       function createBooker(bookerStyle, parentElement) {
-        new ClearvisioAppointmentBooker({
+        window.booker = new ClearvisioAppointmentBooker({
           storeCode: '<?php echo $_ENV['API_STORE_CODE']; ?>',
           apiPath: '/api.php',
           style: bookerStyle,
@@ -29,26 +29,6 @@
       };
 
       createBooker('embedded-safe', document.getElementById('embeddedShadow'));
-
-      if(document.getElementById('embeddedShadow') == null) {
-        window.location.href = './';
-      }
-
-      const parentElement = document.body;
-      const observer = new MutationObserver((mutationsList) => {
-          for (const mutation of mutationsList) {
-              if (mutation.type === 'childList') {
-                  mutation.removedNodes.forEach((node) => {
-                      if (node.id === 'embeddedShadow') {
-                        window.location.href = './';
-                      }
-                  });
-              }
-          }
-      });
-
-      const config = { childList: true, subtree: false };
-      observer.observe(parentElement, config);
     </script>
   </body>
 </html>

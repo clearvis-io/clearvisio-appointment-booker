@@ -4,7 +4,7 @@ import CloseButton from "./CloseButton.js"
 import BackButton from "./BackButton.js"
 
 export default (props) => {
-  const { headerTitle, currentStep } = useStoreon('headerTitle', 'currentStep');
+  const { headerTitle, currentStep, style, parentWidth } = useStoreon('headerTitle', 'currentStep', 'style', 'parentWidth');
 
 
   switch (currentStep) {
@@ -29,8 +29,10 @@ export default (props) => {
   }
 
   return html`
-    <div class="booker-header bg-primary bg-gradient text-light p-2">
-      <div class="container col-sm-10 col-md-8">
+    <div class="booker-header bg-primary bg-gradient text-light p-2 ${style}-header">
+      <div class="container ${(style === 'embedded' || style === 'embedded-safe') && parentWidth === 'small' ? '' :
+        (style === 'embedded' || style === 'embedded-safe') && parentWidth === 'medium' ? html`col-sm-10` : html`col-sm-10 col-md-8`
+      } ${style}-header-container">
         <div class="row">
           <div class="col-8 px-1">
             <h3 class="text-truncate">
@@ -43,7 +45,9 @@ export default (props) => {
           <div class="col-4">
             <div class="btn-group btn-group-lg float-end" role="group" aria-label="Navigation buttons">
               <${BackButton}/>
-              <${CloseButton}/>
+              ${(style === 'embedded' || style === 'embedded-safe') ? '' :
+                html`<${CloseButton}/>`
+              }
             </div>
           </div>
         </div>

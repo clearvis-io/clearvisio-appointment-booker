@@ -171,32 +171,42 @@ export default class ClearvisioAppointmentBooker {
     );
   }
 
+  async loadCSSFiles(cssFiles, shadowRoot) {
+    for (let i = 0; i < cssFiles.length; i++) {
+      try {
+        const response = await fetch(cssFiles[i]);
+        if (!response.ok) {
+            throw new Error('Failed to load CSS file');
+        }
+        let cssText = await response.text();
+        cssText = cssText.replace(/:root\s*{/, ':host {');
+        
+        const style = document.createElement('style');
+        style.textContent = cssText;
+        shadowRoot.appendChild(style);
+      } catch (error) {
+        console.error('Error loading CSS:', error);
+      }
+    };
+  };
+
+  async dispatchParentWidth(width) {
+    if (width <= 576) {
+      this.store.dispatch('parentWidth/set', 'small');
+    } else if (width <= 768) {
+      this.store.dispatch('parentWidth/set', 'medium');
+    } else {
+      this.store.dispatch('parentWidth/set', 'large');
+    }
+  };
+
   createElementAndRender({parentElement, colors, cssUrls}) {
     if (this.store.get().style == 'embedded-safe') {
+      this.dispatchParentWidth(parentElement.clientWidth);
       const shadowRoot = parentElement.attachShadow({ mode: 'open' });
-
-      async function loadCSSFiles(cssFiles) {
-        for(let x = 0; x < cssFiles.length; x++) {
-          try {
-            const response = await fetch(cssFiles[x]);
-            if (!response.ok) {
-                throw new Error('Failed to load CSS file');
-            }
-            let cssText = await response.text();
-            cssText = cssText.replace(/:root\s*{/, ':host {');
-            
-            const style = document.createElement('style');
-            style.textContent = cssText;
-            shadowRoot.appendChild(style);
-          } catch (error) {
-            console.error('Error loading CSS:', error);
-        }
-        };
-      };
-
       var element = document.createElement('div');
       element.id = 'embeddedShadowBooker';
-      loadCSSFiles(cssUrls);
+      this.loadCSSFiles(cssUrls, shadowRoot);
       shadowRoot.appendChild(element);
     } else {
       var element = document.createElement('div');
@@ -211,8 +221,12 @@ export default class ClearvisioAppointmentBooker {
         parentElement.remove();
       }
     });
-  }
 
+    window.addEventListener('resize', () => {
+      const width = document.getElementById('embeddedShadow').clientWidth;
+      this.dispatchParentWidth(width);
+    });
+  }
   getStore() { return this.store; }
 }
 

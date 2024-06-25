@@ -155,21 +155,6 @@ export default class ClearvisioAppointmentBooker {
     var stores = await api.get(this.store, `stores?code=${storeCode}`);
     this.store.dispatch('store/set', stores[0]);
   }
-  
-  async loadEyeExaminationProcesses({eyeExaminationProcessId}) {
-    if (eyeExaminationProcessId) {
-      return [await api.get(this.store, `eye_examination_processes/${eyeExaminationProcessId}`)]
-        .filter((process) => process);
-    }
-    var storeEntity = this.store.get().store;
-    return await api.get(this.store, `eye_examination_processes?hasLength&chain=${storeEntity.chain['@id']}`);
-  }
-
-  async loadCalendars() {
-    return await api.get(this.store,
-      `appointment_calendars?groups[]=userProfilePictureRead&store=${this.store.get().store['@id']}`
-    );
-  }
 
   async loadCSSFiles(cssFiles, shadowRoot) {
     for (let i = 0; i < cssFiles.length; i++) {

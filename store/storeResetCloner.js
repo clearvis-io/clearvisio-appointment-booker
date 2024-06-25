@@ -5,7 +5,6 @@ export function storeResetCloner (store)  {
   });
     
   store.on('resetStore', ({intialStoreContent}) => {
-    const cloneInitialStoreContent = cloneDeep(intialStoreContent)
-    return cloneInitialStoreContent;
+    return cloneDeep(intialStoreContent);
   });
 } 

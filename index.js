@@ -202,13 +202,14 @@ export default class ClearvisioAppointmentBooker {
 
     this.store.on('close', () => {
       element.remove();
+      window.removeEventListener('resize');
       if (parentElement) {
         parentElement.remove();
       }
     });
 
     window.addEventListener('resize', () => {
-      const width = document.getElementById('embedded').clientWidth;
+      const width = parentElement.clientWidth;
       this.dispatchParentWidth(width);
     });
   }

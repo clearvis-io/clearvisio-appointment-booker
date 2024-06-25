@@ -72,12 +72,10 @@
   max-width: fit-content;
 }
 
-.embedded-safe {
-  flex: 1;
+.embedded-safe, .embedded {
   position: static;
   width: 100%; 
   height: 100%; 
-  border: 2px solid black; 
   overflow-x: scroll; 
   overflow-y: hidden;
   font-family: var(--bs-body-font-family);
@@ -104,14 +102,6 @@
   padding-right: 0px !important;
 }
 
-.embedded {
-  position: static;
-  width: 100%;
-  height: 100%; 
-  border: 2px solid black;
-  overflow-x: scroll;
-  overflow-y: hidden;
-}
 .embedded-content, .embedded-safe-content {
   height: inherit !important;
 }  

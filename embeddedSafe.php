@@ -18,17 +18,14 @@
     <script type="module">
       import ClearvisioAppointmentBooker from './build/index.js';
 
-      function createBooker(bookerStyle, parentElement) {
-        new ClearvisioAppointmentBooker({
-          storeCode: '<?php echo $_ENV['API_STORE_CODE']; ?>',
-          apiPath: '/api.php',
-          style: bookerStyle,
-          parentElement: parentElement,
-          cssUrls: [ './build/style.css' ]
-        });
-      };
+      new ClearvisioAppointmentBooker({
+        storeCode: '<?php echo $_ENV['API_STORE_CODE']; ?>',
+        apiPath: '/api.php',
+        style: 'embedded-safe',
+        parentElement:  document.getElementById('embedded'),
+        cssUrls: [ './build/style.css' ]
+      });
 
-      createBooker('embedded-safe', document.getElementById('embedded'));
     </script>
   </body>
 </html>

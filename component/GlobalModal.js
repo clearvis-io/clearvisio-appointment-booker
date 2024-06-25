@@ -3,9 +3,10 @@ import {html, dateTimeFormatter, translator as __} from '../helper/index.js'
 import SimpleModal from './SimpleModal.js'
 
 export default (props) => {
-  const { moduleState, appointment, dispatch } = useStoreon('moduleState', 'appointment');
+  const { moduleState, appointment, dispatch, style } = useStoreon('moduleState', 'appointment', 'style');
 
   const onClose = () => dispatch('close');
+  const onReset = () => dispatch('resetStore')
 
   switch (moduleState) {
     case 'success':
@@ -24,7 +25,7 @@ export default (props) => {
             ${__('If you have any further questions, please contact us through our customer service.')}
           "
           approveButtonLabel="OK"
-          onApprove=${onClose}/>
+          onApprove=${style == 'embedded' || style == 'embedded-safe' ? onReset : onClose}/>
       `;
     case 'error':
       return html`

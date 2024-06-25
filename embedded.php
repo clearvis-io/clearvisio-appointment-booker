@@ -29,13 +29,6 @@
       };
 
       createBooker('embedded', document.getElementById('embedded'));
-
-      var x = new MutationObserver(function (e) {
-        if (e[0].removedNodes) {
-          window.location.href = './';
-        };
-      });
-      x.observe(document.getElementById('embedded'), { childList: true });
     </script>
   </body>
 </html>

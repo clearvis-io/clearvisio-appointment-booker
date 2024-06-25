@@ -208,7 +208,7 @@ export default class ClearvisioAppointmentBooker {
     });
 
     window.addEventListener('resize', () => {
-      const width = document.getElementById('embeddedShadow').clientWidth;
+      const width = document.getElementById('embedded').clientWidth;
       this.dispatchParentWidth(width);
     });
   }

@@ -14,7 +14,7 @@
         <li>API_KEY: <?php echo $_ENV['API_KEY'] ? $_ENV['API_KEY'] : 'Not configured, please specificy API_KEY env var before startup.'; ?></li>
         <li>API_STORE_CODE: <?php echo $_ENV['API_STORE_CODE'] ? $_ENV['API_STORE_CODE'] : 'Not configured, please specificy API_STORE_CODE env var before startup.'; ?></li>
     </ul>
-    <div id="embeddedShadow" style="width: 500px"></div>
+    <div id="embedded" style="width: 500px"></div>
     <script type="module">
       import ClearvisioAppointmentBooker from './build/index.js';
 
@@ -28,7 +28,7 @@
         });
       };
 
-      createBooker('embedded-safe', document.getElementById('embeddedShadow'));
+      createBooker('embedded-safe', document.getElementById('embedded'));
     </script>
   </body>
 </html>

@@ -1,10 +1,10 @@
 import { useStoreon } from '../_snowpack/pkg/storeon/preact.js'
-import { html, translator as __ } from '../helper/index.js'
+import { html, getColumnWidth, translator as __ } from '../helper/index.js'
 import CloseButton from "./CloseButton.js"
 import BackButton from "./BackButton.js"
 
 export default (props) => {
-  const { headerTitle, currentStep } = useStoreon('headerTitle', 'currentStep');
+  const { headerTitle, currentStep, style, parentWidth } = useStoreon('headerTitle', 'currentStep', 'style', 'parentWidth');
 
 
   switch (currentStep) {
@@ -29,8 +29,8 @@ export default (props) => {
   }
 
   return html`
-    <div class="booker-header bg-primary bg-gradient text-light p-2">
-      <div class="container col-sm-10 col-md-8">
+    <div class="booker-header bg-primary bg-gradient text-light p-2 ${style}-header">
+      <div class="container ${getColumnWidth(style,parentWidth)} ${style}-header-container">
         <div class="row">
           <div class="col-8 px-1">
             <h3 class="text-truncate">
@@ -43,7 +43,9 @@ export default (props) => {
           <div class="col-4">
             <div class="btn-group btn-group-lg float-end" role="group" aria-label="Navigation buttons">
               <${BackButton}/>
-              <${CloseButton}/>
+              ${(style === 'embedded' || style === 'embedded-safe') ? '' :
+                html`<${CloseButton}/>`
+              }
             </div>
           </div>
         </div>

@@ -11,10 +11,11 @@ import addressFormatter from './addressFormatter.js';
 import phoneNumberParser from './phoneNumberParser.js';
 import createNextFreeSlotsForDateKey from './createNextFreeSlotsForDateKey.js';
 import ValidationError from './ValidationError.js';
-import availableProcessFilter from '../helper/availableProcessFilter.js'
+import availableProcessFilter from '../helper/availableProcessFilter.js';
+import getColumnWidth from './getColumnWidth.js'
 
 export {
   api, html, translator, availableCalendarFilter, createDateGroups, datesMatch, dateTimesMatch,
   createNextFreeSlotsForDateKey, dateTimeFormatter, nameFormatter, addressFormatter, ValidationError, phoneNumberParser,
-  availableProcessFilter
+  availableProcessFilter, getColumnWidth
 }

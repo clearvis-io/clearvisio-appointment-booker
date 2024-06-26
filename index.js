@@ -22,11 +22,11 @@ const knownCustomerFields = [
 const BookerComponent = (props) => {
   return html`
     <${Style} colors=${props.colors}/>
-    <div class="booker-widget fixed-top">
+    <div class="booker-widget fixed-top ${props.style}">
       <${StoreContext.Provider} value=${props.store}>
         <${GlobalModal}/>
         <${Header}/>
-        <div class="bg-body content">
+        <div class="bg-body content ${props.style}-content">
           <${Carousel}/>
           <div class="content-spacer"></div>
         </div>
@@ -112,6 +112,10 @@ export default class ClearvisioAppointmentBooker {
     if (options.calendarRange) {
       store.dispatch('timeSelectionUi/calendarRange/set', options.calendarRange);
     }
+    if (options.style) {
+      store.dispatch('style/set', options.style);
+    }
+
     if (options.eyeExaminationProcessId) {
       store.dispatch('eyeExaminationProcessId/set', options.eyeExaminationProcessId);
     }
@@ -152,14 +156,63 @@ export default class ClearvisioAppointmentBooker {
     this.store.dispatch('store/set', stores[0]);
   }
 
-  createElementAndRender({parentElement, colors}) {
-    var element = document.createElement('div');
-    (parentElement || document.body).appendChild(element);
-    render(html`<${BookerComponent} store=${this.store} colors=${colors}/>`, element);
+  async loadCSSFiles(cssFiles, shadowRoot) {
+    for (let i = 0; i < cssFiles.length; i++) {
+      try {
+        const response = await fetch(cssFiles[i]);
+        if (!response.ok) {
+            throw new Error('Failed to load CSS file');
+        }
+        let cssText = await response.text();
+        cssText = cssText.replace(/:root\s*{/, ':host {');
+        
+        const style = document.createElement('style');
+        style.textContent = cssText;
+        shadowRoot.appendChild(style);
+      } catch (error) {
+        console.error('Error loading CSS:', error);
+      }
+    };
+  };
 
-    this.store.on('close', () => element.remove());
+  async dispatchParentWidth(width) {
+    if (width <= 576) {
+      this.store.dispatch('parentWidth/set', 'small');
+    } else if (width <= 768) {
+      this.store.dispatch('parentWidth/set', 'medium');
+    } else {
+      this.store.dispatch('parentWidth/set', 'large');
+    }
+  };
+
+  createElementAndRender({parentElement, colors, cssUrls}) {
+    if (this.store.get().style == 'embedded-safe') {
+      this.dispatchParentWidth(parentElement.clientWidth);
+      const shadowRoot = parentElement.attachShadow({ mode: 'open' });
+      var element = document.createElement('div');
+      element.id = 'embeddedShadowBooker';
+      this.loadCSSFiles(cssUrls, shadowRoot);
+      shadowRoot.appendChild(element);
+    } else {
+      var element = document.createElement('div');
+      (parentElement || document.body).appendChild(element);
+    }
+    this.store.dispatch('rootElement/set', element);
+    render(html`<${BookerComponent} store=${this.store} colors=${colors} style=${this.store.get().style}/>`, element);
+
+    this.store.on('close', () => {
+      element.remove();
+      window.removeEventListener('resize');
+      if (parentElement) {
+        parentElement.remove();
+      }
+    });
+
+    window.addEventListener('resize', () => {
+      const width = parentElement.clientWidth;
+      this.dispatchParentWidth(width);
+    });
   }
-
   getStore() { return this.store; }
 }
 

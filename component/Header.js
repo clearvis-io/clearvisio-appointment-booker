@@ -28,11 +28,17 @@ export default (props) => {
       break;
   }
 
+  const getColumnWidth = () => {
+    if ((style !== 'embedded' && style !== 'embedded-safe') || parentWidth == 'large') {
+      return 'col-sm-10 col-md-8';
+    }
+
+    return parentWidth === 'medium' ? 'col-sm-10' : ''
+  }
+
   return html`
     <div class="booker-header bg-primary bg-gradient text-light p-2 ${style}-header">
-      <div class="container ${(style === 'embedded' || style === 'embedded-safe') && parentWidth === 'small' ? '' :
-        (style === 'embedded' || style === 'embedded-safe') && parentWidth === 'medium' ? html`col-sm-10` : html`col-sm-10 col-md-8`
-      } ${style}-header-container">
+      <div class="container ${getColumnWidth()} ${style}-header-container">
         <div class="row">
           <div class="col-8 px-1">
             <h3 class="text-truncate">

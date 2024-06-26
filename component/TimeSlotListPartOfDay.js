@@ -15,7 +15,7 @@ export default () => {
 
   const slots = nextFreeSlots[key] ? nextFreeSlots[key].slots : [];
 
-  for (const element of slots) {
+  for (const element of slots || []) {
     const startDate = new Date(element.start);
 
     if (startDate.getHours() < 12) {

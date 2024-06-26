@@ -175,16 +175,6 @@ export default class ClearvisioAppointmentBooker {
     };
   };
 
-  async dispatchParentWidth(width) {
-    if (width <= 576) {
-      this.store.dispatch('parentWidth/set', 'small');
-    } else if (width <= 768) {
-      this.store.dispatch('parentWidth/set', 'medium');
-    } else {
-      this.store.dispatch('parentWidth/set', 'large');
-    }
-  };
-
   createElementAndRender({parentElement, colors, cssUrls}) {
     if (this.store.get().style == 'embedded-safe') {
       this.dispatchParentWidth(parentElement.clientWidth);
@@ -199,18 +189,24 @@ export default class ClearvisioAppointmentBooker {
     }
     this.store.dispatch('rootElement/set', element);
     render(html`<${BookerComponent} store=${this.store} colors=${colors} style=${this.store.get().style}/>`, element);
+    ;
 
-    this.store.on('close', () => {
-      element.remove();
-      window.removeEventListener('resize');
-      if (parentElement) {
-        parentElement.remove();
+    window.addEventListener('resize', function dispatchParentWidth() {
+      if (parentElement.clientWidth <= 576) {
+        this.store.dispatch('parentWidth/set', 'small');
+      } else if (parentElement.clientWidth <= 768) {
+        this.store.dispatch('parentWidth/set', 'medium');
+      } else {
+        this.store.dispatch('parentWidth/set', 'large');
       }
     });
 
-    window.addEventListener('resize', () => {
-      const width = parentElement.clientWidth;
-      this.dispatchParentWidth(width);
+    this.store.on('close', () => {
+      element.remove();
+      window.removeEventListener('resize', dispatchParentWidth);
+      if (parentElement) {
+        parentElement.remove();
+      }
     });
   }
   getStore() { return this.store; }

@@ -1,5 +1,5 @@
 import {useStoreon} from 'storeon/preact'
-import {html} from '../helper/index.js'
+import {html, getColumnWidth} from '../helper/index.js'
 import Summary from './Summary.js'
 
 export default (props) => {
@@ -17,13 +17,6 @@ export default (props) => {
     needsSummaryCard = false;
   }
 
-  const getColumnWidth = () => {
-    if ((style !== 'embedded' && style !== 'embedded-safe') || parentWidth == 'large') {
-      return 'col-sm-10 col-md-8';
-    }
-
-    return parentWidth === 'medium' ? 'col-sm-10' : ''
-  }
 
   return html`
     <div class="carousel-item
@@ -31,7 +24,7 @@ export default (props) => {
       ${currentStep == props.step ? 'active' : ''}
       ${currentIndex + 1 == index ? 'carousel-item-next' : ''}
     ">
-      <div class="container-sm p-1 ${getColumnWidth()} ${style}-container">
+      <div class="container-sm p-1 ${getColumnWidth(style, parentWidth)} ${style}-container">
         <div class="row">
           <div class="${needsSummaryCard ? 'col col-sm-8' : 'col'}">
             <div class="p-1">

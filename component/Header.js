@@ -1,5 +1,5 @@
 import { useStoreon } from '../_snowpack/pkg/storeon/preact.js'
-import { html, translator as __ } from '../helper/index.js'
+import { html, getColumnWidth, translator as __ } from '../helper/index.js'
 import CloseButton from "./CloseButton.js"
 import BackButton from "./BackButton.js"
 
@@ -28,17 +28,9 @@ export default (props) => {
       break;
   }
 
-  const getColumnWidth = () => {
-    if ((style !== 'embedded' && style !== 'embedded-safe') || parentWidth == 'large') {
-      return 'col-sm-10 col-md-8';
-    }
-
-    return parentWidth === 'medium' ? 'col-sm-10' : ''
-  }
-
   return html`
     <div class="booker-header bg-primary bg-gradient text-light p-2 ${style}-header">
-      <div class="container ${getColumnWidth()} ${style}-header-container">
+      <div class="container ${getColumnWidth(style,parentWidth)} ${style}-header-container">
         <div class="row">
           <div class="col-8 px-1">
             <h3 class="text-truncate">

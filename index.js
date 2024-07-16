@@ -117,6 +117,10 @@ export default class ClearvisioAppointmentBooker {
     if (options.confirmationStatus !== undefined) {
       store.dispatch('appointment/set', {confirmation_status: options.confirmationStatus});
     }
+
+    if (options.showProcessLength !== undefined) {
+      store.dispatch('showProcessLength/set', options.showProcessLength);
+    }
     store.dispatch('medicalConsent/set', options.medicalConsent);
 
     this.createElementAndRender(options);

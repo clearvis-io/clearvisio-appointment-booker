@@ -175,9 +175,19 @@ export default class ClearvisioAppointmentBooker {
     };
   };
 
+  dispatchParentWidth(parentElement) {
+    if (parentElement.clientWidth <= 576) {
+      this.store.dispatch('parentWidth/set', 'small');
+    } else if (parentElement.clientWidth <= 768) {
+      this.store.dispatch('parentWidth/set', 'medium');
+    } else {
+      this.store.dispatch('parentWidth/set', 'large');
+    }
+  }
+
   createElementAndRender({parentElement, colors, cssUrls}) {
     if (this.store.get().style == 'embedded-safe') {
-      this.dispatchParentWidth(parentElement.clientWidth);
+      this.dispatchParentWidth(parentElement);
       const shadowRoot = parentElement.attachShadow({ mode: 'open' });
       var element = document.createElement('div');
       element.id = 'embeddedShadowBooker';
@@ -191,19 +201,15 @@ export default class ClearvisioAppointmentBooker {
     render(html`<${BookerComponent} store=${this.store} colors=${colors} style=${this.store.get().style}/>`, element);
     ;
 
-    window.addEventListener('resize', function dispatchParentWidth() {
-      if (parentElement.clientWidth <= 576) {
-        this.store.dispatch('parentWidth/set', 'small');
-      } else if (parentElement.clientWidth <= 768) {
-        this.store.dispatch('parentWidth/set', 'medium');
-      } else {
-        this.store.dispatch('parentWidth/set', 'large');
-      }
-    });
+    const onResize = function (event) {
+      this.dispatchParentWidth(parentElement);
+    }.bind(this);
+
+    window.addEventListener('resize', onResize);
 
     this.store.on('close', () => {
       element.remove();
-      window.removeEventListener('resize', dispatchParentWidth);
+      window.removeEventListener('resize', onResize);
       if (parentElement) {
         parentElement.remove();
       }

@@ -98,6 +98,8 @@ const messages = {
     'Morning': 'Délelőtt',
     'Afternoon': 'Délután',
     'Evening': 'Este',
+    'Booking the appointment': 'Időpont lefoglalása',
+    'Event draft': 'Esemény piszkozat',
     'Store selection': 'Üzlet választása'
   },
   ro: {
@@ -191,6 +193,8 @@ const messages = {
     'Morning': 'Înainte de masă',
     'Afternoon': 'După masă',
     'Evening': 'Seara',
+    'Booking the appointment': 'Rezervarea unei programări',
+    'Event draft': 'Eveniment schiță',
     'Store selection': 'Selectare magazin'
   },
   hr: {
@@ -282,6 +286,8 @@ const messages = {
     'Morning': 'Prijepodne',
     'Afternoon': 'Poslijepodne',
     'Evening': 'Večer',
+    'Booking the appointment': 'Rezerviranje termina',
+    'Event draft': 'Skica za događaj',
     'Store selection': 'Odabir trgovine'
   },
   en: {

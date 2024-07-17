@@ -53,6 +53,7 @@ This module is a frontend for the Appointment Booking API of clearvis.io. The AP
 * **country**: The country of the address of the customer, it is required to be set if any of the address parts are available in the customerFields. Two character ISO country codes are accepted. Eg. "HU".
 * **language**: The language of the booker UI. If not set, then navigator.language is used. (The available languages are currently en, ro, hu.)
 * **showAppointmentComment**: When set to `true` it will show a comment field (The default value is `false`.)
+* **appointmentCommentRequired**: User will be forced to fill the comment text area on the customer form
 * **constantAppointmentCommentText**: If it is given, then it will prepend the comment message with this text.
 * **translationOverrides**: Plain object storing source-translation pairs for translation overrides. Only English source strings can be overridden, so please switch language to en to find out translation override key.
   ```js
@@ -92,7 +93,17 @@ This module is a frontend for the Appointment Booking API of clearvis.io. The AP
   * *primary*: Sets the color of the header and the primary buttons
   * *danger*: Sets the color of errors dialogs and validation messages
   * *success*: Sets the header color of the success dialog
-
+* **timeSlotMode**: Lists the available time slots with different appearances.
+  * The deafult value is `singleColumn`, that means all the available times will appear beneath each other in one column.
+  * When set to `partOfDay` the available time slots will be grouped into morning, afternoon and evening.
+* **calendarRange**: Allows different options for the day selection at the appoinment interface.
+  * When it is set to `fiveDays` the day selection modul will only appear as five days and you can turn pages for more opportunities.
+  * When set to `month` the actual month will appear as a calendar and you can chose the prefferd day in there.
+* **style**: Determines the appearence of the appointment booker. When set to `fullscreen` the booker will appear in fullsreen mode, in `modal-view` mode the booker will appear as a modal with the page dimmed in the background. In `embedded` mode the content of the booker will appear embeded in the page, and in `embeddedSafe` mode the booker will be embeded in the page but wont use the style sheet of the page. When in `embeddedSafe` mode you can also declare a `parentElement` attribute, and the booker will embed itself inside the given `parentElement`.
+* **storeSelection**: Allows three types of store selection based on preferences.
+  * `no (default)`: Cannot select stores, thus the first screen shows the processes.
+  * `onlyInSameChain`: User can select stores only from the same chain.
+  * `all`: User can select from all the stores availble.
 ## Example backend proxy in PHP
 ```php
 <?php

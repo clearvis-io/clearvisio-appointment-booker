@@ -12,6 +12,7 @@ import { selectedDate } from './selectedDate.js'
 import { nextFreeSlots } from './nextFreeSlots.js'
 import { customerForm } from './customerForm.js'
 import { headerTitle } from './headerTitle.js'
+import { timeSelectionUi } from './timeSelectionUi.js'
 import { priceComment } from './priceComment.js'
 import { price } from './price.js'
 import { showExaminerName } from './showExaminerName.js'
@@ -20,6 +21,10 @@ import { country } from './country.js'
 import { selectedCalendar } from './selectedCalendar.js'
 import { privacy } from './privacy.js'
 import { location } from './location.js'
+import { style } from './style.js'
+import { rootElement } from './rootElement.js'
+import { parentWidth } from './parentWidth.js'
+import { storeResetCloner } from './storeResetCloner.js'
 import { showProcessLength } from './showProcessLength.js'
 
 var closeConfirmModalState = modalStateStore('closeConfirmModalState');
@@ -29,9 +34,10 @@ var detailedDescriptionModalState = modalStateStore('detailedDescriptionModalSta
 
 export default () => {
   return createStoreon([
-    eyeExaminationProcesses, steps, appointment, moduleState, language, api, privacyPolicyModalState,
-    storeStore, calendars, selectedDate, nextFreeSlots, customerForm, privacy,
+    calendars, eyeExaminationProcesses, steps, appointment, moduleState, language, api,
+    privacyPolicyModalState, storeStore, selectedDate, nextFreeSlots, customerForm, privacy,
     closeConfirmModalState, globalModalState, headerTitle, booking, country, selectedCalendar,
-    priceComment, price, showExaminerName, location, detailedDescriptionModalState, showProcessLength
+    priceComment, price, showExaminerName, location, detailedDescriptionModalState, timeSelectionUi,
+    style, rootElement, parentWidth, storeResetCloner, showProcessLength
   ]);
 }

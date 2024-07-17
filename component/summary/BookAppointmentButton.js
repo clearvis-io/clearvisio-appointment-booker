@@ -30,6 +30,10 @@ const createCustomer = async (storeContent) => {
     }
   );
 
+  if ('birth' in customer) {
+    customer.birth = formatBirthDate(customer.birth);
+  }
+
   Object.keys(customer).forEach((key) => {
     if (typeof customer[key] === 'string') {
       customer[key] = customer[key].trim();
@@ -38,6 +42,19 @@ const createCustomer = async (storeContent) => {
 
   return await api.post(storeContent, 'customers', customer);
 }
+
+const formatBirthDate = (birthDate) => {
+  if (!birthDate || !(birthDate instanceof Date)) {
+    return null;
+  }
+  
+  const year = birthDate.getFullYear();
+  const month = String(birthDate.getMonth() + 1).padStart(2, '0');
+  const day = String(birthDate.getDate()).padStart(2, '0');
+  const formattedDate = `${year}-${month}-${day}T00:00:00+00:00`;
+  
+  return formattedDate;
+};
 
 const handleCustomerValidationError = async (storeContent, error) => {
   const {customerForm} = storeContent;

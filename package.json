@@ -8,6 +8,7 @@
     "country-telephone-data": "^0.6.3",
     "cssnano": "^5.0.8",
     "htm": "^3.0.1",
+    "lodash.clonedeep": "^4.5.0",
     "postcss": "^8.3.11",
     "postcss-import-url": "^7.0.0",
     "postcss-prefixer": "^2.1.3",

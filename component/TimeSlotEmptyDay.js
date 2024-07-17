@@ -2,8 +2,8 @@ import {useStoreon} from 'storeon/preact'
 import {html, createNextFreeSlotsForDateKey, dateTimeFormatter, translator as __} from '../helper/index.js'
 
 export default (props) => {
-  const { selectedCalendar, selectedDate, nextFreeSlots, appointment, dispatch } =
-    useStoreon('selectedCalendar', 'appointment', 'nextFreeSlots', 'selectedDate')
+  const { selectedCalendar, selectedDate, nextFreeSlots, appointment, dispatch, nextFreeSlotLoading } =
+    useStoreon('selectedCalendar', 'appointment', 'nextFreeSlots', 'selectedDate', 'nextFreeSlotLoading')
   var date = new Date(selectedDate), key, found = false;
   date.setDate(date.getDate() + 1);
 
@@ -29,11 +29,19 @@ export default (props) => {
           </div>
           <button class="btn m-2 btn-primary" onClick="${onGoToDate}">${__('Go to date')}</button>
         ` :
-        html`
-          <button class="btn m-2 btn-primary" onClick="${onGoToDate}">
-            ${__('Click here to search for the next free appointment')}
-          </button>
-        `
+          (
+            nextFreeSlotLoading ?
+            html`
+              <div class="text-muted">
+                ${__('Search in progress...')}
+              </div>
+            ` :
+            html`
+              <button class="btn m-2 btn-primary" onClick="${onGoToDate}">
+                ${__('Click here to search for the next free appointment')}
+              </button>
+            `
+          )
       }
     </li>
   `;

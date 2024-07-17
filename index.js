@@ -22,11 +22,11 @@ const knownCustomerFields = [
 const BookerComponent = (props) => {
   return html`
     <${Style} colors=${props.colors}/>
-    <div class="booker-widget fixed-top">
+    <div class="booker-widget fixed-top ${props.style}">
       <${StoreContext.Provider} value=${props.store}>
         <${GlobalModal}/>
         <${Header}/>
-        <div class="bg-body content">
+        <div class="bg-body content ${props.style}-content">
           <${Carousel}/>
           <div class="content-spacer"></div>
         </div>
@@ -45,20 +45,6 @@ export default class ClearvisioAppointmentBooker {
     this.setupCustomerFields(options);
     this.setupApi(options);
     this.loadStore(options.storeCode)
-      .then(() => {
-        return Promise.all([
-          this.loadEyeExaminationProcesses(options),
-          this.loadCalendars()
-        ]);
-      })
-      .then(([processes, calendars]) => {
-        this.store.dispatch('eyeExaminationProcesses/set',
-          availableProcessFilter(processes, calendars, options.calendarRoleCheckMode)
-        );
-        this.store.dispatch('calendars/set', calendars);
-        store.dispatch('moduleState/set', 'idle');
-        this.store.dispatch('bookerInit');
-      });
 
     if (options.calendarStepShouldBeHidden) {
       store.dispatch('calendarStepShouldBeHidden/set', options.calendarStepShouldBeHidden);
@@ -99,6 +85,9 @@ export default class ClearvisioAppointmentBooker {
     if (options.showAppointmentComment) {
       store.dispatch('showAppointmentComment/set', options.showAppointmentComment);
     }
+    if (options.appointmentCommentRequired) {
+      store.dispatch('appointmentCommentRequired/set', options.appointmentCommentRequired);
+    }
     if (options.autoselectNextFreeSlot) {
       store.dispatch('autoselectNextFreeSlot/set', options.autoselectNextFreeSlot);
     }
@@ -123,6 +112,15 @@ export default class ClearvisioAppointmentBooker {
     if (options.calendarRange) {
       store.dispatch('timeSelectionUi/calendarRange/set', options.calendarRange);
     }
+    if (options.style) {
+      store.dispatch('style/set', options.style);
+    }
+
+    if (options.eyeExaminationProcessId) {
+      store.dispatch('eyeExaminationProcessId/set', options.eyeExaminationProcessId);
+    }
+
+    store.dispatch('store/setStoreSelection/set', options.storeSelection ?? 'no');
 
     store.dispatch('medicalConsent/set', options.medicalConsent);
 
@@ -158,29 +156,65 @@ export default class ClearvisioAppointmentBooker {
     this.store.dispatch('store/set', stores[0]);
   }
 
-  async loadEyeExaminationProcesses({eyeExaminationProcessId}) {
-    if (eyeExaminationProcessId) {
-      return [await api.get(this.store, `eye_examination_processes/${eyeExaminationProcessId}`)]
-        .filter((process) => process);
+  async loadCSSFiles(cssFiles, shadowRoot) {
+    for (let i = 0; i < cssFiles.length; i++) {
+      try {
+        const response = await fetch(cssFiles[i]);
+        if (!response.ok) {
+            throw new Error('Failed to load CSS file');
+        }
+        let cssText = await response.text();
+        cssText = cssText.replace(/:root\s*{/, ':host {');
+        
+        const style = document.createElement('style');
+        style.textContent = cssText;
+        shadowRoot.appendChild(style);
+      } catch (error) {
+        console.error('Error loading CSS:', error);
+      }
+    };
+  };
+
+  dispatchParentWidth(parentElement) {
+    if (parentElement.clientWidth <= 576) {
+      this.store.dispatch('parentWidth/set', 'small');
+    } else if (parentElement.clientWidth <= 768) {
+      this.store.dispatch('parentWidth/set', 'medium');
+    } else {
+      this.store.dispatch('parentWidth/set', 'large');
     }
-    var storeEntity = this.store.get().store;
-    return await api.get(this.store, `eye_examination_processes?hasLength&chain=${storeEntity.chain['@id']}`);
   }
 
-  async loadCalendars() {
-    return await api.get(this.store,
-      `appointment_calendars?groups[]=userProfilePictureRead&store=${this.store.get().store['@id']}`
-    );
+  createElementAndRender({parentElement, colors, cssUrls}) {
+    if (this.store.get().style == 'embedded-safe') {
+      this.dispatchParentWidth(parentElement);
+      const shadowRoot = parentElement.attachShadow({ mode: 'open' });
+      var element = document.createElement('div');
+      element.id = 'embeddedShadowBooker';
+      this.loadCSSFiles(cssUrls, shadowRoot);
+      shadowRoot.appendChild(element);
+    } else {
+      var element = document.createElement('div');
+      (parentElement || document.body).appendChild(element);
+    }
+    this.store.dispatch('rootElement/set', element);
+    render(html`<${BookerComponent} store=${this.store} colors=${colors} style=${this.store.get().style}/>`, element);
+    ;
+
+    const onResize = function (event) {
+      this.dispatchParentWidth(parentElement);
+    }.bind(this);
+
+    window.addEventListener('resize', onResize);
+
+    this.store.on('close', () => {
+      element.remove();
+      window.removeEventListener('resize', onResize);
+      if (parentElement) {
+        parentElement.remove();
+      }
+    });
   }
-
-  createElementAndRender({parentElement, colors}) {
-    var element = document.createElement('div');
-    (parentElement || document.body).appendChild(element);
-    render(html`<${BookerComponent} store=${this.store} colors=${colors}/>`, element);
-
-    this.store.on('close', () => element.remove());
-  }
-
   getStore() { return this.store; }
 }
 

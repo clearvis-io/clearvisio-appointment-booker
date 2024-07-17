@@ -99,7 +99,8 @@ const messages = {
     'Afternoon': 'Délután',
     'Evening': 'Este',
     'Booking the appointment': 'Időpont lefoglalása',
-    'Event draft': 'Esemény piszkozat'
+    'Event draft': 'Esemény piszkozat',
+    'Store selection': 'Üzlet választása'
   },
   ro: {
     "Are you sure you want to cancel this appointment?":
@@ -193,7 +194,8 @@ const messages = {
     'Afternoon': 'După masă',
     'Evening': 'Seara',
     'Booking the appointment': 'Rezervarea unei programări',
-    'Event draft': 'Eveniment schiță'
+    'Event draft': 'Eveniment schiță',
+    'Store selection': 'Selectare magazin'
   },
   hr: {
     "Are you sure you want to cancel this appointment?": "Jeste li sigurni da želite otkazati ovaj termin?",
@@ -285,7 +287,8 @@ const messages = {
     'Afternoon': 'Poslijepodne',
     'Evening': 'Večer',
     'Booking the appointment': 'Rezerviranje termina',
-    'Event draft': 'Skica za događaj'
+    'Event draft': 'Skica za događaj',
+    'Store selection': 'Odabir trgovine'
   },
   en: {
     '@abbrSunday': 'Sun',

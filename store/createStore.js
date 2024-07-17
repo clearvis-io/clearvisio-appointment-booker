@@ -22,6 +22,10 @@ import { selectedCalendar } from './selectedCalendar.js'
 import { privacy } from './privacy.js'
 import { location } from './location.js'
 import {slotSelection} from './slotSelection.js'
+import { style } from './style.js'
+import { rootElement } from './rootElement.js'
+import { parentWidth } from './parentWidth.js'
+import { storeResetCloner } from './storeResetCloner.js'
 
 var closeConfirmModalState = modalStateStore('closeConfirmModalState');
 var globalModalState = modalStateStore('globalModalState', {visible: true});
@@ -30,10 +34,10 @@ var detailedDescriptionModalState = modalStateStore('detailedDescriptionModalSta
 
 export default () => {
   return createStoreon([
-    eyeExaminationProcesses, steps, appointment, moduleState, language, api, privacyPolicyModalState,
-    storeStore, calendars, selectedDate, nextFreeSlots, customerForm, privacy,
+    calendars, eyeExaminationProcesses, steps, appointment, moduleState, language, api,
+    privacyPolicyModalState, storeStore, selectedDate, nextFreeSlots, customerForm, privacy,
     closeConfirmModalState, globalModalState, headerTitle, booking, country, selectedCalendar,
     priceComment, price, showExaminerName, location, detailedDescriptionModalState, timeSelectionUi,
-    slotSelection
+    slotSelection, style, rootElement, parentWidth, storeResetCloner
   ]);
 }

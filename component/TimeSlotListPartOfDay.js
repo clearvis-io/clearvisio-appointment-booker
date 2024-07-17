@@ -15,10 +15,9 @@ export default () => {
 
   const slots = nextFreeSlots[key] ? nextFreeSlots[key].slots : [];
 
-  for (let i in slots) {
-    const element = slots[i];
-    const startDate = new Date(element.start);    
-    
+  for (const element of slots || []) {
+    const startDate = new Date(element.start);
+
     if (startDate.getHours() < 12) {
       morning.push(element);
     } else if (startDate.getHours() < 18) {
@@ -27,14 +26,14 @@ export default () => {
       evening.push(element);
     }
   };
-  
+
   return html`
     <div class="grid">
       ${
         nextFreeSlots[key] ?
         (
           nextFreeSlots[key].status == 'empty' ?
-          html`<${TimeSlotEmptyDay}/>` : 
+          html`<${TimeSlotEmptyDay}/>` :
           html`
             <${TimeSlotPartOfDayCategory} title=${'Morning'} slots=${morning}/>
             <${TimeSlotPartOfDayCategory} title=${'Afternoon'} slots=${afternoon}/>

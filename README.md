@@ -74,6 +74,7 @@ This module is a frontend for the Appointment Booking API of clearvis.io. The AP
 * **priceComment**: Text that will be showed on summary card below the price of examination
 * **showPrice**: When set to `false` it will hide any price related info (The default value is `true`.)
 * **showLocation**: Whether to show location in summary screen (The default value is `true`.)
+* **showProcessLength**: Whether to show the length of an eye examination process (The default value is `true`.)
 * **locationName**: Name of location. Default value is the store name.
 * **locationAddress**: Address of appointment. Default value is the store address.
 * **autoselectNextFreeSlot**: When set to `true`, automatically select next free slot for appointment. Defaults to `false`.

@@ -106,6 +106,9 @@ export default class ClearvisioAppointmentBooker {
     if (options.confirmationStatus !== undefined) {
       store.dispatch('appointment/set', {confirmation_status: options.confirmationStatus});
     }
+    if (options.showProcessLength !== undefined) {
+      store.dispatch('showProcessLength/set', options.showProcessLength);
+    }
     if (options.timeSlotMode) {
       store.dispatch('timeSelectionUi/timeSlotMode/set', options.timeSlotMode);
     }
@@ -165,7 +168,7 @@ export default class ClearvisioAppointmentBooker {
         }
         let cssText = await response.text();
         cssText = cssText.replace(/:root\s*{/, ':host {');
-        
+
         const style = document.createElement('style');
         style.textContent = cssText;
         shadowRoot.appendChild(style);

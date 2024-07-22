@@ -89,10 +89,15 @@ const requestNextFreeSlots = async (store, date) => {
       }
     }
 
-    if (
-      nextFreeSlotsForDates[key].slots &&
-      nextFreeSlotsForDates[key].slots[nextFreeSlotsForDates[key].slots.length - 1].start == nextFreeSlot.start
-    ) {
+    var found = false;
+    for (let previousSlot of nextFreeSlotsForDates[key].slots || []) {
+      if (previousSlot['@id'] == nextFreeSlot['@id'] || previousSlot.start == nextFreeSlot.start) {
+        found = true;
+        break;
+      }
+    }
+
+    if (found) {
       continue;
     }
 
@@ -102,6 +107,7 @@ const requestNextFreeSlots = async (store, date) => {
     if (!nextFreeSlotsForDates[key].slots) {
       nextFreeSlotsForDates[key].slots = [];
     }
+
     nextFreeSlotsForDates[key].slots.push(nextFreeSlot);
     if (previousKey && previousKey != key) {
       nextFreeSlotsForDates[previousKey].status = 'complete';

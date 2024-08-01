@@ -156,7 +156,7 @@ export default class ClearvisioAppointmentBooker {
   async loadStore(storeCode) {
     try {
       var stores = await api.get(this.store, `stores?code=${storeCode}`);
-      if ( stores[0] == undefined) {
+      if (stores[0] == undefined) {
         this.store.dispatch('moduleState/set', 'error.storeCode');
         return;
       }

@@ -1,5 +1,5 @@
 import {useStoreon} from 'storeon/preact'
-import {html} from '../helper/index.js'
+import {html, translator as __} from '../helper/index.js'
 import EyeExaminationProcessListItem from './EyeExaminationProcessListItem.js'
 import Spinner from './Spinner.js'
 import SimpleModal from './SimpleModal.js'
@@ -10,11 +10,12 @@ export default (props) => {
   const { detailedDescriptionModalState, dispatch, calendars} = useStoreon('detailedDescriptionModalState', 'calendars')
 
   if (store != null) {
-    var tel = store['phone'];
-    var mail = store['email'];
+    var storePhone = store['phone'];
+    var storeMail = store['email'];
   }
-  const baseText = "Hiba! Időpontfoglalás nem lehetséges! Az időpontfoglaló beállítási hibája miatt nem lehetséges az online időpontfoglalás. Kérjük keresse szaküzletünket a "+ tel +" telefonszámon vagy "+ mail +" email címen és jelezze nekünk ezt a hibát a telefonos időpontkérés során:"
-  const baseTextNoPhone = "Hiba! Időpontfoglalás nem lehetséges! Az időpontfoglaló beállítási hibája miatt nem lehetséges az online időpontfoglalás. Kérjük keresse szaküzletünket a "+ mail +" email címen és jelezze nekünk ezt a hibát a telefonos időpontkérés során:"
+
+  const baseText = 'There is a configuration error in the appointment booker that prevents booking. Please contact our store on %mail% email address or book an appointment by calling our store (%tel%) and please mention the error then.'
+  const baseNoPhoneText = 'Error! Appointments can not be created! There is a configuration error in the appointment booker that prevents booking. Please contact our store on %mail% email address or book an appointment by calling us and please mention the error then.'
 
   const onCloseDetailedDescriptionModal = () => dispatch(`detailedDescriptionModalState/set`, false);
   return html`
@@ -23,8 +24,8 @@ export default (props) => {
         eyeExaminationProcesses == null ? html`<li class="list-group-item"><${Spinner}/></li>` :
           eyeExaminationProcesses.length ?
           eyeExaminationProcesses.map(item => html`<${EyeExaminationProcessListItem} item=${item} />`) : 
-          calendars.length ? html`<${ErrorMessage} message="${ !store['phone'] ? baseTextNoPhone : baseText} Nincs munkaóra beállítva a látásszakértőknek."/>`:
-          html`<${ErrorMessage} message="${ !store['phone'] ? baseTextNoPhone : baseText} Nincs naptár létrehozva az üzlethez."/>`
+          calendars.length ? html`<${ErrorMessage} message="${ !store['phone'] ? __(baseNoPhoneText, {mail: storeMail}) : __(baseText, {mail: storeMail, tel: storePhone})} ${__('There is no office hourse configured for this specialist.')}"/>`:
+          html`<${ErrorMessage} message="${ !store['phone'] ? __(baseNoPhoneText, {mail: storeMail}) : __(baseText, {mail: storeMail, tel: storePhone})} ${__('There is no calendar created for this store.')}"/>`
       }
     </ul>
 

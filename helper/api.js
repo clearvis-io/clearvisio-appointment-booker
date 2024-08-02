@@ -12,7 +12,7 @@ const api = {
     const {path, headers} = store.get().api;
     try {
       const response = await fetch(`${path}/${model}`, {headers: extendHeaders(headers)});
-      if (response.status < 200 || response.status > 299) { //TODO: nézzük meg response.ok az igaze a post, put kéréseinknél de nem oké a ezekkot
+      if (response.status < 200 || response.status > 299) {
         const e = new Error('Unexpected api response');
         e.code = response.status;
         

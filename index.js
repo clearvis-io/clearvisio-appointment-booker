@@ -173,23 +173,25 @@ export default class ClearvisioAppointmentBooker {
   async loadEyeExaminationProcesses({eyeExaminationProcessId}) {
     if (eyeExaminationProcessId) {
       try {
-        const  process = await api.get(this.store, `eye_examination_processes/${eyeExaminationProcessId}`);
-        return process
+        return [ await api.get(this.store, `eye_examination_processes/${eyeExaminationProcessId}`) ];
       } catch(error) {
-        if (error.code == 404){
+        if (error.code == 404) {
           this.store.dispatch('moduleState/set', 'error.missingConfiguredProcessId');
           return;
-        } 
+        } else {
+          return error;
+        }
       }
     }
-    var storeEntity = this.store.get().store;
-    var examination = await api.get(this.store, `eye_examination_processes?hasLength&chain=${storeEntity.chain['@id']}`);
-    if (examination.length == 0) {
-      this.store.dispatch('moduleState/set', 'error.noLenght');
+    const storeEntity = this.store.get().store;
+    const examinationProcesses = await api.get(this.store, `eye_examination_processes?hasLength&chain=${storeEntity.chain['@id']}`);
+
+    if (!examinationProcesses.length) {
+      this.store.dispatch('moduleState/set', 'error.noLength');
       return;
-    } else{
-      return examination;
     }
+    
+    return examinationProcesses;
   }
 
   async loadCalendars() {

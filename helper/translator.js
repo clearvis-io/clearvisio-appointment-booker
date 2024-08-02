@@ -97,7 +97,23 @@ const messages = {
     'Detailed description': 'Részletes leírás',
     'Morning': 'Délelőtt',
     'Afternoon': 'Délután',
-    'Evening': 'Este'
+    'Evening': 'Este',
+    'Error! Appointments can not be created! There is a configuration error in the appointment booker that prevents booking. Please contact our store on %mail% email address or book an appointment by calling us and please mention the error then.':
+      'Hiba! Időpontfoglalás nem lehetséges! Az időpontfoglaló beállítási hibája miatt nem lehetséges az online időpontfoglalás. Kérjük keresse szaküzletünket a %mail% email címen vagy jelezze nekünk ezt a hibát a telefonos időpontkérés során:',
+    'There is a configuration error in the appointment booker that prevents booking. Please call our store to book an appointment us and please mention the error then.':
+      'Az időpontfoglaló beállítási hibája miatt nem lehetséges az online időpontfoglalás. Kérjük keresse szaküzletünket és jelezze nekünk ezt a hibát a telefonos időpontkérés során: Nincs email cím beállítva a szaküzlethez.',
+    'There is a configuration error in the appointment booker that prevents booking. Please call our store (%tel%) to book an appointment us and please mention the error then: There is no email address configured for this store.':
+      'Az időpontfoglaló beállítási hibája miatt nem lehetséges az online időpontfoglalás. Kérjük keresse szaküzletünket a %tel% telefonszámon és jelezze nekünk ezt a hibát a telefonos időpontkérés során: Nincs email cím beállítva a szaküzlethez.',
+    'There is no calendar created for this store.': 'Nincs naptár létrehozva az üzlethez.',
+    'There is no office hourse configured for this specialist.': 'Nincs munkaóra beállítva a látásszakértőknek.',
+    'The eye examination process configured for this appointment booker has been removed.': 'Az időpontfoglalóban beállított vizsgálati protokollt időközben törölték.',
+    'There is no email address configured for this store.': 'Nincs email cím beállítva a szaküzlethez.',
+    'The lenght isn’t configured for the eye examination processes.': 'A vizsgálati protokollokhoz nincs időtartam megadva.',
+    'Invalid API key or inactive API user.': 'Hibás API kulcs vagy inaktív API felhasználó.',
+    'Invalid store code': 'Téves üzlet kód',
+    'Error! Appointments can not be created!': 'Hiba! Időpontfoglalás nem lehetséges!',
+    'There is a configuration error in the appointment booker that prevents booking. Please contact our store on %mail% email address or book an appointment by calling our store (%tel%) and please mention the error then.':
+      'Az időpontfoglaló beállítási hibája miatt nem lehetséges az online időpontfoglalás. Kérjük keresse szaküzletünket a %tel% telefonszámon vagy %email% email címen és jelezze nekünk ezt a hibát a telefonos időpontkérés során:',
   },
   ro: {
     "Are you sure you want to cancel this appointment?":
@@ -189,7 +205,23 @@ const messages = {
     'change date': 'modificare dată',
     'Morning': 'Înainte de masă',
     'Afternoon': 'După masă',
-    'Evening': 'Seara'
+    'Evening': 'Seara',
+    'Error! Appointments can not be created! There is a configuration error in the appointment booker that prevents booking. Please contact our store on %mail% email address or book an appointment by calling us and please mention the error then.':
+      'Eroare! Programarea nu se poate rezerva! Rezervarea online a programărilor nu este posibilă din cauza unei erori de configurare în sistemul de rezervare a programărilor. Vă rugăm să contactați magazinul la adresa de e-mail %mail% și să ne informați despre această eroare în timpul solicitării de programare telefonică',
+    'There is a configuration error in the appointment booker that prevents booking. Please call our store to book an appointment us and please mention the error then.':
+      'Rezervarea online nu este posibilă din cauza unei erori de configurare în calendarul de rezervare. Vă rugăm contactați magazinul, informați-ne despre această eroare în timpul solicitării de programare telefonică: Nu a fost setată nicio adresă de e-mail pentru magazinul de specialitate.',
+    'There is a configuration error in the appointment booker that prevents booking. Please call our store (%tel%) to book an appointment us and please mention the error then: There is no email address configured for this store.':
+      'Rezervarea online nu este posibilă din cauza unei erori de configurare în calendarul de rezervare. Vă rugăm contactați magazinul telefonic ( %tel% ), informați-ne despre această eroare în timpul solicitării de programare telefonică: Nu a fost setată nicio adresă de e-mail pentru magazinul de specialitate.',
+    'There is no calendar created for this store.': 'Nu a fost creat calendar pentru acest magazin.',
+    'There is no office hourse configured for this specialist.': 'Nu există ore de lucru pentru specialiștii în vedere.',
+    'The eye examination process configured for this appointment booker has been removed.': 'Protocolul de examinare stabilit la programare a fost anulat între timp.',
+    'There is no email address configured for this store.': 'Nu există nicio adresă de e-mail setată pentru magazinul specializat.',
+    'The lenght isn’t configured for the eye examination processes.': 'Nu este specificată durată pentru protocoalele de examinare.',
+    'Invalid API key or inactive API user.': 'Cheie API greșită sau utilizator API inactiv.',
+    'Invalid store code': 'Cod magazin greșit',
+    'Error! Appointments can not be created!': 'Eroare! Programarea nu se poate rezerva!',
+    'There is a configuration error in the appointment booker that prevents booking. Please contact our store on %mail% email address or book an appointment by calling our store (%tel%) and please mention the error then.':
+      'Eroare! Programarea nu se poate rezerva! Rezervarea online a programărilor nu este posibilă din cauza unei erori de configurare în sistemul de rezervare a programărilor. Vă rugăm să contactați magazinul la numărul de telefon %tel% sau adresa de e-mail %email% și să ne raportați această eroare atunci când solicitați o programare prin telefon:',
   },
   hr: {
     "Are you sure you want to cancel this appointment?": "Jeste li sigurni da želite otkazati ovaj termin?",
@@ -279,7 +311,23 @@ const messages = {
     'change date': 'promijeni termin',
     'Morning': 'Prijepodne',
     'Afternoon': 'Poslijepodne',
-    'Evening': 'Večer'
+    'Evening': 'Večer',
+    'Error! Appointments can not be created! There is a configuration error in the appointment booker that prevents booking. Please contact our store on %mail% email address or book an appointment by calling us and please mention the error then.':
+      'Greška! Rezervacija termina nije moguća! Online rezervacija termina nije moguća zbog greške u konfiguraciji sustava za rezervaciju termina. Kontaktirajte našu optiku na e-mail adresu %mail% i prijavite nam ovu pogrešku tijekom telefonskog zahtjeva za termin.',
+    'There is a configuration error in the appointment booker that prevents booking. Please call our store to book an appointment us and please mention the error then.':
+      'Online rezervacija termina nije moguća zbog greške u konfiguraciji sustava za rezervaciju termina. Kontaktirajte našu optiku i prijavite nam ovu pogrešku tijekom telefonskog zahtjeva za termin. Nije postavljena e-mail adresa za optiku.',
+    'There is a configuration error in the appointment booker that prevents booking. Please call our store (%tel%) to book an appointment us and please mention the error then: There is no email address configured for this store.':
+      'Online rezervacija termina nije moguća zbog greške u konfiguraciji sustava za rezervaciju termina. Nazovite našu optiku na telefonski broj %tel% i prijavite nam ovu pogrešku tijekom telefonskog zahtjeva za termin. Nije postavljena e-mail adresa za optiku.',
+    'There is no calendar created for this store.': 'Kalendar nije napravljen za optiku.',
+    'There is no office hourse configured for this specialist.': 'Za specijaliste za vid nije određeno radno vrijeme.',
+    'The eye examination process configured for this appointment booker has been removed.': 'Zadan protokol pregleda kod rezervacija termina je u međuvremenu izbrisan.',
+    'There is no email address configured for this store.': 'Nije postavljena e-mail adresa za optiku.',
+    'The lenght isn’t configured for the eye examination processes.': 'Kod protokola pregleda nije navedeno trajanje.',
+    'Invalid API key or inactive API user.': 'Loš API ključ ili neaktivan API korisnik.',
+    'Invalid store code': 'Pogrešan kod optike',
+    'Error! Appointments can not be created!': 'Greška! Rezervacija termina nije moguća!',
+    'There is a configuration error in the appointment booker that prevents booking. Please contact our store on %mail% email address or book an appointment by calling our store (%tel%) and please mention the error then.':
+      'Online rezervacija termina nije moguća zbog greške u konfiguraciji sustava za rezervaciju termina. Kontaktirajte našu optiku na %tel% telefonski broj ili na %email% email adresu i  prijavite nam ovu pogrešku tijekom telefonskog zahtjeva za termin. ',
   },
   en: {
     '@abbrSunday': 'Sun',

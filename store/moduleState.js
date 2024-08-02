@@ -1,4 +1,4 @@
-const availableStates = ['idle', 'loading', 'error', 'success', 'error.storeCode', 'error.403', 'error.noLenght', 'error.storeEmail', 'error.missingConfiguredProcessId']
+const availableStates = ['idle', 'loading', 'error', 'success', 'error.storeCode', 'error.403', 'error.noLength', 'error.storeEmail', 'error.missingConfiguredProcessId']
 
 export function moduleState (store) {
   store.on('@init', () => ({ moduleState: 'loading' }))

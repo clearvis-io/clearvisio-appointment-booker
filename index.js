@@ -178,9 +178,8 @@ export default class ClearvisioAppointmentBooker {
         if (error.code == 404) {
           this.store.dispatch('moduleState/set', 'error.missingConfiguredProcessId');
           return;
-        } else {
-          return error;
         }
+        throw new Error(error);
       }
     }
     const storeEntity = this.store.get().store;

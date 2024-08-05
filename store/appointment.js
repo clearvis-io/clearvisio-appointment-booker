@@ -9,6 +9,10 @@ export function appointment (store) {
     return { showAppointmentComment };
   })
 
+  store.on('appointmentCommentRequired/set', (previousValue, appointmentCommentRequired) => {
+    return { appointmentCommentRequired };
+  })
+
   store.on('constantAppointmentCommentText/set', (previousValue, constantAppointmentCommentText) => {
     return { constantAppointmentCommentText };
   })

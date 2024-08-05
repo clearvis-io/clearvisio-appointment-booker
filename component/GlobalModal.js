@@ -13,7 +13,13 @@ export default (props) => {
     storeMail = store["email"]; 
   }
 
-  const onClose = () => dispatch('close');
+  const handleModalApprove = () => {
+    if (style == 'embedded' || style == 'embedded-safe') {
+      dispatch('resetStore');
+    } else {
+      dispatch('close');
+    }
+  } 
 
   const baseText = 'There is a configuration error in the appointment booker that prevents booking. Please contact our store on %mail% email address or book an appointment by calling our store (%tel%) and please mention the error then.'
   const baseNoPhoneText = 'Error! Appointments can not be created! There is a configuration error in the appointment booker that prevents booking. Please contact our store on %mail% email address or book an appointment by calling us and please mention the error then.'
@@ -34,7 +40,7 @@ export default (props) => {
             ${__('If you have any further questions, please contact us through our customer service.')}
           "
           approveButtonLabel="OK"
-          onApprove=${onClose}/>
+          onApprove=${handleModalApprove}/>
       `;
     case 'error':
       return html`

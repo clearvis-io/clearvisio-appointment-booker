@@ -1,12 +1,11 @@
 import {useStoreon} from 'storeon/preact'
 import {html, availableCalendarFilter, translator as __} from '../helper/index.js'
 import CalendarListItem from './CalendarListItem.js'
-import Spinner from './Spinner.js'
+import CalendarListPlaceHolder from './CalendarListPlaceHolder.js'
 
 export default (props) => {
   const {appointment, showFirstAvailableUserItem, dispatch} = useStoreon('appointment', 'showFirstAvailableUserItem');
   const calendars = availableCalendarFilter(useStoreon('calendars', 'appointment', 'calendarRoleCheckMode'));
-
   const firstAvailableUser = {
     user: {
       name: __('First free'),
@@ -19,7 +18,7 @@ export default (props) => {
   return html`
     <ul class="list-group">
       ${
-        appointment.eye_examination_process ?
+        appointment.eye_examination_process && calendars?
         (
           calendars.length ?
             html`
@@ -34,8 +33,8 @@ export default (props) => {
                 </button>
               </li>
           `
-        ) :
-        ''
+        ) : html`<${CalendarListPlaceHolder}/>`
+
       }
     </ul>
   `;

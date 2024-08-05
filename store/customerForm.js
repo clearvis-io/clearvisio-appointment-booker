@@ -17,18 +17,25 @@ const validateEmail = (value, fieldConfig) => {
 }
 
 export function customerForm (store) {
-  store.on('@init', () => ({ customerForm: {}, customerFormGlobalErrors: [] }))
+  store.on('@init', () => ({ customerForm: {}, commentError: null, customerFormGlobalErrors: [] }))
 
-  store.on('customerForm/set', ({customerForm, customerFormGlobalErrors}, newValue) => {
+  store.on('customerForm/set', ({customerForm, customerFormGlobalErrors, commentError}, newValue) => {
     return {
       customerForm: Object.assign(customerForm, newValue.customerForm || {}),
-      customerFormGlobalErrors: newValue.customerFormGlobalErrors || customerFormGlobalErrors
+      customerFormGlobalErrors: newValue.customerFormGlobalErrors || customerFormGlobalErrors,
+      commentError: newValue.commentError === undefined ? commentError : newValue.commentError
     };
   });
 
-  store.on('customerForm/validateAndNext', ({customerForm, appointment}) => {
+  store.on('customerForm/validateAndNext', ({customerForm, appointment, appointmentCommentRequired}) => {
     const {customer} = appointment;
     var foundInvalidField = false;
+    var commentError = null;
+
+    if (appointmentCommentRequired && !(appointment.comment || '').trim()) {
+      foundInvalidField = true;
+      commentError = 'This field is required.';
+    }
 
     Object.keys(customerForm).forEach((fieldId) => {
       customerForm[fieldId].errors = [];
@@ -47,7 +54,7 @@ export function customerForm (store) {
     })
 
     if (foundInvalidField) {
-      return {customerForm, customerFormGlobalErrors: []};
+      return {customerForm, customerFormGlobalErrors: [], commentError};
     }
 
     store.dispatch('currentStep/next');

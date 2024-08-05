@@ -31,10 +31,10 @@ const requestMoreForThisMonthIfNecesarry = async (store, nextFreeSlotsForDates) 
 
   const lastKey = Object.keys(nextFreeSlotsForDates).sort().pop();
   const lastObj = nextFreeSlotsForDates[lastKey];
-  
+
   const regex = /(?<=^(?:[^-]*-){2})(.*)/;
   const lastDateParts = lastKey.match(regex)[1].split('-');
-  
+
   var lastDate = new Date(lastDateParts[0], parseInt(lastDateParts[1]) - 1, parseInt(lastDateParts[2]));
 
   if (lastObj.status !== 'incomplete') {
@@ -65,12 +65,12 @@ const requestNextFreeSlots = async (store, date) => {
   if (nextFreeSlots.length == 0) {
     const endOfWeek = new Date(date);
     endOfWeek.setDate(date.getDate() + 6);
-    store.dispatch('nextFreeSlots/add', createEmptyNextFreeSlotsForDates(store, date, endOfWeek))
+    store.dispatch('nextFreeSlots/add', creatNextFreeSlotsForDates(store, date, endOfWeek))
     return requestNextFreeSlots(store, endOfWeek);
   }
 
   const lastDate = new Date(nextFreeSlots[nextFreeSlots.length - 1].start);
-  const nextFreeSlotsForDates = createEmptyNextFreeSlotsForDates(store, date, lastDate);
+  const nextFreeSlotsForDates = creatNextFreeSlotsForDates(store, date, lastDate);
 
   var previousKey = null;
   for (let i = 0; i < nextFreeSlots.length; i++) {
@@ -78,17 +78,36 @@ const requestNextFreeSlots = async (store, date) => {
     const start = new Date(nextFreeSlot.start);
     const key = createNextFreeSlotsForDateKey(appointment, selectedCalendar, start);
 
-    if ((
-          nextFreeSlotsForDates[key].length &&
-          nextFreeSlotsForDates[key][nextFreeSlotsForDates[key].length - 1].start == nextFreeSlot.start
-        ) || start < firstEligibleTime) {
+    if (start < firstEligibleTime) {
       continue;
     }
 
-    nextFreeSlotsForDates[key].status = 'incomplete';
+    for (let j = 0; j < (nextFreeSlotsForDates[key].slots || []).length; j++) {
+      if (nextFreeSlotsForDates[key].slots[j]['@id'] == nextFreeSlot['@id']) {
+        nextFreeSlotsForDates[key].status = 'complete';
+        continue;
+      }
+    }
+
+    var found = false;
+    for (let previousSlot of nextFreeSlotsForDates[key].slots || []) {
+      if (previousSlot['@id'] == nextFreeSlot['@id'] || previousSlot.start == nextFreeSlot.start) {
+        found = true;
+        break;
+      }
+    }
+
+    if (found) {
+      continue;
+    }
+
+    if (nextFreeSlotsForDates[key].status == 'empty') {
+      nextFreeSlotsForDates[key].status = 'incomplete';
+    }
     if (!nextFreeSlotsForDates[key].slots) {
       nextFreeSlotsForDates[key].slots = [];
     }
+
     nextFreeSlotsForDates[key].slots.push(nextFreeSlot);
     if (previousKey && previousKey != key) {
       nextFreeSlotsForDates[previousKey].status = 'complete';
@@ -122,8 +141,8 @@ const createNextFreeSlotRequest = (store, date) => {
   return Object.keys(request).map((key) => `${key}=${request[key]}`).join('&');
 }
 
-const createEmptyNextFreeSlotsForDates = (store, start, end) => {
-  const {appointment, selectedCalendar} = store.get();
+const creatNextFreeSlotsForDates = (store, start, end) => {
+  const {appointment, selectedCalendar, nextFreeSlots: previouslyStoredNextFreeStlots} = store.get();
   const date = new Date(start);
   date.setHours(0);
   date.setMinutes(0);
@@ -131,7 +150,8 @@ const createEmptyNextFreeSlotsForDates = (store, start, end) => {
   const result = {};
 
   while (date <= end) {
-    result[createNextFreeSlotsForDateKey(appointment, selectedCalendar, date)] = {status: 'empty'};
+    const key = createNextFreeSlotsForDateKey(appointment, selectedCalendar, date);
+    result[key] = previouslyStoredNextFreeStlots[key] || {status: 'empty'};
     date.setDate(date.getDate() + 1);
   }
 

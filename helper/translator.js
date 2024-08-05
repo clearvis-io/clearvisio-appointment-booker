@@ -114,6 +114,8 @@ const messages = {
     'Error! Appointments can not be created!': 'Hiba! Időpontfoglalás nem lehetséges!',
     'There is a configuration error in the appointment booker that prevents booking. Please contact our store on %mail% email address or book an appointment by calling our store (%tel%) and please mention the error then.':
       'Az időpontfoglaló beállítási hibája miatt nem lehetséges az online időpontfoglalás. Kérjük keresse szaküzletünket a %tel% telefonszámon vagy %email% email címen és jelezze nekünk ezt a hibát a telefonos időpontkérés során:',
+    'Store selection': 'Üzlet választása'
+
   },
   ro: {
     "Are you sure you want to cancel this appointment?":
@@ -222,6 +224,7 @@ const messages = {
     'Error! Appointments can not be created!': 'Eroare! Programarea nu se poate rezerva!',
     'There is a configuration error in the appointment booker that prevents booking. Please contact our store on %mail% email address or book an appointment by calling our store (%tel%) and please mention the error then.':
       'Eroare! Programarea nu se poate rezerva! Rezervarea online a programărilor nu este posibilă din cauza unei erori de configurare în sistemul de rezervare a programărilor. Vă rugăm să contactați magazinul la numărul de telefon %tel% sau adresa de e-mail %email% și să ne raportați această eroare atunci când solicitați o programare prin telefon:',
+    'Store selection': 'Selectare magazin'
   },
   hr: {
     "Are you sure you want to cancel this appointment?": "Jeste li sigurni da želite otkazati ovaj termin?",
@@ -328,6 +331,7 @@ const messages = {
     'Error! Appointments can not be created!': 'Greška! Rezervacija termina nije moguća!',
     'There is a configuration error in the appointment booker that prevents booking. Please contact our store on %mail% email address or book an appointment by calling our store (%tel%) and please mention the error then.':
       'Online rezervacija termina nije moguća zbog greške u konfiguraciji sustava za rezervaciju termina. Kontaktirajte našu optiku na %tel% telefonski broj ili na %email% email adresu i  prijavite nam ovu pogrešku tijekom telefonskog zahtjeva za termin. ',
+    'Store selection': 'Odabir trgovine'
   },
   en: {
     '@abbrSunday': 'Sun',

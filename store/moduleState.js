@@ -16,4 +16,11 @@ export function moduleState (store) {
 
     return { moduleState: newValue };
   })
+
+  store.on('eyeExaminationProcesses/set', ({ moduleState }, newProcesses) => {
+    if (moduleState !== 'idle') {
+        store.dispatch('moduleState/set', 'idle');
+        store.dispatch('bookerInit');
+    }
+  });
 }

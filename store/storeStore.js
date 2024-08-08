@@ -8,6 +8,10 @@ export function storeStore (store) {
       requestStores(newStore, storeSelection);
     }
 
+  store.on('store/set', (perviousStoreValue, newStore) => {
+    if (!newStore['email']){
+      store.dispatch('moduleState/set', 'error.storeEmail')
+    }
     return { store: newStore };
   })
   

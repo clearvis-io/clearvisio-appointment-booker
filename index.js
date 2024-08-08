@@ -190,7 +190,7 @@ export default class ClearvisioAppointmentBooker {
       this.store.dispatch('moduleState/set', 'error.noLength');
       return;
     }
-    
+
     return examinationProcesses;
   }
 
@@ -198,7 +198,8 @@ export default class ClearvisioAppointmentBooker {
     return await api.get(this.store,
       `appointment_calendars?groups[]=userProfilePictureRead&store=${this.store.get().store['@id']}`
     );
-    
+  }
+
   async loadCSSFiles(cssFiles, shadowRoot) {
     for (let i = 0; i < cssFiles.length; i++) {
       try {

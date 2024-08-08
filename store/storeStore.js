@@ -8,19 +8,19 @@ export function storeStore (store) {
       requestStores(newStore, storeSelection);
     }
 
-  store.on('store/set', (perviousStoreValue, newStore) => {
-    if (!newStore['email']){
+    if (!newStore.email) {
       store.dispatch('moduleState/set', 'error.storeEmail')
     }
+
     return { store: newStore };
   })
-  
+
   async function requestStores({chain}, storeSelection) {
     store.dispatch('stores/set', await api.get(
       store,
       storeSelection == 'all' ? 'stores' : `stores?chain=${chain['@id']}`
     ));
-  } 
+  }
 
   store.on('stores/set', (previousValue, stores) => {
     return {stores};

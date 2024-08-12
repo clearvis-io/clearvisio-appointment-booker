@@ -4,13 +4,13 @@ import SimpleModal from './SimpleModal.js'
 import ErrorModal from './ErrorModal.js'
 
 export default (props) => {
-  const { moduleState, appointment, dispatch, store} = useStoreon('moduleState', 'appointment', 'store');
+  const { moduleState, appointment, dispatch, store, style} = useStoreon('moduleState', 'appointment', 'store', 'style');
 
   var storePhone, storeMail;
 
-  if (store != null) { 
+  if (store != null) {
     storePhone = store["phone"];
-    storeMail = store["email"]; 
+    storeMail = store["email"];
   }
 
   const handleModalApprove = () => {
@@ -19,7 +19,7 @@ export default (props) => {
     } else {
       dispatch('close');
     }
-  } 
+  }
 
   const baseText = 'There is a configuration error in the appointment booker that prevents booking. Please contact our store on %mail% email address or book an appointment by calling our store (%tel%) and please mention the error then.'
   const baseNoPhoneText = 'Error! Appointments can not be created! There is a configuration error in the appointment booker that prevents booking. Please contact our store on %mail% email address or book an appointment by calling us and please mention the error then.'

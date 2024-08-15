@@ -71,9 +71,5 @@ export default (props) => {
       return html`
         <${ErrorModal} content="${ !storePhone ? __(baseNoPhoneText, {mail: storeMail}) : __(baseText, {mail: storeMail, tel: storePhone})} ${__('The eye examination process configured for this appointment booker has been removed.')}"/>
       `;
-    default:
-      return html`
-        <${SimpleModal} modalClasses="modal-fullscreen" modalStateStore="globalModalState"/>
-      `;
   }
 }

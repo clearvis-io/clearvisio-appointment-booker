@@ -10,7 +10,7 @@ export default (props) => {
     
   const onCloseDetailedDescriptionModal = () => dispatch(`detailedDescriptionModalState/set`, false);
   
-  if (eyeExaminationProcesses == null || !store) {
+  if (eyeExaminationProcesses.length == 0 || !store) {
     return html`
       <ul class="list-group">
         <li class="list-group-item"><${Spinner}/></li>

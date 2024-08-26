@@ -6,6 +6,10 @@ import ErrorModal from './ErrorModal.js'
 export default (props) => {
   const { moduleState, appointment, dispatch, store, style} = useStoreon('moduleState', 'appointment', 'store', 'style');
 
+  if (!moduleState.startsWith("success") && !moduleState.startsWith("error")) {
+    return;
+  }
+
   var storePhone, storeMail;
 
   if (store != null) {
@@ -72,8 +76,6 @@ export default (props) => {
         <${ErrorModal} content="${ !storePhone ? __(baseNoPhoneText, {mail: storeMail}) : __(baseText, {mail: storeMail, tel: storePhone})} ${__('The eye examination process configured for this appointment booker has been removed.')}"/>
       `;
     default:
-      return html`
-        <${SimpleModal} modalClasses="modal-fullscreen" modalStateStore="globalModalState"/>
-      `;
+      throw new Error(`There was an unexpected error: ${moduleState}`);
   }
 }

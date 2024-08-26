@@ -6,7 +6,7 @@ import ErrorModal from './ErrorModal.js'
 export default (props) => {
   const { moduleState, appointment, dispatch, store, style} = useStoreon('moduleState', 'appointment', 'store', 'style');
 
-  if ( !moduleState.startsWith("success") && !moduleState.startsWith("error")) {
+  if (!moduleState.startsWith("success") && !moduleState.startsWith("error")) {
     return;
   }
 

@@ -76,6 +76,6 @@ export default (props) => {
         <${ErrorModal} content="${ !storePhone ? __(baseNoPhoneText, {mail: storeMail}) : __(baseText, {mail: storeMail, tel: storePhone})} ${__('The eye examination process configured for this appointment booker has been removed.')}"/>
       `;
     default:
-      throw new Error('There was an unexpected error');
+      throw new Error(`There was an unexpected error: ${moduleState}`);
   }
 }

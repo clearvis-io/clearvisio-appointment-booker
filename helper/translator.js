@@ -114,7 +114,8 @@ const messages = {
     'Error! Appointments can not be created!': 'Hiba! Időpontfoglalás nem lehetséges!',
     'There is a configuration error in the appointment booker that prevents booking. Please contact our store on %mail% email address or book an appointment by calling our store (%tel%) and please mention the error then.':
       'Az időpontfoglaló beállítási hibája miatt nem lehetséges az online időpontfoglalás. Kérjük keresse szaküzletünket a %tel% telefonszámon vagy %email% email címen és jelezze nekünk ezt a hibát a telefonos időpontkérés során:',
-    'Store selection': 'Üzlet választása'
+    'Store selection': 'Üzlet választása',
+    'There are no eye examination processes configured in the store network or the length of them is not configured.': 'Nincs vizsgálati protokoll a bolthálózatban, vagy a hossza nincs beállítva.'
 
   },
   ro: {

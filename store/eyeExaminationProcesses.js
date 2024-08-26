@@ -34,7 +34,7 @@ export function eyeExaminationProcesses (store) {
     } else {
       processes = await api.get(store, `eye_examination_processes?hasLength&chain=${storeEntity.chain['@id']}`);
       if (processes.length == 0) {
-        store.dispatch('moduleState/set', 'error.noLength');
+        store.dispatch('moduleState/set', 'error.noProcessOrLength');
       }
     }
 

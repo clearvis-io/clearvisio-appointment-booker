@@ -62,6 +62,10 @@ export default (props) => {
       return html`
         <${ErrorModal} content="${ !storePhone ? __(baseNoPhoneText, {mail: storeMail}) : __(baseText, {mail: storeMail, tel: storePhone})} ${__("The lenght isn’t configured for the eye examination processes.")}"/>
       `;
+    case 'error.noProcessOrLength':
+      return html`
+        <${ErrorModal} content="${ !storePhone ? __(baseNoPhoneText, {mail: storeMail}) : __(baseText, {mail: storeMail, tel: storePhone})} ${__('There are no eye examination processes configured in the store network or the length of them is not configured.')}"/>
+      `;
     case 'error.storeEmail':
       return html`
         <${ErrorModal} content="${ !storePhone ? __(

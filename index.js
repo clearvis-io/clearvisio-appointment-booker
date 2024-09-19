@@ -127,6 +127,9 @@ export default class ClearvisioAppointmentBooker {
 
     store.dispatch('medicalConsent/set', options.medicalConsent);
 
+    store.dispatch('confirmationType/set', options.confirmationType ?? 'email');
+    store.dispatch('reminderType/set', options.reminderType ?? 'email');
+
     this.createElementAndRender(options);
   }
 

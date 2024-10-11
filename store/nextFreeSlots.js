@@ -10,7 +10,7 @@ const calendarRangeLoaded = (storeValue, date) => {
     new Date(year, month + 1, 0).getDate();
 
   for (let i = selectedDate.getDate(); i <= lastRequiredDayOfMonth; i++) {
-    const freeSlot = nextFreeSlots[createNextFreeSlotsForDateKey(appointment, selectedCalendar, new Date(year, month, i))]
+    const freeSlot = nextFreeSlots[createNextFreeSlotsForDateKey(appointment, selectedCalendar, new Date(year, month, i))];
     if (freeSlot == undefined || freeSlot.status == 'incomplete') {
       return false;
     }
@@ -19,10 +19,37 @@ const calendarRangeLoaded = (storeValue, date) => {
   return true;
 }
 
+const setSelectedDateIfInitialNextFreeSlotsLoading = (store) => {
+  const { initialNextFreeSlotsLoading, selectedDate, nextFreeSlots, appointment, selectedCalendar} = store.get();
+
+  store.dispatch('nextFreeSlotLoading/set', false);
+
+  if (!initialNextFreeSlotsLoading) {
+    return;
+  }
+
+  if (
+    nextFreeSlots[createNextFreeSlotsForDateKey(appointment, selectedCalendar, selectedDate)].status == 'complete'
+  ) { return; }
+
+  const date = new Date(selectedDate);
+
+  while (nextFreeSlots[createNextFreeSlotsForDateKey(appointment, selectedCalendar, date)]) {
+    const freeSlot = nextFreeSlots[createNextFreeSlotsForDateKey(appointment, selectedCalendar, date)];
+
+    if (freeSlot.status == 'complete') {
+      store.dispatch('selectedDate/set', date);
+      return;
+    }
+
+    date.setDate(date.getDate() + 1);
+  }}
+
 const requestMoreForThisMonthIfNecesarry = async (store, nextFreeSlotsForDates) => {
   const {selectedDate, calendarRange} = store.get();
 
   if (calendarRange == 'fiveDays') {
+    setSelectedDateIfInitialNextFreeSlotsLoading(store);
     return;
   }
 
@@ -43,7 +70,10 @@ const requestMoreForThisMonthIfNecesarry = async (store, nextFreeSlotsForDates) 
 
   if (lastDate <= new Date(year, month + 1, 0)) {
     requestNextFreeSlots(store, lastDate);
+  } else {
+    setSelectedDateIfInitialNextFreeSlotsLoading(store);
   }
+  
 }
 
 const requestNextFreeSlots = async (store, date) => {
@@ -53,7 +83,7 @@ const requestNextFreeSlots = async (store, date) => {
 
   if (!appointment.eye_examination_process || dateIsTooFarFromSelectedDate(store, date) ||
     calendarRangeLoaded(store.get(), date)) {
-      store.dispatch('nextFreeSlotLoading/set', false);
+      setSelectedDateIfInitialNextFreeSlotsLoading(store);
       return;
   }
 

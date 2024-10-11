@@ -4,15 +4,15 @@ import {html, datesMatch, createNextFreeSlotsForDateKey, translator as __} from 
 
 
 export default ({day}) => {
-  const { selectedCalendar, selectedDate, nextFreeSlots, appointment, dispatch} =
-    useStoreon('selectedCalendar', 'appointment', 'nextFreeSlots', 'selectedDate')
+  const { selectedCalendar, selectedDate, nextFreeSlots, appointment, dispatch, firstEligibleDate} =
+    useStoreon('selectedCalendar', 'appointment', 'nextFreeSlots', 'selectedDate', 'firstEligibleDate')
   const nextFreeSlotsOfDay = nextFreeSlots[createNextFreeSlotsForDateKey(appointment, selectedCalendar, day)]
 
   const handleOnClick = (day) => {
     dispatch('selectedDate/set', day);
   };
-  
-  if (day < new Date() || (nextFreeSlotsOfDay && nextFreeSlotsOfDay.status == 'empty')) {
+
+  if (day < new Date(firstEligibleDate).setHours(0,0,0,0) || (nextFreeSlotsOfDay && nextFreeSlotsOfDay.status == 'empty')) {
     return html`<td class='table-active disabled'>${day.getDate()}</td>`;
   }
 

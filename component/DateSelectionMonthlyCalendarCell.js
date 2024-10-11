@@ -12,7 +12,7 @@ export default ({day}) => {
     dispatch('selectedDate/set', day);
   };
 
-  if (day < firstEligibleDate.setHours(0,0,0,0) || (nextFreeSlotsOfDay && nextFreeSlotsOfDay.status == 'empty')) {
+  if (day < new Date(firstEligibleDate).setHours(0,0,0,0) || (nextFreeSlotsOfDay && nextFreeSlotsOfDay.status == 'empty')) {
     return html`<td class='table-active disabled'>${day.getDate()}</td>`;
   }
 

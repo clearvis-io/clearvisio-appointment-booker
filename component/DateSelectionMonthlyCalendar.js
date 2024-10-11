@@ -55,8 +55,6 @@ export default () => {
   }
 
   const previusMonth = () => {
-    dispatch('selectedDate/set', new Date(year, month - 1, 1));
-
     const daysInPreviusMonth = new Date(year, month, 0).getDate();
 
     for (let i = 1; i <= daysInPreviusMonth; i++) {
@@ -66,6 +64,8 @@ export default () => {
         return;
       }
     }
+
+    dispatch('selectedDate/set', new Date(year, month - 1, 1));
   }
   
   return html`

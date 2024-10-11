@@ -1,6 +1,6 @@
 import {useStoreon} from 'storeon/preact'
 import DateSelectionCarouselItem from './DateSelectionCarouselItem.js'
-import {html, createDateGroups, createNextFreeSlotsForDateKey, translator as __} from '../helper/index.js'
+import {html, createDateGroups, translator as __} from '../helper/index.js'
 
 const months = [
   'January',
@@ -18,7 +18,7 @@ const months = [
 ];
 
 export default (props) => {
-  const { selectedDate, dispatch, firstEligibleDate } =
+  const { selectedDate, firstEligibleDate } =
     useStoreon('selectedDate', 'firstEligibleDate');
 
   const dateGroups = createDateGroups(firstEligibleDate);

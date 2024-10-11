@@ -20,7 +20,7 @@ const calendarRangeLoaded = (storeValue, date) => {
 }
 
 const setSelectedDateIfInitialNextFreeSlotsLoading = (store) => {
-  const { initialNextFreeSlotsLoading, selectedDate, nextFreeSlots, calendarRange} = store.get();
+  const { initialNextFreeSlotsLoading, selectedDate, nextFreeSlots, appointment, selectedCalendar} = store.get();
 
   store.dispatch('nextFreeSlotLoading/set', false);
 
@@ -29,13 +29,13 @@ const setSelectedDateIfInitialNextFreeSlotsLoading = (store) => {
   }
 
   if (
-    nextFreeSlots[createNextFreeSlotsForDateKey(store.get().appointment, store.get().selectedCalendar, selectedDate)].status == 'complete'
+    nextFreeSlots[createNextFreeSlotsForDateKey(appointment, selectedCalendar, selectedDate)].status == 'complete'
   ) { return; }
 
   const date = new Date(selectedDate);
 
-  while(nextFreeSlots[createNextFreeSlotsForDateKey(store.get().appointment, store.get().selectedCalendar, date)]) {
-    const freeSlot = nextFreeSlots[createNextFreeSlotsForDateKey(store.get().appointment, store.get().selectedCalendar, date)];
+  while (nextFreeSlots[createNextFreeSlotsForDateKey(appointment, selectedCalendar, date)]) {
+    const freeSlot = nextFreeSlots[createNextFreeSlotsForDateKey(appointment, selectedCalendar, date)];
 
     if (freeSlot.status == 'complete') {
       store.dispatch('selectedDate/set', date);

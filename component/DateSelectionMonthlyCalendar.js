@@ -51,10 +51,21 @@ export default () => {
 
   const nextMonth = () => {
     dispatch('selectedDate/set', new Date(year, month + 1, 1));
+    dispatch('initialNextFreeSlotsLoading/set', true);
   }
 
   const previusMonth = () => {
-    dispatch('selectedDate/set', new Date(year, month, 0));
+    dispatch('selectedDate/set', new Date(year, month - 1, 1));
+
+    const daysInPreviusMonth = new Date(year, month, 0).getDate();
+
+    for (let i = 1; i <= daysInPreviusMonth; i++) {
+      const freeSlot = nextFreeSlots[createNextFreeSlotsForDateKey(appointment, selectedCalendar, new Date(year, month - 1, i))];
+      if (freeSlot.status == 'complete') {
+        dispatch('selectedDate/set', new Date(year, month - 1, i));
+        return;
+      }
+    }
   }
   
   return html`

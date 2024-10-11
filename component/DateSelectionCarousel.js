@@ -1,7 +1,6 @@
 import {useStoreon} from 'storeon/preact'
 import DateSelectionCarouselItem from './DateSelectionCarouselItem.js'
 import {html, createDateGroups, createNextFreeSlotsForDateKey, translator as __} from '../helper/index.js'
-import { useEffect } from 'preact/hooks';
 
 const months = [
   'January',
@@ -19,34 +18,13 @@ const months = [
 ];
 
 export default (props) => {
-  const { selectedDate, appointment, dispatch, nextFreeSlots, selectedCalendar, firstEligibleDate, calendarInitialized } =
-    useStoreon('selectedDate', 'appointment', 'nextFreeSlots', 'selectedCalendar', 'firstEligibleDate', 'calendarInitialized');
+  const { selectedDate, dispatch, firstEligibleDate } =
+    useStoreon('selectedDate', 'firstEligibleDate');
 
   const dateGroups = createDateGroups(firstEligibleDate);
 
   const onPrevious = () => dispatch('selectedDate/set', previousDateGroup[4]);
   const onNext = () => dispatch('selectedDate/set', nextDateGroup[0]);
-
-  var date = new Date(Date.now() + 864e5), key, found = false;
-
-  while (nextFreeSlots[key = createNextFreeSlotsForDateKey(appointment, selectedCalendar, date)]) {
-    if (nextFreeSlots[key].status !== 'empty') {
-      found = true;
-      break;
-    }
-
-    date.setDate(date.getDate() + 1);
-  }
-
-  if (found) {
-    useEffect(() => {
-      if (firstEligibleDate && !calendarInitialized) {
-        console.log('BENNE', date)
-        dispatch('selectedDate/set', date);
-        dispatch('calendarInitialized/set',true);
-      }
-    }, [date]);
-  }
 
   var previousDateGroup, currentDateGroup, nextDateGroup;
   for (let i = 0; i < dateGroups.length; i++) {

@@ -37,7 +37,7 @@ const setSelectedDateIfInitialNextFreeSlotsLoading = (store) => {
   while (nextFreeSlots[createNextFreeSlotsForDateKey(appointment, selectedCalendar, date)]) {
     const freeSlot = nextFreeSlots[createNextFreeSlotsForDateKey(appointment, selectedCalendar, date)];
 
-    if (freeSlot.status == 'complete') {
+    if (freeSlot.status == 'complete' || freeSlot.status == 'incomplete') {
       store.dispatch('selectedDate/set', date);
       return;
     }
@@ -118,7 +118,6 @@ const requestNextFreeSlots = async (store, date) => {
         continue;
       }
     }
-
     var found = false;
     for (let previousSlot of nextFreeSlotsForDates[key].slots || []) {
       if (previousSlot['@id'] == nextFreeSlot['@id'] || previousSlot.start == nextFreeSlot.start) {

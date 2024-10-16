@@ -18,8 +18,8 @@ const months = [
 ];
 
 export default (props) => {
-  const { selectedDate, firstEligibleDate } =
-    useStoreon('selectedDate', 'firstEligibleDate');
+  const { selectedDate, firstEligibleDate, dispatch } =
+    useStoreon('selectedDate', 'firstEligibleDate', 'dispatch');
 
   const dateGroups = createDateGroups(firstEligibleDate);
 

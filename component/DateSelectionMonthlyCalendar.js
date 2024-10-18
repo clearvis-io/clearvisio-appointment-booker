@@ -54,7 +54,7 @@ export default () => {
 
     for (let i = 1; i <= daysInNextMonth; i++) {
       const freeSlot = nextFreeSlots[createNextFreeSlotsForDateKey(appointment, selectedCalendar, new Date(year, month + 1, i))];
-      if (freeSlot && freeSlot.status == 'complete' || freeSlot.status == 'incomplete') {
+      if (freeSlot && (freeSlot.status == 'complete' || freeSlot.status == 'incomplete')) {
         dispatch('selectedDate/set', new Date(year, month + 1, i));
         return;
       }

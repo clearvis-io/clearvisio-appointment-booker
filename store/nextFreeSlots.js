@@ -28,9 +28,11 @@ const setSelectedDateIfInitialNextFreeSlotsLoading = (store) => {
     return;
   }
 
-  if (
-    nextFreeSlots[createNextFreeSlotsForDateKey(appointment, selectedCalendar, selectedDate)].status == 'complete'
-  ) { return; }
+  const key = createNextFreeSlotsForDateKey(appointment, selectedCalendar, selectedDate);
+
+  if (nextFreeSlots[key] && (nextFreeSlots[key].status == 'complete' || nextFreeSlots[key].status == 'incomplete')) {
+    return;
+  }
 
   const date = new Date(selectedDate);
 
@@ -43,7 +45,8 @@ const setSelectedDateIfInitialNextFreeSlotsLoading = (store) => {
     }
 
     date.setDate(date.getDate() + 1);
-  }}
+  }
+}
 
 const requestMoreForThisMonthIfNecesarry = async (store, nextFreeSlotsForDates) => {
   const {selectedDate, calendarRange} = store.get();
@@ -73,7 +76,7 @@ const requestMoreForThisMonthIfNecesarry = async (store, nextFreeSlotsForDates) 
   } else {
     setSelectedDateIfInitialNextFreeSlotsLoading(store);
   }
-  
+
 }
 
 const requestNextFreeSlots = async (store, date) => {
@@ -238,6 +241,7 @@ export function nextFreeSlots (store) {
 
   store.on('bookerInit', async (storedValue) => {
     if (storedValue.currentStep == 'appointment') {
+      store.dispatch('initialNextFreeSlotsLoading/set', true);
       requestNextFreeSlots(store, storedValue.selectedDate);
     }
   });

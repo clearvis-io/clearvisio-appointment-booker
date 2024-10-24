@@ -21,6 +21,7 @@ import { country } from './country.js'
 import { selectedCalendar } from './selectedCalendar.js'
 import { privacy } from './privacy.js'
 import { location } from './location.js'
+import {slotSelection} from './slotSelection.js'
 import { style } from './style.js'
 import { rootElement } from './rootElement.js'
 import { parentWidth } from './parentWidth.js'
@@ -41,6 +42,6 @@ export default () => {
     privacyPolicyModalState, storeStore, selectedDate, nextFreeSlots, customerForm, privacy,
     closeConfirmModalState, globalModalState, headerTitle, booking, country, selectedCalendar,
     priceComment, price, showExaminerName, location, detailedDescriptionModalState, timeSelectionUi,
-    style, rootElement, parentWidth, storeResetCloner, showProcessLength, confirmationType, reminderType, initialNextFreeSlotsLoading
+    slotSelection, style, rootElement, parentWidth, storeResetCloner, showProcessLength, confirmationType, reminderType, initialNextFreeSlotsLoading
   ]);
 }

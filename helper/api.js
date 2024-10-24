@@ -32,17 +32,23 @@ const api = {
     }
   },
 
-  post: async ({api, dispatch}, model, body) => {
-    const {path, headers} = api;
+  post: async (storeContent, model, body) => {
+    return api.doRequest(storeContent, 'POST', model, body);
+  },
+
+  doRequest: async ({api, dispatch}, method, path, body) => {
+    path = `${api.path}/${path}`
+
+    const {headers} = api;
 
     const options = {
-      method: 'POST',
+      method: method,
       headers:  extendHeaders(headers),
       body: JSON.stringify(body)
     };
 
     try {
-      var result = await (await fetch(`${path}/${model}`, options)).json();
+      var result = await (await fetch(path, options)).json();
     } catch (error) {
       dispatch('moduleState/set', 'error');
       throw error;
@@ -57,6 +63,14 @@ const api = {
 
     dispatch('moduleState/set', 'error');
     throw new Error('Invalid result');
+  },
+
+  put: async (storeContent, iri, body) => {
+    const parts = iri.split('/');
+    const model = parts[parts.length - 2];
+    const id = parts[parts.length - 1];
+
+    return api.doRequest(storeContent, 'PUT', `${model}/${id}`, body);
   }
 };
 

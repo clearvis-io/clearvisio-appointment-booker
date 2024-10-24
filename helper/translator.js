@@ -98,6 +98,8 @@ const messages = {
     'Morning': 'Délelőtt',
     'Afternoon': 'Délután',
     'Evening': 'Este',
+    'Booking the appointment': 'Időpont lefoglalása',
+    'Event draft': 'Esemény piszkozat',
     'Error! Appointments can not be created! There is a configuration error in the appointment booker that prevents booking. Please contact our store on %mail% email address or book an appointment by calling us and please mention the error then.':
       'Hiba! Időpontfoglalás nem lehetséges! Az időpontfoglaló beállítási hibája miatt nem lehetséges az online időpontfoglalás. Kérjük keresse szaküzletünket a %mail% email címen vagy jelezze nekünk ezt a hibát a telefonos időpontkérés során:',
     'There is a configuration error in the appointment booker that prevents booking. Please call our store to book an appointment us and please mention the error then.':
@@ -116,7 +118,6 @@ const messages = {
       'Az időpontfoglaló beállítási hibája miatt nem lehetséges az online időpontfoglalás. Kérjük keresse szaküzletünket a %tel% telefonszámon vagy %email% email címen és jelezze nekünk ezt a hibát a telefonos időpontkérés során:',
     'Store selection': 'Üzlet választása',
     'There are no eye examination processes configured in the store network or the length of them is not configured.': 'Nincs vizsgálati protokoll a bolthálózatban, vagy a hossza nincs beállítva.'
-
   },
   ro: {
     "Are you sure you want to cancel this appointment?":
@@ -209,6 +210,8 @@ const messages = {
     'Morning': 'Înainte de masă',
     'Afternoon': 'După masă',
     'Evening': 'Seara',
+    'Booking the appointment': 'Rezervarea unei programări',
+    'Event draft': 'Eveniment schiță',
     'Error! Appointments can not be created! There is a configuration error in the appointment booker that prevents booking. Please contact our store on %mail% email address or book an appointment by calling us and please mention the error then.':
       'Eroare! Programarea nu se poate rezerva! Rezervarea online a programărilor nu este posibilă din cauza unei erori de configurare în sistemul de rezervare a programărilor. Vă rugăm să contactați magazinul la adresa de e-mail %mail% și să ne informați despre această eroare în timpul solicitării de programare telefonică',
     'There is a configuration error in the appointment booker that prevents booking. Please call our store to book an appointment us and please mention the error then.':
@@ -317,6 +320,8 @@ const messages = {
     'Morning': 'Prijepodne',
     'Afternoon': 'Poslijepodne',
     'Evening': 'Večer',
+    'Booking the appointment': 'Rezerviranje termina',
+    'Event draft': 'Skica za događaj',
     'Error! Appointments can not be created! There is a configuration error in the appointment booker that prevents booking. Please contact our store on %mail% email address or book an appointment by calling us and please mention the error then.':
       'Greška! Rezervacija termina nije moguća! Online rezervacija termina nije moguća zbog greške u konfiguraciji sustava za rezervaciju termina. Kontaktirajte našu optiku na e-mail adresu %mail% i prijavite nam ovu pogrešku tijekom telefonskog zahtjeva za termin.',
     'There is a configuration error in the appointment booker that prevents booking. Please call our store to book an appointment us and please mention the error then.':

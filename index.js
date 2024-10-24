@@ -106,6 +106,9 @@ export default class ClearvisioAppointmentBooker {
     if (options.confirmationStatus !== undefined) {
       store.dispatch('appointment/set', {confirmation_status: options.confirmationStatus});
     }
+    if (options.showProcessLength !== undefined) {
+      store.dispatch('showProcessLength/set', options.showProcessLength);
+    }
     if (options.timeSlotMode) {
       store.dispatch('timeSelectionUi/timeSlotMode/set', options.timeSlotMode);
     }
@@ -123,6 +126,9 @@ export default class ClearvisioAppointmentBooker {
     store.dispatch('store/setStoreSelection/set', options.storeSelection ?? 'no');
 
     store.dispatch('medicalConsent/set', options.medicalConsent);
+
+    store.dispatch('confirmationType/set', options.confirmationType ?? 'email');
+    store.dispatch('reminderType/set', options.reminderType ?? 'email');
 
     this.createElementAndRender(options);
   }
@@ -152,8 +158,20 @@ export default class ClearvisioAppointmentBooker {
   }
 
   async loadStore(storeCode) {
-    var stores = await api.get(this.store, `stores?code=${storeCode}`);
-    this.store.dispatch('store/set', stores[0]);
+    try {
+      var stores = await api.get(this.store, `stores?code=${storeCode}`);
+      if (stores[0] == undefined) {
+        this.store.dispatch('moduleState/set', 'error.storeCode');
+        return;
+      }
+      this.store.dispatch('store/set', stores[0]);
+    } catch (error) {
+      if (error.code == 403) {
+        this.store.dispatch('moduleState/set', 'error.403');
+      } else {
+        this.store.dispatch('moduleState/set', 'error.storeCode');
+      }
+    }
   }
 
   async loadCSSFiles(cssFiles, shadowRoot) {
@@ -165,7 +183,7 @@ export default class ClearvisioAppointmentBooker {
         }
         let cssText = await response.text();
         cssText = cssText.replace(/:root\s*{/, ':host {');
-        
+
         const style = document.createElement('style');
         style.textContent = cssText;
         shadowRoot.appendChild(style);

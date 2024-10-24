@@ -11,4 +11,11 @@ export function selectedDate (store) {
   store.on('selectedDate/set', ( previousValue, selectedDate) => {
     return { selectedDate };
   })
+
+  store.on('currentStep/next', (store) => {
+    const { firstEligibleTime } = store;
+    if (store.currentStep == 'appointment') {
+      return { selectedDate: firstEligibleTime };
+    }
+  });
 }

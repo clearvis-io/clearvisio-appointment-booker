@@ -50,11 +50,32 @@ export default () => {
   };
 
   const nextMonth = () => {
+    const daysInNextMonth = new Date(year, month + 1, 0).getDate();
+
+    for (let i = 1; i <= daysInNextMonth; i++) {
+      const freeSlot = nextFreeSlots[createNextFreeSlotsForDateKey(appointment, selectedCalendar, new Date(year, month + 1, i))];
+      if (freeSlot && (freeSlot.status == 'complete' || freeSlot.status == 'incomplete')) {
+        dispatch('selectedDate/set', new Date(year, month + 1, i));
+        return;
+      }
+    }
+
     dispatch('selectedDate/set', new Date(year, month + 1, 1));
+    dispatch('initialNextFreeSlotsLoading/set', true);
   }
 
   const previusMonth = () => {
-    dispatch('selectedDate/set', new Date(year, month, 0));
+    const daysInPreviusMonth = new Date(year, month, 0).getDate();
+
+    for (let i = 1; i <= daysInPreviusMonth; i++) {
+      const freeSlot = nextFreeSlots[createNextFreeSlotsForDateKey(appointment, selectedCalendar, new Date(year, month - 1, i))];
+      if (freeSlot && freeSlot.status == 'complete') {
+        dispatch('selectedDate/set', new Date(year, month - 1, i));
+        return;
+      }
+    }
+
+    dispatch('selectedDate/set', new Date(year, month - 1, 1));
   }
   
   return html`

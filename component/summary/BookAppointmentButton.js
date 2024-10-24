@@ -47,12 +47,12 @@ const formatBirthDate = (birthDate) => {
   if (!birthDate || !(birthDate instanceof Date)) {
     return null;
   }
-  
+
   const year = birthDate.getFullYear();
   const month = String(birthDate.getMonth() + 1).padStart(2, '0');
   const day = String(birthDate.getDate()).padStart(2, '0');
   const formattedDate = `${year}-${month}-${day}T00:00:00+00:00`;
-  
+
   return formattedDate;
 };
 
@@ -86,7 +86,10 @@ const createConsent = async (storeContent, customer) => {
 }
 
 const createAppointmet = async (storeContent, customer) => {
-  const {appointment, language, translationOverrides, constantAppointmentCommentText} = storeContent;
+  const {
+    appointment, language, translationOverrides, constantAppointmentCommentText,
+    confirmationType, reminderType
+  } = storeContent;
   let comment = constantAppointmentCommentText ? constantAppointmentCommentText : '';
   if (appointment.comment) {
     comment = (comment ? comment + "\n\n" : '') + appointment.comment;
@@ -105,8 +108,10 @@ const createAppointmet = async (storeContent, customer) => {
         {language, translationOverrides}
       ),
       status: 'booked',
-      should_send_confirmation_email: true,
-      should_send_reminder_email: true,
+      should_send_confirmation_email: confirmationType == 'email' || confirmationType == 'both',
+      should_send_confirmation_sms: confirmationType == 'sms' || confirmationType == 'both',
+      should_send_reminder_email: reminderType == 'email' || reminderType == 'both',
+      should_send_reminder_sms: reminderType == 'sms' || reminderType == 'both',
       source: 'online'
     })
   );
@@ -116,7 +121,7 @@ export default (props) => {
   var storeContent = useStoreon(
     'appointment', 'api', 'booking', 'language', 'customerForm', 'customerFormGlobalErrors',
     'country', 'moduleState', 'store', 'translationOverrides', 'constantAppointmentCommentText',
-    'medicalConsent'
+    'medicalConsent', 'confirmationType', 'reminderType'
   );
   const { booking, moduleState, dispatch } = storeContent;
 

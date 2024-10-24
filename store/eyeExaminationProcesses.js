@@ -28,8 +28,14 @@ export function eyeExaminationProcesses (store) {
     if (eyeExaminationProcessId) {
       processes = [await api.get(store, `eye_examination_processes/${eyeExaminationProcessId}`)]
         .filter((process) => process);
+      if (processes[0].length == null) {
+        store.dispatch('moduleState/set', 'error.noLength')
+      }
     } else {
       processes = await api.get(store, `eye_examination_processes?hasLength&chain=${storeEntity.chain['@id']}`);
+      if (processes.length == 0) {
+        store.dispatch('moduleState/set', 'error.noProcessOrLength');
+      }
     }
 
     store.dispatch('unfilteredEyeExaminationProcesses/set', processes);

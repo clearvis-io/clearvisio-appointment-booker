@@ -74,6 +74,7 @@ This module is a frontend for the Appointment Booking API of clearvis.io. The AP
 * **priceComment**: Text that will be showed on summary card below the price of examination
 * **showPrice**: When set to `false` it will hide any price related info (The default value is `true`.)
 * **showLocation**: Whether to show location in summary screen (The default value is `true`.)
+* **showProcessLength**: Whether to show the length of an eye examination process (The default value is `true`.)
 * **locationName**: Name of location. Default value is the store name.
 * **locationAddress**: Address of appointment. Default value is the store address.
 * **autoselectNextFreeSlot**: When set to `true`, automatically select next free slot for appointment. Defaults to `false`.
@@ -98,7 +99,7 @@ This module is a frontend for the Appointment Booking API of clearvis.io. The AP
 * **calendarRange**: Allows different options for the day selection at the appoinment interface.
   * When it is set to `fiveDays` the day selection modul will only appear as five days and you can turn pages for more opportunities.
   * When set to `month` the actual month will appear as a calendar and you can chose the prefferd day in there.
-* **style**: Determines the appearence of the appointment booker. When set to `fullscreen` the booker will appear in fullsreen mode, in `modal-view` mode the booker will appear as a modal with the page dimmed in the background. In `embedded` mode the content of the booker will appear embeded in the page, and in `embeddedSafe` mode the booker will be embeded in the page but wont use the style sheet of the page. When in `embeddedSafe` mode you can also declare a `parentElement` attribute, and the booker will embed itself inside the given `parentElement`.
+* **style**: Determines the appearence of the appointment booker. When set to `fullscreen` the booker will appear in fullsreen mode, in `modal-view` mode the booker will appear as a modal with the page dimmed in the background. In `embedded` mode the content of the booker will appear embeded in the page, and in `embedded-safe` mode the booker will be embeded in the page but wont use the style sheet of the page. When in `embedded-safe` mode you can also declare a `parentElement` attribute, and the booker will embed itself inside the given `parentElement`.
 * **storeSelection**: Allows three types of store selection based on preferences.
   * `no (default)`: Cannot select stores, thus the first screen shows the processes.
   * `onlyInSameChain`: User can select stores only from the same chain.

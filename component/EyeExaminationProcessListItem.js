@@ -3,7 +3,7 @@ import {html, translator as __} from '../helper/index.js'
 import ProcessPrice from './ProcessPrice.js'
 
 export default (props) => {
-  const { appointment, dispatch, currentStep } = useStoreon('appointment', 'currentStep')
+  const { appointment, dispatch, currentStep, showProcessLength } = useStoreon('appointment', 'currentStep', 'showProcessLength')
 
   const onClick = () => {
     if (currentStep !== 'process') {
@@ -30,7 +30,7 @@ export default (props) => {
             ${props.item.detailed_description && props.item.detailed_description.length > 0 ?
                 html` <a href="#" onClick=${onShowDetailedDescriptionModal}>${__('More...')}</a>` : ''}
           </p>
-          <span class="badge bg-primary me-1">${props.item.length} ${__('@abbrMinute')}</span>
+          ${ showProcessLength ? html`<span class="badge bg-primary me-1">${props.item.length} ${__('@abbrMinute')}</span>` : ''}
           <span class="badge bg-primary"><${ProcessPrice} process=${props.item}/></span>
         </div>
         <div class="col text-end p-2 next item icon">

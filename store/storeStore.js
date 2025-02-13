@@ -16,10 +16,19 @@ export function storeStore (store) {
   })
 
   async function requestStores({chain}, storeSelection) {
-    store.dispatch('stores/set', await api.get(
+    const calendars = await api.get(
       store,
-      storeSelection == 'all' ? 'stores' : `stores?chain=${chain['@id']}`
-    ));
+      storeSelection == 'all' ? 'appointment_calendars' : `appointment_calendars?store.chain=${chain['@id']}`
+    );
+
+    const stores = {}
+    for (const calendar of calendars) {
+      if (calendar.user && calendar.store) {
+        stores[calendar.store['@id']] = calendar.store
+      }
+    }
+
+    store.dispatch('stores/set', Object.values(stores).sort((a, b) => a.name.localeCompare(b.name)));
   }
 
   store.on('stores/set', (previousValue, stores) => {

@@ -17,25 +17,12 @@ const validateEmail = (value, fieldConfig) => {
 }
 
 const validateInput = (input, fieldConfig) => {
-  if (typeof input !== 'string') return;
-  
-  if (/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi.test(input)) {
-    fieldConfig.errors.push('Suspicious input detected: Script tags are not allowed');
+  if (typeof input !== 'string') {
     return;
   }
-  
-  if (/<[^>]*>/g.test(input)) {
+
+  if (/(<(script|iframe|embed|object|svg|math|img|video|source|style|link|track|applet|bgsound|regexer|meta|base|form)|<[a-z]+\w.on)/i.test(input)) {
     fieldConfig.errors.push('Suspicious input detected: HTML tags are not allowed');
-    return;
-  }
-  
-  if (/javascript:/gi.test(input)) {
-    fieldConfig.errors.push('Suspicious input detected: JavaScript protocols are not allowed');
-    return;
-  }
-  
-  if (/on\w+\s*=/gi.test(input)) {
-    fieldConfig.errors.push('Suspicious input detected: Event handlers are not allowed');
     return;
   }
 };

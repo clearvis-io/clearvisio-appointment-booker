@@ -61,10 +61,7 @@ const messages = {
     'Next': 'Tovább',
     'This field is required.': 'Ez a mező kötelező.',
     'Invalid email address.': 'Hibás email cím.',
-    'Suspicious input detected: Script tags are not allowed': 'Gyanús bevitel észlelve: Script tagek nem engedélyezettek',
     'Suspicious input detected: HTML tags are not allowed': 'Gyanús bevitel észlelve: HTML tagek nem engedélyezettek',
-    'Suspicious input detected: JavaScript protocols are not allowed': 'Gyanús bevitel észlelve: JavaScript protokollok nem engedélyezettek',
-    'Suspicious input detected: Event handlers are not allowed': 'Gyanús bevitel észlelve: Eseménykezelők nem engedélyezettek',
     'Your information': 'Az Ön adatai',
     'Name': 'Név',
     'Date of birth': 'Születési dátum',
@@ -343,7 +340,8 @@ const messages = {
     'There is a configuration error in the appointment booker that prevents booking. Please contact our store on %mail% email address or book an appointment by calling our store (%tel%) and please mention the error then.':
       'Online rezervacija termina nije moguća zbog greške u konfiguraciji sustava za rezervaciju termina. Kontaktirajte našu optiku na %tel% telefonski broj ili na %email% email adresu i  prijavite nam ovu pogrešku tijekom telefonskog zahtjeva za termin. ',
     'Store selection': 'Odabir trgovine',
-    'There are no eye examination processes configured in the store network or the length of them is not configured.': 'U optici nije postavljen protokol pregleda ili nije određeno duljina pregleda.'
+    'There are no eye examination processes configured in the store network or the length of them is not configured.': 'U optici nije postavljen protokol pregleda ili nije određeno duljina pregleda.',
+    'Suspicious input detected: HTML tags are not allowed': 'Sumnjiv unos otkriven: HTML oznake nisu dopuštene'
   },
   en: {
     '@abbrSunday': 'Sun',

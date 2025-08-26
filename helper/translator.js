@@ -230,7 +230,8 @@ const messages = {
     'There is a configuration error in the appointment booker that prevents booking. Please contact our store on %mail% email address or book an appointment by calling our store (%tel%) and please mention the error then.':
       'Eroare! Programarea nu se poate rezerva! Rezervarea online a programărilor nu este posibilă din cauza unei erori de configurare în sistemul de rezervare a programărilor. Vă rugăm să contactați magazinul la numărul de telefon %tel% sau adresa de e-mail %email% și să ne raportați această eroare atunci când solicitați o programare prin telefon:',
     'Store selection': 'Selectare magazin',
-    'There are no eye examination processes configured in the store network or the length of them is not configured.': 'Nu există protocol de consulație în magazin sau durata protocolului nu este specificat.'
+    'There are no eye examination processes configured in the store network or the length of them is not configured.': 'Nu există protocol de consulație în magazin sau durata protocolului nu este specificat.',
+    'Suspicious input detected: HTML tags are not allowed': 'Intrare suspectă detectată: etichetele HTML nu sunt permise'
   },
   hr: {
     "Are you sure you want to cancel this appointment?": "Jeste li sigurni da želite otkazati ovaj termin?",

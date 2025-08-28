@@ -16,6 +16,17 @@ const validateEmail = (value, fieldConfig) => {
   }
 }
 
+const validateInput = (input, fieldConfig) => {
+  if (typeof input !== 'string') {
+    return;
+  }
+
+  if (/(<(script|iframe|embed|object|svg|math|img|video|source|style|link|track|applet|bgsound|regexer|meta|base|form)|<[a-z]+\w.on)/i.test(input)) {
+    fieldConfig.errors.push('Suspicious input detected: HTML tags are not allowed');
+    return;
+  }
+};
+
 export function customerForm (store) {
   store.on('@init', () => ({ customerForm: {}, commentError: null, customerFormGlobalErrors: [] }))
 
@@ -39,6 +50,8 @@ export function customerForm (store) {
 
     Object.keys(customerForm).forEach((fieldId) => {
       customerForm[fieldId].errors = [];
+
+      validateInput(customer[fieldId], customerForm[fieldId]);
 
       if (customerForm[fieldId].required) {
         validateNonEmpty(customer[fieldId], customerForm[fieldId]);

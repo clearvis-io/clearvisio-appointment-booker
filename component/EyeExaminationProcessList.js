@@ -6,10 +6,11 @@ import SimpleModal from './SimpleModal.js'
 import ErrorMessage from './ErrorMessage.js'
 
 export default (props) => {
-  const { eyeExaminationProcesses, detailedDescriptionModalState, store, calendars, dispatch } = useStoreon('eyeExaminationProcesses', 'store', 'calendars')
-    
+  const { eyeExaminationProcesses, detailedDescriptionModalState, store, calendars, dispatch } =
+    useStoreon('eyeExaminationProcesses', 'detailedDescriptionModalState', 'store', 'calendars')
+
   const onCloseDetailedDescriptionModal = () => dispatch(`detailedDescriptionModalState/set`, false);
-  
+
   if (eyeExaminationProcesses.length == 0 || !store) {
     return html`
       <ul class="list-group">

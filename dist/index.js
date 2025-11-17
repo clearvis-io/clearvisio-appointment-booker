@@ -194,7 +194,7 @@ var ze,k,vr,ge,_r,br,yr,Ee={},Sr=[],Kn=/acit|ex(?:s|g|n|p|$)|rph|grid|ows|mnc|nt
     <div class="alert alert-danger mt-3" role="alert">
       ${e}
     </div>
-  `;var Ya=e=>{let{eyeExaminationProcesses:t,detailedDescriptionModalState:r,store:a,calendars:n,dispatch:o}=g("eyeExaminationProcesses","store","calendars"),s=()=>o("detailedDescriptionModalState/set",!1);return t.length==0||!a?l`
+  `;var Ya=e=>{let{eyeExaminationProcesses:t,detailedDescriptionModalState:r,store:a,calendars:n,dispatch:o}=g("eyeExaminationProcesses","detailedDescriptionModalState","store","calendars"),s=()=>o("detailedDescriptionModalState/set",!1);return t.length==0||!a?l`
       <ul class="list-group">
         <li class="list-group-item"><${B}/></li>
       </ul>

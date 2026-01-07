@@ -203,13 +203,13 @@ export default class ClearvisioAppointmentBooker {
     }
   }
 
-  createElementAndRender({parentElement, colors, cssUrls}) {
+  async createElementAndRender({parentElement, colors, cssUrls}) {
     if (this.store.get().style == 'embedded-safe') {
       this.dispatchParentWidth(parentElement);
       const shadowRoot = parentElement.attachShadow({ mode: 'open' });
       var element = document.createElement('div');
       element.id = 'embeddedShadowBooker';
-      this.loadCSSFiles(cssUrls, shadowRoot);
+      await this.loadCSSFiles(cssUrls, shadowRoot);
       shadowRoot.appendChild(element);
     } else {
       var element = document.createElement('div');

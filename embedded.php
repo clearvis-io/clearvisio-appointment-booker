@@ -23,7 +23,10 @@
         storeCode: '<?php echo $_ENV['API_STORE_CODE']; ?>',
         apiPath: '/api.php',
         style: 'embedded',
-        parentElement: document.getElementById('embedded')
+        parentElement: document.getElementById('embedded'),
+        onSuccess: (state) => {
+          console.log('Booking successful!', state);
+        }
       });
     </script>
   </body>

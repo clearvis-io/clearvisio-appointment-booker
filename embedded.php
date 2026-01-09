@@ -24,7 +24,7 @@
         apiPath: '/api.php',
         style: 'embedded',
         parentElement: document.getElementById('embedded'),
-        onSuccess: (state) => {
+        onSuccessCallback: (state) => {
           console.log('Booking successful!', state);
         }
       });

@@ -28,7 +28,7 @@ This module is a frontend for the Appointment Booking API of clearvis.io. The AP
           colors: {
             primary: '#282',
           },
-          onSuccess: () => {
+          onSuccessCallback: () => {
             // Redirect to thank you page after successful booking
             window.location.href = '/thank-you.html';
           }
@@ -108,12 +108,12 @@ This module is a frontend for the Appointment Booking API of clearvis.io. The AP
   * `no (default)`: Cannot select stores, thus the first screen shows the processes.
   * `onlyInSameChain`: User can select stores only from the same chain.
   * `all`: User can select from all the stores availble.
-* **onSuccess**: A callback function that is triggered when an appointment is successfully booked. The callback receives the current state object as a parameter, which includes appointment details, customer information, and other booking data. This is useful for redirecting users to a thank you page, sending analytics events, or performing other post-booking actions.
+* **onSuccessCallback**: A callback function that is triggered when an appointment is successfully booked. The callback receives the current state object as a parameter, which includes appointment details, customer information, and other booking data. This is useful for redirecting users to a thank you page, sending analytics events, or performing other post-booking actions.
   ```js
   new ClearvisioAppointmentBooker({
     storeCode: 'DEMO',
     apiPath: '/myProxiedApi.php',
-    onSuccess: (state) => {
+    onSuccessCallback: (state) => {
       // Redirect to thank you page
       window.location.replace('https://example.com/thank-you');
       

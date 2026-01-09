@@ -123,8 +123,8 @@ export default class ClearvisioAppointmentBooker {
       store.dispatch('eyeExaminationProcessId/set', options.eyeExaminationProcessId);
     }
 
-    if (options.onSuccess) {
-      this.setupSuccessCallback(options.onSuccess);
+    if (options.onSuccessCallback) {
+      this.setupSuccessCallback(options.onSuccessCallback);
     }
 
     store.dispatch('store/setStoreSelection/set', options.storeSelection ?? 'no');

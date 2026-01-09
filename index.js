@@ -123,6 +123,10 @@ export default class ClearvisioAppointmentBooker {
       store.dispatch('eyeExaminationProcessId/set', options.eyeExaminationProcessId);
     }
 
+    if (options.onSuccessCallback) {
+      this.setupSuccessCallback(options.onSuccessCallback);
+    }
+
     store.dispatch('store/setStoreSelection/set', options.storeSelection ?? 'no');
 
     store.dispatch('medicalConsent/set', options.medicalConsent);
@@ -131,6 +135,14 @@ export default class ClearvisioAppointmentBooker {
     store.dispatch('reminderType/set', options.reminderType ?? 'email');
 
     this.createElementAndRender(options);
+  }
+
+  setupSuccessCallback(callback) {
+    this.store.on('moduleState/set', (_, newValue) => {
+      if (newValue === 'success') {
+        callback(this.store.get());
+      }
+    });
   }
 
   setupCustomerFields({customerFields, requiredCustomerFields, medicalConsent}) {

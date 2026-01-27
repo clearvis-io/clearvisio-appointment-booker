@@ -23,7 +23,7 @@ export function storeStore (store) {
 
     const stores = {}
     for (const calendar of calendars) {
-      if (calendar.user && calendar.store) {
+      if (calendar.user && calendar.store && calendar.online_reservation_allowed) {
         stores[calendar.store['@id']] = calendar.store
       }
     }

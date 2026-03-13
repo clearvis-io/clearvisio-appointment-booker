@@ -4,6 +4,7 @@ import {html, api, availableProcessFilter} from './helper/index.js';
 import createStore from './store/createStore.js';
 import {Carousel, BackButton, CloseButton, GlobalModal, Style} from './component/index.js'
 import Header from './component/Header.js';
+import './style.css';
 
 const knownCustomerFields = [
   'first_name',

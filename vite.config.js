@@ -9,11 +9,11 @@ const bootstrapLicense = `/*!
  */
 `;
 
-function addCssLicense() {
+function addCssLicense(outDir) {
   return {
     name: 'add-css-license',
     closeBundle() {
-      const cssFile = join(__dirname, 'dist', 'style.css');
+      const cssFile = join(__dirname, outDir, 'style.css');
       try {
         const css = readFileSync(cssFile, 'utf8');
         if (!css.startsWith('/*!')) {
@@ -24,22 +24,27 @@ function addCssLicense() {
   };
 }
 
-export default defineConfig({
-  build: {
-    lib: {
-      entry: resolve(__dirname, 'index.js'),
-      name: 'ClearvisioAppointmentBooker',
-      formats: ['es'],
-      fileName: () => 'index.js',
-      cssFileName: 'style'
+export default defineConfig(({ mode }) => {
+  const isDev = mode === 'development';
+  const outDir = isDev ? 'build' : 'dist';
+
+  return {
+    build: {
+      lib: {
+        entry: resolve(__dirname, 'index.js'),
+        name: 'ClearvisioAppointmentBooker',
+        formats: ['es'],
+        fileName: () => 'index.js',
+        cssFileName: 'style'
+      },
+      outDir,
+      cssCodeSplit: false,
+      minify: !isDev,
+      target: 'es2018'
     },
-    outDir: 'dist',
-    cssCodeSplit: false,
-    minify: true,
-    target: 'es2018'
-  },
-  plugins: [addCssLicense()],
-  css: {
-    postcss: './postcss.config.js'
-  }
+    plugins: [addCssLicense(outDir)],
+    css: {
+      postcss: './postcss.config.js'
+    }
+  };
 });

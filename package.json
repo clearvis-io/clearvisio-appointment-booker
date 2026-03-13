@@ -1,8 +1,8 @@
 {
   "name": "clearvisio-appointment-booker",
   "scripts": {
-    "dev": "vite build --config vite.config.dev.js --watch",
-    "build": "vite build"
+    "dev": "vite build --mode development --watch",
+    "build": "vite build --mode production"
   },
   "dependencies": {
     "bootstrap": "^5.1.3",

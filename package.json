@@ -17,5 +17,8 @@
     "preact": "^10.2.1",
     "storeon": "^3.1.4",
     "vite": "^8.0.0"
+  },
+  "devDependencies": {
+    "terser": "^5.46.1"
   }
 }

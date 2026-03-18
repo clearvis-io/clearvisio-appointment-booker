@@ -39,8 +39,16 @@ export default defineConfig(({ mode }) => {
       },
       outDir,
       cssCodeSplit: false,
-      minify: !isDev,
-      target: 'es2018'
+      minify: isDev ? false : 'terser',
+      target: 'es2018',
+      terserOptions: isDev ? undefined : {
+        format: {
+          comments: false,
+        },
+        compress: {
+          drop_console: false,
+        }
+      }
     },
     plugins: [addCssLicense(outDir)],
     css: {

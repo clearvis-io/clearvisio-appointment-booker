@@ -1,11 +1,10 @@
-import { useStoreon } from '../_snowpack/pkg/storeon/preact.js'
+import { useStoreon } from 'storeon/preact'
 import { html, getColumnWidth, translator as __ } from '../helper/index.js'
 import CloseButton from "./CloseButton.js"
 import BackButton from "./BackButton.js"
 
 export default (props) => {
   const { headerTitle, currentStep, style, parentWidth } = useStoreon('headerTitle', 'currentStep', 'style', 'parentWidth');
-
 
   switch (currentStep) {
     case 'storeSelection':

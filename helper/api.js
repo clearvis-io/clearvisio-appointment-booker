@@ -15,7 +15,7 @@ const api = {
       if (response.status < 200 || response.status > 299) {
         const e = new Error('Unexpected api response');
         e.code = response.status;
-        
+
         throw e;
       }
 
@@ -27,7 +27,9 @@ const api = {
 
       return result['hydra:member'] ?? result;
     } catch (error) {
-      store.dispatch('moduleState/set', 'error');
+      if (!error.code) {
+        store.dispatch('moduleState/set', 'error');
+      }
       throw error;
     }
   },

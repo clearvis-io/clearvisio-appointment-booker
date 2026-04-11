@@ -112,7 +112,7 @@ const messages = {
     'The eye examination process configured for this appointment booker has been removed.': 'Az időpontfoglalóban beállított vizsgálati protokollt időközben törölték.',
     'There is no email address configured for this store.': 'Nincs email cím beállítva a szaküzlethez.',
     'The lenght isn’t configured for the eye examination processes.': 'A vizsgálati protokollokhoz nincs időtartam megadva.',
-    'Invalid API key or inactive API user.': 'Hibás API kulcs vagy inaktív API felhasználó.',
+    'Invalid API key, inactive API user, or no access to the requested store.': 'Hibás API kulcs, inaktív API felhasználó, vagy nincs hozzáférés a kért üzlethez.',
     'Invalid store code': 'Téves üzlet kód',
     'Error! Appointments can not be created!': 'Hiba! Időpontfoglalás nem lehetséges!',
     'There is a configuration error in the appointment booker that prevents booking. Please contact our store on %mail% email address or book an appointment by calling our store (%tel%) and please mention the error then.':
@@ -224,7 +224,7 @@ const messages = {
     'The eye examination process configured for this appointment booker has been removed.': 'Protocolul de examinare stabilit la programare a fost anulat între timp.',
     'There is no email address configured for this store.': 'Nu există nicio adresă de e-mail setată pentru magazinul specializat.',
     'The lenght isn’t configured for the eye examination processes.': 'Nu este specificată durată pentru protocoalele de examinare.',
-    'Invalid API key or inactive API user.': 'Cheie API greșită sau utilizator API inactiv.',
+    'Invalid API key, inactive API user, or no access to the requested store.': 'Cheie API greșită, utilizator API inactiv sau fără acces la magazinul solicitat.',
     'Invalid store code': 'Cod magazin greșit',
     'Error! Appointments can not be created!': 'Eroare! Programarea nu se poate rezerva!',
     'There is a configuration error in the appointment booker that prevents booking. Please contact our store on %mail% email address or book an appointment by calling our store (%tel%) and please mention the error then.':
@@ -335,7 +335,7 @@ const messages = {
     'The eye examination process configured for this appointment booker has been removed.': 'Zadan protokol pregleda kod rezervacija termina je u međuvremenu izbrisan.',
     'There is no email address configured for this store.': 'Nije postavljena e-mail adresa za optiku.',
     'The lenght isn’t configured for the eye examination processes.': 'Kod protokola pregleda nije navedeno trajanje.',
-    'Invalid API key or inactive API user.': 'Loš API ključ ili neaktivan API korisnik.',
+    'Invalid API key, inactive API user, or no access to the requested store.': 'Loš API ključ, neaktivan API korisnik ili nema pristupa traženoj optici.',
     'Invalid store code': 'Pogrešan kod optike',
     'Error! Appointments can not be created!': 'Greška! Rezervacija termina nije moguća!',
     'There is a configuration error in the appointment booker that prevents booking. Please contact our store on %mail% email address or book an appointment by calling our store (%tel%) and please mention the error then.':

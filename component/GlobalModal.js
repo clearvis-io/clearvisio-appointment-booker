@@ -56,7 +56,7 @@ export default (props) => {
       `;
     case 'error.403':
       return html`
-        <${ErrorModal} content="${ !storePhone ? __(baseNoPhoneText, {mail: storeMail}) : __(baseText, {mail: storeMail, tel: storePhone})} ${__("Invalid API key or inactive API user.")}"/>
+        <${ErrorModal} content="${ !storePhone ? __(baseNoPhoneText, {mail: storeMail}) : __(baseText, {mail: storeMail, tel: storePhone})} ${__("Invalid API key, inactive API user, or no access to the requested store.")}"/>
       `;
     case 'error.noLength':
       return html`

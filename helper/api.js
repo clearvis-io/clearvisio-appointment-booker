@@ -27,9 +27,7 @@ const api = {
 
       return result['hydra:member'] ?? result;
     } catch (error) {
-      if (!error.code) {
-        store.dispatch('moduleState/set', 'error');
-      }
+      store.dispatch('moduleState/set', 'error');
       throw error;
     }
   },

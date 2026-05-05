@@ -1,0 +1,70 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": ["config:recommended"],
+  "labels": ["dependencies"],
+  "assignees": ["hendricha", "balint", "hevesig"],
+  "minimumReleaseAge": "7 days",
+  "major": {
+    "dependencyDashboardApproval": true
+  },
+  "packageRules": [
+    {
+      "description": "Pin Vite version for ecosystem consistency",
+      "matchPackageNames": ["vite"],
+      "matchPackagePatterns": ["^@vitejs/"],
+      "enabled": false
+    },
+    {
+      "description": "Automerge patch updates for stable packages (major > 0)",
+      "matchUpdateTypes": ["patch"],
+      "matchCurrentVersion": ">=1.0.0",
+      "automerge": true,
+      "groupName": "all patch updates"
+    },
+    {
+      "description": "Individual MRs for 0.x packages (unstable semver)",
+      "matchCurrentVersion": "<1.0.0",
+      "groupName": null
+    },
+    {
+      "description": "Group and automerge Preact minor updates",
+      "matchPackageNames": ["preact"],
+      "matchPackagePatterns": ["^preact/"],
+      "matchUpdateTypes": ["minor"],
+      "automerge": true,
+      "groupName": "Preact"
+    },
+    {
+      "description": "Group and automerge PostCSS ecosystem minor updates",
+      "matchPackageNames": ["postcss"],
+      "matchPackagePatterns": ["^postcss-"],
+      "matchUpdateTypes": ["minor"],
+      "automerge": true,
+      "groupName": "PostCSS"
+    },
+    {
+      "description": "Group Preact major updates",
+      "matchPackageNames": ["preact"],
+      "matchPackagePatterns": ["^preact/"],
+      "matchUpdateTypes": ["major"],
+      "groupName": "Preact"
+    },
+    {
+      "description": "Group PostCSS ecosystem major updates",
+      "matchPackageNames": ["postcss"],
+      "matchPackagePatterns": ["^postcss-"],
+      "matchUpdateTypes": ["major"],
+      "groupName": "PostCSS"
+    },
+    {
+      "description": "Label security updates",
+      "matchCategories": ["security"],
+      "addLabels": ["security"]
+    },
+    {
+      "description": "Label major updates",
+      "matchUpdateTypes": ["major"],
+      "addLabels": ["major"]
+    }
+  ]
+}

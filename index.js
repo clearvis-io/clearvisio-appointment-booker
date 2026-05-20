@@ -179,7 +179,7 @@ export default class ClearvisioAppointmentBooker {
       }
       this.store.dispatch('store/set', stores[0]);
     } catch (error) {
-      if (error.code == 403) {
+      if (error.code == 403 || error.code == 400) {
         this.store.dispatch('moduleState/set', 'error.403');
       } else {
         this.store.dispatch('moduleState/set', 'error.storeCode');

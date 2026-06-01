@@ -1,6 +1,6 @@
 import { render } from 'preact';
 import { StoreContext, useStoreon } from 'storeon/preact'
-import {html, api, availableProcessFilter} from './helper/index.js';
+import {html} from './helper/index.js';
 import createStore from './store/createStore.js';
 import {Carousel, BackButton, CloseButton, GlobalModal, Style} from './component/index.js'
 import Header from './component/Header.js';
@@ -45,7 +45,9 @@ export default class ClearvisioAppointmentBooker {
     }
     this.setupCustomerFields(options);
     this.setupApi(options);
-    this.loadStore(options.storeCode)
+    
+    const storeSelection = options.storeSelection ?? 'no';
+    store.dispatch('store/setStoreSelection/set', storeSelection);
 
     if (options.calendarStepShouldBeHidden) {
       store.dispatch('calendarStepShouldBeHidden/set', options.calendarStepShouldBeHidden);
@@ -128,8 +130,6 @@ export default class ClearvisioAppointmentBooker {
       this.setupSuccessCallback(options.onSuccessCallback);
     }
 
-    store.dispatch('store/setStoreSelection/set', options.storeSelection ?? 'no');
-
     store.dispatch('medicalConsent/set', options.medicalConsent);
 
     store.dispatch('confirmationType/set', options.confirmationType ?? 'email');
@@ -168,23 +168,7 @@ export default class ClearvisioAppointmentBooker {
       Object.assign({'X-AUTH-API-STORE-CODE': options.storeCode}, options.apiHeaders || {})
     );
     this.store.dispatch('api/setPath', options.apiPath);
-  }
-
-  async loadStore(storeCode) {
-    try {
-      var stores = await api.get(this.store, `stores?code=${storeCode}`);
-      if (stores[0] == undefined) {
-        this.store.dispatch('moduleState/set', 'error.storeCode');
-        return;
-      }
-      this.store.dispatch('store/set', stores[0]);
-    } catch (error) {
-      if (error.code == 403) {
-        this.store.dispatch('moduleState/set', 'error.403');
-      } else {
-        this.store.dispatch('moduleState/set', 'error.storeCode');
-      }
-    }
+    this.store.dispatch('storeCode/set', options.storeCode);
   }
 
   async loadCSSFiles(cssFiles, shadowRoot) {

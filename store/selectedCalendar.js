@@ -4,4 +4,8 @@ export function selectedCalendar (store)  {
   store.on('selectedCalendar/set', (previousValue, selectedCalendar) => {
     return { selectedCalendar };
   })
+
+  store.on('store/set', () => {
+    return { selectedCalendar: null };
+  })
 }

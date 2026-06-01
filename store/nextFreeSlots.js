@@ -275,4 +275,8 @@ export function nextFreeSlots (store) {
   store.on('nextFreeSlotLoading/set', (currentValue, nextFreeSlotLoading) => {
     return { nextFreeSlotLoading };
   });
+
+  store.on('store/set', () => {
+    return { nextFreeSlots: {} };
+  });
 }

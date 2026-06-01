@@ -25,6 +25,11 @@ export default function (process, calendar, calendarRoleCheckMode) {
     return false;
   }
 
+  // If process has no role requirement, it passes the role check
+  if (!process.highestRequiredRole) {
+    return true;
+  }
+
   for (let i = 0; i < roleHierarchy.length; i++) {
     let role = roleHierarchy[i];
     if (!calendar.user || calendar.user.roles.indexOf(role.name) == -1) {

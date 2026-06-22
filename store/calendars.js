@@ -23,4 +23,10 @@ export function calendars (store) {
     );
     store.dispatch('calendars/set', calendars);
   });
+
+  store.on('currentStep/set', (currentValue, newStep) => {
+    if (newStep === 'storeSelection') {
+      return { calendars: null };
+    }
+  });
 }

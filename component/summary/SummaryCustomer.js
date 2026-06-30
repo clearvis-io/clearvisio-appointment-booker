@@ -13,7 +13,7 @@ export default ({customer, customerAddress}) => {
           ${customer.birth ? html`${__('Date of birth')}: ${dateTimeFormatter.formatDate(customer.birth)}` : ''}
         </div>
         <div>
-          ${customer.gender ? html`${__('Gender')}: ${customer.gender == 'm' ? 'Férfi' : 'Nő'}` : ''}
+          ${customer.gender ? html`${__('Gender')}: ${customer.gender == 'm' ? __('Male') : __('Female')}` : ''}
         </div>
         <div>
             ${customer.ssn ? html`${__('SSN')}: ${customer.ssn}` : ''}

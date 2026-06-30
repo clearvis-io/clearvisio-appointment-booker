@@ -164,7 +164,7 @@ const messages = {
     'Gender': 'Gen',
     'SSN': 'CNP',
     'Country': 'Țara',
-    'State': 'Megye',
+    'State': 'Judeţ',
     'Postal code': 'Cod poștal',
     'City': 'Oraș',
     'Street address': 'Strada',

@@ -58,6 +58,21 @@ export function storeStore (store) {
     return {stores};
   })
 
+  store.on('store/selectByCode', async (previousValue, code) => {
+    try {
+      const stores = await api.get(store, `stores?code=${code}`);
+      if (stores[0]) {
+        store.dispatch('store/set', stores[0]);
+      }
+    } catch (error) {
+      if (error.code == 403 || error.code == 400) {
+        store.dispatch('moduleState/set', 'error.403');
+      } else {
+        store.dispatch('moduleState/set', 'error.storeCode');
+      }
+    }
+  })
+
   store.on('storeCode/set', (previousValue, storeCode) => {
     return { storeCode };
   })

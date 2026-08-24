@@ -9,7 +9,7 @@ export default ({item}) => {
       return;
     }
 
-    dispatch('store/set', item);
+    dispatch('store/selectByCode', item.code);
     dispatch('currentStep/next');
   }
 

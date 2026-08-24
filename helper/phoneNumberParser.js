@@ -47,5 +47,9 @@ export default (locale, number) => {
 
   const firstKey = Object.keys(localCountryCodeMappings)[0];
 
-  return `${firstKey ? localCountryCodeMappings[firstKey] : '+36'}.${number}`;
+  if (!firstKey) {
+    return number;
+  }
+
+  return `${localCountryCodeMappings[firstKey]}.${number}`;
 }
